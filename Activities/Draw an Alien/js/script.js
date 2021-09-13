@@ -1,9 +1,8 @@
 /**
-Title of Project
-Author Name
+Frankie's Lil Alien
+Frankie Latreille
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+This program draws an alien, as imagined by Frankie.
 */
 
 "use strict";
@@ -21,7 +20,7 @@ function preload() {
 Description of setup
 */
 function setup() {
-
+  background(255, 500, 15);
 }
 
 

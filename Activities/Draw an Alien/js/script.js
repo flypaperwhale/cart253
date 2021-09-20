@@ -34,17 +34,17 @@ function setup() {
   ellipse(400,415,300); // a big gaping hole
   fill(100,100,100); // an even darker gray
   ellipse(400,430,120); // deeper into the hole
-  fill(40,40,40); // almost black
+  fill(50,50,50); // almost black
   ellipse(400,444,50); // a throat?
 
   // draw the teeth
   fill(255,255,255);//white
-  triangle(350,350,360,340,372,372);
+  triangle(340,300,360,290,372,372);
   triangle(230,400,240,390,300,405);
   triangle(355,550,360,552,363,510);
   triangle(300,600,305,595,309,599);
   triangle(445,340,450,395,455,345);
-  triangle(570,430,573,370,579,375);
+  triangle(550,430,573,370,579,375);
 
 
 

@@ -6,22 +6,18 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 */
 
-"use strict";
-
-
-/**
-Description of preload
-*/
-function preload() {
-
-}
-
+let backgroundShade = 0;
+let circleX = -250;
+let circleY = 250;
+let circleSize = 400;
+let circleSpeed = 1;
+let circleAcceleration = .01;
 
 /**
 Description of setup
 */
 function setup() {
-
+  createCanvas(500, 500);
 }
 
 
@@ -29,5 +25,16 @@ function setup() {
 Description of draw()
 */
 function draw() {
-
+    background(backgroundShade);
+    ellipseMode(CENTER);
+    fill(mouseX*7, mouseY, mouseX/.5);
+    circleX=circleX+circleSpeed;
+    circleSpeed = circleSpeed + circleAcceleration;
+    ellipse(circleX,circleY,circleSize);
+    circleSize=circleSize+2.5;
+    fill(mouseX*7, mouseY, mouseX/.5);
+    ellipse(circleX-2222, circleY, mouseY);
+    circleSize=circleSize/1.01;
+    fill(mouseX*7, mouseY, mouseX/.5);
+    ellipse(circleX-4000,circleY,circleSize)
 }

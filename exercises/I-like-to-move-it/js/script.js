@@ -8,7 +8,7 @@ along with an eclectic rectangle making rounds.
 
 "use strict";
 
-// creating objects
+// creating objects //
 
 let bg = { // the background object
   r: 0,
@@ -28,21 +28,21 @@ let circleShrink = { // shrinking circle
   w:500,
 }
 
-let circleRail = { // circle on which square turns
+let circleRail = { // circle on which user can walk the squareLink
   allign:`CENTER`,
   x:250,
   y:250,
   w:250,
 }
 
-let squareShip = { // a strange little square
+let squareShip = { // this rectangle is used to create a shimmery effect
   x:125,
   y:250,
   w:100,
   h:50,
 }
 
-let squareLink = {
+let squareLink = { // this rectangle is used to distract the user
   x:0,
   y:0,
   w:60,

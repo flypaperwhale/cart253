@@ -1,3 +1,5 @@
-# Template p5 project
+# I like to move it baby!
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This is an experiment with moving shapes and changing colors.
+
+It seems I am yet unable to use the map() function...

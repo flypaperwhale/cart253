@@ -29,6 +29,8 @@ let user = {
   color: 255,
 };
 
+let numStatic = 2500;
+
 /**
 Description of preload
 */
@@ -44,6 +46,8 @@ function setup() {
 
   covid19.y = random(0,height);
   covid19.vx = covid19.speed;
+
+  noCursor();
 }
 
 /**
@@ -52,7 +56,7 @@ Description of draw()
 function draw() {
   background(0);
   // static background
-  for (let i = 0; i < 3000; i++){
+  for (let i = 0; i < numStatic; i++){
     let x = random(0,width);
     let y = random(0,height);
     stroke(255);

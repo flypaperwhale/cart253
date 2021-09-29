@@ -1,9 +1,13 @@
 /**
-Title of Project
-Author Name
+Clowning Around
+Frankie Latreille
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+In this simulation, the user is a white ball that must dodge the clowns and
+displace the pink ball from the clowns.
+If the user is touched by the clowns, they transform into a clown and must
+not touch the ball.
+If the ball is touched by the floating clowns or the user as a clown, a bad
+surprise awaits the user.
 */
 
 "use strict";
@@ -93,10 +97,10 @@ let pinkClownUser = {
 }
 
 /**
-Preloading the image of a clown
+Preloading the images of different colored clowns
 */
 function preload() {
-// loading clown.png into the program
+// loading clown.png and pinkclown.png into the program
   clown = loadImage('assets/images/clown.png');
   pinkClown = loadImage('assets/images/pinkclown')
 }
@@ -205,6 +209,39 @@ function draw() {
     pinkClownUser = true;
   }
 
+  // check for clowns catching the Ball
+  // if the Ball is caught it transforms into a giant sickly clown
+  // clown1
+  let dCxB1 = dist(theBall.x, theBall.y, clownAsCovid1.x, clownAsCovid1.y);
+  if(dCxB1 < clownAsCovid1.size/2 + theBall.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
+    sickClownBall = true;
+    noLoop();
+  }
+  // clown2
+  let dCxB2 = dist(theBall.x, theBall.y, clownAsCovid2.x, clownAsCovid2.y);
+  if(dCxB2 < clownAsCovid2.size/2 + theBall.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
+    sickClownBall = true;
+    noLoop();
+  }
+  // clown3
+  let dCxB3 = dist(theBall.x, theBall.y, clownAsCovid3.x, clownAsCovid3.y);
+  if(dCxB3 < clownAsCovid3.size/2 + theBall.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
+    sickClownBall = true;
+    noLoop();
+  }
+  // clown4
+  let dCxB4 = dist(theBall.x, theBall.y, clownAsCovid4.x, clownAsCovid4.y);
+  if(dCxB4 < clownAsCovid4.size/2 + theBall.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
+    sickClownBall = true;
+    noLoop();
+  }
+  // clown5
+  let dCxB5 = dist(theBall.x, theBall.y, clownAsCovid5.x, clownAsCovid5.y);
+  if(dCxB5 < clownAsCovid5.size/2 + user.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
+    sickClownBall = true;
+    noLoop();
+  }
+
   // display the Ball
   push();
   theBall.color.r = 251;
@@ -240,7 +277,10 @@ function draw() {
   ellipse(user.x,user.y,user.size);
 }
 
-if (pinkClownUser == true) {
+if (pinkClownUser === true) {
   pinkClownUserCounter++
+  if (pinkClownUserCounter > 5){
+    pinkClownUser = false;
+  }
 
 }

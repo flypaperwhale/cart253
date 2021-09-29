@@ -1,3 +1,8 @@
-# Template p5 project
+# Dodge-em E2
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+In this simulation, the user is a white ball that must dodge the clowns and
+displace the pink ball from the clowns.
+If the user is touched by the clowns, they transform into a clown and must
+not touch the ball.
+If the ball is touched by the floating clowns or the user as a clown, a bad
+surprise awaits the user.

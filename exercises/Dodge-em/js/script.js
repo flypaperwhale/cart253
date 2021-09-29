@@ -166,27 +166,29 @@ function draw() {
   user.x = mouseX;
   user.y = mouseY;
 
-  // check for clown1 catching user
+  // check for clowns catching user
+  // if the user is caught they transform into a pink clown
+  // clown1
   let dCxU1 = dist(user.x, user.y, clownAsCovid1.x, clownAsCovid1.y);
   if(dCxU1 < clownAsCovid1.size/2 + user.size/2 + 1.5){
     noLoop();
   }
-  // check for clown2 catching user
+  // clown2
   let dCxU2 = dist(user.x, user.y, clownAsCovid2.x, clownAsCovid2.y);
   if(dCxU2 < clownAsCovid2.size/2 + user.size/2 + 1.5){
     noLoop();
   }
-  // check for clown3 catching user
+  // clown3
   let dCxU3 = dist(user.x, user.y, clownAsCovid3.x, clownAsCovid3.y);
   if(dCxU3 < clownAsCovid3.size/2 + user.size/2 + 1.5){
     noLoop();
   }
-  // check for clown4 catching user
+  // clown4
   let dCxU4 = dist(user.x, user.y, clownAsCovid4.x, clownAsCovid4.y);
   if(dCxU4 < clownAsCovid4.size/2 + user.size/2 + 1.5){
     noLoop();
   }
-  // check for clown5 catching user
+  // clown5 
   let dCxU5 = dist(user.x, user.y, clownAsCovid5.x, clownAsCovid5.y);
   if(dCxU5 < clownAsCovid5.size/2 + user.size/2 + 1.5){
     noLoop();

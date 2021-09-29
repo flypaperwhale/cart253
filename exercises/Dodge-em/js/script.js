@@ -140,7 +140,7 @@ function draw() {
   clownAsCovid5.y = clownAsCovid5.y + clownAsCovid5.vy;
 
 
-  // clown reapears at the left side when arriving at the right side
+  // clowns reapear at the left side when arriving at the right side
   if (clownAsCovid1.x > width){
     clownAsCovid1.x = 0;
     clownAsCovid1.y = random(0,height);
@@ -166,9 +166,29 @@ function draw() {
   user.x = mouseX;
   user.y = mouseY;
 
-  // check for clown catching
-  let d = dist(user.x, user.y, clownAsCovid1.x, clownAsCovid1.y);
-  if(d < clownAsCovid1.size/2 + user.size/2 + 1.5){
+  // check for clown1 catching user
+  let dCxU1 = dist(user.x, user.y, clownAsCovid1.x, clownAsCovid1.y);
+  if(dCxU1 < clownAsCovid1.size/2 + user.size/2 + 1.5){
+    noLoop();
+  }
+  // check for clown2 catching user
+  let dCxU2 = dist(user.x, user.y, clownAsCovid2.x, clownAsCovid2.y);
+  if(dCxU2 < clownAsCovid2.size/2 + user.size/2 + 1.5){
+    noLoop();
+  }
+  // check for clown3 catching user
+  let dCxU3 = dist(user.x, user.y, clownAsCovid3.x, clownAsCovid3.y);
+  if(dCxU3 < clownAsCovid3.size/2 + user.size/2 + 1.5){
+    noLoop();
+  }
+  // check for clown4 catching user
+  let dCxU4 = dist(user.x, user.y, clownAsCovid4.x, clownAsCovid4.y);
+  if(dCxU4 < clownAsCovid4.size/2 + user.size/2 + 1.5){
+    noLoop();
+  }
+  // check for clown5 catching user
+  let dCxU5 = dist(user.x, user.y, clownAsCovid5.x, clownAsCovid5.y);
+  if(dCxU5 < clownAsCovid5.size/2 + user.size/2 + 1.5){
     noLoop();
   }
 

@@ -36,6 +36,7 @@ Description of preload
 */
 function preload() {
 
+  clown = loadImage('assets/images/clown.png');
 }
 
 /**

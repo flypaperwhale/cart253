@@ -8,86 +8,199 @@ author, and this description to match your project!
 
 "use strict";
 
-let clownAsCovid = {
-  x:0,
+// creating js objects //
+
+// theBall, to be displaced out of the way of the clowns by the user
+let theBall = {
+  x:400,
   y:250,
-  size:100,
+  size:75,
+  color: {
+    r:251,
+    g:145,
+    b:255,
+  }
+};
+// floating clown1
+let clownAsCovid1 = {
+  x:0,
+  y:25,
+  size:30,
+  speed:2.5,
+  vx:0,
+  vy:0,
+  image: undefined,
+};
+// floating clown2
+let clownAsCovid2 = {
+  x:0,
+  y:75,
+  size:30,
   speed:5,
   vx:0,
   vy:0,
   image: undefined,
 };
-
+// floating clown3
+let clownAsCovid3 = {
+  x:0,
+  y:150,
+  size:30,
+  speed:3.2,
+  vx:0,
+  vy:0,
+  image: undefined,
+};
+// floating clown4
+let clownAsCovid4 = {
+  x:0,
+  y:250,
+  size:30,
+  speed:2,
+  vx:0,
+  vy:0,
+  image: undefined,
+};
+// floating clown5
+let clownAsCovid5 = {
+  x:0,
+  y:300,
+  size:30,
+  speed:5.5,
+  vx:0,
+  vy:0,
+  image: undefined,
+};
+// the user is a small ball
 let user = {
   x:250,
-  y:250,
-  size: 100,
+  y:450,
+  size: 35,
   color: 255,
+  image: undefined,
 };
-
-let numStatic = 2500;
 
 let clown = undefined;
 
 /**
-Description of preload
+Preloading the image of a clown
 */
 function preload() {
-
+// loading clown.png into the program
   clown = loadImage('assets/images/clown.png');
-
 }
 
 /**
-Description of setup
+Setting up the clowns
 */
 function setup() {
   createCanvas(windowWidth,windowHeight);
 
-  clownAsCovid.y = random(0,height);
-  clownAsCovid.vx = clownAsCovid.speed;
+  // set clown1
+  clownAsCovid1.y = random(0,height);
+  clownAsCovid1.vx = clownAsCovid1.speed;
+  // set clown2
+  clownAsCovid2.y = random(0,height);
+  clownAsCovid2.vx = clownAsCovid2.speed;
+  // set clown3
+  clownAsCovid3.y = random(0,height);
+  clownAsCovid3.vx = clownAsCovid3.speed;
+  // set clown4
+  clownAsCovid4.y = random(0,height);
+  clownAsCovid4.vx = clownAsCovid4.speed;
+  // set clown5
+  clownAsCovid5.y = random(0,height);
+  clownAsCovid5.vx = clownAsCovid5.speed;
 
   noCursor();
 }
 
 /**
-Description of draw()
+Here the program displays the clowns, the ball, and the user's cursor
 */
 function draw() {
-  background(0);
-  // static background
-  for (let i = 0; i < numStatic; i++){
-    let x = random(0,width);
-    let y = random(0,height);
-    stroke(255);
-    point(x,y);
+
+  background(128,212,255); // cotton candy blue
+
+  // covid movement //
+  clownAsCovid1.x = clownAsCovid1.x + clownAsCovid1.vx;
+  // clown 1
+  clownAsCovid1.y = clownAsCovid1.y + clownAsCovid1.vy;
+  // clown 2
+  clownAsCovid2.x = clownAsCovid2.x + clownAsCovid2.vx;
+  clownAsCovid2.y = clownAsCovid2.y + clownAsCovid2.vy;
+  // clown 3
+  clownAsCovid3.x = clownAsCovid3.x + clownAsCovid3.vx;
+  clownAsCovid3.y = clownAsCovid3.y + clownAsCovid3.vy;
+  // clown 4
+  clownAsCovid4.x = clownAsCovid4.x + clownAsCovid4.vx;
+  clownAsCovid4.y = clownAsCovid4.y + clownAsCovid4.vy;
+  // clown 5
+  clownAsCovid5.x = clownAsCovid5.x + clownAsCovid5.vx;
+  clownAsCovid5.y = clownAsCovid5.y + clownAsCovid5.vy;
+
+
+  // clown reapears at the left side when arriving at the right side
+  if (clownAsCovid1.x > width){
+    clownAsCovid1.x = 0;
+    clownAsCovid1.y = random(0,height);
+  }
+  if (clownAsCovid2.x > width){
+    clownAsCovid2.x = 0;
+    clownAsCovid2.y = random(0,height);
+  }
+  if (clownAsCovid3.x > width){
+    clownAsCovid3.x = 0;
+    clownAsCovid3.y = random(0,height);
+  }
+  if (clownAsCovid4.x > width){
+    clownAsCovid4.x = 0;
+    clownAsCovid4.y = random(0,height);
+  }
+  if (clownAsCovid5.x > width){
+    clownAsCovid5.x = 0;
+    clownAsCovid5.y = random(0,height);
   }
 
-
-  // covid movement
-  clownAsCovid.x = clownAsCovid.x + clownAsCovid.vx;
-  clownAsCovid.y = clownAsCovid.y + clownAsCovid.vy;
-
-  if (clownAsCovid.x > width){
-    clownAsCovid.x = 0;
-    clownAsCovid.y = random(0,height);
-  }
   // user movement
   user.x = mouseX;
   user.y = mouseY;
 
-  // check for covid catching
-  let d = dist(user.x, user.y, clownAsCovid.x, clownAsCovid.y);
-  if(d < clownAsCovid.size/2 + user.size/2 + 1.5){
+  // check for clown catching
+  let d = dist(user.x, user.y, clownAsCovid1.x, clownAsCovid1.y);
+  if(d < clownAsCovid1.size/2 + user.size/2 + 1.5){
     noLoop();
   }
 
-  // display clownAsCovid
-  clownAsCovid.image = clown;
-  image(clownAsCovid.image, clownAsCovid.x, clownAsCovid.y);
+  // display the Ball
+  push();
+  theBall.color.r =
+  theBall.color.g =
+  theBall.color.b =
+  fill(theBall.color.r,theBall.color.g,theBall.color.b);
 
+  // display clownAsCovid1
+  clownAsCovid1.image = clown;
+  image(clownAsCovid1.image, clownAsCovid1.x, clownAsCovid1.y, clownAsCovid1.size, clownAsCovid1.size);
+
+  // display clownAsCovid2
+  clownAsCovid2.image = clown;
+  image(clownAsCovid2.image, clownAsCovid2.x, clownAsCovid2.y, clownAsCovid2.size, clownAsCovid2.size);
+
+  // display clownAsCovid3
+  clownAsCovid3.image = clown;
+  image(clownAsCovid3.image, clownAsCovid3.x, clownAsCovid3.y, clownAsCovid3.size, clownAsCovid3.size);
+
+  // display clownAsCovid4
+  clownAsCovid4.image = clown;
+  image(clownAsCovid4.image, clownAsCovid4.x, clownAsCovid4.y, clownAsCovid4.size, clownAsCovid4.size);
+
+  // display clownAsCovid5
+  clownAsCovid5.image = clown;
+  image(clownAsCovid5.image, clownAsCovid5.x, clownAsCovid5.y, clownAsCovid5.size, clownAsCovid5.size);
 
   // display user
   fill(user.color);
+  noStroke();
   ellipse(user.x,user.y,user.size);
 }

@@ -75,7 +75,7 @@ let clownAsCovid5 = {
   vy:0,
   image: undefined,
 };
-// the user is a small ball
+// the user is a small white ball
 let user = {
   x:250,
   y:450,
@@ -88,12 +88,22 @@ let clown = undefined;
 
 let pinkClown = undefined;
 
+let sickClown = undefined;
+
 let pinkClownUser = {
   x:250,
   y:450,
   size: 35,
-  color: 255,
   image: undefined,
+  switch: false,
+}
+
+let sickClownBall = {
+  x: 0,
+  y: 0,
+  size: 80,
+  image: undefined,
+  switch: false,
 }
 
 /**
@@ -102,7 +112,8 @@ Preloading the images of different colored clowns
 function preload() {
 // loading clown.png and pinkclown.png into the program
   clown = loadImage('assets/images/clown.png');
-  pinkClown = loadImage('assets/images/pinkclown')
+  pinkClown = loadImage('assets/images/pinkclown');
+  sickClown = loadImage('assets/images/sickclown');
 }
 
 /**
@@ -111,22 +122,23 @@ Setting up the clowns
 function setup() {
   createCanvas(900,600);
 
-  // set clown1
+  // intialize clown1 position and velocity
   clownAsCovid1.y = random(0,height);
   clownAsCovid1.vx = clownAsCovid1.speed;
-  // set clown2
+  // intialize clown2 position and velocity
   clownAsCovid2.y = random(0,height);
   clownAsCovid2.vx = clownAsCovid2.speed;
-  // set clown3
+  // intialize clown3 position and velocity
   clownAsCovid3.y = random(0,height);
   clownAsCovid3.vx = clownAsCovid3.speed;
-  // set clown4
+  // intialize clown4 position and velocity
   clownAsCovid4.y = random(0,height);
   clownAsCovid4.vx = clownAsCovid4.speed;
-  // set clown5
+  // intialize clown5 position and velocity
   clownAsCovid5.y = random(0,height);
   clownAsCovid5.vx = clownAsCovid5.speed;
 
+  // remove the cursor
   noCursor();
 }
 
@@ -135,11 +147,12 @@ Here the program displays the clowns, the ball, and the user's cursor
 */
 function draw() {
 
+  // draw the background //
   background(128,212,255); // cotton candy blue
 
-  // covid movement //
-  clownAsCovid1.x = clownAsCovid1.x + clownAsCovid1.vx;
+  // Clowns movement //
   // clown 1
+  clownAsCovid1.x = clownAsCovid1.x + clownAsCovid1.vx;
   clownAsCovid1.y = clownAsCovid1.y + clownAsCovid1.vy;
   // clown 2
   clownAsCovid2.x = clownAsCovid2.x + clownAsCovid2.vx;
@@ -153,7 +166,6 @@ function draw() {
   // clown 5
   clownAsCovid5.x = clownAsCovid5.x + clownAsCovid5.vx;
   clownAsCovid5.y = clownAsCovid5.y + clownAsCovid5.vy;
-
 
   // clowns reapear at the left side when arriving at the right side
   if (clownAsCovid1.x > width){
@@ -177,72 +189,88 @@ function draw() {
     clownAsCovid5.y = random(0,height);
   }
 
-  // user movement
+  // user movement //
   user.x = mouseX;
   user.y = mouseY;
 
-  // check for clowns catching user
+  // the Ball movement //
+  let dUxB = dist(user.x, user.y, theBall.x, theBall.y);
+  if (dUxB <= theBall.size - user.size/2) {
+    function mouseDragged(){
+      theBall.x = mouseX;
+      theBall.y = mouseY;
+    }
+  }
+
+  // check for clowns catching user //
   // if the user is caught they transform into a pink clown
   // clown1
   let dCxU1 = dist(user.x, user.y, clownAsCovid1.x, clownAsCovid1.y);
   if(dCxU1 < clownAsCovid1.size/2 + user.size/2 + 1.5){
-    pinkClownUser = true;
+    pinkClownUser.switch = true;
   }
   // clown2
   let dCxU2 = dist(user.x, user.y, clownAsCovid2.x, clownAsCovid2.y);
   if(dCxU2 < clownAsCovid2.size/2 + user.size/2 + 1.5){
-    pinkClownUser = true;
+    pinkClownUser.switch = true;
   }
   // clown3
   let dCxU3 = dist(user.x, user.y, clownAsCovid3.x, clownAsCovid3.y);
   if(dCxU3 < clownAsCovid3.size/2 + user.size/2 + 1.5){
-    pinkClownUser = true;
+    pinkClownUser.switch = true;
   }
   // clown4
   let dCxU4 = dist(user.x, user.y, clownAsCovid4.x, clownAsCovid4.y);
   if(dCxU4 < clownAsCovid4.size/2 + user.size/2 + 1.5){
-    pinkClownUser = true;
+    pinkClownUser.switch = true;
   }
   // clown5
   let dCxU5 = dist(user.x, user.y, clownAsCovid5.x, clownAsCovid5.y);
   if(dCxU5 < clownAsCovid5.size/2 + user.size/2 + 1.5){
-    pinkClownUser = true;
+    pinkClownUser.switch = true;
   }
 
   // check for clowns catching the Ball
   // if the Ball is caught it transforms into a giant sickly clown
   // clown1
   let dCxB1 = dist(theBall.x, theBall.y, clownAsCovid1.x, clownAsCovid1.y);
-  if(dCxB1 < clownAsCovid1.size/2 + theBall.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
-    sickClownBall = true;
+  if(dCxB1 < clownAsCovid1.size/2 + theBall.size/2 + 1.5){
+    sickClownBall.switch = true;
     noLoop();
   }
   // clown2
   let dCxB2 = dist(theBall.x, theBall.y, clownAsCovid2.x, clownAsCovid2.y);
-  if(dCxB2 < clownAsCovid2.size/2 + theBall.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
-    sickClownBall = true;
+  if(dCxB2 < clownAsCovid2.size/2 + theBall.size/2 + 1.5){
+    sickClownBall.switch = true;
     noLoop();
   }
   // clown3
   let dCxB3 = dist(theBall.x, theBall.y, clownAsCovid3.x, clownAsCovid3.y);
-  if(dCxB3 < clownAsCovid3.size/2 + theBall.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
-    sickClownBall = true;
+  if(dCxB3 < clownAsCovid3.size/2 + theBall.size/2 + 1.5){
+    sickClownBall.switch = true;
     noLoop();
   }
   // clown4
   let dCxB4 = dist(theBall.x, theBall.y, clownAsCovid4.x, clownAsCovid4.y);
-  if(dCxB4 < clownAsCovid4.size/2 + theBall.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
-    sickClownBall = true;
+  if(dCxB4 < clownAsCovid4.size/2 + theBall.size/2 + 1.5){
+    sickClownBall.switch = true;
     noLoop();
   }
   // clown5
   let dCxB5 = dist(theBall.x, theBall.y, clownAsCovid5.x, clownAsCovid5.y);
-  if(dCxB5 < clownAsCovid5.size/2 + user.size/2 + 1.5 || pinkClown.size/2 + theBall.size/2){
-    sickClownBall = true;
+  if(dCxB5 < clownAsCovid5.size/2 + user.size/2 + 1.5){
+    sickClownBall.switch = true;
     noLoop();
   }
 
-  // display the Ball
+  // check for pinkClownUser catching the ball
+  let dPxB = dist(theBall.x, theBall.y, pinkClownUser.x, pinkClownUser.y)
+  if (dPxB < pinkClownUser.size/2 + theBall.size/2) {
+    sickClownBall.switch = true;
+    noLoop();
+  }
+
+  // display the Ball //
   push();
   theBall.color.r = 251;
   theBall.color.g = 145;
@@ -251,36 +279,50 @@ function draw() {
   ellipseMode(CENTER);
   ellipse(theBall.x,theBall.y,theBall.size);
 
-  // display clownAsCovid1
+  // display clownAsCovid1 //
   clownAsCovid1.image = clown;
   image(clownAsCovid1.image, clownAsCovid1.x, clownAsCovid1.y, clownAsCovid1.size, clownAsCovid1.size);
 
-  // display clownAsCovid2
+  // display clownAsCovid2 //
   clownAsCovid2.image = clown;
   image(clownAsCovid2.image, clownAsCovid2.x, clownAsCovid2.y, clownAsCovid2.size, clownAsCovid2.size);
 
-  // display clownAsCovid3
+  // display clownAsCovid3 //
   clownAsCovid3.image = clown;
   image(clownAsCovid3.image, clownAsCovid3.x, clownAsCovid3.y, clownAsCovid3.size, clownAsCovid3.size);
 
-  // display clownAsCovid4
+  // display clownAsCovid4 //
   clownAsCovid4.image = clown;
   image(clownAsCovid4.image, clownAsCovid4.x, clownAsCovid4.y, clownAsCovid4.size, clownAsCovid4.size);
 
-  // display clownAsCovid5
+  // display clownAsCovid5 //
   clownAsCovid5.image = clown;
   image(clownAsCovid5.image, clownAsCovid5.x, clownAsCovid5.y, clownAsCovid5.size, clownAsCovid5.size);
 
-  // display user
+  // display user //
   fill(user.color);
   noStroke();
   ellipse(user.x,user.y,user.size);
-}
 
-if (pinkClownUser === true) {
-  pinkClownUserCounter++
-  if (pinkClownUserCounter > 5){
-    pinkClownUser = false;
+
+  // display pinkClown //
+  if (pinkClownUser.switch === true){
+    pinkClownUser.image = pinkClown;
+    image(pinkClownUser.image,user.x,user.y,pinkClownUser.size,pinkClownUser.size);
+  }
+
+  // display sickClown //
+  if (sickClownBall.switch === true){
+    sickClownBall.image = sickClown;
+    image(sickClown.image, theBall.x, theBall.y, sickClownBall.size, sickClownBall.size);
+  }
+
+  // counter to display user as the pink clown
+  if (pinkClownUser.switch === true) {
+    pinkClownUser.counter++
+    if (pinkClownUser.counter > 5){
+      pinkClownUser = false;
+    }
   }
 
 }

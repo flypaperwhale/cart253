@@ -82,12 +82,23 @@ let user = {
 
 let clown = undefined;
 
+let pinkClown = undefined;
+
+let pinkClownUser = {
+  x:250,
+  y:450,
+  size: 35,
+  color: 255,
+  image: undefined,
+}
+
 /**
 Preloading the image of a clown
 */
 function preload() {
 // loading clown.png into the program
   clown = loadImage('assets/images/clown.png');
+  pinkClown = loadImage('assets/images/pinkclown')
 }
 
 /**
@@ -171,27 +182,27 @@ function draw() {
   // clown1
   let dCxU1 = dist(user.x, user.y, clownAsCovid1.x, clownAsCovid1.y);
   if(dCxU1 < clownAsCovid1.size/2 + user.size/2 + 1.5){
-    noLoop();
+    pinkClownUser = true;
   }
   // clown2
   let dCxU2 = dist(user.x, user.y, clownAsCovid2.x, clownAsCovid2.y);
   if(dCxU2 < clownAsCovid2.size/2 + user.size/2 + 1.5){
-    noLoop();
+    pinkClownUser = true;
   }
   // clown3
   let dCxU3 = dist(user.x, user.y, clownAsCovid3.x, clownAsCovid3.y);
   if(dCxU3 < clownAsCovid3.size/2 + user.size/2 + 1.5){
-    noLoop();
+    pinkClownUser = true;
   }
   // clown4
   let dCxU4 = dist(user.x, user.y, clownAsCovid4.x, clownAsCovid4.y);
   if(dCxU4 < clownAsCovid4.size/2 + user.size/2 + 1.5){
-    noLoop();
+    pinkClownUser = true;
   }
   // clown5
   let dCxU5 = dist(user.x, user.y, clownAsCovid5.x, clownAsCovid5.y);
   if(dCxU5 < clownAsCovid5.size/2 + user.size/2 + 1.5){
-    noLoop();
+    pinkClownUser = true;
   }
 
   // display the Ball
@@ -227,4 +238,9 @@ function draw() {
   fill(user.color);
   noStroke();
   ellipse(user.x,user.y,user.size);
+}
+
+if (pinkClownUser == true) {
+  pinkClownUserCounter++
+
 }

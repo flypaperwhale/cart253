@@ -12,8 +12,8 @@ author, and this description to match your project!
 
 // theBall, to be displaced out of the way of the clowns by the user
 let theBall = {
-  x:400,
-  y:250,
+  x:700,
+  y:300,
   size:75,
   color: {
     r:251,
@@ -94,7 +94,7 @@ function preload() {
 Setting up the clowns
 */
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(900,600);
 
   // set clown1
   clownAsCovid1.y = random(0,height);
@@ -188,7 +188,7 @@ function draw() {
   if(dCxU4 < clownAsCovid4.size/2 + user.size/2 + 1.5){
     noLoop();
   }
-  // clown5 
+  // clown5
   let dCxU5 = dist(user.x, user.y, clownAsCovid5.x, clownAsCovid5.y);
   if(dCxU5 < clownAsCovid5.size/2 + user.size/2 + 1.5){
     noLoop();
@@ -196,10 +196,12 @@ function draw() {
 
   // display the Ball
   push();
-  theBall.color.r =
-  theBall.color.g =
-  theBall.color.b =
+  theBall.color.r = 251;
+  theBall.color.g = 145;
+  theBall.color.b = 255;
   fill(theBall.color.r,theBall.color.g,theBall.color.b);
+  ellipseMode(CENTER);
+  ellipse(theBall.x,theBall.y,theBall.size);
 
   // display clownAsCovid1
   clownAsCovid1.image = clown;

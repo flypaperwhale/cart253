@@ -8,18 +8,14 @@ author, and this description to match your project!
 
 "use strict";
 
-let covid19 = {
+let clownAsCovid = {
   x:0,
   y:250,
   size:100,
   speed:5,
   vx:0,
   vy:0,
-  color: {
-    r:255,
-    g:0,
-    b:0,
-  }
+  image: undefined,
 };
 
 let user = {
@@ -31,12 +27,15 @@ let user = {
 
 let numStatic = 2500;
 
+let clown = undefined;
+
 /**
 Description of preload
 */
 function preload() {
 
   clown = loadImage('assets/images/clown.png');
+
 }
 
 /**
@@ -45,8 +44,8 @@ Description of setup
 function setup() {
   createCanvas(windowWidth,windowHeight);
 
-  covid19.y = random(0,height);
-  covid19.vx = covid19.speed;
+  clownAsCovid.y = random(0,height);
+  clownAsCovid.vx = clownAsCovid.speed;
 
   noCursor();
 }
@@ -66,27 +65,28 @@ function draw() {
 
 
   // covid movement
-  covid19.x = covid19.x + covid19.vx;
-  covid19.y = covid19.y + covid19.vy;
+  clownAsCovid.x = clownAsCovid.x + clownAsCovid.vx;
+  clownAsCovid.y = clownAsCovid.y + clownAsCovid.vy;
 
-  if (covid19.x > width){
-    covid19.x = 0;
-    covid19.y = random(0,height);
+  if (clownAsCovid.x > width){
+    clownAsCovid.x = 0;
+    clownAsCovid.y = random(0,height);
   }
   // user movement
   user.x = mouseX;
   user.y = mouseY;
 
   // check for covid catching
-  let d = dist(user.x, user.y, covid19.x, covid19.y);
-  if(d < covid19.size/2 + user.size/2 + 1.5){
+  let d = dist(user.x, user.y, clownAsCovid.x, clownAsCovid.y);
+  if(d < clownAsCovid.size/2 + user.size/2 + 1.5){
     noLoop();
   }
 
-  // display covid
-  noStroke();
-  fill(covid19.color.r,covid19.color.g,covid19.color.b);
-  ellipse(covid19.x,covid19.y,covid19.size);
+  // display clownAsCovid
+  clownAsCovid.image = clown;
+  image(clownAsCovid.image, clownAsCovid.x, clownAsCovid.y);
+
+
   // display user
   fill(user.color);
   ellipse(user.x,user.y,user.size);

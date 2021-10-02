@@ -114,7 +114,7 @@ Preloading the images of different colored clowns
 function preload() {
 // loading clown.png and pinkclown.png into the program
   clown = loadImage('assets/images/clown.png');
-  pinkClown = loadImage('assets/images/pinkclown.png');
+  pinkClown = loadImage('assets/images/pinkclown2.png');
   sickClown = loadImage('assets/images/sickclown.png');
 }
 
@@ -331,11 +331,10 @@ function draw() {
   print('pinkCounter =', pinkClownUser.counter,'pinkClown Switch =',pinkClownUser.switch,'sickClown Switch =', sickClownBall.switch);
 }
 
-
 // the Ball movement //
 function mouseDragged(){
   let distanceUserxBall = dist(user.x, user.y, theBall.x, theBall.y);
-  if (distanceUserxBall <= (theBall.size - user.size/2)) {// #### I must be making a MISTAKE here #### (map?)//
+  if (distanceUserxBall <= (theBall.size - user.size/2)) {
     theBall.x = mouseX;
     theBall.y = mouseY;
   }

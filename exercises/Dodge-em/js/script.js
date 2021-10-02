@@ -89,7 +89,7 @@ let pinkClownUser = {
   y:450,
   size: 35,
   image: undefined,
-  switch: 'off',
+  switch: 0,
   counter:0,
 }
 
@@ -98,7 +98,8 @@ let sickClownBall = {
   y: 0,
   size: 80,
   image: undefined,
-  switch: 'off',
+  switch: 0,
+  counter:0,
 }
 
 let clown = undefined;
@@ -155,15 +156,6 @@ function draw() {
   user.x = mouseX;
   user.y = mouseY;
 
-  // the Ball movement //
-  let distanceUserxBall = dist(user.x, user.y, theBall.x, theBall.y);
-  if (distanceUserxBall <= (theBall.size - user.size/2)) {
-    function mouseDragged(){ // #### I must be making a MISTAKE here #### (map?)//
-      theBall.x = mouseX;
-      theBall.y = mouseY;
-    }
-  }
-
   // Clowns movement //
   // clown 1
   clownAsCovid1.x = clownAsCovid1.x + clownAsCovid1.vx;
@@ -208,27 +200,27 @@ function draw() {
   // clown1
   let distanceClown1xUser = dist(user.x, user.y, clownAsCovid1.x, clownAsCovid1.y);
   if(distanceClown1xUser < clownAsCovid1.size/2 + user.size/2 + 1.5){
-    pinkClownUser.switch = 'on';
+    pinkClownUser.switch = 1;
   }
   // clown2
   let distanceClown2xUser = dist(user.x, user.y, clownAsCovid2.x, clownAsCovid2.y);
   if(distanceClown2xUser < clownAsCovid2.size/2 + user.size/2 + 1.5){
-    pinkClownUser.switch = 'on';
+    pinkClownUser.switch = 1;
   }
   // clown3
   let distanceClown3xUser = dist(user.x, user.y, clownAsCovid3.x, clownAsCovid3.y);
   if(distanceClown3xUser < clownAsCovid3.size/2 + user.size/2 + 1.5){
-    pinkClownUser.switch = 'on';
+    pinkClownUser.switch = 1;
   }
   // clown4
   let distanceClown4xUser = dist(user.x, user.y, clownAsCovid4.x, clownAsCovid4.y);
   if(distanceClown4xUser < clownAsCovid4.size/2 + user.size/2 + 1.5){
-    pinkClownUser.switch = 'on';
+    pinkClownUser.switch = 1;
   }
   // clown5
   let distanceClown5xUser = dist(user.x, user.y, clownAsCovid5.x, clownAsCovid5.y);
   if(distanceClown5xUser < clownAsCovid5.size/2 + user.size/2 + 1.5){
-    pinkClownUser.switch = 'on';
+    pinkClownUser.switch = 1;
   }
 
   // check for clowns catching the Ball
@@ -236,33 +228,58 @@ function draw() {
   // clown1
   let distanceClown1xBall = dist(theBall.x, theBall.y, clownAsCovid1.x, clownAsCovid1.y);
   if(distanceClown1xBall < clownAsCovid1.size/2 + theBall.size/2 + 1.5){
-    sickClownBall.switch = 'on';
+    sickClownBall.switch = 1;
   }
   // clown2
   let distanceClown2xBall = dist(theBall.x, theBall.y, clownAsCovid2.x, clownAsCovid2.y);
   if(distanceClown2xBall < clownAsCovid2.size/2 + theBall.size/2 + 1.5){
-    sickClownBall.switch = 'on';
+    sickClownBall.switch = 1;
   }
   // clown3
   let distanceClown3xBall = dist(theBall.x, theBall.y, clownAsCovid3.x, clownAsCovid3.y);
   if(distanceClown3xBall < clownAsCovid3.size/2 + theBall.size/2 + 1.5){
-    sickClownBall.switch = 'on';
+    sickClownBall.switch = 1;
   }
   // clown4
   let distanceClown4xBall = dist(theBall.x, theBall.y, clownAsCovid4.x, clownAsCovid4.y);
   if(distanceClown4xBall < clownAsCovid4.size/2 + theBall.size/2 + 1.5){
-    sickClownBall.switch = 'on';
+    sickClownBall.switch = 1;
   }
   // clown5
   let distanceClown5xBall = dist(theBall.x, theBall.y, clownAsCovid5.x, clownAsCovid5.y);
   if(distanceClown5xBall < clownAsCovid5.size/2 + user.size/2 + 1.5){
-    sickClownBall.switch = 'on';
+    sickClownBall.switch = 1;
   }
 
   // check for pinkClownUser catching the ball
-  let distancePinkxBall = dist(theBall.x, theBall.y, pinkClownUser.x, pinkClownUser.y)
-  if (distancePinkxBall < pinkClownUser.size/2 + theBall.size/2) {
-    sickClownBall.switch = 'on';
+  if (pinkClownUser.switch === 1) {
+    let distancePinkxBall = dist(theBall.x, theBall.y, user.x, user.y)
+    if (distancePinkxBall < pinkClownUser.size/2 + theBall.size/2) {
+      sickClownBall.switch = 1;
+      }
+  }
+
+  // display user //
+  fill(user.color);
+  noStroke();
+  ellipse(user.x,user.y,user.size);
+
+  // display pinkClown //
+  if (pinkClownUser.switch === 1){
+    pinkClownUser.image = pinkClown;
+    push();
+    imageMode(CENTER);
+    image(pinkClownUser.image,user.x,user.y,pinkClownUser.size,pinkClownUser.size);
+    pop();
+  }
+
+  // counter to display user as the pink clown
+    if (pinkClownUser.switch === 1) {
+    pinkClownUser.counter++
+    if (pinkClownUser.counter === 200){
+      pinkClownUser.switch = 0;
+      pinkClownUser.counter = 0;
+    }
   }
 
   // display the Ball //
@@ -293,38 +310,33 @@ function draw() {
   clownAsCovid5.image = clown;
   image(clownAsCovid5.image, clownAsCovid5.x, clownAsCovid5.y, clownAsCovid5.size, clownAsCovid5.size);
 
-  // display user //
-  fill(user.color);
-  noStroke();
-  ellipse(user.x,user.y,user.size);
 
-  // display pinkClown //
-  pinkClownUser.image = pinkClown;
-  if (pinkClownUser.switch === 'on'){
+  // display sickClown //
+  if (sickClownBall.switch === 1){
+    sickClownBall.image = sickClown;
     push();
     imageMode(CENTER);
-    image(pinkClownUser.image,user.x,user.y,pinkClownUser.size,pinkClownUser.size);
+    image(sickClown.image, theBall.x, theBall.y, sickClownBall.size, sickClownBall.size);
     pop();
   }
 
-  // counter to display user as the pink clown
-  if (pinkClownUser.switch === 'on') {
-    constrain(pinkClownUser.counter,0,299);
-    pinkClownUser.counter++
-    if (pinkClownUser.counter >= 300){
-      pinkClownUser = 'off';
+  // counter to display theBall as the sick clown
+  if (sickClownBall.switch === 1) {
+    sickClownBall.counter++
+    if (sickClownBall.counter >= 200){
+      sickClownBall.switch = 0;
+      sickClownBall.counter = 0;
     }
   }
+  print('pinkCounter =', pinkClownUser.counter,'pinkClown Switch =',pinkClownUser.switch,'sickClown Switch =', sickClownBall.switch);
+}
 
-  // display sickClown //
-  sickClownBall.image = sickClown;
-  if (sickClownBall.switch === 'on'){
 
-    image(sickClown.image, theBall.x, theBall.y, sickClownBall.size, sickClownBall.size);
+// the Ball movement //
+function mouseDragged(){
+  let distanceUserxBall = dist(user.x, user.y, theBall.x, theBall.y);
+  if (distanceUserxBall <= (theBall.size - user.size/2)) {// #### I must be making a MISTAKE here #### (map?)//
+    theBall.x = mouseX;
+    theBall.y = mouseY;
   }
-
-  if(sickClownBall.switch === 'on'){
-    noLoop();
-  }
-
 }

@@ -316,16 +316,17 @@ function draw() {
     sickClownBall.image = sickClown;
     push();
     imageMode(CENTER);
-    image(sickClown.image, theBall.x, theBall.y, sickClownBall.size, sickClownBall.size);
+    image(sickClownBall.image, theBall.x, theBall.y, sickClownBall.size, sickClownBall.size);
     pop();
   }
 
   // counter to display theBall as the sick clown
   if (sickClownBall.switch === 1) {
     sickClownBall.counter++
-    if (sickClownBall.counter >= 200){
+    if (sickClownBall.counter >= 20){
       sickClownBall.switch = 0;
       sickClownBall.counter = 0;
+      noLoop();
     }
   }
   print('pinkCounter =', pinkClownUser.counter,'pinkClown Switch =',pinkClownUser.switch,'sickClown Switch =', sickClownBall.switch);

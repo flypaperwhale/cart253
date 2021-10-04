@@ -12,6 +12,10 @@ surprise awaits the user.
 
 "use strict";
 
+//rotational angle
+let angle = 0;
+let numStars = 200;
+
 // creating js objects //
 
 // theBall, to be displaced out of the way of the clowns by the user
@@ -30,7 +34,7 @@ let clownAsCovid1 = {
   x:0,
   y:25,
   size:30,
-  speed:2.5,
+  speed:3.5,
   vx:0.01,
   vy:0,
   image: undefined,
@@ -40,7 +44,7 @@ let clownAsCovid2 = {
   x:0,
   y:75,
   size:30,
-  speed:3,
+  speed:4,
   vx:0,
   vy:0,
   image: undefined,
@@ -50,7 +54,7 @@ let clownAsCovid3 = {
   x:0,
   y:150,
   size:30,
-  speed:1,
+  speed:2,
   vx:0,
   vy:0,
   image: undefined,
@@ -60,7 +64,7 @@ let clownAsCovid4 = {
   x:0,
   y:250,
   size:30,
-  speed:4,
+  speed:4.5,
   vx:0,
   vy:0,
   image: undefined,
@@ -70,7 +74,7 @@ let clownAsCovid5 = {
   x:0,
   y:300,
   size:30,
-  speed:4.5,
+  speed:5,
   vx:0,
   vy:0,
   image: undefined,
@@ -112,7 +116,7 @@ let sickClown = undefined;
 Preloading the images of different colored clowns
 */
 function preload() {
-// loading clown.png and pinkclown.png into the program
+// loading clown.png, pinkclown2.png, and sickclown.png into the program
   clown = loadImage('assets/images/clown.png');
   pinkClown = loadImage('assets/images/pinkclown2.png');
   sickClown = loadImage('assets/images/sickclown.png');
@@ -323,7 +327,7 @@ function draw() {
   // counter to display theBall as the sick clown
   if (sickClownBall.switch === 1) {
     sickClownBall.counter++
-    if (sickClownBall.counter >= 20){
+    if (sickClownBall.counter >= 15){
       sickClownBall.switch = 0;
       sickClownBall.counter = 0;
       noLoop();

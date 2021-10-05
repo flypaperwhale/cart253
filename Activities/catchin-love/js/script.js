@@ -50,6 +50,12 @@ function draw() {
     // SAD ENDING
   }
 
+  // check if circles overlap
+  let d = dist(circle1.x,circle1.y,circle2.x,circle2.y);
+  if (d < circle1.size/2 + circle2.size/2){
+    // LOVE ENDING
+  }
+
   // display circles
   ellipse(circle1.x, circle1.y, circle1.size);
   ellipse(circle2.x, circle2.y, circle2.size);

@@ -18,11 +18,50 @@ let circle2 = {
   speed:3,
 };
 
+let state = `simulation`// can be: title, simulation, sad, love
+
 /**
 Description of setup
 */
 function setup() {
   createCanvas(500,500);
+  setupCircles();
+}
+
+/**
+Description of draw()
+*/
+function draw() {
+  background(0);
+
+  if (state === `title`){
+
+  }
+
+  if (state === `simulation`){
+
+  }
+
+  if (state === `love`){
+
+  }
+
+  if (state === `sad`){
+    
+  }
+
+  simulation();
+
+}
+
+function simulation(){
+  move();
+  checkOffscreen();
+  checkOverlap();
+  display();
+}
+
+function setupCircles(){
   // position circles seperate
   circle1.x = width/3;
   circle2.x = 2 * width/3;
@@ -33,29 +72,31 @@ function setup() {
   circle2.vy = random(-circle2.speed,circle2.speed);
 }
 
-/**
-Description of draw()
-*/
-function draw() {
-  background(0);
-  // move circle
+function move(){
+  // move circles
   circle1.x = circle1.x + circle1.vx;
   circle1.y = circle1.y + circle1.vy;
 
   circle2.x = circle2.x + circle2.vx;
   circle2.y = circle2.y + circle2.vy;
+}
 
+function checkOffscreen(){
   // check if the circle have gone offscreen
   if(circle1.x < 0 || circle1.x > width || circle1.y < 0 || circle1.y > height || circle2.x < 0 || circle2.x > width || circle2.y < 0 || circle2.y > height){
     // SAD ENDING
   }
+}
 
+function checkOverlap(){
   // check if circles overlap
   let d = dist(circle1.x,circle1.y,circle2.x,circle2.y);
   if (d < circle1.size/2 + circle2.size/2){
     // LOVE ENDING
   }
+}
 
+function display(){
   // display circles
   ellipse(circle1.x, circle1.y, circle1.size);
   ellipse(circle2.x, circle2.y, circle2.size);

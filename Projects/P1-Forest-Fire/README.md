@@ -1,3 +1,5 @@
-# Template p5 project
+# Project 1 : Forest Fire
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+I am trying to create a simulation of a growing, dying, regenerating forest.
+In this simulation, the user can make lightning strike down on the forest,
+and cause significant destruction, which then should lead to regeneration.

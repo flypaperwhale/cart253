@@ -8,13 +8,26 @@ author, and this description to match your project!
 
 "use strict";
 
+let bg = {
+  color:{
+    r:0,
+    g:0,
+    b:0,
+  }
+};
+
 let circle1 = {
   x:undefined,
   y:250,
   size: 100,
   vx:0,
   vy:0,
-  speed:3,
+  speed:1,
+  color:{
+    r:undefined,
+    g:undefined,
+    b:undefined,
+  }
 };
 
 let circle2 = {
@@ -24,6 +37,11 @@ let circle2 = {
   vx:0,
   vy:0,
   speed:3,
+  color:{
+    r:undefined,
+    g:undefined,
+    b:undefined,
+  }
 };
 
 let state = `title`// can be: title, simulation, desert, seeds
@@ -41,13 +59,16 @@ Description of setup
 function setup() {
   createCanvas(500,500);
   setupCircles();
+  bg.color.r=19;
+  bg.color.g=40;
+  bg.color.b=15;
 }
 
 /**
 Description of draw()
 */
 function draw() {
-  background(0);
+  background(bg.color.r,bg.color.g,bg.color.b);
 
   if (state === `title`){
     title();
@@ -69,7 +90,7 @@ function setupCircles(){
   circle1.x = width/3;
   circle2.x = 2 * width/3;
   // start circles moving in rando
-  circle1.vx = random(-circle1.speed,circle1.speed);
+  circle1.vx = -circle.speed;
   circle2.vx = random(-circle2.speed,circle2.speed);
   //circle1.vy = random(-circle1.speed,circle1.speed);
   //circle2.vy = random(-circle2.speed,circle2.speed);
@@ -95,20 +116,20 @@ function simulation(){
   display();
 }
 function love(){
-  push();
-  textSize(64);
-  fill(222,100,150);
-  textAlign(CENTER,CENTER);
-  text(`LOVE!!!`,width/2,height/2);
-  pop();
+  display();
+  //createSeed(); // <--
+  disperseSeed(circle1);
+  disperseSeed(circle2);
+  changeBackgroundColor(2,5,1,75,205,40);
 }
 function sad(){
   push();
   textSize(64);
   fill(200,100,100);
   textAlign(CENTER,CENTER);
-  text(`OH noooo :(`,width/2,height/2);
+  text(`Deserted`,width/2,height/2);
   pop();
+  changeBackgroundColor(2,2,1,115,100,70);
 }
 
 // function simulation functions //
@@ -141,6 +162,34 @@ function checkOverlap(){
 
 function display(){
   // display circles
+  push();
+  noStroke();
+  fill(148,87,46);
   ellipse(circle1.x, circle1.y, circle1.size);
   ellipse(circle2.x, circle2.y, circle2.size);
+  pop();
+}
+
+function disperseSeed(circle){
+  // display seeds
+  for (let i = 0; i<5;i++){
+    push();
+    fill(92,47,7);
+    ellipseMode(CENTER);
+    seedX=circle.x;
+    seedY=circle.y;
+    ellipse(seedX,seedY,seedSize);
+    pop();
+    seedX = seedX + random(-circle.size,circle.size);
+    seedY = seedY + random(-circle.size,circle.size);
+  }
+}
+
+function changeBackgroundColor(addR,addG,addB,maxR,maxG,maxB){
+  bg.color.r = bg.color.r + addR;
+  bg.color.r = constrain(bg.color.r,0,maxR);
+  bg.color.g = bg.color.g + addG;
+  bg.color.g = constrain(bg.color.g,0,maxG);
+  bg.color.b = bg.color.b + addB;
+  bg.color.b = constrain(bg.color.b,0,maxB);
 }

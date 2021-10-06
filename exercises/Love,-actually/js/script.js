@@ -36,7 +36,7 @@ let circle2 = {
   size: 100,
   vx:0,
   vy:0,
-  speed:3,
+  speed:2,
   color:{
     r:undefined,
     g:undefined,
@@ -44,7 +44,16 @@ let circle2 = {
   }
 };
 
-let state = `title`// can be: title, simulation, desert, seeds
+let seed = {
+  x:undefined,
+  y:undefined,
+  size: 10,
+  vx:0,
+  vy:0,
+  speed:2,
+}
+
+let state = `title`// can be: title, simulation, sad, love, seedDispersal, stop
 
 /**
 Description of preload
@@ -58,10 +67,14 @@ Description of setup
 */
 function setup() {
   createCanvas(500,500);
-  setupCircles();
   bg.color.r=19;
   bg.color.g=40;
   bg.color.b=15;
+
+  setupCircles();
+
+  setupSeeds(circle1.x,circle1.y,circle.size);
+  setupSeeds(circle2.x,circle2.y,circle.size);
 }
 
 /**
@@ -79,8 +92,15 @@ function draw() {
   else if (state === `love`){
     love();
   }
+  else if (state === `seedDispersal`){
+    disperseSeed(circle1.x,circle1.y,circle1.size);
+    disperseSeed(circle2.x,circle2.y,circle2.size);
+  }
   else if (state === `sad`){
     sad();
+  }
+  else if (state === `stop`){
+    noLoop();
   }
 }
 
@@ -90,42 +110,64 @@ function setupCircles(){
   circle1.x = width/3;
   circle2.x = 2 * width/3;
   // start circles moving in rando
-  circle1.vx = -circle.speed;
-  circle2.vx = random(-circle2.speed,circle2.speed);
+  circle1.vx = random(-circle2.speed,0);
+  circle2.vx = random(0,circle2.speed);
   //circle1.vy = random(-circle1.speed,circle1.speed);
   //circle2.vy = random(-circle2.speed,circle2.speed);
 }
 
+function setupSeeds(circleX,circleY,circleSize){
+  seed.x = circleX;
+  seed.y = circleY;
+  seed.vx = random(-circleSize,circleSize);
+  seed.vy = random(-circleSize,circleSize);
+}
+// title function for title state
 function title(){
   push();
   textSize(64);
-  fill(200,100,100);
+  fill(200,140,100);
   textAlign(CENTER,CENTER);
-  text(`LOVE?`,width/2,height/2);
+  text(`Seeds?`,width/2,height/2);
   pop();
 }
-function mousePressed() {
+function keyPressed() {
   if (state === `title`){
     state = `simulation`;
   }
 }
 function simulation(){
-  move();
+  moveCircles();
   checkOffscreen();
   checkOverlap();
   display();
 }
 function love(){
   display();
-  //createSeed(); // <--
-  disperseSeed(circle1);
-  disperseSeed(circle2);
-  changeBackgroundColor(2,5,1,75,205,40);
+  changeBackgroundColor(10,40,2,75,205,40);
+  state = `seedDispersal`;
+  console.log(state);
+}
+function disperseSeed(circleX,circleY,circleSize){
+  display();
+  // display seeds
+  for (let i = 0; i<5;i++){
+    console.log("in disperseSeed",i);
+    push();
+    fill(92,47,7);
+    ellipseMode(CENTER);
+    ellipse(seed.x,seed.y,seed.size);
+    pop();
+    moveSeeds();
+    console.log("in for loop",i);
+  }
+  changeBackgroundColor(10,40,2,75,205,40);
+  state = `stop`;
 }
 function sad(){
   push();
   textSize(64);
-  fill(200,100,100);
+  fill(140,140,140);
   textAlign(CENTER,CENTER);
   text(`Deserted`,width/2,height/2);
   pop();
@@ -133,7 +175,7 @@ function sad(){
 }
 
 // function simulation functions //
-function move(){
+function moveCircles(){
   // move circles
   // circle1
   circle1.x = circle1.x + circle1.vx;
@@ -141,6 +183,11 @@ function move(){
   // circle2
   circle2.x = circle2.x + circle2.vx;
   circle2.y = circle2.y + circle2.vy;
+}
+
+function moveSeeds(){
+  seed.x = seed.x + seed.vx;
+  seed.y = seed.y + seed.vy;
 }
 
 function checkOffscreen(){
@@ -170,20 +217,6 @@ function display(){
   pop();
 }
 
-function disperseSeed(circle){
-  // display seeds
-  for (let i = 0; i<5;i++){
-    push();
-    fill(92,47,7);
-    ellipseMode(CENTER);
-    seedX=circle.x;
-    seedY=circle.y;
-    ellipse(seedX,seedY,seedSize);
-    pop();
-    seedX = seedX + random(-circle.size,circle.size);
-    seedY = seedY + random(-circle.size,circle.size);
-  }
-}
 
 function changeBackgroundColor(addR,addG,addB,maxR,maxG,maxB){
   bg.color.r = bg.color.r + addR;
@@ -192,4 +225,8 @@ function changeBackgroundColor(addR,addG,addB,maxR,maxG,maxB){
   bg.color.g = constrain(bg.color.g,0,maxG);
   bg.color.b = bg.color.b + addB;
   bg.color.b = constrain(bg.color.b,0,maxB);
+}
+
+function mousePressed(){
+  circle2.vx=circle2.vx-9;
 }

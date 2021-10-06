@@ -1,13 +1,16 @@
 /**
-Title of Project
-Author Name
+Impact circles
+Frankie Latreille
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+This program is supposed to simulate the meeting of two plants to produce seed
+I couldn't quite get the seed animation to work, so the land either turns green
+when the two circles meet, or if they split, the background turns gray
 */
 
 "use strict";
 
+// creating js objects//
+// the background
 let bg = {
   color:{
     r:0,
@@ -15,7 +18,7 @@ let bg = {
     b:0,
   }
 };
-
+// circle1 the NPC
 let circle1 = {
   x:undefined,
   y:250,
@@ -29,7 +32,7 @@ let circle1 = {
     b:undefined,
   }
 };
-
+// circle2 the Player
 let circle2 = {
   x:undefined,
   y:250,
@@ -44,26 +47,10 @@ let circle2 = {
   }
 };
 
-let seed = {
-  x:undefined,
-  y:undefined,
-  size: 10,
-  vx:0,
-  vy:0,
-  speed:2,
-}
-
-let state = `title`// can be: title, simulation, sad, love, seedDispersal, stop
+let state = `title`// can be: title, simulation, desert, seeding, stop
 
 /**
-Description of preload
-*/
-function preload() {
-
-}
-
-/**
-Description of setup
+Setting up canvas and circles
 */
 function setup() {
   createCanvas(500,500);
@@ -72,56 +59,48 @@ function setup() {
   bg.color.b=15;
 
   setupCircles();
-
-  setupSeeds(circle1.x,circle1.y,circle.size);
-  setupSeeds(circle2.x,circle2.y,circle.size);
 }
 
 /**
-Description of draw()
+Drawing different scenarios with different states
 */
 function draw() {
+// fill in the background a dark green
   background(bg.color.r,bg.color.g,bg.color.b);
-
+// title state calls the title function to display the title
   if (state === `title`){
     title();
   }
+// simulation state has the two main circles moving
   else if (state === `simulation`){
     simulation();
   }
-  else if (state === `love`){
-    love();
+// the seeding state has the circles stop and the background turn green
+  else if (state === `seeding`){
+    seeding();
   }
-  else if (state === `seedDispersal`){
-    disperseSeed(circle1.x,circle1.y,circle1.size);
-    disperseSeed(circle2.x,circle2.y,circle2.size);
+// the desert state stops the animation and turns the background gray
+  else if (state === `desert`){
+    desert();
   }
-  else if (state === `sad`){
-    sad();
-  }
+// stop state terminates the program
   else if (state === `stop`){
+    changeBackgroundColor(10,40,2,75,205,40);
+    display();
     noLoop();
   }
 }
 
 // functions //
 function setupCircles(){
-  // position circles seperate
+// position circles seperate
   circle1.x = width/3;
   circle2.x = 2 * width/3;
-  // start circles moving in rando
+// start circles moving in random directions, only on x axis
   circle1.vx = random(-circle2.speed,0);
   circle2.vx = random(0,circle2.speed);
-  //circle1.vy = random(-circle1.speed,circle1.speed);
-  //circle2.vy = random(-circle2.speed,circle2.speed);
 }
 
-function setupSeeds(circleX,circleY,circleSize){
-  seed.x = circleX;
-  seed.y = circleY;
-  seed.vx = random(-circleSize,circleSize);
-  seed.vy = random(-circleSize,circleSize);
-}
 // title function for title state
 function title(){
   push();
@@ -131,40 +110,37 @@ function title(){
   text(`Seeds?`,width/2,height/2);
   pop();
 }
+// press any key to start simulation
 function keyPressed() {
   if (state === `title`){
     state = `simulation`;
   }
 }
+// simulation function
 function simulation(){
   moveCircles();
   checkOffscreen();
   checkOverlap();
   display();
 }
-function love(){
-  display();
-  changeBackgroundColor(10,40,2,75,205,40);
-  state = `seedDispersal`;
-  console.log(state);
+// when mouse is pressed, player circle runs into the NPC circle
+function mousePressed(){
+  circle2.vx=circle2.vx-9;
 }
-function disperseSeed(circleX,circleY,circleSize){
+// seeding when the two circles touch, the background changes to green
+function seeding(){
   display();
-  // display seeds
-  for (let i = 0; i<5;i++){
-    console.log("in disperseSeed",i);
-    push();
-    fill(92,47,7);
-    ellipseMode(CENTER);
-    ellipse(seed.x,seed.y,seed.size);
-    pop();
-    moveSeeds();
-    console.log("in for loop",i);
-  }
+  push();
+  textSize(64);
+  fill(140,100,140);
+  textAlign(CENTER,CENTER);
+  text(`Seeded!`,width/2,height/2);
+  pop();
   changeBackgroundColor(10,40,2,75,205,40);
-  state = `stop`;
+  //state = `stop`;
 }
-function sad(){
+// desert, when the circles split, the background changes to gray
+function desert(){
   push();
   textSize(64);
   fill(140,140,140);
@@ -175,8 +151,8 @@ function sad(){
 }
 
 // function simulation functions //
+// move circles
 function moveCircles(){
-  // move circles
   // circle1
   circle1.x = circle1.x + circle1.vx;
   circle1.y = circle1.y + circle1.vy;
@@ -184,31 +160,23 @@ function moveCircles(){
   circle2.x = circle2.x + circle2.vx;
   circle2.y = circle2.y + circle2.vy;
 }
-
-function moveSeeds(){
-  seed.x = seed.x + seed.vx;
-  seed.y = seed.y + seed.vy;
-}
-
+// check if the circles have gone offscreen
 function checkOffscreen(){
-  // check if the circle have gone offscreen
   if(circle1.x < 0 || circle1.x > width || circle1.y < 0 || circle1.y > height || circle2.x < 0 || circle2.x > width || circle2.y < 0 || circle2.y > height){
     // SAD ENDING
-    state = `sad`;
+    state = `desert`;
   }
 }
-
+// check if circles overlap
 function checkOverlap(){
-  // check if circles overlap
   let d = dist(circle1.x,circle1.y,circle2.x,circle2.y);
   if (d < circle1.size/2 + circle2.size/2){
     // LOVE ENDING
-    state = `love`;
+    state = `seeding`;
   }
 }
-
+// display circles
 function display(){
-  // display circles
   push();
   noStroke();
   fill(148,87,46);
@@ -216,8 +184,8 @@ function display(){
   ellipse(circle2.x, circle2.y, circle2.size);
   pop();
 }
-
-
+// other functions //
+// changes background color
 function changeBackgroundColor(addR,addG,addB,maxR,maxG,maxB){
   bg.color.r = bg.color.r + addR;
   bg.color.r = constrain(bg.color.r,0,maxR);
@@ -226,7 +194,9 @@ function changeBackgroundColor(addR,addG,addB,maxR,maxG,maxB){
   bg.color.b = bg.color.b + addB;
   bg.color.b = constrain(bg.color.b,0,maxB);
 }
-
-function mousePressed(){
-  circle2.vx=circle2.vx-9;
+// keyTyped to check if player has pressed q or Q to quit program
+function keyTyped(){
+  if (key === `q` || key === `Q`){
+    state = `stop`;
+  }
 }

@@ -25,15 +25,15 @@ let birch = {
   image:undefined,
 };
 
-}
+
 /**
 Description of preload
 */
 function preload() {
-  pinetree
-
+  pinetree.image = loadImage('assets/images/Pinetree.png');
+  fir.image = loadImage('assets/images/Fir.png');
+  birch.image = loadImage('assets/images/Birch.png');
 }
-
 
 /**
 Description of setup
@@ -48,5 +48,10 @@ function setup() {
 Description of draw()
 */
 function draw() {
+  // draw the background
   background(bg.color.r,bg.color.g,bg.color.b);
+  image(fir.image,250,250,250,250);
+
+
+
 }

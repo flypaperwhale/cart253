@@ -50,7 +50,7 @@ let birch = {
 };
 
 let checkCode = undefined;
-
+let newCode = undefined;
 
 /**
 Description of preload
@@ -65,6 +65,7 @@ function preload() {
 Description of setup
 */
 function setup() {
+  frameRate(10);
   createCanvas(600,600);
 
 }
@@ -82,6 +83,13 @@ function draw() {
   imageMode(CENTER);
   image(fir.image,300,300,60,90);
   pop();
+  // fixed fir 2
+  push();
+  imageMode(CENTER);
+  image(fir.image,500,500,60,90);
+  pop();
+
+
   // constantly check for new seeds, new sprouts
   isThereNewFir(); // will verify if there is a new fir, if there is, the program
   // will manage the new objects through an alphanumerical coded system
@@ -89,13 +97,19 @@ function draw() {
   // where its x and y axis will be,
   // the object can be created
   createFir(fir.code.letter+fir.code.number);
+  // create checkCode to create newCode
   checkCode = fir.code.letter+fir.code.number;
-  console.log(`The checkCode is: ${checkCode}`);
-  fir.code = fir.code.letter + fir.code.number++;
-  if (checkCode !== fir.code){
+  console.log(`The checkCode is: ${checkCode}`+`and the firCodeNumber is ${fir.code.number}`);
+  // create newCode
+  newCode = fir.code.letter + (fir.code.number++);
+  console.log(`^ the check code is ${checkCode} and the new code number is ${newCode}`);
+  // if the checkCode and newCode are different, that means a new tree is born!
+  if (checkCode !== newCode){
+    console.log(`chaching`);//checking things out
     thereIsNewFir();
+    // This is just for testing the tree generating randomly
+    console.log(`${thereIsNewFir} whether there is new fir and...`+`The fir code is: ${newCode}`);
   }
-  console.log(`${thereIsNewFir} whether there is new fir and...`+`The fir code is: ${fir.code}`);
 }
 
 // when this function learns that a new fir is sprouting, it will assign it a
@@ -105,13 +119,16 @@ function draw() {
 
 function isThereNewFir(){
   if (thereIsNewFir()){
-    establishFirCode();
+    establishFirCode(checkCode); // checkCode may be dumb here
   }
 }
 
 // this function confirms if a new fir needs to be sprouting or not
 function thereIsNewFir(){
-  return true;
+  if (mousePressed){
+    return true;
+  }
+  else return false;
 }
 // this function verifies object codes and assigns new ones when certain events happen
 // events like: sprouting, growing, dying, burning
@@ -120,25 +137,37 @@ function establishFirCode(treeCode){
   // check what was former code of the tree that came from the seed before it
   // change the code to the tree code and by incrementing the number by 1
   // establish a new x, y, (either randomly at the beginning or procedurally throughout the simulation)
+  fir.x = fir.x + random(0, width);
+  fir.y = fir.y + random(height, 0);
 }
 
 
 // Functions for creating trees //
-function createFir(firCode){
+function createFir(firCodeLet,firCodeNum){
   push();
   imageMode(CENTER);
+  constrain (fir.x,0,width);
+  constrain (fir.y,height,0);
   image(fir.image,fir.x,fir.y,fir.width,fir.height);
   pop();
+  fir.x = 0;
+  fir.y = 0;
 }
-function createBirch(birchCode){
+function createBirch(birchCodeLet,birchCodeNum){
   push();
   imageMode(CENTER);
   image(birch.image,birch.x,birch.y,birch.width,birch.height);
   pop();
 }
-function createPinetree(pinetreeCode){
+function createPinetree(pinetreeCodeLet,pinetreeCodeNum){
   push();
   imageMode(CENTER);
   image(pinetree.image,pinetree.x,pinetree.y,pinetree.width,pinetree.height);
   pop();
+}
+
+// other functions //
+
+function mousePressed(){
+  return true;
 }

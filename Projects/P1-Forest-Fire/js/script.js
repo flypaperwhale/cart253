@@ -49,6 +49,13 @@ let birch = {
   },
 };
 
+let cloud = {
+  image:undefined,
+  x:70,
+  y:70,
+  width:65,
+  height:50,
+}
 let checkCode = undefined;
 let newCode = undefined;
 
@@ -59,6 +66,7 @@ function preload() {
   pinetree.image = loadImage('assets/images/Pinetree.png');
   fir.image = loadImage('assets/images/Fir.png');
   birch.image = loadImage('assets/images/Birch.png');
+  cloud.image = loadImage('assets/images/cloud_PNG16.png');
 }
 
 /**
@@ -110,6 +118,12 @@ function draw() {
     // This is just for testing the tree generating randomly
     console.log(`${thereIsNewFir} whether there is new fir and...`+`The fir code is: ${newCode}`);
   }
+
+  // display the cloud
+  push();
+  imageMode(CENTER);
+  image(cloud.image,cloud.x,cloud.y,cloud.width,cloud.height);
+  pop();
 }
 
 // when this function learns that a new fir is sprouting, it will assign it a

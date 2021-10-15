@@ -16,8 +16,20 @@ Module 1 in dev. P1
 - have tree burning
 */
 
-
 "use strict";
+
+let forestColumns = [
+  [``,``,``,``,``,``,``,``,``,``],//A
+  [``,``,``,``,``,``,``,``,``,``],//B
+  [``,``,``,``,``,``,``,``,``,``],//C
+  [``,``,``,``,``,``,``,``,``,``],//D
+  [``,``,``,``,``,``,``,``,``,``],//E
+  [``,``,``,``,``,``,``,``,``,``],//F
+  [``,``,``,``,``,``,``,``,``,``],//G
+  [``,``,``,``,``,``,``,``,``,``],//H
+  [``,``,``,``,``,``,``,``,``,``],//I
+  [``,``,``,``,``,``,``,``,``,``],//J
+]
 let bg = {
   color:{
     r:0,
@@ -26,17 +38,21 @@ let bg = {
   }
 }
 
-let pinetree = {
+let tree = {
   image:undefined,
   x:undefined,
   y:undefined,
   width:60,
   height:90,
   code:{
-    letter:`P`,
-    number:0,
+    type:`P`,
+    frameAge:age,
   },
 };
+
+//let pineSprout
+
+//let pineCharred
 
 let cloud = {
   image:undefined,
@@ -62,9 +78,10 @@ Description of preload
 */
 function preload() {
   pinetree.image = loadImage('assets/images/Pinetree.png');
-  fir.image = loadImage('assets/images/Fir.png');
-  birch.image = loadImage('assets/images/Birch.png');
+  //fir.image = loadImage('assets/images/Fir.png');
+  //birch.image = loadImage('assets/images/Birch.png');
   cloud.image = loadImage('assets/images/cloud_PNG16.png');
+  fire.image = loadImage()
 }
 
 /**
@@ -74,6 +91,11 @@ function setup() {
   frameRate(10);
   createCanvas(600,600);
 
+  cloudMovement(); //CREATE!
+
+  checkForestGrid(); //CREATE!
+  fireMovement(); //CREATE!
+  treeGrowth(); //CREATE!
 }
 
 
@@ -89,12 +111,6 @@ function draw() {
   imageMode(CENTER);
   image(fir.image,300,300,60,90);
   pop();
-  // fixed fir 2
-  push();
-  imageMode(CENTER);
-  image(fir.image,500,500,60,90);
-  pop();
-
 
   // constantly check for new seeds, new sprouts
   isThereNewFir(); // will verify if there is a new fir, if there is, the program

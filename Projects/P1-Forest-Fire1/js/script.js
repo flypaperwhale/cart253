@@ -8,6 +8,12 @@ author, and this description to match your project!
 
 "use strict";
 
+let forest = [];
+let rows = 5;
+let cols = 5;
+
+let unit;
+
 let pinetree = {
   image:undefined,
 }
@@ -34,13 +40,24 @@ function preload() {
 
 }
 
-
-
 /**
 Description of setup
 */
 function setup() {
   noCursor();
+
+  for (let r = 0; r < rows; r++) {
+    forest.push([]);
+    for (let c = 0; c < cols; c++) {
+      if (random() < 0.15) {
+        forest[r][c] = `F`;
+      } else {
+        forest[r][c] = ` `;
+      }
+    }
+  }
+
+  unit = height / forest.length;
 }
 
 

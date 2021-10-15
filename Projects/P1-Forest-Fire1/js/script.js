@@ -12,20 +12,25 @@ let pinetree = {
   image:undefined,
 }
 
+let cursor = {
+  image:undefined,
+  width:45,
+  height:45,
+}
+
 /**
 Description of preload
 */
 function preload() {
   pinetree.image = loadImage('assets/images/Pinetree.png');
-  let imagep = loadImage('assets/images/Pine-Sap.jpeg');
-  let imagePX = loadImage('assets/images/Torched-Pinetree.png');
-
+  //loadImage('assets/images/Pine-Sap.jpeg');
+  //loadImage('assets/images/Torched-Pinetree.png');
   //fir.image = loadImage('assets/images/Fir.png');
   //birch.image = loadImage('assets/images/Birch.png');
-  cloud.image = loadImage('assets/images/cloud.png');
-  fire.image = loadImage('assets/images/fire.png');
+  //cloud.image = loadImage('assets/images/cloud.png');
+  //fire.image = loadImage('assets/images/fire.png');
 
-  let cursor = loadImage('assets/images/Godly-user.png');
+  cursor.image = loadImage('assets/images/Godly-user.png');
 
 }
 
@@ -35,7 +40,7 @@ function preload() {
 Description of setup
 */
 function setup() {
-
+  noCursor();
 }
 
 
@@ -43,8 +48,9 @@ function setup() {
 Description of draw()
 */
 function draw() {
-createCanvas(500,500);
-background(0);
+  createCanvas(500,500);
+  background(0);
 
+  image(cursor.image,mouseX,mouseY,cursor.width,cursor.height);
 
 }

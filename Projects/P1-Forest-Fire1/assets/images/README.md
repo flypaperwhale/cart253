@@ -25,4 +25,4 @@ Pine Sap.201-2010737_loblolly-pine-tree-seedling-hd-png-download.png . https://w
 Sprout
 Cloud. cloud_PNG16 . http://pngimg.com/download/4323
 Fire. png-transparent-burning-fire-combustion-raging-fire-flames-thumbnail . https://www.pngwing.com/en/search?q=raging+fire
-Cursor. png-transparent-computer-mouse-pointer-cursor-computer-icons-button-mazda-angle-electronics-text . https://www.pngwing.com/en/free-png-pdafv
+Cursor. 220084_mouse-cursor-png . https://www.dlf.pt/pngs/208568/

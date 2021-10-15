@@ -6,6 +6,17 @@ I am trying to grow a forest, and sometimes lightning burns it down.
 But it grows back.
 */
 
+/**
+Module 1 in dev. P1
+- get tree to grow
+- display timer
+- have cloud clickable
+- have lighting
+- have thunder
+- have tree burning
+*/
+
+
 "use strict";
 let bg = {
   color:{
@@ -26,28 +37,6 @@ let pinetree = {
     number:0,
   },
 };
-let fir = {
-  image:undefined,
-  x:75,
-  y:150,
-  width:60,
-  height:90,
-  code:{
-    letter:`F`,
-    number:0,
-  },
-};
-let birch = {
-  image:undefined,
-  x:undefined,
-  y:undefined,
-  width:60,
-  height:90,
-  code:{
-    letter:`B`,
-    number:0,
-  },
-};
 
 let cloud = {
   image:undefined,
@@ -55,7 +44,16 @@ let cloud = {
   y:70,
   width:65,
   height:50,
-}
+};
+
+let fire = {
+  image: undefined,
+  x:0,
+  y:0,
+  width:0,
+  height:0,
+};
+
 let checkCode = undefined;
 let newCode = undefined;
 
@@ -84,7 +82,7 @@ Description of draw()
 */
 function draw() {
   // draw the background
-  background(bg.color.r,bg.color.g,bg.color.b);
+  //background(bg.color.r,bg.color.g,bg.color.b);
 
   // display a fir (MAESTRO)
   push();

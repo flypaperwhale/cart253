@@ -10,6 +10,12 @@ author, and this description to match your project!
 
 let initSwitch = 0;
 
+let cell = {
+  x:undefined,
+  y:undefined,
+  value:undefined,
+}
+
 let bg = {
   r:40,
   g:130,
@@ -19,11 +25,11 @@ let bg = {
 let forestGrid = [
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//A
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//B
-  [` `,` `,` `,` `,`P`,` `,` `,` `,` `,` `],//C
-  [` `,` `,` `,`P`,`P`,` `,` `,` `,` `,` `],//D
-  [` `,` `,` `,`P`,`P`,`P`,` `,` `,` `,` `],//E
-  [` `,` `,` `,` `,`P`,` `,` `,` `,` `,` `],//F
-  [` `,` `,` `,` `,`P`,`P`,` `,` `,` `,` `],//G
+  [` `,` `,` `,` `,`F`,` `,` `,` `,` `,` `],//C
+  [` `,` `,` `,`F`,`F`,` `,` `,` `,` `,` `],//D
+  [` `,` `,` `,`F`,`F`,`F`,` `,` `,` `,` `],//E
+  [` `,` `,` `,` `,`F`,` `,` `,` `,` `,` `],//F
+  [` `,` `,` `,` `,`F`,`F`,` `,` `,` `,` `],//G
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//H
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//I
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//J
@@ -61,6 +67,9 @@ let pinetree = {
   height:50,
 }
 
+let fire1 = 1;
+let fire2 = 0;
+
 let fire = {
   image:undefined,
   width:35,
@@ -91,7 +100,8 @@ function preload() {
   fir.image = loadImage('assets/images/Fir.png');
   //birch.image = loadImage('assets/images/Birch.png');
   cloud.image = loadImage('assets/images/cloud.png');
-  fire.image = loadImage('assets/images/fire.png');
+  fire.image1 = loadImage('assets/images/fire1.png');
+  fire.image2 = loadImage('assets/images/fire2.png');
 
   cursor.image = loadImage('assets/images/Godly-user.png');
 
@@ -136,12 +146,13 @@ function draw() {
 
   //displayForest();
 
+  checkIfFire();
+  if (cell.value===`!`){
+    displayFire(cell.x,cell.y);
+    flipFire();
+  }
 
 
-
-  //checkIfFire();
-
-  displayFire();
   // display the cloud
   push();
   imageMode(CENTER);
@@ -181,19 +192,17 @@ function displayForest() {
     }
 };
 
-/*
+
 // The fire should appear on a second grid, unless I can code more values into the array cells
 function checkIfFire(){
   for (let y = 0; y < fireGrid.length; y++) {
   let row = fireGrid[y];
   for (let x = 0; x < fireGrid[y].length; x++) {
-    let cell = fireGrid[y][x];
-    console.log(`fire check cell is checked. y = ${y} and x = ${x}`);
-    if (cell === `!`) {
-      displayFire(x,y);
+    cell.value = fireGrid[y][x];
+    console.log(`this is the current cell ${cell.value}`);
+    //console.log(`fire check cell is checked. y = ${y} and x = ${x}`);
     }}}
-}
-*/
+
 function drawPinetree(x, y){
   push();
   imageMode(CORNER);
@@ -211,7 +220,25 @@ function drawFir(x,y){
 function mousePressed(){}
 
 function displayFire(x,y){
-  push();
-  imageMode(CORNER);
-  image(fire.image,x * cellUnit + 5,y * cellUnit,fire.width,fire.height);
-}
+    if (fire1 === 1){
+      push();
+      imageMode(CORNER);
+      image(fire.image1,x * cellUnit + 5,y * cellUnit,fire.width,fire.height);
+      pop();}
+    else if (fire2 === 1){
+      push();
+      imageMode(CORNER);
+      image(fire.image2,x * cellUnit + 5,y * cellUnit,fire.width,fire.height);
+      pop();}
+  }
+
+  function flipFire(){
+    if (fire1 === 1){
+      fire1 = 0;
+      fire2 = 1;
+    }
+    else if (fire2 === 1){
+      fire1 = 1;
+      fire2 = 0;
+    }
+  }

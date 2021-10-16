@@ -8,6 +8,8 @@ author, and this description to match your project!
 
 "use strict";
 
+let initSwitch = 0;
+
 let bg = {
   r:40,
   g:130,
@@ -32,7 +34,7 @@ let fireGrid = [
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//B
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//C
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//D
-  [` `,` `,` `,` `,`F`,` `,` `,` `,` `,` `],//E
+  [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//E
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//F
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//G
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//H
@@ -58,12 +60,21 @@ let fire = {
   width:35,
   height:40,
 }
+
+let cloud = {
+  image:undefined,
+  x:50,
+  y:60,
+  width:65,
+  height:50,
+}
+
 let cursor = {
   image:undefined,
   width:45,
   height:45,
 }
-
+let thunderSFX;
 /**
 Description of preload
 */
@@ -73,11 +84,12 @@ function preload() {
   //loadImage('assets/images/Torched-Pinetree.png');
   //fir.image = loadImage('assets/images/Fir.png');
   //birch.image = loadImage('assets/images/Birch.png');
-  //cloud.image = loadImage('assets/images/cloud.png');
+  cloud.image = loadImage('assets/images/cloud.png');
   fire.image = loadImage('assets/images/fire.png');
 
   cursor.image = loadImage('assets/images/Godly-user.png');
 
+  thunderSFX = loadSound(`assets/sounds/THUND.WAV`);
 }
 
 /**
@@ -115,21 +127,38 @@ function draw() {
 
   background(bg.r,bg.g,bg.b);
 
-  displayForest();
+  for (let i = initSwitch; i<1; i++){
+    displayForest();
+    initSwitch=1;}
 
 
 
   checkIfFire();
 
   displayFire();
-
+  // display the cloud
+  push();
+  imageMode(CENTER);
+  image(cloud.image,cloud.x,cloud.y,cloud.width,cloud.height);
+  pop();
   image(cursor.image,mouseX,mouseY,cursor.width,cursor.height);
 
+  if (mouseClicked()){
+    console.log(`mouse is clicked`);
+    let d = dist(mouseX, mouseY, cloud.x, cloud.y);
+    if (dist < cursor.width/2 + cloud.width/2){
+      thunderSFX.play();
+  }
 };
+}
 
 function displayForest() {
+
+  // Check the indexes through the array
+  // The first order array is rows
     for (let y = 0; y < forestGrid.length; y++) {
     let row = forestGrid[y];
+  // the second order array is collumns
     for (let x = 0; x < forestGrid[y].length; x++) {
       push();
       noFill();
@@ -157,21 +186,14 @@ function checkIfFire(){
     }}}
 }
 
-function drawGreenCircles(x, y) {
-  push();
-  noStroke();
-  fill(100, 200, 100);
-  ellipseMode(CORNER);
-  ellipse(x * cellUnit, y * cellUnit, cellUnit);
-  pop();
-};
-
 function drawTree(x, y){
   push();
   imageMode(CORNER);
   image(pinetree.image,x * cellUnit,y * cellUnit,pinetree.width,pinetree.height);
   pop();
 }
+
+function mouseClicked(){};
 
 function displayFire(x,y){
   push();

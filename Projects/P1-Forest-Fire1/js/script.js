@@ -20,7 +20,7 @@ let forest = [
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//C
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//D
   [` `,` `,` `,` `,`P`,` `,` `,` `,` `,` `],//E
-  [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//F
+  [` `,` `,` `,` `,` `,`F`,` `,` `,` `,` `],//F
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//G
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//H
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//I
@@ -40,6 +40,11 @@ let pinetree = {
   height:50,
 }
 
+let fire = {
+  image:undefined,
+  width:35,
+  height:40,
+}
 let cursor = {
   image:undefined,
   width:45,
@@ -56,7 +61,7 @@ function preload() {
   //fir.image = loadImage('assets/images/Fir.png');
   //birch.image = loadImage('assets/images/Birch.png');
   //cloud.image = loadImage('assets/images/cloud.png');
-  //fire.image = loadImage('assets/images/fire.png');
+  fire.image = loadImage('assets/images/fire.png');
 
   cursor.image = loadImage('assets/images/Godly-user.png');
 
@@ -101,6 +106,11 @@ function draw() {
 
   image(cursor.image,mouseX,mouseY,cursor.width,cursor.height);
 
+  checkIfFire();
+
+  if (cell === `F`){
+    displayFire();
+  }
 };
 
 function displayForest() {
@@ -113,13 +123,24 @@ function displayForest() {
       rect(x * cellUnit, y * cellUnit, cellUnit, cellUnit);
       pop();
       let cell = forest[y][x];
-      console.log(`cell is checked. y = ${y} and x = ${x}`);
+      console.log(`forest init. cell is checked. y = ${y} and x = ${x}`);
       if (cell === `P`) {
         drawTree(x, y);
       }
     }
   }
 };
+
+function checkIfFire(){
+  for (let y = 0; y < forest.length; y++) {
+  let row = forest[y];
+  for (let x = 0; x < forest[y].length; x++) {
+    let cell = forest[y][x];
+    console.log(`fire check cell is checked. y = ${y} and x = ${x}`);
+    if (cell === `F`) {
+      displayFire(x,y);
+    }}}
+}
 
 function drawGreenCircles(x, y) {
   push();
@@ -133,6 +154,12 @@ function drawGreenCircles(x, y) {
 function drawTree(x, y){
   push();
   imageMode(CORNER);
-  image(pinetree.image,x * cellUnit ,y * cellUnit ,pinetree.width,pinetree.height);
+  image(pinetree.image,x * cellUnit,y * cellUnit,pinetree.width,pinetree.height);
   pop();
+}
+
+function displayFire(x,y){
+  push();
+  imageMode(CORNER);
+  image(fire.image,x * cellUnit +5,y * cellUnit,fire.width,fire.height);
 }

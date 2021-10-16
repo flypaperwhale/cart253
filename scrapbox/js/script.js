@@ -1,6 +1,7 @@
 
 let frame;
 let thunderSFX;
+
 let lightning = {
   x:0,
   y:0,
@@ -12,6 +13,9 @@ let cloud = {
   image:undefined,
   x:50,
   y:60,
+  speed:1,
+  vx:0,
+  vy:0,
   width:65,
   height:50,
   clicked:undefined,
@@ -34,12 +38,26 @@ function preload() {
 function setup(){
   createCanvas(500,500);
 
+  // intialize cloud position and velocity
+  cloud.y = random(0,height);
+  cloud.vx = cloud.vx + cloud.speed;
+
+  noCursor();
 }
 
 
 function draw(){
   background(0);
   lightFilter();
+
+  // Clowns movement //
+  // clown 1
+  cloud.x = cloud.x + cloud.vx;
+  cloud.y = cloud.y + cloud.vy;
+  // clowns reapear at the left side when arriving at the right side
+  if (cloud.x > width){
+    cloud.x = 0;
+    cloud.y = random(0,height);}
 
   push();
   imageMode(CENTER);

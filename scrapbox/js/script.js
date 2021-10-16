@@ -1,5 +1,12 @@
 
+let frame;
 let thunderSFX;
+let lightning = {
+  x:0,
+  y:0,
+  color:255,
+  alpha:0,
+}
 
 let cloud = {
   image:undefined,
@@ -32,6 +39,7 @@ function setup(){
 
 function draw(){
   background(0);
+  lightFilter();
 
   push();
   imageMode(CENTER);
@@ -48,6 +56,17 @@ function draw(){
 
 }
 
+function lightFilter(){
+  console.log(`alpha1=${lightning.alpha}`);
+  push();
+  noStroke();
+  fill(lightning.color,lightning.alpha);
+  rectMode(CENTER);
+  rect(lightning.x,lightning.y,canvas.width,canvas.height);
+  pop();
+  console.log(`alpha2=${lightning.alpha}`);
+}
+
 function MouseOverCloud(){
   let d = dist(cursor.x, cursor.y, cloud.x, cloud.y);
   if (d < cursor.width/2 + cloud.width/2){
@@ -61,15 +80,17 @@ function mouseClicked(){
   if (MouseOverCloud()){
     cloud.clicked=true;
     if (cloud.clicked === true){
+
       thunderSFX.play();
+      lightning.alpha = 255;
       cloud.clicked=false;
     }
   }
 };
 
 function lightNThunder(){
-  if (cloud.clicked){
-      thunderSFX.play();
+    console.log(`you've made it in lightnthunder`);
+    lightning.alpha = random(1-255);
 
-  console.log(mouseClicked());
-}}
+  }
+  //console.log(`mouseclicked = ${mouseClicked()} and frame = ${frame} and lightning.alpha = ${lightning.alpha}`);

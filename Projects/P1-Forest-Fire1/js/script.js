@@ -36,6 +36,8 @@ let cellUnit;
 
 let pinetree = {
   image:undefined,
+  width:50,
+  height:50,
 }
 
 let cursor = {
@@ -111,8 +113,9 @@ function displayForest() {
       rect(x * cellUnit, y * cellUnit, cellUnit, cellUnit);
       pop();
       let cell = forest[y][x];
+      console.log(`cell is checked. y = ${y} and x = ${x}`);
       if (cell === `P`) {
-        drawGreenCircles(x, y);
+        drawTree(x, y);
       }
     }
   }
@@ -126,3 +129,10 @@ function drawGreenCircles(x, y) {
   ellipse(x * cellUnit, y * cellUnit, cellUnit);
   pop();
 };
+
+function drawTree(x, y){
+  push();
+  imageMode(CORNER);
+  image(pinetree.image,x * cellUnit ,y * cellUnit ,pinetree.width,pinetree.height);
+  pop();
+}

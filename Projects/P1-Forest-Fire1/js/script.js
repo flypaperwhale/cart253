@@ -14,13 +14,26 @@ let bg = {
   b:3,
 }
 
-let forest = [
+let forestGrid = [
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//A
+  [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//B
+  [` `,` `,` `,` `,`P`,` `,` `,` `,` `,` `],//C
+  [` `,` `,` `,`P`,`P`,` `,` `,` `,` `,` `],//D
+  [` `,` `,` `,`P`,`P`,`P`,` `,` `,` `,` `],//E
+  [` `,` `,` `,` `,`P`,` `,` `,` `,` `,` `],//F
+  [` `,` `,` `,` `,`P`,`P`,` `,` `,` `,` `],//G
+  [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//H
+  [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//I
+  [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//J
+]
+
+let fireGrid = [
+  [`F`,` `,` `,` `,` `,` `,` `,` `,` `,` `],//A
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//B
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//C
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//D
-  [` `,` `,` `,` `,`P`,` `,` `,` `,` `,` `],//E
-  [` `,` `,` `,` `,` `,`F`,` `,` `,` `,` `],//F
+  [` `,` `,` `,` `,`F`,` `,` `,` `,` `,` `],//E
+  [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//F
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//G
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//H
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//I
@@ -74,7 +87,7 @@ function setup() {
   createCanvas(500,500);
   noCursor();
 
-  cellUnit = height / forest.length;
+  cellUnit = height / forestGrid.length;
 
 // Initialize the forest
 
@@ -104,25 +117,26 @@ function draw() {
 
   displayForest();
 
-  image(cursor.image,mouseX,mouseY,cursor.width,cursor.height);
+
 
   checkIfFire();
 
-  if (cell === `F`){
-    displayFire();
-  }
+  displayFire();
+
+  image(cursor.image,mouseX,mouseY,cursor.width,cursor.height);
+
 };
 
 function displayForest() {
-    for (let y = 0; y < forest.length; y++) {
-    let row = forest[y];
-    for (let x = 0; x < forest[y].length; x++) {
+    for (let y = 0; y < forestGrid.length; y++) {
+    let row = forestGrid[y];
+    for (let x = 0; x < forestGrid[y].length; x++) {
       push();
       noFill();
       stroke(0);
       rect(x * cellUnit, y * cellUnit, cellUnit, cellUnit);
       pop();
-      let cell = forest[y][x];
+      let cell = forestGrid[y][x];
       console.log(`forest init. cell is checked. y = ${y} and x = ${x}`);
       if (cell === `P`) {
         drawTree(x, y);
@@ -131,11 +145,12 @@ function displayForest() {
   }
 };
 
+// The fire should appear on a second grid, unless I can code more values into the array cells
 function checkIfFire(){
-  for (let y = 0; y < forest.length; y++) {
-  let row = forest[y];
-  for (let x = 0; x < forest[y].length; x++) {
-    let cell = forest[y][x];
+  for (let y = 0; y < fireGrid.length; y++) {
+  let row = fireGrid[y];
+  for (let x = 0; x < fireGrid[y].length; x++) {
+    let cell = fireGrid[y][x];
     console.log(`fire check cell is checked. y = ${y} and x = ${x}`);
     if (cell === `F`) {
       displayFire(x,y);
@@ -161,5 +176,5 @@ function drawTree(x, y){
 function displayFire(x,y){
   push();
   imageMode(CORNER);
-  image(fire.image,x * cellUnit +5,y * cellUnit,fire.width,fire.height);
+  image(fire.image,x * cellUnit + 5,y * cellUnit,fire.width,fire.height);
 }

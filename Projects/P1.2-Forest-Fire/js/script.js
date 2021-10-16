@@ -15,19 +15,22 @@ let tree = {
   y:,
   w:,
   h:,
-  age:,
-  type:,
-  onFire:,
+  age:, //tree.age is an upwards timer
+  type:, //tree.type can be Fir, Pine, or Birch
+  image:, // is changed according to age, type combinations, or if Torched
+  onFire:, //tree.onFire is a downwards timer, when it reaches 0, tree.type turns to `Torched`
 }
 
-let fireScape = [];
+let fireScape = []; //stores in the spreading fires,
 
 let fire = {
   x:,
   y:,
   w:,
   h:,
-  side:,
+  side:, //2 sides for flickering effect
+  assignedTree:, //fire.assignedTree value connects fires in the fireScape array to their
+  //respective trees in the forest array
 }
 
 let cloud = {
@@ -50,10 +53,14 @@ Description of setup
 function setup() {
   createCanvas(400,400);
 
-  initializeForest();
+  initializeForest(); //constrain the number of trees created at first
     createTree(); //when a tree is created during initializtion,
       treeFactory(); //loop to check that its x,y are not too close to another tree
       //if it is, assign another random x,y
+
+  initialize cloud();
+
+  initialize user();
 
 }
 
@@ -75,10 +82,26 @@ growingForest();
         //but have the seed fall in the vicinity of the reproducing tree
 
 //when fireState is `on`, fire is displayed
-//tree.onFire is a downwards timer, when it reaches 0, tree.type turns to `Torched`
 fireState();
+  fireBurns();//go through forest array and tree.onFire-- every frame
+  assignFire();//pushes a fire to the fireScape array and assigns in the fire.assignedTree value
+  //the tree in the array of the same name that has catched fire
+  fireGoesOut();//extinguishes fires when their fire.assigned tree's tree.onFire timer reaches 0
 
-lightNThunder();
+  fireSpreads();//compare the forest array with itself
+  //first check where the burning trees are x,y
+  //second check if there are other trees in each tree's vicinity
+  //if there are non burning trees beside a burning tree
+  //at tree.onFire === 15 || === 1, the fire will spread
+  //ONE of the trees in the vicinity will catch fire.
+  //(if I can, some trees will catch fire more easily and take some heat off of other types)
+
+lightNThunder(); // when cloud is clicked lightNThunder state is activated
+// there is a flicker of lightning
+// a wav of thunder
+// and a random tree is selected
+// this tree is assigned to a fire pushed into the fireScape array
+// the tree's tree.onFire timer is set to (aprox) 30
 
 cloud();
 

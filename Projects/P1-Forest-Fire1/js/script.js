@@ -30,11 +30,11 @@ let forestGrid = [
 ]
 
 let fireGrid = [
-  [`F`,` `,` `,` `,` `,` `,` `,` `,` `,` `],//A
+  [`!`,` `,` `,` `,` `,` `,` `,` `,` `,` `],//A
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//B
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//C
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//D
-  [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//E
+  [` `,` `,` `,` `,`!`,` `,` `,` `,` `,` `],//E
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//F
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//G
   [` `,` `,` `,` `,` `,` `,` `,` `,` `,` `],//H
@@ -48,6 +48,12 @@ let fireGrid = [
 //let cols = 10;
 
 let cellUnit;
+
+let fir = {
+  image: undefined,
+  width: 50,
+  height: 50,
+}
 
 let pinetree = {
   image:undefined,
@@ -82,7 +88,7 @@ function preload() {
   pinetree.image = loadImage('assets/images/Pinetree.png');
   //loadImage('assets/images/Pine-Sap.jpeg');
   //loadImage('assets/images/Torched-Pinetree.png');
-  //fir.image = loadImage('assets/images/Fir.png');
+  fir.image = loadImage('assets/images/Fir.png');
   //birch.image = loadImage('assets/images/Birch.png');
   cloud.image = loadImage('assets/images/cloud.png');
   fire.image = loadImage('assets/images/fire.png');
@@ -109,14 +115,15 @@ function setup() {
     forest.push([]);
     for (let c = 0; c < cols; c++) {
       if (random() < 0.15) {
-        forest[r][c] = `?`;
+        forest[r][c] = `F`;
       } else {
         forest[r][c] = ` `;
       }
     }
   }
 
-  cellUnit = height / forest.length;*/
+  cellUnit = height / forest.length; */
+
 }
 
 
@@ -127,13 +134,12 @@ function draw() {
 
   background(bg.r,bg.g,bg.b);
 
-  for (let i = initSwitch; i<1; i++){
-    displayForest();
-    initSwitch=1;}
+  //displayForest();
 
 
 
-  checkIfFire();
+
+  //checkIfFire();
 
   displayFire();
   // display the cloud
@@ -143,10 +149,10 @@ function draw() {
   pop();
   image(cursor.image,mouseX,mouseY,cursor.width,cursor.height);
 
-  if (mouseClicked()){
+  if (mousePressed()){
     console.log(`mouse is clicked`);
     let d = dist(mouseX, mouseY, cloud.x, cloud.y);
-    if (dist < cursor.width/2 + cloud.width/2){
+    if (d < cursor.width/2 + cloud.width/2){
       thunderSFX.play();
   }
 };
@@ -168,12 +174,14 @@ function displayForest() {
       let cell = forestGrid[y][x];
       console.log(`forest init. cell is checked. y = ${y} and x = ${x}`);
       if (cell === `P`) {
-        drawTree(x, y);
+        drawPinetree(x, y);}
+      else if (cell === `F`){
+        drawFir(x, y);}
       }
     }
-  }
 };
 
+/*
 // The fire should appear on a second grid, unless I can code more values into the array cells
 function checkIfFire(){
   for (let y = 0; y < fireGrid.length; y++) {
@@ -181,19 +189,26 @@ function checkIfFire(){
   for (let x = 0; x < fireGrid[y].length; x++) {
     let cell = fireGrid[y][x];
     console.log(`fire check cell is checked. y = ${y} and x = ${x}`);
-    if (cell === `F`) {
+    if (cell === `!`) {
       displayFire(x,y);
     }}}
 }
-
-function drawTree(x, y){
+*/
+function drawPinetree(x, y){
   push();
   imageMode(CORNER);
   image(pinetree.image,x * cellUnit,y * cellUnit,pinetree.width,pinetree.height);
   pop();
 }
 
-function mouseClicked(){};
+function drawFir(x,y){
+  push();
+  imageMode(CORNER);
+  image(fir.image,x * cellUnit,y * cellUnit,fir.width,fir.height);
+  pop();
+}
+
+function mousePressed(){}
 
 function displayFire(x,y){
   push();

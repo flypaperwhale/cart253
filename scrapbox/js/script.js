@@ -1,42 +1,75 @@
-// Angles of rotation for our shape
-let angleX = 0;
-let angleY = 0;
 
-function setup() {
-  // Using WEBGL in createCanvas to specify 3D graphics
-  createCanvas(500, 500, WEBGL);
+let thunderSFX;
+
+let cloud = {
+  image:undefined,
+  x:50,
+  y:60,
+  width:65,
+  height:50,
+  clicked:undefined,
+}
+let cursor = {
+  image:undefined,
+  x:0,
+  y:0,
+  width:45,
+  height:45,
 }
 
-function draw() {
+function preload() {
+  thunderSFX = loadSound(`assets/sounds/THUND.WAV`);
+
+  cursor.image = loadImage('assets/images/Godly-user.png');
+  cloud.image = loadImage('assets/images/cloud.png');
+}
+
+function setup(){
+  createCanvas(500,500);
+
+}
+
+
+function draw(){
   background(0);
 
-  // Our shape
   push();
-  // Translate to the center (not really needed, but just for completeness)
-  translate(0, 0, 0);
-  // Rotate AROUND the x axis
-  rotateX(angleX);
-  // Rotate AROUND the y axis
-  rotateY(angleY);
-  // Looks nicer
-  noStroke();
-  // Our central cube is white
-  fill(255);
-  box(100);
-  // A red bar passing through the box
-  fill(255, 0, 0);
-  box(200, 25, 25);
-  // A green bar passing through the box
-  fill(0, 255, 0);
-  box(25, 200, 25);
-  // A blue bar passing through the box
-  fill(0, 0, 255);
-  box(25, 25, 200);
-  // Note how the entire shape rotates because the rotateX() and rotateY() are applied to everything
-  // afterwards until the pop() below here
+  imageMode(CENTER);
+  image(cloud.image,cloud.x,cloud.y,cloud.width,cloud.height);
   pop();
 
-  // Increase the angles to rotate over time
-  angleX = angleX + 0.01;
-  angleY = angleY + 0.05;
+  cursor.x = mouseX;
+  cursor.y = mouseY;
+  image(cursor.image,cursor.x,cursor.y,cursor.width,cursor.height);
+
+  lightNThunder();
+
+  console.log(`mouse over cloud = ${MouseOverCloud()} and cloud.clicked = ${cloud.clicked}`);
+
 }
+
+function MouseOverCloud(){
+  let d = dist(cursor.x, cursor.y, cloud.x, cloud.y);
+  if (d < cursor.width/2 + cloud.width/2){
+    return true;}
+  else {
+    return false
+  }
+  }
+
+function mouseClicked(){
+  if (MouseOverCloud()){
+    cloud.clicked=true;
+    if (cloud.clicked === true){
+      thunderSFX.play();
+      cloud.clicked=false;
+    }
+  }
+};
+
+function lightNThunder(){
+  if (cloud.clicked){
+      thunderSFX.play();
+
+  console.log(mouseClicked());
+}}

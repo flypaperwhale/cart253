@@ -81,7 +81,7 @@ function preload() {
 Description of setup
 */
 function setup() {
-  createCanvas(400,400);
+  createCanvas(600,600);
 
   noCursor();
 
@@ -174,7 +174,7 @@ function growingForest(){
 
     function treeReproduction(){}
 
-  function check4Seedling(){}
+  function check4Seed(){}
 
     function createTree(){
       for (let i = 0; i<initialNumTrees; i++){

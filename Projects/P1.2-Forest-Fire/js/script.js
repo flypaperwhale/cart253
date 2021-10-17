@@ -9,35 +9,31 @@ when it is struck by lightning a tree catches fire.
 
 "use strict";
 
+
+let state = `itializing`; // can be initializing, growingforest, thunderNLight
+let parallelState = `fireWatch`; // can be fireWatch, fireBurning
+
+//--- Creating JS objects ---//
+
+// background values
 let bg={
   r:40,
   g:130,
   b:3,
 }
-
-let initialNumTrees=0;
-let min=5;
-let max=25;
-let numTrees;
-
-let forest = [];
-
-let adultFir;
-
-/*
-let tree = {
+// cloud
+let cloud = {
+  image:undefined,
   x:0,
   y:0,
-  w:0,
-  h:0,
-  age:0, //tree.age is an upwards timer
-  type:0, //tree.type can be Fir, Pine, or Birch
-  image:0, // is changed according to age, type combinations, or if Torched
-  onFire:0, //tree.onFire is a downwards timer, when it reaches 0, tree.type turns to `Torched`
+  //....
 }
-*/
-
-let fireScape = []; //stores in the spreading fires,
+// cursor (hand)
+let cursor = {
+  image:undefined,
+  width:45,
+  height:45,
+}
 
 let fire = {
   x:0,
@@ -50,18 +46,18 @@ let fire = {
   image:0,
 }
 
-let cloud = {
-  image:undefined,
-  x:0,
-  y:0,
-  //....
-}
+//--- Declaring variables ---//
+let initialNumTrees=0;
+let min=5;
+let max=25;
+let numTrees;
 
-let cursor = {
-  image:undefined,
-  width:45,
-  height:45,
-}
+let forest = []; // forest array stores all the trees and their values
+
+let adultFir;
+let type;
+
+let fireScape = []; // stores in the spreading fires,
 
 let weveGotFire;
 
@@ -83,13 +79,11 @@ function preload() {
   let thunderSFX = loadSound(`assets/sounds/THUND0.WAV`);
 }
 
-
 /**
 Description of SETUP
 */
 function setup() {
   createCanvas(600,600);
-
   noCursor();
 
   initializeForest(); //constrain the number of trees created at first
@@ -98,6 +92,22 @@ function setup() {
   //initialize user(); //might not need
 }
 
+// this function creates tree objects to be stored in forest array
+function treeFactory(x,y){
+  console.log(`tree factory values x:${x}, y:${y}, type:${type}`);
+  let tree = {
+    x:x,
+    y:y,
+    w:50,
+    h:60,
+    age:350, //tree.age is an upwards timer
+    type:`Fir`, //tree.type can be Fir, Pine, or Birch
+    image: adultFir, // is changed according to age, type combinations, or if Torched
+    onFire:0, //tree.onFire is a downwards timer, when it reaches 0, tree.type turns to `Torched`
+  }
+  console.log(`tree = ${tree.x}`);
+  return tree;
+}
 
 /**
 Description of DRAW()
@@ -105,18 +115,29 @@ Description of DRAW()
 function draw() {
 background(bg.r,bg.g,bg.b);
 
+for (let i = 0; i < forest.length; i++){
+  displayTrees(forest[i]);
+}
+
 growingForestState();
 while (growingForestState()){
-  displayNGrowTrees();//go through forest array and increase every tree.age++
-  //check for combinations between type + age to switch type (type name = tree type plus tree age)
-  check4Seed(); //is there a seed? commence it's aging process, from sprout, to...
-  check4Fire(); //if a fire has been declared this will become true, for fireState to turn on
+  for (let i = 0; i < forest.length; i++){
+
+    treesGrow(forest[i]);//go through forest array and increase every tree.age++
+    //check for combinations between type + age to switch type (type name = tree type plus tree age)
+    check4Seed(forest[i]); //is there a seed? commence it's aging process, from sprout, to...
+
+  }
+  for (let i = 0; i < forest.length; i++){
+  check4Fire(forest[i]); //if a fire has been declared this will become true, for fireState to turn on
+  }
 }
+
 
 //when fireState is `on`, fire is displayed
 fireState();
   while (fireState()){
-    fireBurns();//go through forest array and tree.onFire-- every frame
+    fireBurns(forest[i]);//go through forest array and tree.onFire-- every frame
   };
 
   /* SPREADING FIRE
@@ -140,45 +161,54 @@ drawUser();
 
 drawCloud();
 
-
 }
+
+
+
 
 //--- Program Functions ---//
 
-  //Setup functions//
+//Setup functions//
 function initializeForest(){
   initialNumTrees = random(min,max);
   console.log(`initial number of trees is ${initialNumTrees}`);
   for (let i = 0; i<initialNumTrees; i++){
-    createTree(i); //when a tree is created during initializtion,
+    let type = `Fir`;
+    forest[i]=treeFactory(random(0,width),random(0,height), type);
   }
-  numTrees = initialNumTrees;
+  numTrees = forest.length;
   console.log(`Forest is initialized`);
 }
 
-  //Draw functions//
-    //Tree functions//
-      //Background forest state//
+
+//Draw functions//
+//Tree functions//
+
+//display trees
+function displayTrees(tree){
+  push();
+  imageMode(CENTER);
+  image(tree.image,tree.x,tree.y,tree.w,tree.h);
+  pop();
+}
+
+
+//Background forest state//
 function growingForestState(){
   console.log(`growing forest state`);
   return true;
 }
 
-      //monitoring trees in forest array and manipulating values//
-  function displayNGrowTrees(){
-  for (let i = 0; i<numTrees; i++){
-    push();
-    imageMode(CENTER);
-    image(tree.image,tree.x,tree.y,tree.w,tree.h);
-    pop();
+//monitoring trees in forest array and manipulating values//
+function treesGrow(tree){
+    treeGrowth(tree);
+  }
 
-    treeGrowth(forest[i]);
-  }}
-
-    function treeGrowth(tree){ //a tree with a certain type reaches a certain age, image is changed
-      tree.age++;
-      treeAction(tree);
-    }
+//increase tree's age by 1 every frame
+function treeGrowth(tree){
+  tree.age++;
+  //treeAction(tree); //a tree with a certain type reaches a certain age, image is changed
+}
 
 /*
     treeAction(){
@@ -191,44 +221,27 @@ function growingForestState(){
       }
     }
 */
-    function treeReproduction(){} //when certain tree types reach certain age or burn, a seed is produced
 
-  function check4Seed(){}
+function treeReproduction(){} //when certain tree types reach certain age or burn, a seed is produced
 
-  function createTree(i){ //wrong.. push! <----
-    let type = `Fir`;
-    forest[i]=treeFactory(random(0,width),random(0,height), type);
-  }
+function check4Seed(){} //finds the trees that are type seed and starts increasing their age
 
-
-      function treeFactory(x,y, type){
-        console.log(`tree factory values x:${x}, y:${y}, type:${type}`);
-        let tree = {
-        x:0,
-        y:0,
-        w:50,
-        h:60,
-        age:350, //tree.age is an upwards timer
-        type:`Fir`, //tree.type can be Fir, Pine, or Birch
-        image: adultFir, // is changed according to age, type combinations, or if Torched
-        onFire:0,
-        }
-      }
+function createTree(i){
+  forest[i]=treeFactory(random(0,width),random(0,height));
+}
 
 // --- //
-function check4Fire(){
-  //go through forest array
-  for (let t = 0; t < forest.length; t++){
-    if (tree[t].onFire <= 30 && tree[t].onFire > 0){
-      weveGotFire = true;
-      break;
-    }
-    else {
-      weveGotFire = false;
-    }
-}}
+function check4Fire(tree){ //going through the forest array
+  if (tree.onFire <= 30 && tree.onFire > 0){
+    weveGotFire = true;
 
-    //Fire functions//
+  }
+  else {
+    weveGotFire = false;
+  }
+}
+
+//Fire functions//
 function fireState(){
   console.log(`we're in fire state`);
    if (weveGotFire === true){
@@ -241,28 +254,29 @@ function fireState(){
 
       //monitoring fires in fireScape array with forest array tree values
       //and manipulating fire and tree values//
-    function fireBurns(i){
-      tree[i].onFire--;
-      assignFire();//pushes a fire to the fireScape array and assigns in the fire.assignedTree value
+function fireBurns(i){
+  tree.onFire--;
+  assignFire();//pushes a fire to the fireScape array and assigns in the fire.assignedTree value
       //the tree in the array of the same name that has catched fire
-
-      fireGoesOut();//extinguishes fires when their fire.assigned tree's tree.onFire timer reaches 0
-
+  fireGoesOut();//extinguishes fires when their fire.assigned tree's tree.onFire timer reaches 0
     }
 
-      function fireFlicker(){
-        fire.image = fire1;
-      //every frame the fire changes sides, fire1, fire2, fire1, fire2
-      }
-      function displayFire(){
-        image(fire.image,fire.x,fire.y,fire.w,fire.h);
-      }
+function fireFlicker(){ //every frame the fire changes sides, fire1, fire2, fire1, fire2
+  fire.image = fire1;
+}
 
-    function assignFire(){}
+function displayFire(){
+  image(fire.image,fire.x,fire.y,fire.w,fire.h);
+}
 
-    function fireGoesOut(){}
+function assignFire(){}
 
-    //Cloud functions//
+function fireGoesOut(){
+  weveGotFire = false
+
+}
+
+//Cloud functions//
 function lightNThunder(){
   console.log(`this is lightning and thunder state`);
 }

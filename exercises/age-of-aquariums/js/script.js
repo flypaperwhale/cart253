@@ -80,7 +80,7 @@ function moveFish(fish){
 //displays the provided fish on the canvas
 function displayFish(fish){
   push();
-  fill(200,100,100);
+  fill(145,225,100);
   noStroke();
   ellipse(fish.x,fish.y,fish.size);
   pop();

@@ -7,6 +7,12 @@ Behold! It looks as though I am creating life out of code!
 
 "use strict";
 
+let state = `title`; //can be title, game, playSound, ending1, ending2
+
+let x;
+let y;
+let z;
+
 let round = 0;
 let magicNum = 2;
 
@@ -66,6 +72,13 @@ Description of draw()
 */
 function draw() {
   background(100,180,225);
+
+if (state === `title`){
+  push();
+  textAlign(CENTER,CENTER);
+  text(`You've entered a magical plane`, width/2, height/2);
+  pop();
+}
 
   for (let i = 0; i < school.length; i++){
 

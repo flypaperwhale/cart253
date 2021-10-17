@@ -1,5 +1,7 @@
 "use strict";
 
+let torchedFir;
+
 let tree = {
   image: undefined,
   x:200,
@@ -7,6 +9,7 @@ let tree = {
   w:50,
   h:60,
   onFire:0,
+  counter:27,
 }
 
 let fire = {
@@ -16,6 +19,7 @@ let fire = {
   w:45,
   h:50,
   side:1, //or side 2
+  counter:50,
 }
 
 /*let cloud = {
@@ -61,6 +65,7 @@ let onFire=0;
 
 function preload() {
   tree.image = loadImage('assets/images/Fir2.png');
+  torchedFir = loadImage('assets/images/Fir3.png');
 
   fireIMG1 = loadImage('assets/images/fire1.png');
   fireIMG2 = loadImage('assets/images/fire2.png'); // <--- FLICKER
@@ -98,10 +103,24 @@ function draw(){
   if (fire.side === 1){
     fire.image = fireIMG1;
     fire.side = 2;
+    fire.counter--;
   }
   else if (fire.side === 2){
     fire.image = fireIMG2;
     fire.side =1;
+    fire.counter--;
+  }
+
+  if(tree.onFire===1){
+    tree.counter--;
+  }
+
+  if (fire.counter===0){
+    onFire=0;
+  }
+  if (tree.onFire===1 && tree.counter===0){
+    tree.w=40;
+    tree.image=torchedFir;
   }
 
   if (onFire===1){
@@ -138,6 +157,8 @@ function displayFire(){
 
 function mousePressed(){
   onFire = 1;
+  tree.onFire = 1;
+  fire.counter=30;
 }
 
 function lightFilter(){
@@ -167,6 +188,7 @@ function mouseClicked(){
 
       thunderSFX.play();
       lightning.alpha = 255;
+
       cloud.clicked=false;
     }
   }

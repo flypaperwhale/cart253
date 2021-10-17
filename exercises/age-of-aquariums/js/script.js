@@ -8,7 +8,7 @@ Behold! It looks as though I am creating life out of code!
 "use strict";
 
 let school = [];
-
+let schoolSize = 10;
 /**
 Description of preload
 function preload() {
@@ -22,10 +22,9 @@ function setup() {
   createCanvas(600,600);
 
 //create fish
-for (let i = 0; i < 4; i++){
+for (let i = 0; i < schoolSize; i++){
   school[i] = createFish(random(0,width), random(0,height));
-}
-
+  }
 }
 
 function createFish(x,y){
@@ -46,31 +45,25 @@ Description of draw()
 function draw() {
   background(0);
 
-  for (let i = 0; i < 4; i++){
+  for (let i = 0; i < school.length; i++){
     moveFish(school[i]);
-  }
-
-  for (let i = 0; i < 4; i++){
     displayFish(school[i]);
   }
 }
 
-//move fish
+//move fish()
 // choose whether provided fish changes direction and moves it
 function moveFish(fish){
-
 //choose whether to change direction
   let change = random(0,1);
   if (change < 0.05){
     fish.vx = random(-fish.speed, fish.speed);
     fish.vy = random(-fish.speed, fish.speed);
   }
-
 //move the fish
   fish.x = fish.x + fish.vx;
   fish.y = fish.y + fish.vy;
-
-  //constrain fish to canvas
+//constrain fish to canvas
   fish.x = constrain(fish.x, 0, width);
   fish.y = constrain(fish.y, 0, height);
 }

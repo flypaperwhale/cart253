@@ -45,6 +45,7 @@ function preload() {
 
 function setup(){
   createCanvas(400,400);
+  frameRate(10);
 
 }
 
@@ -62,9 +63,11 @@ function draw(){
 
   if (fire.side === 1){
     fire.image = fireIMG1;
+    fire.side = 2;
   }
   else if (fire.side === 2){
     fire.image = fireIMG2;
+    fire.side =1;
   }
 
   if (onFire===1){

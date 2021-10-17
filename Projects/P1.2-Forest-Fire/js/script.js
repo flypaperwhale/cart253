@@ -14,6 +14,9 @@ let bg={
   g:130,
   b:3,
 }
+
+let initialNumTrees;
+
 let forest = [];
 
 let tree = {
@@ -81,11 +84,10 @@ function setup() {
   createCanvas(400,400);
 
   noCursor();
-  
+
+  initialNumTrees= random(5-22);
   initializeForest(); //constrain the number of trees created at first
-    createTree(); //when a tree is created during initializtion,
-      treeFactory(); //loop to check that its x,y are not too close to another tree
-      //if it is, assign another random x,y
+
     return false;
 
   //initialize cloud(); //might not need
@@ -106,7 +108,7 @@ growingForest();
   //check for combinations between type + age to switch type (type name = tree type plus tree age)
     treeGrowth();//a tree with a certain type reaches a certain age, image is changed
     treeReproduction();//when certain tree types reach certain age or burn, a seed is produced
-  check4Seedling();//is there a seed? commence it's aging process, from sprout, to...
+  check4Seed();//is there a seed? commence it's aging process, from sprout, to...
     createTree(); //when a tree is created from reproduction,
       treeFactory(); //loop to check that its x,y are not too close to another tree
         //if it is, assign another random x,y
@@ -150,6 +152,9 @@ drawCloud();
 
   //Setup functions//
 function initializeForest(){
+  createTree(); //when a tree is created during initializtion,
+    treeFactory(); //loop to check that its x,y are not too close to another tree
+    //if it is, assign another random x,y
   console.log(`Forest is initialized`);
   return true;
 }
@@ -171,9 +176,15 @@ function growingForest(){
 
   function check4Seedling(){}
 
-    function createTree(){}
+    function createTree(){
+      for (let i = 0; i<initialNumTrees; i++){
+        forest[i]=treeFactory(random(0,width),random(0,height));
+      }
+    }
 
-      function treeFactory(){}
+      function treeFactory(x,y){
+
+      }
 
 // --- //
 function check4Fire(){

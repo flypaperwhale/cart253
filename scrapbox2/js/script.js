@@ -38,7 +38,7 @@ let cloud = {
   image:undefined,
   x:50,
   y:60,
-  speed:1,
+  speed:2,
   vx:0,
   vy:0,
   width:65,
@@ -85,7 +85,7 @@ function setup(){
 
 
 function draw(){
-  background(0);
+  background(40,130,3);
 
   tree.x = width/2;
   tree.y = height/2;

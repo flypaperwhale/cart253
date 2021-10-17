@@ -8,12 +8,23 @@ Behold! It looks as though I am creating life out of code!
 "use strict";
 
 let school = [];
-let schoolSize = 10;
+let schoolSize = 5;
+
+let cursor = {
+  image:undefined,
+  x:0,
+  y:0,
+  width:200,
+  height:250,
+}
+
 /**
 Description of preload
-function preload() {
-}
 */
+function preload() {
+  cursor.image = loadImage('assets/images/hermes-staff.png');
+}
+
 
 /**
 Description of setup
@@ -21,6 +32,8 @@ Description of setup
 function setup() {
   createCanvas(600,600);
 
+  noCursor();
+  
 //create fish
 for (let i = 0; i < schoolSize; i++){
   school[i] = createFish(random(0,width), random(0,height));
@@ -49,6 +62,7 @@ function draw() {
     moveFish(school[i]);
     displayFish(school[i]);
   }
+  drawUser();
 }
 
 //move fish()
@@ -76,5 +90,12 @@ function displayFish(fish){
   fill(145,225,100);
   noStroke();
   ellipse(fish.x,fish.y,fish.size);
+  pop();
+}
+
+function drawUser(){
+  push();
+  imageMode(CENTER);
+  image(cursor.image,mouseX,mouseY,cursor.width,cursor.height);
   pop();
 }

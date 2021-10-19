@@ -130,15 +130,17 @@ function draw(){
   // lightFilter function creates the white rectangle, always present
   // gets flickering opacity then turned to max when there is lightNThunder
   lightFilter();
-  fireFlicker(); // when fire is displayed, it flickers
+
 
   // Go through the forrest array, check all the created trees
   for (let i = 0; i < forest.length; i++){
     displayTrees(forest[i]);// and display them
     checkForFire(forest[i]);// and check if any of them are on fire
-    displayFire(forest[i]);// display any fire
-    fireOut(forest[i]); // if a fireCounter and lifeCounter run out
-    // the forest disappears and the tree image becomes torched
+    if(checkForFire(forest[i]));{
+      displayFire(forest[i]);// display any fire
+      fireOut(forest[i]); // if a fireCounter and lifeCounter run out
+      // the forest disappears and the tree image becomes torched
+    }
   }
   cloudMovement();
   displayCloud();
@@ -166,6 +168,7 @@ function initializeCloud(){
 
 // white rectangle to create lightning effect when cloud clicked
 function lightFilter(){
+  lightning.alpha=0;
   console.log(`alpha1=${lightning.alpha}`);
   push();
   noStroke();
@@ -174,19 +177,6 @@ function lightFilter(){
   rect(lightning.x,lightning.y,canvas.width,canvas.height);
   pop();
   console.log(`alpha2=${lightning.alpha}`);
-}
-
-function fireFlicker(){
-  if (fire.side === 1){
-    fire.image = fireIMG1;
-    fire.side = 2;
-    fire.counter--;
-  }
-  else if (fire.side === 2){
-    fire.image = fireIMG2;
-    fire.side =1;
-    fire.counter--;
-  }
 }
 
 // Display trees function
@@ -198,14 +188,29 @@ function displayTrees(tree){
 }
 
 function checkForFire(tree){
-  if(tree.onFire===1){
-    tree.lifeCounter--;
-    tree.fireCounter--;
+  if(tree.onFire===1 && tree.fireCounter=== 0){
+    tree.fireCounter=30;
+    return true;
   }
+  else return false;
 }
 
 function displayFire(tree){
+  fireFlicker(tree); // when fire is displayed, it flickers
   image(fire.image,tree.x,tree.y,fire.w,fire.h);
+}
+
+function fireFlicker(tree){
+  if (fire.side === 1){
+    fire.image = fireIMG1;
+    fire.side = 2;
+    tree.fireCounter--;
+  }
+  else if (fire.side === 2){
+    fire.image = fireIMG2;
+    fire.side =1;
+    tree.fireCounter--;
+  }
 }
 
 function fireOut(tree){

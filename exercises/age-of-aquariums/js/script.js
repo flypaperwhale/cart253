@@ -43,9 +43,9 @@ let secret3 = `If it looks like a duck, swims like a duck, and quacks like a duc
 let secret4 = `Don't take me so seriously.`;
 
 let secret5 = `A wise old owl lived in an oak,
-The more he saw, the less he spoke
-The less he spoke, the more he heard,
-Now, wasn't he a wise old bird? `;
+The more they saw, the less they spoke
+The less they spoke, the more they heard,
+Now, wasn't that a wise old bird? `;
 let secrets = [secret1,secret2,secret3,secret4,secret5];
 
 let cursor = {

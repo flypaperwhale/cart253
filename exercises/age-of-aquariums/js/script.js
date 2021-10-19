@@ -141,7 +141,7 @@ if (state===`pause`){
   image(cursor.image,cursor.x,cursor.y,cursor.width,cursor.height);
   pop();
   timer++
-  if (timer === 300){
+  if (timer === 200){
     timer = 0;
     state = `title`;
   }
@@ -167,14 +167,14 @@ if (state === `title`){
     console.log(`timer is on ${timer}`);
     timer++;}
     console.log(`timer is on ${timer}`);
-  if (timer < 50){
+  if (timer < 60){
     push();
     textAlign(CENTER,CENTER);
     titleText = `You've entered a magical plane`;
     text(titleText,width/2,height/2);
     pop();
   }
-  else if (timer >= 50 && timer < 300){
+  else if (timer >= 50 && timer < 320){
       titleText = `Your guide is here with a secret...`;
       push();
       textAlign(CENTER,CENTER);
@@ -197,17 +197,38 @@ if (state === `spirits state`){
 
     if (clickFish===3){
       state = `secret eludes`;
+
     }
   }
 }
 
 if (state === `secret eludes`){
+  push();
+  textAlign(CENTER,CENTER);
+  text(`you're too distracted... try again, Be discerning.`, width/2, height/2);
+  pop();
+  state = `pause`;
+  timer = 0;
 }
 
 if (state === `caughtSecret`){
+    push();
+    textAlign(CENTER,CENTER);
+    text(theGuide.secret, width/2, height/2);
+    pop();
+    timer++
+    if (timer === 150){
+      state=`ending`;
+    }
 }
 
 if (state === `ending`){
+  push();
+  textAlign(CENTER,CENTER);
+  text(`Go for now...`, width/2, height/2);
+  pop();
+  state = `pause`;
+  timer = 0;
 }
 
 
@@ -254,6 +275,7 @@ function mouseClicked(){
     let d = dist(mouseX, mouseY, cursor.x, cursor.y);
     if (d < cursor.width/2 + 10){
       console.log(`mouse is over staff`);
+      startTimer=1;
       playTitleSong = 1;
       gameStarts++;
       startGame();}
@@ -271,6 +293,7 @@ function mouseClicked(){
         fish.color.b=fish.color.b+70;
         fish.song.play();
         if (fish.secret>0){
+          timer = 0;
           state = `caughtSecret`;
         if (clickFish ===3){
           state = `secret eludes`;

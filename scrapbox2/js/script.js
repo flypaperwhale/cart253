@@ -156,9 +156,11 @@ function displayFire(){
 }
 
 function mousePressed(){
-  onFire = 1;
-  tree.onFire = 1;
-  fire.counter=30;
+  if(mouseOverCloud()){
+    onFire = 1;
+    tree.onFire = 1;
+    fire.counter=30;
+  }
 }
 
 function lightFilter(){
@@ -172,7 +174,7 @@ function lightFilter(){
   console.log(`alpha2=${lightning.alpha}`);
 }
 
-function MouseOverCloud(){
+function mouseOverCloud(){
   let d = dist(cursor.x, cursor.y, cloud.x, cloud.y);
   if (d < cursor.width/2 + cloud.width/2){
     return true;}
@@ -182,7 +184,7 @@ function MouseOverCloud(){
   }
 
 function mouseClicked(){
-  if (MouseOverCloud()){
+  if (mouseOverCloud()){
     cloud.clicked=true;
     if (cloud.clicked === true){
 

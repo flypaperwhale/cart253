@@ -226,9 +226,7 @@ function treeReproduction(){} //when certain tree types reach certain age or bur
 
 function check4Seed(){} //finds the trees that are type seed and starts increasing their age
 
-function createTree(i){
-  forest[i]=treeFactory(random(0,width),random(0,height));
-}
+
 
 // --- //
 function check4Fire(tree){ //going through the forest array

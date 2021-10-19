@@ -1,17 +1,28 @@
 "use strict";
 
-let torchedFir;
-
+//---Declaring JS objects---//
+/* trees declared in treeFactory ***
+// Trees, which will be stored in the array forrest[]
 let tree = {
-  image: undefined,
-  x:200,
-  y:200,
+  x:0,
+  y:0,
   w:50,
   h:60,
-  onFire:0,
+  image: undefined,
+  onFire:0, // this switch toggles the display fire function
+  // and begins the downards counter until tree is torched
   counter:27,
 }
+*/
+let bg = {
+  color:{
+    r:40,
+    g:130,
+    b:3,
+  },
+}
 
+// fire, which appears at each burning tree's x,y
 let fire = {
   image: undefined,
   x:0,
@@ -19,18 +30,10 @@ let fire = {
   w:45,
   h:50,
   side:1, //or side 2
-  counter:50,
+  counter:50,// downwards counter for the duration of the fire animation
 }
 
-/*let cloud = {
-  image: undefined,
-  x:30,
-  y:30,
-  w:60,
-  h:40,
-}
-*/
-
+// lightning is a flashing white rectangle over canvas, when cloud clicked
 let lightning = {
   x:0,
   y:0,
@@ -38,6 +41,7 @@ let lightning = {
   alpha:0,
 }
 
+// cloud is animated to float over the forest
 let cloud = {
   image:undefined,
   x:50,
@@ -49,6 +53,8 @@ let cloud = {
   height:50,
   clicked:undefined,
 }
+
+// cursor aesthetic engages the user
 let cursor = {
   image:undefined,
   x:0,
@@ -57,112 +63,108 @@ let cursor = {
   height:45,
 }
 
-let fireIMG1;
-let fireIMG2;
-let thunderSFX;
+//--- Declaring variables ---//
+let forestSize=0; // for initializing the forest, will be random
+let min=15; // minimum number of trees in the forest
+let max=30; // maximum number of trees in the forest
+let forest = []; // forest array stores all the trees and their values
 
-let onFire=0;
+let adultFir; // name for the image of a fir tree
+let torchedFir; // name for the image of a torched fir tree
 
+//let type; // tree type could come in useful
+
+let fireIMG1; // fire image side 1
+let fireIMG2; // fire image side 2, for the flickering effect
+
+let thunderSFX; // sound effect of thunder
+
+let onFire=0; // switch to turn the fire functions on
+
+//---Preload functions---//
+// preloading images, fir tree at different stages, cloud and noCursor
+// and sounds of thunder
 function preload() {
-  tree.image = loadImage('assets/images/Fir2.png');
+  adultFir = loadImage('assets/images/Fir2.png');
   torchedFir = loadImage('assets/images/Fir3.png');
-
   fireIMG1 = loadImage('assets/images/fire1.png');
-  fireIMG2 = loadImage('assets/images/fire2.png'); // <--- FLICKER
-
+  fireIMG2 = loadImage('assets/images/fire2.png');
   cloud.image = loadImage('assets/images/cloud.png');
-
-  thunderSFX = loadSound(`assets/sounds/THUND.WAV`);
-
   cursor.image = loadImage('assets/images/Godly-user.png');
+  thunderSFX = loadSound(`assets/sounds/THUND.WAV`);
 }
 
+//---Setup functions---//
+// creating canvas, initializing the forest and the cloud
 function setup(){
   createCanvas(400,400);
-  frameRate(10);
-
-  // intialize cloud position and velocity
-    cloud.y = random(0,height);
-    cloud.vx = cloud.vx + cloud.speed;
-
-    noCursor();
+  frameRate(10);//this is used to control animations, for lack of a better way yet
+  initializeForest();//time to create the trees to initialize the forest
+  initializeCloud();//
+  // remove default cursor for better immersion
+  noCursor();
 }
 
+// this function creates tree objects to be stored in forest array
+function treeFactory(x,y){ //x,y can be anywhere on the canvas
+  console.log(`tree factory values x:${x}, y:${y}, type:`);
+  let tree = {
+    x:x,
+    y:y,
+    w:50,
+    h:60,
+    //age:350,// tree.age will be an upwards timer
+    //type:`Fir`,// tree.type could be Fir, Pine, or Birch
+    image: adultFir,// is changed according to age, type combinations, or if Torched
+    onFire:0,// tree.onFire is a downwards timer, when it reaches 0, tree.type turns to `Torched`
+    lifeCounter:30,
+    fireCounter:0,
+  }
+  console.log(`tree = ${tree.x}`);
+  return tree;
+}
 
+//---The draw function---//
 function draw(){
-  background(40,130,3);
-
-  tree.x = width/2;
-  tree.y = height/2;
-
-  image(tree.image,tree.x,tree.y,tree.w,tree.h);
-  image(cloud.image,cloud.x,cloud.y,cloud.w,cloud.h);
-
-
-
-  if (fire.side === 1){
-    fire.image = fireIMG1;
-    fire.side = 2;
-    fire.counter--;
-  }
-  else if (fire.side === 2){
-    fire.image = fireIMG2;
-    fire.side =1;
-    fire.counter--;
-  }
-
-  if(tree.onFire===1){
-    tree.counter--;
-  }
-
-  if (fire.counter===0){
-    onFire=0;
-  }
-  if (tree.onFire===1 && tree.counter===0){
-    tree.w=40;
-    tree.image=torchedFir;
-  }
-
-  if (onFire===1){
-    displayFire();
-  }
-
+  background(bg.color.r,bg.color.g,bg.color.b); // Green grassy background
+  // lightFilter function creates the white rectangle, always present
+  // gets flickering opacity then turned to max when there is lightNThunder
   lightFilter();
+  fireFlicker(); // when fire is displayed, it flickers
 
-  // Clowns movement //
-  // clown 1
-  cloud.x = cloud.x + cloud.vx;
-  cloud.y = cloud.y + cloud.vy;
-  // clowns reapear at the left side when arriving at the right side
-  if (cloud.x > width){
-    cloud.x = 0;
-    cloud.y = random(0,height);}
-
-  push();
-  imageMode(CENTER);
-  image(cloud.image,cloud.x,cloud.y,cloud.width,cloud.height);
-  pop();
-
-  cursor.x = mouseX;
-  cursor.y = mouseY;
-  image(cursor.image,cursor.x,cursor.y,cursor.width,cursor.height);
-
-  lightNThunder();
-
+  // Go through the forrest array, check all the created trees
+  for (let i = 0; i < forest.length; i++){
+    displayTrees(forest[i]);// and display them
+    checkForFire(forest[i]);// and check if any of them are on fire
+    displayFire(forest[i]);// display any fire
+    fireOut(forest[i]); // if a fireCounter and lifeCounter run out
+    // the forest disappears and the tree image becomes torched
+  }
+  cloudMovement();
+  displayCloud();
+  createCursor();
 }
 
-function displayFire(){
-  image(fire.image,tree.x,tree.y,fire.w,fire.h);
-}
+//---Program functions---//
 
-function mousePressed(){
-  if(mouseOverCloud()){
-    onFire = 1;
-    tree.onFire = 1;
-    fire.counter=30;
+// Initialize forest function to create a random sized forest
+function initializeForest(){
+  // select forest size with min and max values in variable declarations
+  forestSize = random(min,max);
+  //trees with different x,y will be created
+  //as many as the random forestSize between min and max number of trees
+  for (let i = 0; i<forestSize; i++){
+    forest[i]=treeFactory(random(0,width), random(0,height));
   }
 }
+// Initialize cloud function
+function initializeCloud(){
+  // intialize cloud position and velocity
+  cloud.y = random(0,height);
+  cloud.vx = cloud.vx + cloud.speed;
+}
 
+// white rectangle to create lightning effect when cloud clicked
 function lightFilter(){
   console.log(`alpha1=${lightning.alpha}`);
   push();
@@ -174,31 +176,110 @@ function lightFilter(){
   console.log(`alpha2=${lightning.alpha}`);
 }
 
+function fireFlicker(){
+  if (fire.side === 1){
+    fire.image = fireIMG1;
+    fire.side = 2;
+    fire.counter--;
+  }
+  else if (fire.side === 2){
+    fire.image = fireIMG2;
+    fire.side =1;
+    fire.counter--;
+  }
+}
+
+// Display trees function
+function displayTrees(tree){
+  push();
+  imageMode(CENTER);
+  image(tree.image,tree.x,tree.y,tree.w,tree.h);
+  pop();
+}
+
+function checkForFire(tree){
+  if(tree.onFire===1){
+    tree.lifeCounter--;
+    tree.fireCounter--;
+  }
+}
+
+function displayFire(tree){
+  image(fire.image,tree.x,tree.y,fire.w,fire.h);
+}
+
+function fireOut(tree){
+  if (tree.onFire===1 && tree.lifeCounter===0){
+    tree.w=40;
+    tree.image=torchedFir;
+    tree.onFire=0;
+  }
+  /*if (tree.fireCounter===0){
+    tree.onFire=0; // connected to the fire image...*/
+    //this here is not necessary
+  }
+
+// Cloud movement //
+function cloudMovement(){
+  cloud.x = cloud.x + cloud.vx;
+  cloud.y = cloud.y + cloud.vy;
+  // cloud reapears at the left side when arriving at the right side
+  if (cloud.x > width){
+    cloud.x = 0;
+    cloud.y = random(0,height);
+  }
+}
+
+function displayCloud(){
+  push();
+  imageMode(CENTER);
+  image(cloud.image,cloud.x,cloud.y,cloud.width,cloud.height);
+  pop();
+}
+
+function createCursor(){
+  cursor.x = mouseX;
+  cursor.y = mouseY;
+  image(cursor.image,cursor.x,cursor.y,cursor.width,cursor.height);
+}
+
+// function to check whether the mouse is over the cloud or not
 function mouseOverCloud(){
   let d = dist(cursor.x, cursor.y, cloud.x, cloud.y);
   if (d < cursor.width/2 + cloud.width/2){
-    return true;}
+    return true; // mouse is over the cloud
+    }
   else {
-    return false
-  }
-  }
-
-function mouseClicked(){
-  if (mouseOverCloud()){
-    cloud.clicked=true;
-    if (cloud.clicked === true){
-
-      thunderSFX.play();
-      lightning.alpha = 255;
-
-      cloud.clicked=false;
+    return false // mouse is not over the cloud
     }
   }
-};
+
+// function that causes thunder and lightning
+function mouseClicked(){
+  if (mouseOverCloud()){ // mouse must be over the cloud
+    // for this function to work
+
+    cloud.clicked=true; // if user clicks on the cloud
+    if (cloud.clicked === true){
+      lightNThunder();
+      cloud.clicked=false; // return false because lightning is a click
+        // and a flash
+    }
+  }
+}
+
+// when mouse pressed on cloud, a random tree is selected to burn
+function mousePressed(){
+  if(mouseOverCloud()){
+    tree = random(forest); // a random tree in forest array is selected
+    tree.onFire = 1; // tree on fire switch is on
+    fire.counter=30; // tree downwards counter starts <-- needs to create fires! ARRAY
+  }
+}
 
 function lightNThunder(){
     console.log(`you've made it in lightnthunder`);
-    lightning.alpha = random(1-255);
-
+    thunderSFX.play(); // thunder sound effects are played
+    lightning.alpha = 255; // the white rectangle's is rendered opaque
   }
   //console.log(`mouseclicked = ${mouseClicked()} and frame = ${frame} and lightning.alpha = ${lightning.alpha}`);

@@ -131,7 +131,6 @@ function draw(){
   // gets flickering opacity then turned to max when there is lightNThunder
   lightFilter();
 
-
   // Go through the forrest array, check all the created trees
   for (let i = 0; i < forest.length; i++){
     displayTrees(forest[i]);// and display them
@@ -145,6 +144,13 @@ function draw(){
   cloudMovement();
   displayCloud();
   createCursor();
+
+  if (cloud.clicked === true){
+    lightNThunder();
+    cloud.clicked=false; // return false because lightning is a click
+      // and a flash
+}
+lightning.alpha=0;
 }
 
 //---Program functions---//
@@ -168,7 +174,6 @@ function initializeCloud(){
 
 // white rectangle to create lightning effect when cloud clicked
 function lightFilter(){
-  lightning.alpha=0;
   console.log(`alpha1=${lightning.alpha}`);
   push();
   noStroke();
@@ -263,15 +268,10 @@ function mouseOverCloud(){
 function mouseClicked(){
   if (mouseOverCloud()){ // mouse must be over the cloud
     // for this function to work
-
     cloud.clicked=true; // if user clicks on the cloud
-    if (cloud.clicked === true){
-      lightNThunder();
-      cloud.clicked=false; // return false because lightning is a click
-        // and a flash
+    lightning.alpha=255;
     }
   }
-}
 
 // when mouse pressed on cloud, a random tree is selected to burn
 function mousePressed(){
@@ -285,6 +285,6 @@ function mousePressed(){
 function lightNThunder(){
     console.log(`you've made it in lightnthunder`);
     thunderSFX.play(); // thunder sound effects are played
-    lightning.alpha = 255; // the white rectangle's is rendered opaque
+    lightning.alpha = random(1,255); // the white rectangle's is rendered opaque
   }
   //console.log(`mouseclicked = ${mouseClicked()} and frame = ${frame} and lightning.alpha = ${lightning.alpha}`);

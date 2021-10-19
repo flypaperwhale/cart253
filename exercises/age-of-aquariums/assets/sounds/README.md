@@ -3,6 +3,7 @@
 This is the folder where you would keep all the sound files associated with your project, such as `.mp3`, `.wav`, and other formats. An example sound, `bark.wav`, is here in case you need something to play around with.
 
 magic spirit - sosp6
+magic spirit2 - barn_owl_hoots - aliceshalloweenfun.homestead.com/barn_owl_hoots.wav
 
 dud spirit - mysterious - starmen.net/mother2/soundfx/mysterious.wav
 

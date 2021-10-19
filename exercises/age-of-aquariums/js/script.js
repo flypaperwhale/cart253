@@ -8,20 +8,41 @@ Behold! It looks as though I am creating life out of code!
 "use strict";
 
 let timer = 0;
-let state = `title`; //can be title, game, playSound, ending1, ending2
-let playTitleSong = 1;
+let state = `pause`; //can be title, game, playSound, ending1, ending2
+let playTitleSong = 0;
 let titleSong;
 let dudSong;
 let wonkySong;
 let secretSong;
-let clickFish;
+let secretSong2;
+let clickFish = 0;
 let round = 0;
 let magicNum = 2;
-
+let titleText = undefined;
+let gameStarts=0;
 let school = [];
+let startTimer = 0;
 let schoolSize = 0;
 
 let itIs;
+
+let theGuide={
+  secret:undefined,
+  song:undefined,
+}
+
+let secret1 = `The rising of birds in their flight is the sign of an ambuscade. Startled beasts indicate that a sudden attack is coming."`;
+
+let secret2 = `You were born with wings, why prefer to crawl through life.`;
+
+let secret3 = `If it looks like a duck, swims like a duck, and quacks like a duck, then it probably is a duck.`;
+
+let secret4 = `Don't take me so seriously.`;
+
+let secret5 = `A wise old owl lived in an oak,
+The more he saw, the less he spoke
+The less he spoke, the more he heard,
+Now, wasn't he a wise old bird? `;
 
 let cursor = {
   image:undefined,
@@ -41,21 +62,17 @@ function preload() {
   dudSong = loadSound('assets/sounds/dud-spirit.wav');
   wonkySong = loadSound('assets/sounds/wonky-spirit.wav');
   secretSong = loadSound('assets/sounds/magic-spirit.wav');
-
-
 }
-
 
 /**
 Description of setup
 */
 function setup() {
   createCanvas(600,600);
-  noCursor();
   schoolSize = random(3,9);
 //create fish
 for (let i = 0; i < schoolSize; i++){
-  school[i] = createFish(random(0,width), random(0,height), random(0,255),);
+  school[i] = createFish(random(0,width), random(0,height), random(0,255));
   colorizeFish(school[i]);
 }
 }
@@ -74,8 +91,40 @@ function createFish(x,y){
       b:0,
     },
     song:undefined,
+    secret:0,
   };
   return fish;
+}
+
+function colorizeFish(fish){
+  round = round + 1 ;
+  if (round === 1){
+    fish.secret=random(1,5);
+    fish.color.r =0;
+    fish.color.b =200;
+    fish.color.g =150;
+    if (fish.secret === 5){
+      fish.song = secretSong2;
+    }
+    else fish.song = secretSong;
+    theGuide.secret = fish.secret;
+    theGuide.song = fish.song;
+  }
+  if (round === 2){
+    fish.secret=0;
+    fish.color.r =100;
+    fish.color.b =255;
+    fish.color.g =0;
+    fish.song = dudSong;
+  }
+  if (round === 3){
+    fish.secret=0;
+    fish.color.r =100;
+    fish.color.b =0;
+    fish.color.g =255;
+    fish.song = wonkySong;
+    round = 1;
+  }
 }
 
 /**
@@ -84,27 +133,62 @@ Description of draw()
 function draw() {
   background(100,180,225);
 
+if (state===`pause`){
+  push();
+  imageMode(CENTER);
+  cursor.x=width/2;
+  cursor.y=height/2-120;
+  image(cursor.image,cursor.x,cursor.y,cursor.width,cursor.height);
+  pop();
+  timer++
+  if (timer === 300){
+    timer = 0;
+    state = `title`;
+  }
+
+}
+
 if (state === `title`){
-    if (playTitleSong === 1){
-    titleSong.play();
-    playTitleSong =0;}
-    push();
-    imageMode(CENTER);
-    image(cursor.image,width/2,height/2-120,cursor.width,cursor.height);
-    pop();
+  push();
+  imageMode(CENTER);
+  cursor.x=width/2;
+  cursor.y=height/2-120;
+  image(cursor.image,cursor.x,cursor.y,cursor.width,cursor.height);
+  pop();
+
+  if (startTimer ===0){
     push();
     textAlign(CENTER,CENTER);
-    text(`You've entered a magical plane`, width/2, height/2);
+    titleText = `You've entered a magical plane`;
+    text(titleText,width/2,height/2);
     pop();
-    timer++;
-    if (timer === 300){
-      state = `spirits state`;
+  }
+  if (startTimer===1){
+    console.log(`timer is on ${timer}`);
+    timer++;}
+    console.log(`timer is on ${timer}`);
+  if (timer < 50){
+    push();
+    textAlign(CENTER,CENTER);
+    titleText = `You've entered a magical plane`;
+    text(titleText,width/2,height/2);
+    pop();
+  }
+  else if (timer >= 50 && timer < 300){
+      titleText = `Your guide is here with a secret...`;
+      push();
+      textAlign(CENTER,CENTER);
+      text(titleText, width/2, height/2);
+      pop();
     }
-}
+  else if (timer === 300){
+      state = `spirits state`;}
+    }
+
+  //console.log(`dist = mousex ${mouseX}, mouseY ${mouseY}, cursor.x ${cursor.x}, cursor.y ${cursor.y}`);}
 
 if (state === `spirits state`){
   for (let i = 0; i < school.length; i++){
-
 
     moveFish(school[i]);
     displayFish(school[i]);
@@ -118,41 +202,18 @@ if (state === `spirits state`){
 }
 
 if (state === `secret eludes`){
-
 }
 
 if (state === `caughtSecret`){
-
 }
 
 if (state === `ending`){
-  
-}
 }
 
-function colorizeFish(fish){
-  round = round + 1 ;
-  if (round === 1){
-    fish.secret=1;
-    fish.color.r =0;
-    fish.color.b =200;
-    fish.color.g =150;
-    fish.song = secretSong;
+
 }
-  if (round === 2){
-    fish.color.r =100;
-    fish.color.b =255;
-    fish.color.g =0;
-    fish.song = dudSong;
-  }
-  if (round === 3){
-    fish.color.r =100;
-    fish.color.b =0;
-    fish.color.g =255;
-    fish.song = wonkySong;
-    round = 1;
-  }
-}
+
+
 //move fish()
 // choose whether provided fish changes direction and moves it
 function moveFish(fish){
@@ -188,23 +249,47 @@ function drawUser(){
 }
 
 function mouseClicked(){
-  clickFish = clickFish++;
+  console.log(`mouse click clickfish = ${clickFish}`);
   if (state === `title`){
-    console.log(`do nothing`);
-  }
+    let d = dist(mouseX, mouseY, cursor.x, cursor.y);
+    if (d < cursor.width/2 + 10){
+      console.log(`mouse is over staff`);
+      playTitleSong = 1;
+      gameStarts++;
+      startGame();}
+    }
+
   else if (state === `spirits state`){
     for(let i = 0; i<school.length;i++){
+      console.log(`spiritstate clickfish = ${clickFish}`);
       let fish = school[i];
       let d = dist(mouseX, mouseY-70, fish.x, fish.y);
       if (d < cursor.width/5 + fish.size/2){
+        clickFish = clickFish + 1;
         console.log(`mouse is over`);
         fish.color.r=fish.color.r+30;
         fish.color.b=fish.color.b+70;
         fish.song.play();
-        if (fish.secret===1){
+        if (fish.secret>0){
           state = `caughtSecret`;
+        if (clickFish ===3){
+          state = `secret eludes`;
+        }
         }
       }
     }
+  }
+}
+
+
+
+function startGame(){
+  if (gameStarts === 1){
+    noCursor();
+    if (playTitleSong === 1){
+    titleSong.play();
+    playTitleSong =0;}
+    gameStarts++;
+    startTimer=1;
   }
 }

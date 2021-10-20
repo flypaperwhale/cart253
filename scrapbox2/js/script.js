@@ -81,6 +81,8 @@ let thunderSFX; // sound effect of thunder
 
 let onFire=0; // switch to turn the fire functions on
 
+let weHaveFire=undefined;
+
 //---Preload functions---//
 // preloading images, fir tree at different stages, cloud and noCursor
 // and sounds of thunder
@@ -118,7 +120,7 @@ function treeFactory(x,y){ //x,y can be anywhere on the canvas
     image: adultFir,// is changed according to age, type combinations, or if Torched
     onFire:0,// tree.onFire is a downwards timer, when it reaches 0, tree.type turns to `Torched`
     lifeCounter:30,
-    fireCounter:0,
+    fireCounter:31,
   }
   console.log(`tree = ${tree.x}`);
   return tree;
@@ -134,19 +136,23 @@ function draw(){
   // Go through the forrest array, check all the created trees
   for (let i = 0; i < forest.length; i++){
     displayTrees(forest[i]);// and display them
-    checkForFire(forest[i]);// and check if any of them are on fire
-    if(checkForFire(forest[i]));{
-      displayFire(forest[i]);// display any fire
-      fireOut(forest[i]); // if a fireCounter and lifeCounter run out
+    //checkForFire(forest[i]);// and check if any of them are on fire
+    displayFire(forest[i]);// display any fire
+    fireOut(forest[i]); // if a fireCounter and lifeCounter run out
       // the forest disappears and the tree image becomes torched
     }
-  }
+
   cloudMovement();
   displayCloud();
   createCursor();
 
   if (cloud.clicked === true){
     lightNThunder();
+    let tree = random(forest); // a random tree in forest array is selected
+    console.log(`in cloudclicked after random forest ${tree.onFire}`)
+    tree.fireCounter=30;
+    tree.onFire = 1; // tree on fire switch is on
+    console.log(`in cloudclicked after random forest ${tree.onFire}`)
     cloud.clicked=false; // return false because lightning is a click
       // and a flash
 }
@@ -174,14 +180,12 @@ function initializeCloud(){
 
 // white rectangle to create lightning effect when cloud clicked
 function lightFilter(){
-  console.log(`alpha1=${lightning.alpha}`);
   push();
   noStroke();
   fill(lightning.color,lightning.alpha);
   rectMode(CENTER);
   rect(lightning.x,lightning.y,canvas.width,canvas.height);
   pop();
-  console.log(`alpha2=${lightning.alpha}`);
 }
 
 // Display trees function
@@ -192,17 +196,28 @@ function displayTrees(tree){
   pop();
 }
 
+/*
 function checkForFire(tree){
-  if(tree.onFire===1 && tree.fireCounter=== 0){
+  console.log(`in cloudclicked after random forest ${tree.onFire}`)
+  if(tree.onFire===1){
     tree.fireCounter=30;
-    return true;
+    weHaveFire=true;
   }
-  else return false;
+  if(weHaveFire===true){
+  for (let i = 0; i<forest.length; i++){
+
+  }
+    weHaveFire= true;
+  }
+  else if (tree.onFire===0 || weHaveFire= false;
 }
+*/
 
 function displayFire(tree){
-  fireFlicker(tree); // when fire is displayed, it flickers
-  image(fire.image,tree.x,tree.y,fire.w,fire.h);
+  if (tree.onFire===1){
+    fireFlicker(tree); // when fire is displayed, it flickers
+    image(fire.image,tree.x,tree.y,fire.w,fire.h);
+  }
 }
 
 function fireFlicker(tree){
@@ -273,15 +288,16 @@ function mouseClicked(){
     }
   }
 
-// when mouse pressed on cloud, a random tree is selected to burn
+/*// when mouse pressed on cloud, a random tree is selected to burn
 function mousePressed(){
   if(mouseOverCloud()){
     tree = random(forest); // a random tree in forest array is selected
+    console.log(`in mouse pressed after random forest ${tree.onFire}`)
     tree.onFire = 1; // tree on fire switch is on
-    fire.counter=30; // tree downwards counter starts <-- needs to create fires! ARRAY
+    console.log(`in mouse pressed adter onfire forest ${tree.onFire}`)
   }
 }
-
+*/
 function lightNThunder(){
     console.log(`you've made it in lightnthunder`);
     thunderSFX.play(); // thunder sound effects are played

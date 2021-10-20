@@ -216,19 +216,26 @@ function checkForFire(tree){
 function displayFire(tree){
   if (tree.onFire===1){
     fireFlicker(tree); // when fire is displayed, it flickers
+    push();
+    imageMode(CENTER);
     image(fire.image,tree.x,tree.y,fire.w,fire.h);
+    pop();
+    }
+  if (tree.onFire===1 && tree.fireCounter===0)
+  return;
   }
-}
 
 function fireFlicker(tree){
   if (fire.side === 1){
     fire.image = fireIMG1;
     fire.side = 2;
-    tree.fireCounter--;
+    tree.lifeCounter--;
+    tree.fireCounter--
   }
   else if (fire.side === 2){
     fire.image = fireIMG2;
     fire.side =1;
+    tree.lifeCounter--;
     tree.fireCounter--;
   }
 }

@@ -1,5 +1,3 @@
-# Project 1 : Forest Fire
+# Template p5 project
 
-I am trying to create a simulation of a growing, dying, regenerating forest.
-In this simulation, the user can make lightning strike down on the forest,
-and cause significant destruction, which then should lead to regeneration.
+This program is a ludic simulation of lightning striking a forest and burning it down tree by tree. The lightning is prompted by the user with a click. Have fun!

@@ -2,6 +2,9 @@
 
 //---Declaring JS objects---//
 
+//state
+let state = `title` //can be title, simulation, end
+
 // background object
 let bg = {
   color:{
@@ -108,25 +111,26 @@ function treeFactory(x,y){ // x,y can be anywhere on the canvas
 
 //---The draw function---//
 function draw(){
-  background(bg.color.r,bg.color.g,bg.color.b);// Green grassy background
-  lightFilter();// lightFilter function creates the white rectangle, always present
-  // gets flickering opacity then turned to max when there is lightNThunder
+    background(bg.color.r,bg.color.g,bg.color.b);// Green grassy background
+    lightFilter();// lightFilter function creates the white rectangle, always present
+    // gets flickering opacity then turned to max when there is lightNThunder
 
-  // Go through the forrest array, check all the created trees
-  for (let i = 0; i < forest.length; i++){
-    displayTrees(forest[i]);// and display them
-    displayFire(forest[i]);// if a tree is on fire, display any fire
-    fireOut(forest[i]);// if a fireCounter and lifeCounter run out
-    // the fire disappears and the tree image becomes torched
-    }
+    // Go through the forrest array, check all the created trees
+    for (let i = 0; i < forest.length; i++){
+      displayTrees(forest[i]);// and display them
+      displayFire(forest[i]);// if a tree is on fire, display any fire
+      fireOut(forest[i]);// if a fireCounter and lifeCounter run out
+      // the fire disappears and the tree image becomes torched
+      toEndState(forest[i]);
+      }
 
-  cloudMovement();// animates the cloud
-  displayCloud();// displays the cloud
-  createCursor();// displays the cursor
+    cloudMovement();// animates the cloud
+    displayCloud();// displays the cloud
+    createCursor();// displays the cursor
 
-  lightningStrikes();// when mouse is clicked a random tree is selected to burn
-  lightning.alpha=0;// resets lightning rectangle to transparent
-}
+    lightningStrikes();// when mouse is clicked a random tree is selected to burn
+    lightning.alpha=0;// resets lightning rectangle to transparent
+  }
 
 //---Program functions---//
 // Initialize forest function to create a random sized forest
@@ -203,6 +207,10 @@ function fireOut(tree){// for each tree in the forest array
     tree.onFire=3;// code tree onFire to 3 so it will not be randomly selected anymore
     // when lightning strikes
   }
+}
+
+function toEndState(tree){
+  return;
 }
 
 // Cloud movement function

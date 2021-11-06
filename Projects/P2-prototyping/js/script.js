@@ -9,6 +9,8 @@ so that she might see the constellations in the sky
 
 "use strict";
 
+let items = [`Ham`,`Big Bone`,`Slingshot`,`Broken Light Bulb`,`Wrench`,`Injunction`];
+
 let state = undefined;
 
 

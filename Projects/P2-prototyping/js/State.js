@@ -4,6 +4,11 @@ class State {
   }
 
   update(){
-    
+
   }
+
+  mouseClicked(){
+
+  }
+
 }

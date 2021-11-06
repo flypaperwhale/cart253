@@ -1,4 +1,4 @@
-class SimulationState extends State {
+class EndGameState extends State {
   constructor(){
     super();
   }
@@ -11,11 +11,10 @@ class SimulationState extends State {
     background(0);
 
     fill(255);
-    text(`Eat my shorts!`, 600/2, 600/2);
+    text(`See you!`, 600/2, 600/2);
   }
 
-
     mouseClicked(){
-      state = new EndGameState();
+      console.log(`nothing happens. the game is over`);
     }
 }

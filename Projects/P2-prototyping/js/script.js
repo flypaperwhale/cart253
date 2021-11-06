@@ -1,9 +1,10 @@
 /**
-Title of Project
-Author Name
+Interrupting Sky Glow
+Frankie Latreille
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+Dolly explores the town of Sky Glow, fulfilling the needs of townsfolk
+while finding ways to turn out the lights in town
+so that she might see the constellations in the sky
 */
 
 "use strict";

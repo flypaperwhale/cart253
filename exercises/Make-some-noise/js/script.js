@@ -75,7 +75,7 @@ function draw() {
     noStroke();
     fill(225,225,100, 200);
     ellipseMode(CENTER);
-    ellipse(width/2, height/2-70, 400,400);
+    ellipse(width/2, height/2-70, 600,600);
     pop();
 
     push();
@@ -96,12 +96,20 @@ function draw() {
       pop();
     }
 
-  // Blue sky
+  // Green Grass and gray path
   push();
   noStroke();
   fill(30, 75, 40);
   rectMode(CENTER);
   rect(width / 2, height, 600, 800);
+  pop();
+  push();
+  noStroke();
+  fill(45,45,45);
+  ellipseMode(CENTER);
+  ellipse(width/2, height/2+75,250,150);
+  rectMode(CENTER);
+  rect(width/2, height/2+200, 50, 300);
   pop();
 
   if (state === `title`) {

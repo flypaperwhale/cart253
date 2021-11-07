@@ -1,13 +1,16 @@
 class Player { // the player, controlled by up, down, left, right, and mouse click
-  constructor(){
-    x = undefined;
-    y = undefined;
-    vx = undefined;
-    vy = undefined;
-    speed = undefined;
+  constructor(x,y){
+    this.x = x;
+    this.y = y;
+    this.inventory = [];
   }
 
   display(){
+    push();
+    fill(200,0,15);
+    ellipseMode(CENTER);
+    ellipse(this.x,this.y,20);
+    pop();
     // displays Player, and Player walking animation
   }
 

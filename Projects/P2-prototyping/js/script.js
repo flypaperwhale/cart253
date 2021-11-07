@@ -12,7 +12,7 @@ so that she might see the constellations in the sky
 let items = [`Ham`,`Big Bone`,`Slingshot`,`Broken Light Bulb`,`Wrench`,`Injunction`];
 
 let state = undefined;
-
+let player;
 
 /**
 Description of preload
@@ -30,6 +30,7 @@ createCanvas(600,600);
 
 state = new TitleState;
 
+player = new Player(300,400);
 
 }
 
@@ -39,6 +40,9 @@ Description of draw()
 */
 function draw() {
   state.update();
+
+  player.display();
+
 
 }
 

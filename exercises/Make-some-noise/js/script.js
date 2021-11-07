@@ -58,8 +58,8 @@ function setup() {
   lightFlickSound.addCue(0.4,flickBulbOff);
   lightFlickSound.addCue(0.75,flickBulbOn);
 
-  let x = width/2;
-  let y = height;
+  let x = 250;
+  let y = 470;
   pedestrian = new Pedestrian(x,y);
 }
 
@@ -168,6 +168,7 @@ function draw() {
     pop();
   }
 
+  pedestrian.constrain();
   pedestrian.handleInput();
   pedestrian.move();
   pedestrian.display();

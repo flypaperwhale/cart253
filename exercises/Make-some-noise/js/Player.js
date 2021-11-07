@@ -9,13 +9,9 @@ class Pedestrian {
     this.alive = true;
   }
 
-  checkHit(vehicle) {
-    if (this.x > vehicle.x - vehicle.width/2 &&
-        this.x < vehicle.x + vehicle.width/2 &&
-        this.y > vehicle.y - vehicle.height/2 &&
-        this.y < vehicle.y + vehicle.height/2) {
-      this.alive = false;
-    }
+  constrain() {
+    this.x = constrain(this.x,0,600);
+    this.y = constrain(this.y,395,810);
   }
 
   handleInput() {

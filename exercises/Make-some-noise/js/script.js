@@ -14,45 +14,96 @@ let starsBackground;
 
 let sunsetStarsIntro;
 let backgroundMusic;
+let constellationWinkSound;
 
+let state = `title`; //can be title, simulation
 
+let dayTimer = 600;
+let skyAlpha = 255;
+
+let songSwitch = 0;
 
 /**
 Description of preload
 */
 function preload() {
-  starsBackground = loadImage('assets/images/starnight.jpg');
+  starsBackground = loadImage("assets/images/starnight.jpg");
   sunsetStarsIntro = loadSound(`assets/sounds/intro-constellation.mp3`);
   backgroundMusic = loadSound(`assets/sounds/skyglowbgmusic.mp3`);
-
+  constellationWinkSound = loadSound(`assets/sounds/constellationWink.wav`)
 }
-
 
 /**
 Description of setup
 */
 function setup() {
-  createCanvas(600,800);
-
-  push();
-  imageMode(CENTER);
-  image(starsBackground,width/2, height/2,600,800);
-  pop();
-
-  push();
-  noStroke();
-  fill(30,75,40);
-  rectMode(CENTER);
-  rect(width/2,height,600,800);
-  pop();
+  createCanvas(600, 800);
 }
-
 
 /**
 Description of draw()
 */
 function draw() {
+  push();
+  imageMode(CENTER);
+  image(starsBackground, width / 2, height / 2, 600, 800);
+  pop();
 
+  push();
+  noStroke();
+  fill(30, 75, 40);
+  rectMode(CENTER);
+  rect(width / 2, height, 600, 800);
+  pop();
 
+  console.log(
+    `dayTimer = ${dayTimer} and skyAlpha ${skyAlpha} and State ${state}`
+  );
 
+  if (state === `title`) {
+    text(`CLICK`, width / 2, height / 2);
+  }
+
+  if (state === `sunset`) {
+    songSwitch++;
+    songSwitch = constrain(songSwitch,0,2);
+    playSunsetSong();
+    skyAlpha = map(dayTimer, 600, 0, 255, 0); //map skyAlpha (255,0) goes down as dayTimer (600,0) goes down
+    dayTimer--;
+    dayTimer = constrain(dayTimer, 0, 600);
+    displaySky();
+    if (dayTimer === 0) {
+      //play coin sword sound
+      songSwitch=0
+      state = `simulation`;
+    }
+  }
+
+  if (state === `simulation`) {
+    songSwitch++;
+    songSwitch = constrain(songSwitch,0,2);
+    if (songSwitch===1){
+        constellationWinkSound.play();
+    }
+  }
+}
+
+function playSunsetSong(){
+  if (songSwitch===1){
+    sunsetStarsIntro.play();
+  }
+}
+function displaySky() {
+  push();
+  noStroke();
+  fill(100, 100, 255, skyAlpha);
+  rectMode(CENTER);
+  rect(width / 2, 0, 600, 800);
+  pop();
+}
+
+function mouseClicked() {
+  if (state === `title`) {
+    state = `sunset`;
+  }
 }

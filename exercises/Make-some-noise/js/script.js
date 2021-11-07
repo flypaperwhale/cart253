@@ -68,7 +68,7 @@ function setup() {
   lightFlickSound.addCue(0.75,flickBulbOn);
   lightFlickSound.addCue(0.8,flickBulbOff);
 
-  let x = 220;
+  let x = 230;
   let y = 495;
   pedestrian = new Pedestrian(x,y);
 }
@@ -171,7 +171,7 @@ function draw() {
   push();
   fill(20,5,15);
   ellipseMode(CENTER);
-  ellipse(355,450,20)
+  ellipse(340,465,20)
   pop();
 
   if (state === `lightsUp`) {

@@ -16,6 +16,8 @@ let streetlampImage;
 let sunsetStarsIntro;
 let backgroundMusic;
 let constellationWinkSound;
+let lightFlickSound;
+let lightBuzzNoise;
 
 let state = `title`; //can be title, simulation
 
@@ -23,6 +25,8 @@ let dayTimer = 600;
 let skyAlpha = 255;
 
 let songSwitch = 0;
+
+let lightIsOn = false;
 
 /**
 Description of preload
@@ -32,7 +36,9 @@ function preload() {
   streetlampImage = loadImage("assets/images/lamp.png");
   sunsetStarsIntro = loadSound(`assets/sounds/intro-constellation.mp3`);
   backgroundMusic = loadSound(`assets/sounds/skyglowbgmusic.mp3`);
-  constellationWinkSound = loadSound(`assets/sounds/constellationWink.wav`)
+  constellationWinkSound = loadSound(`assets/sounds/constellationWink.wav`);
+  lightFlickSound = loadSound("assets/sounds/lightFlick.wav");
+  lightBuzzNoise = loadSound("assets/sounds/lightBuzz.wav");
 }
 
 /**
@@ -55,6 +61,21 @@ function draw() {
   imageMode(CENTER);
   image(starsBackground, width / 2, height / 2, 600, 800);
   pop();
+
+  if (lightIsOn === true){
+    push();
+    noStroke();
+    fill(225,225,100, 200);
+    ellipseMode(CENTER);
+    ellipse(width/2, height/2-70, 400,400);
+    pop();
+    push();
+    noStroke();
+    fill(200,200,0, 200);
+    ellipseMode(CENTER);
+    ellipse(width/2, height/2-70, 100,100);
+    pop();
+  }
 
   push();
   noStroke();
@@ -80,7 +101,7 @@ function draw() {
     if (dayTimer === 0) {
       //play coin sword sound
       songSwitch=0
-      state = `simulation`;
+      state = `lightsUp`;
     }
   }
 
@@ -89,11 +110,19 @@ function draw() {
   image(streetlampImage,width/2,height/2,25,140);
   pop();
 
-  if (state === `simulation`) {
+  if (state === `lightsUp`) {
     songSwitch++;
-    songSwitch = constrain(songSwitch,0,2);
+    songSwitch = constrain(songSwitch,0,300);
     if (songSwitch===1){
         constellationWinkSound.play();
+    }
+    if (songSwitch===200){
+      lightFlickSound.play();
+    }
+    if (songSwitch===270){
+      turnLightOn();
+      lightBuzzNoise.play();
+      // I would like to have the light buzz weaker, and grow louder when Player is nearer
     }
   }
 }
@@ -110,6 +139,10 @@ function displaySky() {
   rectMode(CENTER);
   rect(width / 2, 0, 600, 800);
   pop();
+}
+
+function turnLightOn(){
+  lightIsOn = true;
 }
 
 function mouseClicked() {

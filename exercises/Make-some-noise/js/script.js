@@ -14,6 +14,7 @@ let pedestrian;
 
 let starsBackground;
 let streetlampImage;
+let streetlampFoot;
 
 let sunsetStarsIntro;
 let backgroundMusic;
@@ -32,12 +33,18 @@ let songSwitch = 0;
 
 let lightIsOn = false;
 
+let playerDistance;
+let lampX = 300;
+let lampY = 400;
+let buzzVolume;
+
 /**
 Description of preload
 */
 function preload() {
   starsBackground = loadImage("assets/images/starnight.jpg");
   streetlampImage = loadImage("assets/images/lamp.png");
+  streetlampFoot = loadImage("assets/images/lampFoot.png");
   sunsetStarsIntro = loadSound(`assets/sounds/intro-constellation.mp3`);
   backgroundMusic = loadSound(`assets/sounds/skyglowbgmusic.mp3`);
   constellationWinkSound = loadSound(`assets/sounds/constellationWink.wav`);
@@ -70,6 +77,8 @@ function draw() {
   console.log(
     `dayTimer = ${dayTimer} and skyAlpha ${skyAlpha} and State ${state}`
   );
+
+  playerDistance = dist(pedestrian.x,pedestrian.y, lampX,lampY);
 
   push();
   imageMode(CENTER);
@@ -143,7 +152,17 @@ function draw() {
 
   push();
   imageMode(CENTER);
-  image(streetlampImage,width/2,height/2,25,140);
+  image(streetlampFoot,lampX,lampY+60,25,25);
+  pop();
+
+  pedestrian.constrain();
+  pedestrian.handleInput();
+  pedestrian.move();
+  pedestrian.display();
+
+  push();
+  imageMode(CENTER);
+  image(streetlampImage,lampX,lampY-20,25,140);
   pop();
 
   if (state === `lightsUp`) {
@@ -162,16 +181,12 @@ function draw() {
   if (lightIsOn===true){
     push();
     lightBuzzNoise.playMode(`untilDone`);
-    lightBuzzNoise.setVolume(0.05);
+    buzzVolume = map(playerDistance,0,350,0.2,0);
+    lightBuzzNoise.setVolume(buzzVolume);
     lightBuzzNoise.rate(1.2);
     lightBuzzNoise.play();
     pop();
   }
-
-  pedestrian.constrain();
-  pedestrian.handleInput();
-  pedestrian.move();
-  pedestrian.display();
 
 }
 

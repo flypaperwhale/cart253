@@ -11,7 +11,7 @@ class Pedestrian {
 
   constrain() {
     this.x = constrain(this.x,0,600);
-    this.y = constrain(this.y,395,810);
+    this.y = constrain(this.y,402,810);
   }
 
   handleInput() {

@@ -39,6 +39,10 @@ let lampX = 300;
 let lampY = 400;
 let buzzVolume;
 
+let bgmusic1;
+let bgmusic2;
+let bgmusic3;
+
 /**
 Description of preload
 */
@@ -52,6 +56,10 @@ function preload() {
   lightFlickSound = loadSound("assets/sounds/lightFlick.wav");
   lightBuzzNoise = loadSound("assets/sounds/lightBuzz.wav");
   bulbBurstSound = loadSound("assets/sounds/bulbBurst.wav");
+
+  bgmusic1 = loadSound("assets/sounds/skyglowbgmusic.mp3")
+  bgmusic2 = loadSound("assets/sounds/testbgmusic.mp3");
+  bgmusic3 = loadSound("assets/sounds/testbgmusic2.mp3");
 }
 
 /**
@@ -130,11 +138,6 @@ function draw() {
   rect(width/2, height/2+200, 50, 300);
   pop();
 
-  if (state === `title`) {
-    background(255);
-    text(`CLICK`, width / 2, height / 2);
-  }
-
   if (state === `sunset`) {
 
     songSwitch++;
@@ -174,16 +177,23 @@ function draw() {
   ellipse(340,465,20)
   pop();
 
+  if (state === `title`) {
+    background(255);
+    text(`CLICK`, width / 2, height / 2);
+  }
+
   if (state === `lightsUp`) {
     songSwitch++;
-    songSwitch = constrain(songSwitch,0,270);
+    songSwitch = constrain(songSwitch,0,420);
     if (songSwitch===200){
       lightFlickSound.play();
-
     }
     if (songSwitch===270){
       turnLightOn();
       // I would like to have the light buzz weaker, and grow louder when Player is nearer
+    }
+    if (songSwitch===420){
+      playBGMusic();
     }
   }
 
@@ -209,6 +219,7 @@ function draw() {
     }
     lightIsOn=false;
   }
+
 }
 
 function playSunsetSong(){
@@ -237,6 +248,15 @@ function flickBulbOff() {
 
 function turnLightOn(){
   lightIsOn = true;
+}
+
+function playBGMusic(){
+  push();
+  bgmusic2.playMode(`untilDone`);
+  bgmusic2.setVolume(.88);
+  bgmusic2.rate(.85);
+  bgmusic2.play();
+  pop();
 }
 
 function mouseClicked() {

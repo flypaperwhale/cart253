@@ -5,6 +5,7 @@ class SimulationState extends State {
 
   update(){
     this.display();
+
   }
 
   display(){
@@ -12,6 +13,8 @@ class SimulationState extends State {
 
     fill(255);
     text(`Eat my shorts!`, 600/2, 600/2);
+
+    player.handleInput();
   }
 
 

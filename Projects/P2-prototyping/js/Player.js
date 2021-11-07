@@ -2,6 +2,11 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
   constructor(x,y){
     this.x = x;
     this.y = y;
+    this.vx = 0;
+    this.vy = 0;
+    this.size = 20;
+    this.speed = 5;
+    this.alive = true;
     this.inventory = [];
   }
 
@@ -9,10 +14,32 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
     push();
     fill(200,0,15);
     ellipseMode(CENTER);
-    ellipse(this.x,this.y,20);
+    ellipse(this.x,this.y,this.size);
     pop();
     // displays Player, and Player walking animation
   }
+
+  handleInput() {
+      if (keyIsDown(LEFT_ARROW)) {
+        this.vx = -this.speed;
+      }
+      else if (keyIsDown(RIGHT_ARROW)) {
+        this.vx = this.speed;
+      }
+      else {
+        this.vx = 0;
+      }
+
+      if (keyIsDown(UP_ARROW)) {
+        this.vy = -this.speed;
+      }
+      else if (keyIsDown(DOWN_ARROW)) {
+        this.vy = this.speed;
+      }
+      else {
+        this.vy = 0;
+      }
+    }
 
   addToPlayerInventory(item){
     // pushes new items into the inventory array

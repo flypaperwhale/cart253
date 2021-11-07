@@ -42,6 +42,7 @@ function draw() {
   state.update();
 
   player.display();
+  
 
 
 }

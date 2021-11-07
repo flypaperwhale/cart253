@@ -21,6 +21,7 @@ let backgroundMusic;
 let constellationWinkSound;
 let lightFlickSound;
 let lightBuzzNoise;
+let bulbBurstSound;
 
 let flickerBulb;
 
@@ -50,6 +51,7 @@ function preload() {
   constellationWinkSound = loadSound(`assets/sounds/constellationWink.wav`);
   lightFlickSound = loadSound("assets/sounds/lightFlick.wav");
   lightBuzzNoise = loadSound("assets/sounds/lightBuzz.wav");
+  bulbBurstSound = loadSound("assets/sounds/bulbBurst.wav");
 }
 
 /**
@@ -64,9 +66,10 @@ function setup() {
   lightFlickSound.addCue(0.3,flickBulbOn);
   lightFlickSound.addCue(0.4,flickBulbOff);
   lightFlickSound.addCue(0.75,flickBulbOn);
+  lightFlickSound.addCue(0.8,flickBulbOff);
 
   let x = 220;
-  let y = 450;
+  let y = 495;
   pedestrian = new Pedestrian(x,y);
 }
 
@@ -173,7 +176,7 @@ function draw() {
 
   if (state === `lightsUp`) {
     songSwitch++;
-    songSwitch = constrain(songSwitch,0,300);
+    songSwitch = constrain(songSwitch,0,270);
     if (songSwitch===200){
       lightFlickSound.play();
 
@@ -194,6 +197,18 @@ function draw() {
     pop();
   }
 
+  if (state === `lightsOut`){
+    lightBuzzNoise.stop();
+    songSwitch++;
+    songSwitch = constrain(songSwitch,0,3);
+    if (songSwitch===2){
+      push();
+      bulbBurstSound.setVolume(1.5);
+      bulbBurstSound.play();
+      pop();
+    }
+    lightIsOn=false;
+  }
 }
 
 function playSunsetSong(){
@@ -220,8 +235,6 @@ function flickBulbOff() {
 }
 
 
-
-
 function turnLightOn(){
   lightIsOn = true;
 }
@@ -230,5 +243,9 @@ function mouseClicked() {
   if (state === `title`) {
 
     state = `sunset`;
+  }
+  if (state === `lightsUp`){
+    songSwitch=0;
+    state = `lightsOut`;
   }
 }

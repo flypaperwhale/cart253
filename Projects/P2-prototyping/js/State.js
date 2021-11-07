@@ -4,7 +4,7 @@ class State {
   }
 
   update(){
-
+    player.handleInput();
   }
 
   mouseClicked(){

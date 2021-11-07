@@ -39,10 +39,10 @@ player = new Player(300,400);
 Description of draw()
 */
 function draw() {
-  state.update();
+  state.update(player);
 
   player.display();
-  
+
 
 
 }

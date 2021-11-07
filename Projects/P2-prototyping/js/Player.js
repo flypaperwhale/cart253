@@ -41,6 +41,11 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
       }
     }
 
+    move() {
+      this.x += this.vx;
+      this.y += this.vy;
+    }
+    
   addToPlayerInventory(item){
     // pushes new items into the inventory array
   }

@@ -5,7 +5,7 @@ Frankie Latreille
 This project is more an aesthetic research.
 I will use images and shapes to create a background,
 and I will use states to have different audio-visual effects
-there will also be noisy buttons to navigate the states
+
 */
 
 "use strict";

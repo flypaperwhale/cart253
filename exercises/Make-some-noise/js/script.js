@@ -10,6 +10,8 @@ there will also be noisy buttons to navigate the states
 
 "use strict";
 
+let pedestrian;
+
 let starsBackground;
 let streetlampImage;
 
@@ -55,6 +57,10 @@ function setup() {
   lightFlickSound.addCue(0.3,flickBulbOn);
   lightFlickSound.addCue(0.4,flickBulbOff);
   lightFlickSound.addCue(0.75,flickBulbOn);
+
+  let x = width/2;
+  let y = height;
+  pedestrian = new Pedestrian(x,y);
 }
 
 /**
@@ -75,7 +81,7 @@ function draw() {
     noStroke();
     fill(225,225,100, 200);
     ellipseMode(CENTER);
-    ellipse(width/2, height/2-70, 600,600);
+    ellipse(width/2, height/2-70, 605,605);
     pop();
 
     push();
@@ -118,6 +124,7 @@ function draw() {
   }
 
   if (state === `sunset`) {
+
     songSwitch++;
     songSwitch = constrain(songSwitch,0,2);
     playSunsetSong();
@@ -160,6 +167,11 @@ function draw() {
     lightBuzzNoise.play();
     pop();
   }
+
+  pedestrian.handleInput();
+  pedestrian.move();
+  pedestrian.display();
+
 }
 
 function playSunsetSong(){
@@ -194,6 +206,7 @@ function turnLightOn(){
 
 function mouseClicked() {
   if (state === `title`) {
+
     state = `sunset`;
   }
 }

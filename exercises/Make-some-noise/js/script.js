@@ -19,6 +19,8 @@ let constellationWinkSound;
 let lightFlickSound;
 let lightBuzzNoise;
 
+let flickerBulb;
+
 let state = `title`; //can be title, simulation
 
 let dayTimer = 500;
@@ -47,6 +49,12 @@ Description of setup
 function setup() {
   createCanvas(600, 800);
   userStartAudio();
+
+  lightFlickSound.addCue(0.1,flickBulbOn);
+  lightFlickSound.addCue(0.2,flickBulbOff);
+  lightFlickSound.addCue(0.3,flickBulbOn);
+  lightFlickSound.addCue(0.4,flickBulbOff);
+  lightFlickSound.addCue(0.75,flickBulbOn);
 }
 
 /**
@@ -77,6 +85,16 @@ function draw() {
     ellipse(width/2, height/2-70, 100,100);
     pop();
   }
+
+  //flicker bulb
+    if (flickerBulb){
+      push();
+      noStroke();
+      fill(200,200,0, 200);
+      ellipseMode(CENTER);
+      ellipse(width/2, height/2-70, 100,100);
+      pop();
+    }
 
   // Blue sky
   push();
@@ -118,9 +136,7 @@ function draw() {
     songSwitch = constrain(songSwitch,0,300);
     if (songSwitch===200){
       lightFlickSound.play();
-      lightFlickSound.addCue(0,flickBulb,`on`);
-      lightFlickSound.addCue(0,flickBulb,`on`);
-      lightFlickSound.addCue(0,flickBulb,`on`);
+
     }
     if (songSwitch===270){
       turnLightOn();
@@ -152,19 +168,17 @@ function displaySky() {
   pop();
 }
 
-function flickBulb(onOff){
-  if (onOff === `on`){
-    push();
-    noStroke();
-    fill(200,200,0, 200);
-    ellipseMode(CENTER);
-    ellipse(width/2, height/2-70, 100,100);
-    pop();
-  }
-  else if (onOff === `off`){
-    // show nothing
-  }
+
+function flickBulbOn() {
+  flickerBulb = true;
 }
+
+function flickBulbOff() {
+  flickerBulb = false;
+}
+
+
+
 
 function turnLightOn(){
   lightIsOn = true;

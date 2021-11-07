@@ -21,7 +21,7 @@ let lightBuzzNoise;
 
 let state = `title`; //can be title, simulation
 
-let dayTimer = 600;
+let dayTimer = 500;
 let skyAlpha = 255;
 
 let songSwitch = 0;
@@ -46,7 +46,7 @@ Description of setup
 */
 function setup() {
   createCanvas(600, 800);
-
+  userStartAudio();
 }
 
 /**
@@ -69,6 +69,7 @@ function draw() {
     ellipseMode(CENTER);
     ellipse(width/2, height/2-70, 400,400);
     pop();
+
     push();
     noStroke();
     fill(200,200,0, 200);
@@ -77,6 +78,7 @@ function draw() {
     pop();
   }
 
+  // Blue sky
   push();
   noStroke();
   fill(30, 75, 40);
@@ -90,17 +92,18 @@ function draw() {
   }
 
   if (state === `sunset`) {
-    background(0,0,0,0);
     songSwitch++;
     songSwitch = constrain(songSwitch,0,2);
     playSunsetSong();
-    skyAlpha = map(dayTimer, 600, 0, 255, 0); //map skyAlpha (255,0) goes down as dayTimer (600,0) goes down
+    skyAlpha = map(dayTimer, 500, 0, 255, 0); //map skyAlpha (255,0) goes down as dayTimer (600,0) goes down
     dayTimer--;
-    dayTimer = constrain(dayTimer, 0, 600);
+    dayTimer = constrain(dayTimer, 0, 500);
     displaySky();
     if (dayTimer === 0) {
       //play coin sword sound
-      songSwitch=0
+      constellationWinkSound.play();
+      dayTimer=1;
+      songSwitch=0;
       state = `lightsUp`;
     }
   }
@@ -113,23 +116,31 @@ function draw() {
   if (state === `lightsUp`) {
     songSwitch++;
     songSwitch = constrain(songSwitch,0,300);
-    if (songSwitch===1){
-        constellationWinkSound.play();
-    }
     if (songSwitch===200){
       lightFlickSound.play();
+      lightFlickSound.addCue(0,flickBulb,`on`);
+      lightFlickSound.addCue(0,flickBulb,`on`);
+      lightFlickSound.addCue(0,flickBulb,`on`);
     }
     if (songSwitch===270){
       turnLightOn();
-      lightBuzzNoise.play();
       // I would like to have the light buzz weaker, and grow louder when Player is nearer
     }
+  }
+
+  if (lightIsOn===true){
+    push();
+    lightBuzzNoise.playMode(`untilDone`);
+    lightBuzzNoise.setVolume(0.05);
+    lightBuzzNoise.rate(1.2);
+    lightBuzzNoise.play();
+    pop();
   }
 }
 
 function playSunsetSong(){
   if (songSwitch===1){
-    sunsetStarsIntro.play();
+    sunsetStarsIntro.play(0,1,0.2);
   }
 }
 function displaySky() {
@@ -139,6 +150,20 @@ function displaySky() {
   rectMode(CENTER);
   rect(width / 2, 0, 600, 800);
   pop();
+}
+
+function flickBulb(onOff){
+  if (onOff === `on`){
+    push();
+    noStroke();
+    fill(200,200,0, 200);
+    ellipseMode(CENTER);
+    ellipse(width/2, height/2-70, 100,100);
+    pop();
+  }
+  else if (onOff === `off`){
+    // show nothing
+  }
 }
 
 function turnLightOn(){

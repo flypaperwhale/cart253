@@ -11,6 +11,7 @@ there will also be noisy buttons to navigate the states
 "use strict";
 
 let starsBackground;
+let streetlampImage;
 
 let sunsetStarsIntro;
 let backgroundMusic;
@@ -28,6 +29,7 @@ Description of preload
 */
 function preload() {
   starsBackground = loadImage("assets/images/starnight.jpg");
+  streetlampImage = loadImage("assets/images/lamp.png");
   sunsetStarsIntro = loadSound(`assets/sounds/intro-constellation.mp3`);
   backgroundMusic = loadSound(`assets/sounds/skyglowbgmusic.mp3`);
   constellationWinkSound = loadSound(`assets/sounds/constellationWink.wav`)
@@ -38,12 +40,17 @@ Description of setup
 */
 function setup() {
   createCanvas(600, 800);
+
 }
 
 /**
 Description of draw()
 */
 function draw() {
+  console.log(
+    `dayTimer = ${dayTimer} and skyAlpha ${skyAlpha} and State ${state}`
+  );
+
   push();
   imageMode(CENTER);
   image(starsBackground, width / 2, height / 2, 600, 800);
@@ -56,15 +63,13 @@ function draw() {
   rect(width / 2, height, 600, 800);
   pop();
 
-  console.log(
-    `dayTimer = ${dayTimer} and skyAlpha ${skyAlpha} and State ${state}`
-  );
-
   if (state === `title`) {
+    background(255);
     text(`CLICK`, width / 2, height / 2);
   }
 
   if (state === `sunset`) {
+    background(0,0,0,0);
     songSwitch++;
     songSwitch = constrain(songSwitch,0,2);
     playSunsetSong();
@@ -78,6 +83,11 @@ function draw() {
       state = `simulation`;
     }
   }
+
+  push();
+  imageMode(CENTER);
+  image(streetlampImage,width/2,height/2,25,140);
+  pop();
 
   if (state === `simulation`) {
     songSwitch++;

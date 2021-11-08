@@ -2,11 +2,17 @@ class SimulationState extends State {
   constructor(){
     super();
 
+    this.npcArray = new NPCs();
+    this.stateCounter=0;
     this.player = new Player(300,450);
-    this.npc = new NPC(500,550);
-    this.item = new Item(200,200);
+    this.npc = new Bob(500,550);
+    this.item = new Item(200,200,`Ham`);
+
+    // let items = [`Ham`,`Big Bone`,`Slingshot`,`Broken Light Bulb`,`Wrench`,`Injunction`];
 
   }
+
+checkPlayerInventory
 
   update(){
     background(0);
@@ -21,6 +27,8 @@ class SimulationState extends State {
 
     this.item.display();
 
+    this.player.checkItemCollide();
+
   }
 
   display(){
@@ -29,6 +37,14 @@ class SimulationState extends State {
 
 
     mouseClicked(){
-      state = new EndGameState();
+      // check of player is colliding with npc
+      this.player.checkNPCCollide(thisNPCarray);
+      if (this.player.colliding()){
+        this.player.checkPlayerInventory();
+      }
+      this.stateCounter++
+      if(this.stateCounter===3){
+        state = new EndGameState();
+      }
     }
 }

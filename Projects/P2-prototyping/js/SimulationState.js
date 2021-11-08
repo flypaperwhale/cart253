@@ -2,13 +2,16 @@ class SimulationState extends State {
   constructor(){
     super();
 
-    this.npcArray = new NPCs();
-    this.stateCounter=0;
+    // this.npcArray = new NPCList(); //?! is this the equivalent of inputing an array full //
+    // of NPC class object? will I be able to call upon the NPCs in this array
+    // to display them and have player interact with them?
+
     this.player = new Player(300,450);
     this.npc = new Bob(500,550);
     this.item = new Item(200,200,`Ham`);
 
-    // let items = [`Ham`,`Big Bone`,`Slingshot`,`Broken Light Bulb`,`Wrench`,`Injunction`];
+    this.stateCounter=0;
+
 
   }
 
@@ -17,7 +20,7 @@ checkPlayerInventory
   update(){
     background(0);
     fill(255);
-    text(`Eat my shorts!`, 600/2, 600/2);
+    text(`press escape to see inventory!`, 600/2, 600/2);
 
     this.player.handleInput();
     this.player.move();
@@ -29,6 +32,9 @@ checkPlayerInventory
 
     this.player.checkItemCollide();
 
+    if (this.player.isCollided){
+
+    }
   }
 
   display(){
@@ -38,8 +44,9 @@ checkPlayerInventory
 
     mouseClicked(){
       // check of player is colliding with npc
-      this.player.checkNPCCollide(thisNPCarray);
-      if (this.player.colliding()){
+      this.player.checkNPCCollide(this.npc);
+      if (this.player.isCollided){
+        this.npc
         this.player.checkPlayerInventory();
       }
       this.stateCounter++

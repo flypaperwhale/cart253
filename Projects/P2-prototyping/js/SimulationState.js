@@ -4,6 +4,8 @@ class SimulationState extends State {
 
     this.player = new Player(300,450);
     this.npc = new NPC(500,550);
+    this.item = new Item(200,200);
+
   }
 
   update(){
@@ -16,6 +18,8 @@ class SimulationState extends State {
     this.player.display();
 
     this.npc.display();
+
+    this.item.display();
 
   }
 

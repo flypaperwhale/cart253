@@ -208,9 +208,10 @@ function draw() {
   }
 
   if (state === `lightsOut`){
+    playBGMusic();
     lightBuzzNoise.stop();
     songSwitch++;
-    songSwitch = constrain(songSwitch,0,3);
+    songSwitch = constrain(songSwitch,0,420);
     if (songSwitch===2){
       push();
       bulbBurstSound.setVolume(1.5);
@@ -254,7 +255,7 @@ function playBGMusic(){
   push();
   bgmusic2.playMode(`untilDone`);
   bgmusic2.setVolume(.88);
-  bgmusic2.rate(.85);
+  bgmusic2.rate(.77);
   bgmusic2.play();
   pop();
 }

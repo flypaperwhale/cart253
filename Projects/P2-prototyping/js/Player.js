@@ -13,6 +13,7 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
   display(){
     push();
     fill(200,0,15);
+    noStroke();
     ellipseMode(CENTER);
     ellipse(this.x,this.y,this.size);
     pop();
@@ -45,7 +46,7 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
       this.x += this.vx;
       this.y += this.vy;
     }
-    
+
   addToPlayerInventory(item){
     // pushes new items into the inventory array
   }

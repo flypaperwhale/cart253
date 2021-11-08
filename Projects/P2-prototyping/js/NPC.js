@@ -13,6 +13,7 @@ class NPC { // 3-4 characters, the electricity box, the 3 lamp posts
    // displays NPC specific image at the correct coordinates
    push();
    fill(0,200,15);
+   noStroke();
    ellipseMode(CENTER);
    ellipse(this.x,this.y,this.size);
    pop();

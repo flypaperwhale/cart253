@@ -2,7 +2,8 @@ class SimulationState extends State {
   constructor(){
     super();
 
-    this.player = new Player(300,400);
+    this.player = new Player(300,450);
+    this.npc = new NPC(500,550);
   }
 
   update(){
@@ -14,10 +15,12 @@ class SimulationState extends State {
     this.player.move();
     this.player.display();
 
+    this.npc.display();
+
   }
 
   display(){
-    
+
   }
 
 

@@ -13,6 +13,7 @@ let items = [`Ham`,`Big Bone`,`Slingshot`,`Broken Light Bulb`,`Wrench`,`Injuncti
 
 let state = undefined;
 let player;
+let npc1;
 
 /**
 Description of preload
@@ -30,8 +31,6 @@ createCanvas(600,600);
 
 state = new TitleState;
 
-player = new Player(300,400);
-
 }
 
 
@@ -39,9 +38,9 @@ player = new Player(300,400);
 Description of draw()
 */
 function draw() {
-  state.update(player);
+  state.update();
 
-  player.display();
+
 
 
 

@@ -29,6 +29,7 @@ checkPlayerInventory
     this.player.display();
 
     this.npc.display();
+    this.npc.playerCollide(this.player.x,this.player.y);
 
     this.item.display();
     this.item.playerCollide(this.player.x,this.player.y);

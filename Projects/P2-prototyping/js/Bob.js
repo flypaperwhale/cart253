@@ -8,6 +8,7 @@ class Bob extends NPC { // 3-4 characters, the electricity box, the 3 lamp posts
     this.image = undefined;
     this.npcHoldingItem = undefined;
     this.npcdesiredItem = undefined;
+    this.playerCollided = false;
   }
 
   display(){
@@ -21,6 +22,17 @@ class Bob extends NPC { // 3-4 characters, the electricity box, the 3 lamp posts
   }
 
   // MOVE function?
+
+  playerCollide(playerX,playerY){
+    let d = dist(this.x, this.y, playerX, playerY);
+    if (d < this.size/2){
+        this.playerCollided = true;
+        console.log(`it's true, you've collided NPC!`);
+      }
+      else {
+        this.playerCollided = false;
+      }
+    }
 
   mouseClicked(){
     // conditional, if Player is colliding with NPC

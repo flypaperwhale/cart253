@@ -21,9 +21,9 @@ class Item { //should receive image too
   playerCollide(playerX,playerY){
     if (this.isOnMap === true){
       let d = dist(this.x, this.y, playerX, playerY);
-      if (d< this.size/2){
+      if (d< this.size){
         this.playerCollided = true;
-        console.log(`it's true, you've collided!`);
+        console.log(`it's true, you've collided Item!`);
       }
       else {
         this.playerCollided = false;

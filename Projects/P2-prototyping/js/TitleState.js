@@ -11,6 +11,7 @@ class TitleState extends State {
     background(0);
 
     fill(255);
+    textAlign(CENTER);
     text(`Welcome. Click mouse to start.`, 600/2, 600/2);
   }
 

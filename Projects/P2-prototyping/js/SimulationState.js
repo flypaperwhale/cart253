@@ -6,6 +6,7 @@ class SimulationState extends State {
     // of NPC class object? will I be able to call upon the NPCs in this array
     // to display them and have player interact with them?
 
+    this.textBubble = new TextBubble(`whatever`);
     this.player = new Player(300,450);
     this.npc = new Bob(500,550);
     //this.item = new Item(200,200,`Ham`);
@@ -34,17 +35,6 @@ checkPlayerInventory
     this.item.display();
     this.item.playerCollide(this.player.x,this.player.y);
 
-    /*for (let i = 0; i < this.gameItems.length; i++){
-      this.checkedItem = this.gameItems[i];
-      if (checkedItem.isOnMap === true){
-          this.item.display();
-          this.player.checkItemCollide(this.item);
-      }
-    }
-*/
-    if (this.player.isCollided){
-
-    }
   }
 
   display(){
@@ -52,16 +42,18 @@ checkPlayerInventory
   }
 
 
-    mouseClicked(){
-      // check of player is colliding with npc
-      this.player.checkNPCCollide(this.npc);
-      if (this.player.isCollided){
-        this.npc
-        this.player.checkPlayerInventory();
-      }
+  mouseClicked(){
+
+      if (this.npc.playerCollided === true){
+        this.textBubble.display();
+        }
+
       this.stateCounter++
       if(this.stateCounter===3){
         state = new EndGameState();
       }
+
     }
-}
+
+
+  }

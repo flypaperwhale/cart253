@@ -1,5 +1,6 @@
 class State {
   constructor(){
+    noCursor();
 
   }
 

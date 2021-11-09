@@ -6,8 +6,8 @@ class Bob extends NPC { // 3-4 characters, the electricity box, the 3 lamp posts
     this.size = 20;
     this.name = `Bob`;
     this.image = undefined;
-    this.npcHoldingItem = undefined;
-    this.npcdesiredItem = undefined;
+    this.npcHoldingItem = `Big bone`;
+    this.npcdesiredItem = `Ham`;
     this.playerCollided = false;
   }
 

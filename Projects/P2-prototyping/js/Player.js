@@ -48,6 +48,12 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
       this.y += this.vy;
     }
 
+  displayInventory(){
+    for (let i=0; i<this.inventory.length; i++){
+      console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);
+    }
+  }
+
   addToPlayerInventory(item){
     // pushes new items into the inventory array
   }

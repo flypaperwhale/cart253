@@ -202,6 +202,8 @@ function draw() {
     lightBuzzNoise.playMode(`untilDone`);
     buzzVolume = map(playerDistance,0,350,0.2,0);
     lightBuzzNoise.setVolume(buzzVolume);
+    let panning = map(pedestrian.x, 0., width, -1.0, 1.0);
+    lightBuzzNoise.pan(panning);
     lightBuzzNoise.rate(1.2);
     lightBuzzNoise.play();
     pop();

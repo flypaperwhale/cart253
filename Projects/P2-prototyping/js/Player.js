@@ -8,6 +8,7 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
     this.speed = 5;
     this.alive = true;
     this.inventory = [];
+    this.isCollided = false;
   }
 
   display(){
@@ -53,10 +54,29 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
 
   checkPlayerInventory(){
     // looks through player inventory array. Is called when interacting with NPCs
+    for (let i=0; i< this.inventory.length; i++){
+      let checkedItem = this.inventory[i];
+      console.log(`i is currently ${i} and item is ${checkedItem}`);
+    }
   }
 
   removeFromPlayerInventory(item){
     // removes an item from inventory, if item is traded or used.
   }
 
-}
+  checkNPCCollide(npc){
+    //is the player colliding into this npc?
+    let d = dist(this.x, this.y, npc.x, npc.y);
+    if (d< npc.size/2){
+      this.isCollided = true;
+    }
+    else {
+      this.isCollided = false;
+    }
+    // for (let i = 0; i < npcArray.length; i++){ //
+      // check collision
+      // if collision, this.player.isCollided = true;
+      // else isCollided = false;
+    }
+
+  }

@@ -8,11 +8,13 @@ class SimulationState extends State {
 
     this.player = new Player(300,450);
     this.npc = new Bob(500,550);
+    //this.item = new Item(200,200,`Ham`);
+
+    //this.gameItems = [];
     this.item = new Item(200,200,`Ham`);
+    //this.gameItems.push(this.addingItem);
 
     this.stateCounter=0;
-
-
   }
 
 checkPlayerInventory
@@ -29,9 +31,16 @@ checkPlayerInventory
     this.npc.display();
 
     this.item.display();
+    this.item.playerCollide(this.player.x,this.player.y);
 
-    this.player.checkItemCollide();
-
+    /*for (let i = 0; i < this.gameItems.length; i++){
+      this.checkedItem = this.gameItems[i];
+      if (checkedItem.isOnMap === true){
+          this.item.display();
+          this.player.checkItemCollide(this.item);
+      }
+    }
+*/
     if (this.player.isCollided){
 
     }

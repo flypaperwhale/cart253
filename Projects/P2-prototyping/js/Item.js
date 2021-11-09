@@ -5,6 +5,8 @@ class Item { //should receive image too
     this.size = 10;
     this.name = name;
     this.image = undefined;
+    this.isOnMap = true;
+    this.playerCollided = false;
   }
 
   display(){
@@ -16,7 +18,20 @@ class Item { //should receive image too
     pop();
   }
 
+  playerCollide(playerX,playerY){
+    if (this.isOnMap === true){
+      let d = dist(this.x, this.y, playerX, playerY);
+      if (d< this.size/2){
+        this.playerCollided = true;
+        console.log(`it's true, you've collided!`);
+      }
+      else {
+        this.playerCollided = false;
+      }
+    }
+  }
 }
+
   /*isPickedUp(){
       //check if Player is colliding. if they are, item is picked up
     }*/

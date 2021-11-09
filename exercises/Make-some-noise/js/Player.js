@@ -7,6 +7,7 @@ class Pedestrian {
     this.vy = 0;
     this.speed = 5;
     this.alive = true;
+    this.playerCollided = false;
   }
 
   constrain() {

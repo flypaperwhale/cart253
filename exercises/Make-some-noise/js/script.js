@@ -9,7 +9,7 @@ and I will use states to have different audio-visual effects
 */
 
 "use strict";
-
+let synth;
 let pedestrian;
 
 let starsBackground;
@@ -42,6 +42,9 @@ let buzzVolume;
 let bgmusic1;
 let bgmusic2;
 let bgmusic3;
+
+let canBurst = false;
+let clickCounter=0;
 
 /**
 Description of preload
@@ -79,6 +82,8 @@ function setup() {
   let x = 230;
   let y = 495;
   pedestrian = new Pedestrian(x,y);
+
+  synth = new p5.PolySynth();
 }
 
 /**
@@ -171,6 +176,7 @@ function draw() {
   image(streetlampImage,lampX,lampY-20,25,140);
   pop();
 
+// npc
   push();
   fill(20,5,15);
   ellipseMode(CENTER);
@@ -202,7 +208,7 @@ function draw() {
     lightBuzzNoise.playMode(`untilDone`);
     buzzVolume = map(playerDistance,0,350,0.2,0);
     lightBuzzNoise.setVolume(buzzVolume);
-    let panning = map(pedestrian.x, 0, width, .9, -.9);
+    let panning = map(pedestrian.x, 0, width, .9, -.9); //pan code from p5 reference
     lightBuzzNoise.pan(panning);
     lightBuzzNoise.rate(1.2);
     lightBuzzNoise.play();
@@ -222,6 +228,15 @@ function draw() {
     }
     lightIsOn=false;
   }
+
+  let d = dist(pedestrian.x, pedestrian.y, 340, 465);
+    if (d < 20/2){
+        pedestrian.playerCollided = true;
+        console.log(`it's true, you've collided NPC!`);
+      }
+      else {
+        pedestrian.playerCollided = false;
+      }
 
 }
 
@@ -267,8 +282,20 @@ function mouseClicked() {
 
     state = `sunset`;
   }
+
   if (state === `lightsUp`){
-    songSwitch=0;
-    state = `lightsOut`;
+    if (pedestrian.playerCollided === true){
+      synth.play(`C5`,1,0,.2);
+      synth.play(`D5`,1,.25,.2);
+      synth.play(`E5`,1,.5,.2);
+      canBurst=true;
+      }
+    if (canBurst === true){
+      clickCounter++
+      if (clickCounter === 2){
+        songSwitch=0;
+        state = `lightsOut`;
+      }
+    }
   }
 }

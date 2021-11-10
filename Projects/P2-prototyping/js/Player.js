@@ -56,8 +56,8 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
   }
 
   paused(){
-    this.vx = 0;
-    this.vy = 0;
+    console.log(`hello pause?`);
+    this.isPaused = true;
   }
 
   addToPlayerInventory(item){

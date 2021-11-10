@@ -30,7 +30,7 @@ checkPlayerInventory
       this.vx = 0;
       this.vy = 0;
     }
-    else{
+    else if (this.player.isPaused === false){
       console.log(`why my comin here is ${this.player.isPaused}
         this.item.isCollided = ${this.item.playerCollided}`);
       this.player.handleInput();

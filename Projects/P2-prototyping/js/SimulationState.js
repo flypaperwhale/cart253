@@ -26,7 +26,14 @@ checkPlayerInventory
     text(`press space to talk to NPCs
       press escape to see inventory!`, 600/2, 600/2);
 
-    this.player.handleInput();
+    if(this.player.isPaused === true){
+      this.vx = 0;
+      this.vy = 0;
+    }
+    else{
+      this.player.handleInput();
+    }
+
     this.player.move();
     this.player.display();
 
@@ -34,7 +41,9 @@ checkPlayerInventory
     this.npc.playerCollide(this.player.x,this.player.y);
 
     if(this.npc.isClicked === true){
-      this.textBubble.display(`Momma OooOooo`);
+      this.player.paused();
+      this.textBubble = new TextBubble(`Momma OooOooo`);
+      this.textBubble.display();
       console.log(`working`);
     }
 

@@ -18,7 +18,7 @@ class TitleState extends State {
   keyPressed(){
 
   }
-  
+
   mouseClicked(){
     state = new SimulationState();
   }

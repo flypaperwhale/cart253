@@ -14,36 +14,28 @@ let state = undefined;
 /**
 Description of preload
 */
-function preload() {
-
-}
-
+function preload() {}
 
 /**
 Description of setup
 */
 function setup() {
-createCanvas(600,600);
+  createCanvas(600, 600);
 
-state = new TitleState;
-
+  state = new TitleState();
 }
-
 
 /**
 Description of draw()
 */
 function draw() {
   state.update();
-
-
-
 }
 
-function keyPressed(){
+function keyPressed() {
   state.keyPressed();
 }
 
-function mouseClicked(){
+function mouseClicked() {
   state.mouseClicked();
 }

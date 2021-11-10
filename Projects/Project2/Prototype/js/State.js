@@ -1,7 +1,6 @@
 class State {
   constructor(){
-    //noCursor();
-
+    noCursor();
   }
 
   update(){
@@ -10,7 +9,7 @@ class State {
   keyPressed(){
 
   }
-  
+
   mouseClicked(){
 
   }

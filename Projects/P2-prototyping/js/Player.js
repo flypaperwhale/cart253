@@ -5,11 +5,13 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
     this.vx = 0;
     this.vy = 0;
     this.size = 20;
-    this.speed = 5;
+    this.speed = 3;
     this.alive = true;
     this.inventory = [];
     this.isCollided = false;
     this.isPaused = false;
+    this.tradeHappens = false;
+    this.itemToAddToInventory = undefined;
   }
 
   display(){
@@ -56,7 +58,6 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
   }
 
   paused(){
-    console.log(`hello pause?`);
     this.isPaused = true;
   }
 
@@ -70,6 +71,26 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
       let checkedItem = this.inventory[i];
       console.log(`i is currently ${i} and item is ${checkedItem}`);
     }
+  }
+
+  checkTrade(npcDesiredItem, npcHoldingItem){
+console.log(`making it to trade? what is DI ${npcDesiredItem} and HI ${npcHoldingItem}`);
+    for (let i = 0; i< this.inventory.length; i++){
+      let checkedItemName = this.inventory[i];
+console.log(`${checkedItemName} + ${npcDesiredItem}`);
+      if (checkedItemName === npcDesiredItem){
+console.log(`why don't you come in here? ${this.tradeHappens}`);
+        //splice
+        this.tradeHappens = true;
+        this.itemToAddToInventory = npcHoldingItem;
+console.log(`so you did come in here? ${this.tradeHappens}`);
+      }
+    }
+    // verifies what item npc desires
+    // Go through Player inventory array
+    // if item is in Player inv. array, item is removed from array and
+    // Holding Item is pushed into the inventory array
+
   }
 
   removeFromPlayerInventory(item){

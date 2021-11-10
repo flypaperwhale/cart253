@@ -32,8 +32,6 @@ checkPlayerInventory
       this.vy = 0;
     }
     else if (this.player.isPaused === false){
-      console.log(`why my comin here is ${this.player.isPaused}
-        this.item.isCollided = ${this.item.playerCollided}`);
       this.player.handleInput();
       this.player.move();
     }
@@ -41,13 +39,43 @@ checkPlayerInventory
     this.player.display();
 
     this.npc.display();
+
     this.npc.playerCollide(this.player.x,this.player.y);
 
     if(this.npc.isClicked === true){
       this.player.paused();
-      this.textBubble = new TextBubble(`Momma OooOooo`);
+console.log(`A the textNo is ${this.npc.textNo}`);
+
+      let desiredItem = this.npc.desiredItem;
+      let holdingItem = this.npc.holdingItem;
+      this.player.checkTrade(desiredItem, holdingItem);
+
+console.log(`B the textNo is ${this.npc.textNo}`);
+
+      if (this.npc.textNo === 1){
+        this.textBubble = new TextBubble(`Hello Dolly, can you bring me Ham?`);
+      }
+      else if (this.npc.textNo === 2){
+        this.textBubble = new TextBubble(`Give me that Ham!`);
+        this.player.inventory.shift();
+        this.item = new Item(0,0,`Big bone`);
+        this.player.inventory.push(this.item);
+      }
+      else if (this.npc.textNo === 3){
+        this.textBubble = new TextBubble(`Thanks for the Ham,
+          you can keep that bone`);
+        }
+
+        if (this.player.tradeHappens === true){
+          console.log(`trade is supposed to happen`);
+          this.npc.textNo = 2;
+          this.player.tradeHappens = false;
+        }
+        if (this.npc.tradeSucceeded === true){
+          this.npc.textNo = 3;
+        }
+
       this.textBubble.display();
-      console.log(`working`);
     }
 
     this.item.display();
@@ -62,7 +90,7 @@ checkPlayerInventory
       this.player.isPaused = true;
       this.eventSwitch = constrain(this.eventSwitch, 0,1);
       if (this.eventSwitch === 0){
-        this.player.inventory.push(`rubber`);
+        this.player.inventory.push(`Ham`);
         this.textBubble = new TextBubble(`You just picked up ${this.player.inventory[0]}`);
       }
       this.eventSwitch++;
@@ -92,10 +120,13 @@ checkPlayerInventory
         this.npc.isClicked = false;
         this.player.isPaused = false;
         this.item.playerCollided = false;
+        if (this.npc.textNo === 2){
+          this.npc.tradeSucceeded = true;
+        }
       }
 
       this.stateCounter++
-      if(this.stateCounter===5){
+      if(this.stateCounter===10){
         state = new EndGameState();
       }
 

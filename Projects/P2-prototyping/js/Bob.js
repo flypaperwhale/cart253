@@ -6,10 +6,12 @@ class Bob extends NPC { // 3-4 characters, the electricity box, the 3 lamp posts
     this.size = 20;
     this.name = `Bob`;
     this.image = undefined;
-    this.npcHoldingItem = `Big bone`;
-    this.npcdesiredItem = `Ham`;
+    this.holdingItem = `Big bone`;
+    this.desiredItem = `Ham`;
     this.playerCollided = false;
     this.isClicked = false;
+    this.textNo = 1;
+    this.tradeSucceeded = false;
   }
 
   display(){
@@ -51,11 +53,5 @@ class Bob extends NPC { // 3-4 characters, the electricity box, the 3 lamp posts
     text(text,150,150);
   }
 
-  checkTrade(){
-    // verifies what item npc desires
-    // Go through Player inventory array
-    // if item is in Player inv. array, item is removed from array and
-    // Holding Item is pushed into the inventory array
 
-  }
 }

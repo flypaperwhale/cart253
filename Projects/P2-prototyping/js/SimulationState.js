@@ -34,19 +34,22 @@ checkPlayerInventory
     this.npc.playerCollide(this.player.x,this.player.y);
 
     if(this.npc.isClicked === true){
-      this.textBubble.display();
+      this.textBubble.display(`Momma OooOooo`);
+      console.log(`working`);
     }
 
     this.item.display();
     this.item.playerCollide(this.player.x,this.player.y);
 
     if(this.item.playerCollided === true){
+      this.player.paused();
+      this.player.isPaused = true;
       this.item.isOnMap = false;
       if (this.item.isOnMap === false){
         this.item.x = undefined;
       }
       this.player.inventory.push(`rubber`);
-      console.log(`Item ${`rubber`} in inv. : ${this.player.inventory[0]}`);
+      this.textBubble = new TextBubble(`You just picked up ${this.player.inventory[0]}`);
       this.textBubble.display();
     }
   }
@@ -64,8 +67,13 @@ checkPlayerInventory
   mouseClicked(){
 
       if (this.npc.playerCollided === true){
-        this.npc.isClicked === true;
+        this.npc.isClicked = true;
         }
+
+      if (this.player.isPaused === true){
+        this.player.isPaused = false;
+        this.textBubble.break();
+      }
 
       this.stateCounter++
       if(this.stateCounter===3){

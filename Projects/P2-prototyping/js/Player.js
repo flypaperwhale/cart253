@@ -9,6 +9,7 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
     this.alive = true;
     this.inventory = [];
     this.isCollided = false;
+    this.isPaused = false;
   }
 
   display(){
@@ -52,6 +53,11 @@ class Player { // the player, controlled by up, down, left, right, and mouse cli
     for (let i=0; i<this.inventory.length; i++){
       console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);
     }
+  }
+
+  paused(){
+    this.vx = 0;
+    this.vy = 0;
   }
 
   addToPlayerInventory(item){

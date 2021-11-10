@@ -2,12 +2,12 @@ class TextBubble {
   constructor(text){
     this.text = text;
     this.loop = true;
-    this.stopTextBubble = undefined;
+    this.stopTextBubble = false;
   }
 
   display(){
     //console.log(`ça marche tu?`);
-    if (this.stopTextBubble !== true){
+    if (this.stopTextBubble === false){
       push();
       fill(255);
       rectMode(CENTER);

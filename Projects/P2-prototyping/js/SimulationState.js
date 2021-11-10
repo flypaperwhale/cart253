@@ -31,10 +31,12 @@ checkPlayerInventory
       this.vy = 0;
     }
     else{
+      console.log(`why my comin here is ${this.player.isPaused}
+        this.item.isCollided = ${this.item.playerCollided}`);
       this.player.handleInput();
+      this.player.move();
     }
 
-    this.player.move();
     this.player.display();
 
     this.npc.display();
@@ -79,9 +81,12 @@ checkPlayerInventory
         this.npc.isClicked = true;
         }
 
-      if (this.player.isPaused === true){
-        this.player.isPaused = false;
+      if (this.npc.isClicked === true && this.player.isPaused === true
+      || this.item.playerCollided === true && this.player.isPaused === true){
         this.textBubble.break();
+        this.npc.isClicked = false;
+        this.player.isPaused = false;
+        this.item.playerCollided = false;
       }
 
       this.stateCounter++

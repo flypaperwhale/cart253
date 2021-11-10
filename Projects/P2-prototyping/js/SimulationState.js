@@ -16,6 +16,7 @@ class SimulationState extends State {
     //this.gameItems.push(this.addingItem);
 
     this.stateCounter=0;
+    this.eventSwitch = 0;
   }
 
 checkPlayerInventory
@@ -53,14 +54,18 @@ checkPlayerInventory
     this.item.playerCollide(this.player.x,this.player.y);
 
     if(this.item.playerCollided === true){
-      this.player.paused();
-      this.player.isPaused = true;
       this.item.isOnMap = false;
       if (this.item.isOnMap === false){
         this.item.x = undefined;
       }
-      this.player.inventory.push(`rubber`);
-      this.textBubble = new TextBubble(`You just picked up ${this.player.inventory[0]}`);
+      this.player.paused();
+      this.player.isPaused = true;
+      this.eventSwitch = constrain(this.eventSwitch, 0,1);
+      if (this.eventSwitch === 0){
+        this.player.inventory.push(`rubber`);
+        this.textBubble = new TextBubble(`You just picked up ${this.player.inventory[0]}`);
+      }
+      this.eventSwitch++;
       this.textBubble.display();
     }
   }
@@ -90,7 +95,7 @@ checkPlayerInventory
       }
 
       this.stateCounter++
-      if(this.stateCounter===3){
+      if(this.stateCounter===5){
         state = new EndGameState();
       }
 

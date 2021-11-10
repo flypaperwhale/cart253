@@ -1,12 +1,16 @@
 class State {
   constructor(){
-    noCursor();
+    //noCursor();
 
   }
 
   update(){
   }
 
+  keyPressed(){
+
+  }
+  
   mouseClicked(){
 
   }

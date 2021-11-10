@@ -9,6 +9,7 @@ class Bob extends NPC { // 3-4 characters, the electricity box, the 3 lamp posts
     this.npcHoldingItem = `Big bone`;
     this.npcdesiredItem = `Ham`;
     this.playerCollided = false;
+    this.isClicked = false;
   }
 
   display(){

@@ -15,6 +15,10 @@ class TitleState extends State {
     text(`Welcome. Click mouse to start.`, 600/2, 600/2);
   }
 
+  keyPressed(){
+
+  }
+  
   mouseClicked(){
     state = new SimulationState();
   }

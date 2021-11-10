@@ -7,12 +7,12 @@ class SimulationState extends State {
     // to display them and have player interact with them?
 
     this.textBubble = new TextBubble(`whatever`);
-    this.player = new Player(300,450);
-    this.npc = new Bob(500,550);
+    this.player = new Player(150,400);
+    this.npc = new Bob(450,400);
     //this.item = new Item(200,200,`Ham`);
 
     //this.gameItems = [];
-    this.item = new Item(200,200,`Ham`);
+    this.item = new Item(300,100,`Ham`);
     //this.gameItems.push(this.addingItem);
 
     this.stateCounter=0;
@@ -25,7 +25,7 @@ checkPlayerInventory
     background(0);
     fill(255);
     text(`press space to talk to NPCs
-      press escape to see inventory (in console)!`, 600/2, 600/2);
+      press enter to see inventory (in console)!`, 600/2, 600/2);
 
     if(this.player.isPaused === true){
       this.vx = 0;
@@ -96,6 +96,7 @@ console.log(`B the textNo is ${this.npc.textNo}`);
       this.eventSwitch++;
       this.textBubble.display();
     }
+
   }
 
   display(){
@@ -103,12 +104,10 @@ console.log(`B the textNo is ${this.npc.textNo}`);
   }
 
   keyPressed(){
-    if(keyCode===ESCAPE){
+    if(keyCode===RETURN){
       this.player.displayInventory();
-    }
-  }
 
-  keyPressed(){
+    }
     if(keyCode===32){
       if (this.npc.playerCollided === true){
         this.npc.isClicked = true;

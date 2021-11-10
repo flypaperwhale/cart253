@@ -25,7 +25,7 @@ checkPlayerInventory
     background(0);
     fill(255);
     text(`press space to talk to NPCs
-      press escape to see inventory!`, 600/2, 600/2);
+      press escape to see inventory (in console)!`, 600/2, 600/2);
 
     if(this.player.isPaused === true){
       this.vx = 0;
@@ -108,8 +108,8 @@ console.log(`B the textNo is ${this.npc.textNo}`);
     }
   }
 
-  mouseClicked(){
-
+  keyPressed(){
+    if(keyCode===32){
       if (this.npc.playerCollided === true){
         this.npc.isClicked = true;
         }
@@ -129,6 +129,8 @@ console.log(`B the textNo is ${this.npc.textNo}`);
       if(this.stateCounter===10){
         state = new EndGameState();
       }
+
+    }
 
     }
 

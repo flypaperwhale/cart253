@@ -23,7 +23,6 @@ class Item { //should receive image too
       let d = dist(this.x, this.y, playerX, playerY);
       if (d< this.size){
         this.playerCollided = true;
-        console.log(`it's true, you've collided Item!`);
       }
       else {
         this.playerCollided = false;
@@ -31,12 +30,3 @@ class Item { //should receive image too
     }
   }
 }
-
-  /*isPickedUp(){
-      //check if Player is colliding. if they are, item is picked up
-    }*/
-
-// Items are to be set up in the main script
-// When game is started, some every Item is created and stored somewhere
-// Some are on the map and can be picked up by being walked on
-// Other will be on NPCs and will be tradeable.

@@ -6,7 +6,6 @@ class TextBubble {
   }
 
   display(){
-    //console.log(`ça marche tu?`);
     if (this.stopTextBubble === false){
       push();
       fill(255);

@@ -206,7 +206,7 @@ function draw() {
   if (lightIsOn===true){
     push();
     lightBuzzNoise.playMode(`untilDone`);
-    buzzVolume = map(playerDistance,0,350,0.2,0);
+    buzzVolume = map(playerDistance,0,height-lampX,0.2,0);
     lightBuzzNoise.setVolume(buzzVolume);
     let panning = map(pedestrian.x, 0, width, .9, -.9); //pan code from p5 reference
     lightBuzzNoise.pan(panning);

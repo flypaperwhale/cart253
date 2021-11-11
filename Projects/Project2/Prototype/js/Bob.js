@@ -35,8 +35,4 @@ class Bob extends NPC {
       this.playerCollided = false;
     }
   }
-
-/*  displayText(text) {
-    text(text, 150, 150);
-  }*/
 }

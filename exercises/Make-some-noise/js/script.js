@@ -168,6 +168,12 @@ function draw() {
       state = `lightsUp`;
     }
   }
+  // npc
+  push();
+  fill(20, 5, 15);
+  ellipseMode(CENTER);
+  ellipse(340, 465, 20);
+  pop();
 
   push();
   imageMode(CENTER);
@@ -182,12 +188,6 @@ function draw() {
   image(streetlampImage, lampX, lampY - 20, 25, 140);
   pop();
 
-  // npc
-  push();
-  fill(20, 5, 15);
-  ellipseMode(CENTER);
-  ellipse(340, 465, 20);
-  pop();
 
   if (state === `title`) {
     pedestrian.paused();
@@ -217,9 +217,9 @@ function draw() {
   if (lightIsOn === true) {
     push();
     lightBuzzNoise.playMode(`untilDone`);
-    buzzVolume = map(playerDistance, 0, height - lampX, 0.2, 0);
+    buzzVolume = map(playerDistance, 0, height - lampX, 0.1, 0);
     lightBuzzNoise.setVolume(buzzVolume);
-    let panning = map(pedestrian.x, 0, width, 0.9, -0.9); //pan code from p5 reference
+    let panning = map(pedestrian.x, 0, width, 0.6, -0.6); //pan code from p5 reference
     lightBuzzNoise.pan(panning);
     lightBuzzNoise.rate(1.2);
     lightBuzzNoise.play();
@@ -241,7 +241,7 @@ function draw() {
   }
 
   let d = dist(pedestrian.x, pedestrian.y, 340, 465);
-  if (d < 20 / 2) {
+  if (d < 20 ) {
     pedestrian.playerCollided = true;
     console.log(`it's true, you've collided NPC!`);
   } else {

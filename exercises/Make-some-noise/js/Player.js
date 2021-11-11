@@ -5,7 +5,7 @@ class Pedestrian {
     this.size = 20;
     this.vx = 0;
     this.vy = 0;
-    this.speed = 5;
+    this.speed = 4;
     this.alive = true;
     this.playerCollided = false;
     this.isPaused = true;

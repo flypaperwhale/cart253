@@ -8,6 +8,7 @@ class Pedestrian {
     this.speed = 5;
     this.alive = true;
     this.playerCollided = false;
+    this.isPaused = true;
   }
 
   constrain() {
@@ -40,6 +41,10 @@ class Pedestrian {
   move() {
     this.x += this.vx;
     this.y += this.vy;
+  }
+
+  paused() {
+    this.isPaused = true;
   }
 
   display() {

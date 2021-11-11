@@ -44,7 +44,8 @@ let bgmusic2;
 let bgmusic3;
 
 let canBurst = false;
-let clickCounter=0;
+let clickCounter = 0;
+let npcSwitch;
 
 /**
 Description of preload
@@ -60,7 +61,7 @@ function preload() {
   lightBuzzNoise = loadSound("assets/sounds/lightBuzz.wav");
   bulbBurstSound = loadSound("assets/sounds/bulbBurst.wav");
 
-  bgmusic1 = loadSound("assets/sounds/skyglowbgmusic.mp3")
+  bgmusic1 = loadSound("assets/sounds/skyglowbgmusic.mp3");
   bgmusic2 = loadSound("assets/sounds/testbgmusic.mp3");
   bgmusic3 = loadSound("assets/sounds/testbgmusic2.mp3");
 }
@@ -72,17 +73,18 @@ function setup() {
   createCanvas(600, 800);
   userStartAudio();
 
-  lightFlickSound.addCue(0.1,flickBulbOn);
-  lightFlickSound.addCue(0.2,flickBulbOff);
-  lightFlickSound.addCue(0.3,flickBulbOn);
-  lightFlickSound.addCue(0.4,flickBulbOff);
-  lightFlickSound.addCue(0.75,flickBulbOn);
-  lightFlickSound.addCue(0.8,flickBulbOff);
+  lightFlickSound.addCue(0.1, flickBulbOn);
+  lightFlickSound.addCue(0.2, flickBulbOff);
+  lightFlickSound.addCue(0.3, flickBulbOn);
+  lightFlickSound.addCue(0.4, flickBulbOff);
+  lightFlickSound.addCue(0.75, flickBulbOn);
+  lightFlickSound.addCue(0.8, flickBulbOff);
 
   let x = 230;
   let y = 495;
-  pedestrian = new Pedestrian(x,y);
+  pedestrian = new Pedestrian(x, y);
 
+  npcSwitch = 1;
   synth = new p5.PolySynth();
 }
 
@@ -93,39 +95,46 @@ function draw() {
   console.log(
     `dayTimer = ${dayTimer} and skyAlpha ${skyAlpha} and State ${state}`
   );
+  if (pedestrian.isPaused === true) {
+    pedestrian.vx = 0;
+    pedestrian.vy = 0;
+  } else if (pedestrian.isPaused === false) {
+    pedestrian.handleInput();
+    pedestrian.move();
+  }
 
-  playerDistance = dist(pedestrian.x,pedestrian.y, lampX,lampY);
+  playerDistance = dist(pedestrian.x, pedestrian.y, lampX, lampY);
 
   push();
   imageMode(CENTER);
   image(starsBackground, width / 2, height / 2, 600, 800);
   pop();
 
-  if (lightIsOn === true){
+  if (lightIsOn === true) {
     push();
     noStroke();
-    fill(225,225,100, 200);
+    fill(225, 225, 100, 200);
     ellipseMode(CENTER);
-    ellipse(width/2, height/2-70, 605,605);
+    ellipse(width / 2, height / 2 - 70, 605, 605);
     pop();
 
     push();
     noStroke();
-    fill(200,200,0, 200);
+    fill(200, 200, 0, 200);
     ellipseMode(CENTER);
-    ellipse(width/2, height/2-70, 100,100);
+    ellipse(width / 2, height / 2 - 70, 100, 100);
     pop();
   }
 
   //flicker bulb
-    if (flickerBulb){
-      push();
-      noStroke();
-      fill(200,200,0, 200);
-      ellipseMode(CENTER);
-      ellipse(width/2, height/2-70, 100,100);
-      pop();
-    }
+  if (flickerBulb) {
+    push();
+    noStroke();
+    fill(200, 200, 0, 200);
+    ellipseMode(CENTER);
+    ellipse(width / 2, height / 2 - 70, 100, 100);
+    pop();
+  }
 
   // Green Grass and gray path
   push();
@@ -136,113 +145,110 @@ function draw() {
   pop();
   push();
   noStroke();
-  fill(45,45,45);
+  fill(45, 45, 45);
   ellipseMode(CENTER);
-  ellipse(width/2, height/2+75,250,150);
+  ellipse(width / 2, height / 2 + 75, 250, 150);
   rectMode(CENTER);
-  rect(width/2, height/2+200, 50, 300);
+  rect(width / 2, height / 2 + 200, 50, 300);
   pop();
 
   if (state === `sunset`) {
-
     songSwitch++;
-    songSwitch = constrain(songSwitch,0,2);
+    songSwitch = constrain(songSwitch, 0, 2);
     playSunsetSong();
-    skyAlpha = map(dayTimer, 500, 0, 255, 0); //map skyAlpha (255,0) goes down as dayTimer (600,0) goes down
+    skyAlpha = map(dayTimer, 310, 0, 255, 0); //map skyAlpha (255,0) goes down as dayTimer (600,0) goes down
     dayTimer--;
-    dayTimer = constrain(dayTimer, 0, 500);
+    dayTimer = constrain(dayTimer, 0, 310);
     displaySky();
     if (dayTimer === 0) {
       //play coin sword sound
       constellationWinkSound.play();
-      dayTimer=1;
-      songSwitch=0;
+      dayTimer = 1;
+      songSwitch = 0;
       state = `lightsUp`;
     }
   }
 
   push();
   imageMode(CENTER);
-  image(streetlampFoot,lampX,lampY+60,25,25);
+  image(streetlampFoot, lampX, lampY + 60, 25, 25);
   pop();
 
   pedestrian.constrain();
-  pedestrian.handleInput();
-  pedestrian.move();
   pedestrian.display();
 
   push();
   imageMode(CENTER);
-  image(streetlampImage,lampX,lampY-20,25,140);
+  image(streetlampImage, lampX, lampY - 20, 25, 140);
   pop();
 
-// npc
+  // npc
   push();
-  fill(20,5,15);
+  fill(20, 5, 15);
   ellipseMode(CENTER);
-  ellipse(340,465,20)
+  ellipse(340, 465, 20);
   pop();
 
   if (state === `title`) {
+    pedestrian.paused();
     background(255);
-    text(`CLICK`, width / 2, height / 2);
+    text(`Press Space`, width / 2, height / 2);
   }
 
   if (state === `lightsUp`) {
     songSwitch++;
-    songSwitch = constrain(songSwitch,0,420);
-    if (songSwitch===200){
+    songSwitch = constrain(songSwitch, 0, 420);
+    if (songSwitch === 200) {
       lightFlickSound.play();
     }
-    if (songSwitch===270){
+    if (songSwitch === 270) {
       turnLightOn();
       // I would like to have the light buzz weaker, and grow louder when Player is nearer
     }
-    if (songSwitch===420){
+    if (songSwitch === 410) {
       playBGMusic();
+      pedestrian.isPaused = false;
     }
   }
 
-  if (lightIsOn===true){
+  if (lightIsOn === true) {
     push();
     lightBuzzNoise.playMode(`untilDone`);
-    buzzVolume = map(playerDistance,0,height-lampX,0.2,0);
+    buzzVolume = map(playerDistance, 0, height - lampX, 0.2, 0);
     lightBuzzNoise.setVolume(buzzVolume);
-    let panning = map(pedestrian.x, 0, width, .9, -.9); //pan code from p5 reference
+    let panning = map(pedestrian.x, 0, width, 0.9, -0.9); //pan code from p5 reference
     lightBuzzNoise.pan(panning);
     lightBuzzNoise.rate(1.2);
     lightBuzzNoise.play();
     pop();
   }
 
-  if (state === `lightsOut`){
+  if (state === `lightsOut`) {
     playBGMusic();
     lightBuzzNoise.stop();
     songSwitch++;
-    songSwitch = constrain(songSwitch,0,420);
-    if (songSwitch===2){
+    songSwitch = constrain(songSwitch, 0, 420);
+    if (songSwitch === 2) {
       push();
       bulbBurstSound.setVolume(1.5);
       bulbBurstSound.play();
       pop();
     }
-    lightIsOn=false;
+    lightIsOn = false;
   }
 
   let d = dist(pedestrian.x, pedestrian.y, 340, 465);
-    if (d < 20/2){
-        pedestrian.playerCollided = true;
-        console.log(`it's true, you've collided NPC!`);
-      }
-      else {
-        pedestrian.playerCollided = false;
-      }
-
+  if (d < 20 / 2) {
+    pedestrian.playerCollided = true;
+    console.log(`it's true, you've collided NPC!`);
+  } else {
+    pedestrian.playerCollided = false;
+  }
 }
 
-function playSunsetSong(){
-  if (songSwitch===1){
-    sunsetStarsIntro.play(0,1,0.2);
+function playSunsetSong() {
+  if (songSwitch === 1) {
+    sunsetStarsIntro.play(0, 1, 0.2);
   }
 }
 function displaySky() {
@@ -254,7 +260,6 @@ function displaySky() {
   pop();
 }
 
-
 function flickBulbOn() {
   flickerBulb = true;
 }
@@ -263,38 +268,39 @@ function flickBulbOff() {
   flickerBulb = false;
 }
 
-
-function turnLightOn(){
+function turnLightOn() {
   lightIsOn = true;
 }
 
-function playBGMusic(){
+function playBGMusic() {
   push();
   bgmusic2.playMode(`untilDone`);
-  bgmusic2.setVolume(.88);
-  bgmusic2.rate(.77);
+  bgmusic2.setVolume(0.88);
+  bgmusic2.rate(0.77);
   bgmusic2.play();
   pop();
 }
 
-function mouseClicked() {
-  if (state === `title`) {
+function keyPressed() {
+  if (keyCode === 32) {
+    if (state === `title`) {
+      state = `sunset`;
+    }
 
-    state = `sunset`;
-  }
-
-  if (state === `lightsUp`){
-    if (pedestrian.playerCollided === true){
-      synth.play(`C5`,1,0,.2);
-      synth.play(`D5`,1,.25,.2);
-      synth.play(`E5`,1,.5,.2);
-      canBurst=true;
+    if (state === `lightsUp`) {
+      if (pedestrian.playerCollided === true && npcSwitch === 1) {
+        synth.play(`C5`, 1, 0, 0.2);
+        synth.play(`D5`, 1, 0.25, 0.2);
+        synth.play(`E5`, 1, 0.5, 0.2);
+        canBurst = true;
+        npcSwitch = 0;
       }
-    if (canBurst === true){
-      clickCounter++
-      if (clickCounter === 2){
-        songSwitch=0;
-        state = `lightsOut`;
+      if (canBurst === true) {
+        clickCounter++;
+        if (clickCounter === 2) {
+          songSwitch = 0;
+          state = `lightsOut`;
+        }
       }
     }
   }

@@ -192,7 +192,10 @@ function draw() {
   if (state === `title`) {
     pedestrian.paused();
     background(255);
+    push();
+    textAlign(CENTER);
     text(`Press Space`, width / 2, height / 2);
+    pop();
   }
 
   if (state === `lightsUp`) {

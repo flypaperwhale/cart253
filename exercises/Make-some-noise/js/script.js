@@ -25,7 +25,7 @@ let playerDistLamp; // value of distance between player and the lamp
 let buzzVolume; // lamp buzz sound volume, to be mapped on playerDistLamp values
 let synth; // used for p5.sound melody when npc is interacted with
 let npcSoundSwitch; // switch true/false used to play npc synth sound only once
-let clickCounter = 0; // counter used to verify if player has interacted with npc
+let keyPressCounter = 0; // counter used to verify if player has interacted with npc
 let canBurst = false; // when true, player can burst the lamp's bulb
 // Asset names //
 // images
@@ -113,31 +113,12 @@ function draw() {
   displayLamppost(); // displays lamppost in front of player
   titleState(); // (1) called in this position to hide the other visuals during titleState
   lightsUpState(); // (3) simulation state when light is on. player can play.
+  lightsOutState(); // (4) (last) simulation state when light is off. player can play.
 
-  if (state === `lightsOut`) {
-    playBGMusic();
-    lightBuzzNoise.stop();
-    songSwitch++;
-    songSwitch = constrain(songSwitch, 0, 410);
-    if (songSwitch === 2) {
-      push();
-      bulbBurstSound.setVolume(1.5);
-      bulbBurstSound.play();
-      pop();
-    }
-    lightIsOn = false;
+
   }
 
-  /*?*/ let d = dist(player.x, player.y, 340, 465); // distance between player and npc
-  // hard numbered!! because?? //
-  if (d < 20) {
-    // if the player touches the space where the npc is at all...
-    turnPlayerNPCCollisionTrue(); // playerCollided is true
-  } else {
-    // if the player is not touching the space where the npc is...
-    turnPlayerNPCCollisionFalse(); // playerCollided is false
-  }
-}
+
 
 function pausePlayer() {
   // turns player velocities to 0
@@ -290,6 +271,7 @@ function titleState(){ // blank initial state
 function lightsUpState(){ // animation when the light turns on, then simulation begins
   // and player can play
   if (state === `lightsUp`) { // if state is "lightsUp"
+    checkPlayerNPCCollision(); // checks if player is touching npc or not
     calculatePlayerLampDist(); // calculate the distance between player and lamp every frame
     songSwitch++; // add 1 to songSwitch
     songSwitch = constrain(songSwitch, 0, 410); // constrain songSwitch to 0-410
@@ -303,6 +285,32 @@ function lightsUpState(){ // animation when the light turns on, then simulation 
       playBGMusic(); // the backgroung music starts playing
       player.isPaused = false; // and the player can start moving the avatar
     }
+  }
+}
+
+function lightsOutState(){ // simulation when light bulb explodes. player can play. no ending
+  if (state === `lightsOut`) { // if state is "lightsOut"
+    playBGMusic(); // background music keeps playing (from "untilDone" mode)
+    lightBuzzNoise.stop(); // the buzzing noise is stopped
+    songSwitch++; // +1 to the songSwitch
+    songSwitch = constrain(songSwitch, 0, 410); // the songSwitch is constrained from 0 to 410
+    if (songSwitch === 2) { // when the song switch reaches 2
+      // (songSwitch is turned to zero when npc is interacted with)
+      bulbBursting(); // bulb bursting sound
+    }
+    lightIsOn = false; // lightIsOn switch is turned off
+  }
+}
+
+function checkPlayerNPCCollision(){
+  /*?*/ let d = dist(player.x, player.y, 340, 465); // distance between player and npc
+  // hard numbered!! because?? //
+  if (d < 20) {
+    // if the player touches the space where the npc is at all...
+    turnPlayerNPCCollisionTrue(); // playerCollided is true
+  } else {
+    // if the player is not touching the space where the npc is...
+    turnPlayerNPCCollisionFalse(); // playerCollided is false
   }
 }
 
@@ -355,6 +363,13 @@ function playBGMusic() {
   pop();
 }
 
+function bulbBursting(){ // handles bulb bursting audio FX
+  push();
+  bulbBurstSound.setVolume(1.7); // bulb bursting soun is loud
+  bulbBurstSound.play(); // play bulb bursting sound
+  pop();
+}
+
 function keyPressed() {
   if (keyCode === 32) {
     if (state === `title`) {
@@ -370,8 +385,8 @@ function keyPressed() {
         npcSoundSwitch = false;
       }
       if (canBurst === true) {
-        clickCounter++;
-        if (clickCounter === 2) {
+        keyPressCounter++;
+        if (keyPressCounter === 2) {
           songSwitch = 0;
           state = `lightsOut`;
         }

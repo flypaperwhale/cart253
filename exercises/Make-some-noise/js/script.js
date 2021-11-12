@@ -98,113 +98,27 @@ function setNPCSynth() {
 Draw the program (player, npc, background, audio-visual effects)
 */
 function draw() {
-  if (player.isPaused === true) {
-    // if player is paused...
-    pausePlayer(); // set player x,y velocities to 0
-    // and ignore handleInput + move
-  } else if (player.isPaused === false) {
-    // if player is not paused...
-    player.handleInput(); // handle player input
-    player.move(); // and move player avatar
-  }
-  // store the distance between the player avatar and the lamp
+  handlePausePlayerState(); // Handle pause player state
+  // draw the background (sky, lights, ground)
   displayStars(); // displays starry nightsky image background
-
-  // flicker bulb happens when cued during the lightFlickSound in intro animation
-  if (flickerBulb) {
-    // if flickerBulb is true show lamp glow
-    displayLampGlow();
-  }
-
-  if (lightIsOn === true) {
-    // if the lamp is turned on
-    displaySkyGlow(); // large yellow ellipse behind lamp covering starry bg
-    displayLampGlow(); // small yellow ellipse around lamp head
-  }
-
-  // display Green Grass and gray circle and path
-  displayGreenGrass();
-  displayCircleAndPath();
-
-  if (state === `sunset`) {
-    songSwitch++;
-    songSwitch = constrain(songSwitch, 0, 2);
-    playSunsetSong();
-    skyAlpha = map(dayTimer, 310, 0, 255, 0); //map skyAlpha (255,0) goes down as dayTimer (600,0) goes down
-    dayTimer--;
-    dayTimer = constrain(dayTimer, 0, 310);
-    displaySky();
-    if (dayTimer === 0) {
-      //play coin sword sound
-      constellationWinkSound.play();
-      dayTimer = 1;
-      songSwitch = 0;
-      state = `lightsUp`;
-    }
-  }
-  // npc
-  push();
-  fill(20, 5, 15);
-  ellipseMode(CENTER);
-  ellipse(340, 465, 20);
-  pop();
-
-  push();
-  imageMode(CENTER);
-  image(streetlampFoot, lampX, lampY + 60, 25, 25);
-  pop();
-
-  player.constrain();
-  player.display();
-
-  push();
-  imageMode(CENTER);
-  image(streetlampImage, lampX, lampY - 20, 25, 140);
-  pop();
-
-  if (state === `title`) {
-    player.paused();
-    background(255);
-    push();
-    textAlign(CENTER);
-    text(`Press Space`, width / 2, height / 2);
-    pop();
-  }
-
-  if (state === `lightsUp`) {
-    calculatePlayerLampDist(); // calculated distance between player and lamp every frame
-    songSwitch++;
-    songSwitch = constrain(songSwitch, 0, 420);
-    if (songSwitch === 200) {
-      lightFlickSound.play();
-    }
-    if (songSwitch === 270) {
-      turnLightOn();
-      // I would like to have the light buzz weaker, and grow louder when Player is nearer
-    }
-    if (songSwitch === 410) {
-      playBGMusic();
-      player.isPaused = false;
-    }
-  }
-
-  if (lightIsOn === true) {
-    push();
-    lightBuzzNoise.playMode(`untilDone`);
-    buzzVolume = map(playerDistLamp, 0, height - lampX, 0.1, 0);
-    lightBuzzNoise.setVolume(buzzVolume);
-    let panning = map(player.x, 0, width, 0.6, -0.6); //pan code from p5 reference
-    lightBuzzNoise.pan(panning);
-    lightBuzzNoise.rate(1.2);
-    lightBuzzNoise.play();
-    pop();
-  }
+  flickBulb(); // flicks bulb when cued during lightFlickSound in intro
+  displayLightsOn(); // if lightIsOn is true, displays yellow light ellipses
+  displayGreenGrass(); // display Green Grass
+  displayCircleAndPath(); // display gray circle and path
+  // simulation
+  sunsetState(); // (2) operates the sunset state (introduction animation)
+  displayNPC(); // displays npc (in hard numbered x,y!!) underneath player
+  displayLampFoot(); // displayed before the player for correct layer effect
+  displayPlayer(); // displays player and also constrains them to move only on the ground
+  displayLamppost(); // displays lamppost in front of player
+  titleState(); // (1) called in this position to hide the other visuals during titleState
+  lightsUpState(); // (3) simulation state when light is on. player can play.
 
   if (state === `lightsOut`) {
     playBGMusic();
     lightBuzzNoise.stop();
     songSwitch++;
-    songSwitch = constrain(songSwitch, 0, 420);
+    songSwitch = constrain(songSwitch, 0, 410);
     if (songSwitch === 2) {
       push();
       bulbBurstSound.setVolume(1.5);
@@ -232,7 +146,20 @@ function pausePlayer() {
 }
 
 function calculatePlayerLampDist() {
+  // store the distance between the player avatar and the lamp
   playerDistLamp = dist(player.x, player.y, lampX, lampY);
+}
+
+function handlePausePlayerState(){
+  if (player.isPaused === true) {
+    // if player is paused...
+    pausePlayer(); // set player x,y velocities to 0
+    // and ignore handleInput + move
+  } else if (player.isPaused === false) {
+    // if player is not paused...
+    player.handleInput(); // handle player input
+    player.move(); // and move player avatar
+  }
 }
 
 function displayStars() {
@@ -242,6 +169,22 @@ function displayStars() {
   imageMode(CENTER);
   /*?*/ image(starsBackground, width / 2, height / 2, 600, 800); // random numbers?? ** //
   pop();
+}
+
+function flickBulb(){
+  if (flickerBulb) { // happens when cued during the lightFlickSound in intro animation
+    // if flickerBulb is true show lamp glow
+    displayLampGlow();
+  }
+}
+
+function displayLightsOn(){
+  if (lightIsOn === true) {
+    // if the lamp is turned on
+    displaySkyGlow(); // large yellow ellipse behind lamp covering starry bg
+    displayLampGlow(); // small yellow ellipse around lamp head
+    lightBuzzing(); // light buzzing sound FX grows weaker the further away player is from lamp
+  }
 }
 
 function displaySkyGlow() {
@@ -285,6 +228,96 @@ function displayCircleAndPath() {
   rectMode(CENTER);
   rect(width / 2, height / 2 + 200, 50, 300); // a narrow path down the center
   pop();
+}
+
+function sunsetState(){ // introduction animation, blue sky becomes dark and starry...
+  if (state === `sunset`) { // if the state equals "sunset"
+    songSwitch++; // the songSwitch is increased
+    songSwitch = constrain(songSwitch, 0, 2); // the songSwitch is constrained between 0-2
+    playSunsetSong(); // the sunset theme is played
+    skyAlpha = map(dayTimer, 310, 0, 255, 0); // map skyAlpha (255,0) goes down as dayTimer (310,0) goes down
+    dayTimer--; // dayTimer goes down
+    /*?*/dayTimer = constrain(dayTimer, 0, 310); // constrain dayTimer (why?)
+    displaySky(); // the blue sky rectangle covers the starry bg image
+    if (dayTimer === 0) { // once the dayTimer reaches 0...
+      constellationWinkSound.play(); // a chime sound to signify the twinkling stars
+      dayTimer = 1; // dayTimer is reset to 1
+      songSwitch = 0; // songSwitch is reset to 0
+      state = `lightsUp`; // ... and then, no time to admire the stars, the lights go on!
+    }
+  }
+}
+
+function displayNPC(){
+  // npc
+  push();
+  fill(20, 5, 15); // blackish
+  ellipseMode(CENTER);
+  /*?*/ellipse(340, 465, 20); // hard numbers!!
+  pop();
+}
+
+function displayLampFoot(){ // player moves in front of lamp foot
+  push();
+  imageMode(CENTER);
+  image(streetlampFoot, lampX, lampY + 60, 25, 25);
+  pop();
+}
+
+function displayPlayer(){
+  player.constrain();
+  player.display();
+}
+
+function displayLamppost(){
+  push();
+  imageMode(CENTER);
+  /*?*/image(streetlampImage, lampX, lampY - 20, 25, 140); // hard numbers!!
+  pop();
+}
+
+function titleState(){ // blank initial state
+  if (state === `title`) { // if state is "title"
+    player.paused(); // player is paused
+    background(255); // background is white
+    push();
+    textAlign(CENTER);
+    text(`Press Space`, width / 2, height / 2); // text tell player to press space to start simulation
+    pop();
+  }
+}
+
+function lightsUpState(){ // animation when the light turns on, then simulation begins
+  // and player can play
+  if (state === `lightsUp`) { // if state is "lightsUp"
+    calculatePlayerLampDist(); // calculate the distance between player and lamp every frame
+    songSwitch++; // add 1 to songSwitch
+    songSwitch = constrain(songSwitch, 0, 410); // constrain songSwitch to 0-410
+    if (songSwitch === 200) { // when songSwitch reaches 200
+      lightFlickSound.play(); // play the lightFlickSound (which has visual FX cues)
+    }
+    if (songSwitch === 270) { // when songSwitch reaches 270
+      turnLightOn(); // the light is turned on
+    }
+    if (songSwitch === 410) { // when songSwitch reaches 410
+      playBGMusic(); // the backgroung music starts playing
+      player.isPaused = false; // and the player can start moving the avatar
+    }
+  }
+}
+
+function lightBuzzing(){
+  if (lightIsOn === true) {
+    push();
+    lightBuzzNoise.playMode(`untilDone`);
+    buzzVolume = map(playerDistLamp, 0, height - lampX, 0.1, 0);
+    lightBuzzNoise.setVolume(buzzVolume);
+    let panning = map(player.x, 0, width, 0.6, -0.6); //pan code from p5 reference
+    lightBuzzNoise.pan(panning);
+    lightBuzzNoise.rate(1.2);
+    lightBuzzNoise.play();
+    pop();
+  }
 }
 
 function playSunsetSong() {

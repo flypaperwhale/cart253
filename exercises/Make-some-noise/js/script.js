@@ -9,29 +9,24 @@ and used states to have audio-visual effects
 */
 
 "use strict";
-let state = `title`; // can be title, simulation
 
-// variable declarations
-let pedestrian; // player is pedestrian
-//(Player and pedestrian code sourced https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
+// variable declarations //
+let state = `title`; // can be title, sunset, lightsUp, lightsOut
+let player; // player avatar, class Player
+//(Player (pedestrian) code sourced https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
 let lampX = 300; // lamp x value
 let lampY = 400; // lamp y value
-
-let songSwitch = 0; // ticker switch to play sounds at certain time frames (+/- a Counter)
-
+let songSwitch = 0; // ticker switch to play sounds at certain time frames (a Counter?)
 let dayTimer = 500; // Counter used to map skyAlpha. 500 = day, 0 = night
 let skyAlpha = 255; // the blue sky's alpha value is manipulated by mapping it to dayTimer
-
 let flickerBulb; // switch true/false to activate lamp bulb flicker animation
 let lightIsOn = false; // switch true/false that draws light a.-v. FX when true
 let playerDistLamp; // value of distance between player and the lamp
 let buzzVolume; // lamp buzz sound volume, to be mapped on playerDistLamp values
-
-let clickCounter = 0; // counter used to verify if player has interacted with npc
 let synth; // used for p5.sound melody when npc is interacted with
 let npcSoundSwitch; // switch true/false used to play npc synth sound only once
+let clickCounter = 0; // counter used to verify if player has interacted with npc
 let canBurst = false; // when true, player can burst the lamp's bulb
-
 // Asset names //
 // images
 let starsBackground; // background image name
@@ -50,7 +45,8 @@ let bgmusic3; // background music 3
 /**
 Preloading images and sounds
 */
-function preload() { // images
+function preload() {
+  // images
   starsBackground = loadImage("assets/images/starnight.jpg");
   streetlampImage = loadImage("assets/images/lamp.png");
   streetlampFoot = loadImage("assets/images/lampFoot.png");
@@ -70,18 +66,15 @@ Setting up visual light flickering cues to the light flicker sound,
 creating the player, and setting up npc synth sound interaction
 */
 function setup() {
-  createCanvas(600, 800);
+  createCanvas(600, 800); // hard numbers?//
   userStartAudio();
-
   cueLightFlicks(); // sets up time cues for light visual effect to the flicker sound
-
-  createPlayer(); // x,y starting positions declared and new Player is created
-
+  createPlayer(230,495); // (x,y) starting positions declared and new Player is created
   setNPCSynth(); // set the npc Sound switch on and create a new synthesizer
-
 }
+
 // Setup program functions //
-function cueLightFlicks(){
+function cueLightFlicks() {
   lightFlickSound.addCue(0.1, flickBulbOn);
   lightFlickSound.addCue(0.2, flickBulbOff);
   lightFlickSound.addCue(0.3, flickBulbOn);
@@ -89,16 +82,13 @@ function cueLightFlicks(){
   lightFlickSound.addCue(0.75, flickBulbOn);
   lightFlickSound.addCue(0.8, flickBulbOff);
 }
-
-function createPlayer(){
-  // player avatar's starting x,y position
-    let x = 230;
-    let y = 495;
-  // create player avatar and display at starting x,y position
-    pedestrian = new Pedestrian(x, y);
+// Create player
+function createPlayer(x,y) {
+  // create new player class
+  player = new Player(x, y);
 }
-
-function setNPCSynth(){
+// Create Synthesizer (for npc sound)
+function setNPCSynth() {
   npcSoundSwitch = true; // when this switch is true, when npc is interacted with
   // npc makes a sound. when false, no more sound/interaction.
   synth = new p5.PolySynth();
@@ -108,62 +98,33 @@ function setNPCSynth(){
 Draw the program (player, npc, background, audio-visual effects)
 */
 function draw() {
-  if (pedestrian.isPaused === true) {
-    pedestrian.vx = 0;
-    pedestrian.vy = 0;
-  } else if (pedestrian.isPaused === false) {
-    pedestrian.handleInput();
-    pedestrian.move();
+  if (player.isPaused === true) {
+    // if player is paused...
+    pausePlayer(); // set player x,y velocities to 0
+    // and ignore handleInput + move
+  } else if (player.isPaused === false) {
+    // if player is not paused...
+    player.handleInput(); // handle player input
+    player.move(); // and move player avatar
   }
+  // store the distance between the player avatar and the lamp
+  displayStars(); // displays starry nightsky image background
 
-  playerDistLamp = dist(pedestrian.x, pedestrian.y, lampX, lampY);
-
-  push();
-  imageMode(CENTER);
-  image(starsBackground, width / 2, height / 2, 600, 800);
-  pop();
+  // flicker bulb happens when cued during the lightFlickSound in intro animation
+  if (flickerBulb) {
+    // if flickerBulb is true show lamp glow
+    displayLampGlow();
+  }
 
   if (lightIsOn === true) {
-    push();
-    noStroke();
-    fill(225, 225, 100, 200);
-    ellipseMode(CENTER);
-    ellipse(width / 2, height / 2 - 70, 605, 605);
-    pop();
-
-    push();
-    noStroke();
-    fill(200, 200, 0, 200);
-    ellipseMode(CENTER);
-    ellipse(width / 2, height / 2 - 70, 100, 100);
-    pop();
+    // if the lamp is turned on
+    displaySkyGlow(); // large yellow ellipse behind lamp covering starry bg
+    displayLampGlow(); // small yellow ellipse around lamp head
   }
 
-  //flicker bulb
-  if (flickerBulb) {
-    push();
-    noStroke();
-    fill(200, 200, 0, 200);
-    ellipseMode(CENTER);
-    ellipse(width / 2, height / 2 - 70, 100, 100);
-    pop();
-  }
-
-  // Green Grass and gray path
-  push();
-  noStroke();
-  fill(30, 75, 40);
-  rectMode(CENTER);
-  rect(width / 2, height, 600, 800);
-  pop();
-  push();
-  noStroke();
-  fill(45, 45, 45);
-  ellipseMode(CENTER);
-  ellipse(width / 2, height / 2 + 75, 250, 150);
-  rectMode(CENTER);
-  rect(width / 2, height / 2 + 200, 50, 300);
-  pop();
+  // display Green Grass and gray circle and path
+  displayGreenGrass();
+  displayCircleAndPath();
 
   if (state === `sunset`) {
     songSwitch++;
@@ -193,17 +154,16 @@ function draw() {
   image(streetlampFoot, lampX, lampY + 60, 25, 25);
   pop();
 
-  pedestrian.constrain();
-  pedestrian.display();
+  player.constrain();
+  player.display();
 
   push();
   imageMode(CENTER);
   image(streetlampImage, lampX, lampY - 20, 25, 140);
   pop();
 
-
   if (state === `title`) {
-    pedestrian.paused();
+    player.paused();
     background(255);
     push();
     textAlign(CENTER);
@@ -212,6 +172,7 @@ function draw() {
   }
 
   if (state === `lightsUp`) {
+    calculatePlayerLampDist(); // calculated distance between player and lamp every frame
     songSwitch++;
     songSwitch = constrain(songSwitch, 0, 420);
     if (songSwitch === 200) {
@@ -223,7 +184,7 @@ function draw() {
     }
     if (songSwitch === 410) {
       playBGMusic();
-      pedestrian.isPaused = false;
+      player.isPaused = false;
     }
   }
 
@@ -232,7 +193,7 @@ function draw() {
     lightBuzzNoise.playMode(`untilDone`);
     buzzVolume = map(playerDistLamp, 0, height - lampX, 0.1, 0);
     lightBuzzNoise.setVolume(buzzVolume);
-    let panning = map(pedestrian.x, 0, width, 0.6, -0.6); //pan code from p5 reference
+    let panning = map(player.x, 0, width, 0.6, -0.6); //pan code from p5 reference
     lightBuzzNoise.pan(panning);
     lightBuzzNoise.rate(1.2);
     lightBuzzNoise.play();
@@ -253,13 +214,77 @@ function draw() {
     lightIsOn = false;
   }
 
-  let d = dist(pedestrian.x, pedestrian.y, 340, 465);
-  if (d < 20 ) {
-    pedestrian.playerCollided = true;
-    console.log(`it's true, you've collided NPC!`);
+  /*?*/ let d = dist(player.x, player.y, 340, 465); // distance between player and npc
+  // hard numbered!! because?? //
+  if (d < 20) {
+    // if the player touches the space where the npc is at all...
+    turnPlayerNPCCollisionTrue(); // playerCollided is true
   } else {
-    pedestrian.playerCollided = false;
+    // if the player is not touching the space where the npc is...
+    turnPlayerNPCCollisionFalse(); // playerCollided is false
   }
+}
+
+function pausePlayer() {
+  // turns player velocities to 0
+  player.vx = 0;
+  player.vy = 0;
+}
+
+function calculatePlayerLampDist() {
+  playerDistLamp = dist(player.x, player.y, lampX, lampY);
+}
+
+function displayStars() {
+  // displays background image
+  // displays artist image of a starry sky with the moon
+  push();
+  imageMode(CENTER);
+  /*?*/ image(starsBackground, width / 2, height / 2, 600, 800); // random numbers?? ** //
+  pop();
+}
+
+function displaySkyGlow() {
+  // displays circle of light far over the nightsky
+  push();
+  noStroke();
+  fill(225, 225, 100, 200); // light yellow and slightly transparent
+  ellipseMode(CENTER);
+  /*?*/ ellipse(width / 2, height / 2 - 70, 605, 605); /*?*/
+  pop();
+}
+
+function displayLampGlow() {
+  // displays circle of light around lamphead
+  push();
+  noStroke();
+  fill(200, 200, 0, 200); // light yellow and slightly transparent
+  ellipseMode(CENTER);
+  /*?*/ ellipse(width / 2, height / 2 - 70, 100, 100); // ?? real numbers hmmm ** //
+  pop();
+}
+
+function displayGreenGrass() {
+  // draws a green rectangle as land where player can walk around
+  push();
+  noStroke();
+  fill(30, 75, 40); // middle green
+  rectMode(CENTER);
+  rect(width / 2, height, 600, 800); // displayed at bottom center
+  pop();
+}
+
+function displayCircleAndPath() {
+  // draws a gray path leading to the circle
+  // in the middle of which stands the lamppost
+  push();
+  noStroke();
+  fill(45, 45, 45); // dark grey
+  ellipseMode(CENTER);
+  ellipse(width / 2, height / 2 + 75, 250, 150); // a circle at mid center
+  rectMode(CENTER);
+  rect(width / 2, height / 2 + 200, 50, 300); // a narrow path down the center
+  pop();
 }
 
 function playSunsetSong() {
@@ -304,7 +329,7 @@ function keyPressed() {
     }
 
     if (state === `lightsUp`) {
-      if (pedestrian.playerCollided === true && npcSoundSwitch === true) {
+      if (player.playerCollided === true && npcSoundSwitch === true) {
         synth.play(`C5`, 1, 0, 0.2);
         synth.play(`D5`, 1, 0.25, 0.2);
         synth.play(`E5`, 1, 0.5, 0.2);
@@ -320,4 +345,14 @@ function keyPressed() {
       }
     }
   }
+}
+
+function turnPlayerNPCCollisionTrue() {
+  // turns playerCollided switch true
+  player.playerCollided = true; // the playerCollided switch inside the player class is turned on
+}
+
+function turnPlayerNPCCollisionFalse() {
+  // turns playerCollided switch false
+  player.playerCollided = false; // the playerCollided switch is turned off
 }

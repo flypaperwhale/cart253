@@ -1,100 +1,113 @@
 /**
-Sky Glow audio-visuals
+Sky Glow audio-visuals prototype
 Frankie Latreille
 
-This project is more an aesthetic research.
-I will use images and shapes to create a background,
-and I will use states to have different audio-visual effects
+This project is an aesthetic research.
+I have used images and shapes to create a background,
+and used states to have audio-visual effects
 
 */
 
 "use strict";
-let synth;
-let pedestrian;
+let state = `title`; // can be title, simulation
 
-let starsBackground;
-let streetlampImage;
-let streetlampFoot;
+// variable declarations
+let pedestrian; // player is pedestrian
+//(Player and pedestrian code sourced https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
+let lampX = 300; // lamp x value
+let lampY = 400; // lamp y value
 
-let sunsetStarsIntro;
-let backgroundMusic;
-let constellationWinkSound;
-let lightFlickSound;
-let lightBuzzNoise;
-let bulbBurstSound;
+let songSwitch = 0; // ticker switch to play sounds at certain time frames (+/- a Counter)
 
-let flickerBulb;
+let dayTimer = 500; // Counter used to map skyAlpha. 500 = day, 0 = night
+let skyAlpha = 255; // the blue sky's alpha value is manipulated by mapping it to dayTimer
 
-let state = `title`; //can be title, simulation
+let flickerBulb; // switch true/false to activate lamp bulb flicker animation
+let lightIsOn = false; // switch true/false that draws light a.-v. FX when true
+let playerDistLamp; // value of distance between player and the lamp
+let buzzVolume; // lamp buzz sound volume, to be mapped on playerDistLamp values
 
-let dayTimer = 500;
-let skyAlpha = 255;
+let clickCounter = 0; // counter used to verify if player has interacted with npc
+let synth; // used for p5.sound melody when npc is interacted with
+let npcSoundSwitch; // switch true/false used to play npc synth sound only once
+let canBurst = false; // when true, player can burst the lamp's bulb
 
-let songSwitch = 0;
-
-let lightIsOn = false;
-
-let playerDistance;
-let lampX = 300;
-let lampY = 400;
-let buzzVolume;
-
-let bgmusic1;
-let bgmusic2;
-let bgmusic3;
-
-let canBurst = false;
-let clickCounter = 0;
-let npcSwitch;
+// Asset names //
+// images
+let starsBackground; // background image name
+let streetlampImage; // streetlamp
+let streetlampFoot; // streetlamp foot
+// sounds
+let sunsetStarsIntro; // sunset introduction theme
+let constellationWinkSound; // constellation wink
+let lightFlickSound; // light flick
+let lightBuzzNoise; // light buzz
+let bulbBurstSound; // bulb burst
+let bgmusic1; // background music 1
+let bgmusic2; // background music 2
+let bgmusic3; // background music 3
 
 /**
-Description of preload
+Preloading images and sounds
 */
-function preload() {
+function preload() { // images
   starsBackground = loadImage("assets/images/starnight.jpg");
   streetlampImage = loadImage("assets/images/lamp.png");
   streetlampFoot = loadImage("assets/images/lampFoot.png");
+  // sounds
   sunsetStarsIntro = loadSound(`assets/sounds/intro-constellation.mp3`);
-  backgroundMusic = loadSound(`assets/sounds/skyglowbgmusic.mp3`);
   constellationWinkSound = loadSound(`assets/sounds/constellationWink.wav`);
   lightFlickSound = loadSound("assets/sounds/lightFlick.wav");
   lightBuzzNoise = loadSound("assets/sounds/lightBuzz.wav");
   bulbBurstSound = loadSound("assets/sounds/bulbBurst.wav");
-
   bgmusic1 = loadSound("assets/sounds/skyglowbgmusic.mp3");
   bgmusic2 = loadSound("assets/sounds/testbgmusic.mp3");
   bgmusic3 = loadSound("assets/sounds/testbgmusic2.mp3");
 }
 
 /**
-Description of setup
+Setting up visual light flickering cues to the light flicker sound,
+creating the player, and setting up npc synth sound interaction
 */
 function setup() {
   createCanvas(600, 800);
   userStartAudio();
 
+  cueLightFlicks(); // sets up time cues for light visual effect to the flicker sound
+
+  createPlayer(); // x,y starting positions declared and new Player is created
+
+  setNPCSynth(); // set the npc Sound switch on and create a new synthesizer
+
+}
+// Setup program functions //
+function cueLightFlicks(){
   lightFlickSound.addCue(0.1, flickBulbOn);
   lightFlickSound.addCue(0.2, flickBulbOff);
   lightFlickSound.addCue(0.3, flickBulbOn);
   lightFlickSound.addCue(0.4, flickBulbOff);
   lightFlickSound.addCue(0.75, flickBulbOn);
   lightFlickSound.addCue(0.8, flickBulbOff);
+}
 
-  let x = 230;
-  let y = 495;
-  pedestrian = new Pedestrian(x, y);
+function createPlayer(){
+  // player avatar's starting x,y position
+    let x = 230;
+    let y = 495;
+  // create player avatar and display at starting x,y position
+    pedestrian = new Pedestrian(x, y);
+}
 
-  npcSwitch = 1;
+function setNPCSynth(){
+  npcSoundSwitch = true; // when this switch is true, when npc is interacted with
+  // npc makes a sound. when false, no more sound/interaction.
   synth = new p5.PolySynth();
 }
 
 /**
-Description of draw()
+Draw the program (player, npc, background, audio-visual effects)
 */
 function draw() {
-  console.log(
-    `dayTimer = ${dayTimer} and skyAlpha ${skyAlpha} and State ${state}`
-  );
   if (pedestrian.isPaused === true) {
     pedestrian.vx = 0;
     pedestrian.vy = 0;
@@ -103,7 +116,7 @@ function draw() {
     pedestrian.move();
   }
 
-  playerDistance = dist(pedestrian.x, pedestrian.y, lampX, lampY);
+  playerDistLamp = dist(pedestrian.x, pedestrian.y, lampX, lampY);
 
   push();
   imageMode(CENTER);
@@ -217,7 +230,7 @@ function draw() {
   if (lightIsOn === true) {
     push();
     lightBuzzNoise.playMode(`untilDone`);
-    buzzVolume = map(playerDistance, 0, height - lampX, 0.1, 0);
+    buzzVolume = map(playerDistLamp, 0, height - lampX, 0.1, 0);
     lightBuzzNoise.setVolume(buzzVolume);
     let panning = map(pedestrian.x, 0, width, 0.6, -0.6); //pan code from p5 reference
     lightBuzzNoise.pan(panning);
@@ -291,12 +304,12 @@ function keyPressed() {
     }
 
     if (state === `lightsUp`) {
-      if (pedestrian.playerCollided === true && npcSwitch === 1) {
+      if (pedestrian.playerCollided === true && npcSoundSwitch === true) {
         synth.play(`C5`, 1, 0, 0.2);
         synth.play(`D5`, 1, 0.25, 0.2);
         synth.play(`E5`, 1, 0.5, 0.2);
         canBurst = true;
-        npcSwitch = 0;
+        npcSoundSwitch = false;
       }
       if (canBurst === true) {
         clickCounter++;

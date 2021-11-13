@@ -142,8 +142,7 @@ function handlePausePlayerState() {
     // and ignore handleInput + move
   } else if (player.isPaused === false) {
     // if player is not paused...
-    player.handleInput(); // handle player input
-    player.move(); // and move player avatar
+    movePlayer(); // handle user input and move player avatar
   }
 }
 
@@ -152,6 +151,11 @@ function pausePlayer() {
   // turns player velocities to 0
   player.vx = 0;
   player.vy = 0;
+}
+
+function movePlayer(){
+  player.handleInput(); // handle player input
+  player.move(); // and move player avatar
 }
 
 function displayStars() {
@@ -286,12 +290,16 @@ function titleState() {
   if (state === `title`) {
     // if state is "title"
     player.paused(); // player is paused
-    background(255); // background is white
-    push();
-    textAlign(CENTER);
-    text(`Press Space`, width / 2, height / 2); // text tell player to press space to start simulation
-    pop();
+    runTitleState(); // runs title state
   }
+}
+
+function runTitleState(){
+  background(255); // background is white
+  push();
+  textAlign(CENTER);
+  text(`Press Space`, width / 2, height / 2); // text tell player to press space to start simulation
+  pop();
 }
 
 function sunsetState() {
@@ -301,6 +309,7 @@ function sunsetState() {
     songSwitch++; // the songSwitch is increased
     songSwitch = constrain(songSwitch, 0, 2); // the songSwitch is constrained between 0-2
     playSunsetSong(); // the sunset theme is played
+    // sunset animation with skyAlpha and dayTimer
     skyAlpha = map(dayTimer, 310, 0, 255, 0); // map skyAlpha (255,0) goes down as dayTimer (310,0) goes down
     dayTimer--; // dayTimer goes down
     /*?*/ dayTimer = constrain(dayTimer, 0, 310); // constrain dayTimer (why?)
@@ -326,7 +335,7 @@ function playSunsetSong() {
   }
 }
 
-function resetSongSwitch() {
+function resetSongSwitch() { // resets songSwitch to 0
   songSwitch = 0;
 }
 
@@ -426,7 +435,7 @@ function bulbBursting() {
 function keyPressed() {
   // when key is pressed
   if (keyCode === 32) {
-    // Spacebar
+    // **** SPACEBAR ****
 
     if (state === `title`) {
       // if state is "title"
@@ -439,9 +448,7 @@ function keyPressed() {
       if (player.playerCollidedNPC === true && npcSoundSwitch === true) {
         // player interacts with npc
         // play musical notes
-        synth.play(`C5`, 1, 0, 0.2);
-        synth.play(`D5`, 1, 0.25, 0.2);
-        synth.play(`E5`, 1, 0.5, 0.2);
+        playNPCSound();
         canBurst = true; // turn bulb canBurst switch to true
         npcSoundSwitch = false; // so interaction only happens once, npcSoundSwitch is turned off
       }
@@ -456,4 +463,10 @@ function keyPressed() {
       }
     }
   }
+}
+
+function playNPCSound(){ // npc sound
+  synth.play(`C5`, 1, 0, 0.2);
+  synth.play(`D5`, 1, 0.25, 0.2);
+  synth.play(`E5`, 1, 0.5, 0.2);
 }

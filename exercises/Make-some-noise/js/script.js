@@ -13,7 +13,7 @@ and used states to have audio-visual effects
 // variable declarations //
 let state = `title`; // can be title, sunset, lightsUp, lightsOut
 let player; // player avatar, class Player
-//(Player (pedestrian) code sourced https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
+// (Player (pedestrian) code sourced https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
 let lampX = 300; // lamp x value
 let lampY = 400; // lamp y value
 let songSwitch = 0; // ticker switch to play sounds at certain time frames (a Counter?)
@@ -83,11 +83,13 @@ function cueLightFlicks() {
   lightFlickSound.addCue(0.8, flickBulbOff);
 }
 
-function flickBulbOn() { // on cue flicks bulb on
+function flickBulbOn() {
+  // on cue flicks bulb on
   flickerBulb = true;
 }
 
-function flickBulbOff() { // on cue flicks bulb off
+function flickBulbOff() {
+  // on cue flicks bulb off
   flickerBulb = false;
 }
 
@@ -208,8 +210,10 @@ function displaySkyGlow() {
   pop();
 }
 
-function lightBuzzing() { // light buzzing sound FX
-  if (lightIsOn === true) { // if lightIsOn is true
+function lightBuzzing() {
+  // light buzzing sound FX
+  if (lightIsOn === true) {
+    // if lightIsOn is true
     push();
     lightBuzzNoise.playMode(`untilDone`); // buzz sound mode loop until done
     buzzVolume = map(playerDistLamp, 0, height - lampX, 0.1, 0);
@@ -263,12 +267,14 @@ function displayLampFoot() {
   pop();
 }
 
-function displayPlayer() { // player is displayed
+function displayPlayer() {
+  // player is displayed
   player.constrain(); // movement is constrained to the ground
   player.display(); // display player
 }
 
-function displayLamppost() { // lampost is displayed
+function displayLamppost() {
+  // lampost is displayed
   push();
   imageMode(CENTER);
   /*?*/ image(streetlampImage, lampX, lampY - 20, 25, 140); // hard numbers!!
@@ -308,18 +314,20 @@ function sunsetState() {
   }
 }
 
-function setState(stateName){
+function setState(stateName) {
   state = stateName;
 }
 
-function playSunsetSong() { // plays sunset theme
-  if (songSwitch === 1) { // if songSwitch is 1
+function playSunsetSong() {
+  // plays sunset theme
+  if (songSwitch === 1) {
+    // if songSwitch is 1
     sunsetStarsIntro.play(0, 1, 0.2);
   }
 }
 
-function resetSongSwitch(){
-    songSwitch = 0;
+function resetSongSwitch() {
+  songSwitch = 0;
 }
 
 function lightsUpState() {
@@ -347,7 +355,8 @@ function lightsUpState() {
   }
 }
 
-function checkPlayerNPCCollision() { // check for collision between player and npc
+function checkPlayerNPCCollision() {
+  // check for collision between player and npc
   /*?*/ let d = dist(player.x, player.y, 340, 465); // distance between player and npc
   // hard numbered!! because?? //
   if (d < 20) {
@@ -374,11 +383,13 @@ function calculatePlayerLampDist() {
   playerDistLamp = dist(player.x, player.y, lampX, lampY);
 }
 
-function turnLightOn() { // turns lightIsOn switch on
+function turnLightOn() {
+  // turns lightIsOn switch on
   lightIsOn = true;
 }
 
-function playBGMusic() { // plays bg music
+function playBGMusic() {
+  // plays bg music
   push();
   bgmusic2.playMode(`untilDone`); // bg music mode loops forever
   bgmusic2.setVolume(0.88); // not too loud
@@ -412,16 +423,21 @@ function bulbBursting() {
   pop();
 }
 
-function keyPressed() { // when key is pressed
-  if (keyCode === 32) { // Spacebar
+function keyPressed() {
+  // when key is pressed
+  if (keyCode === 32) {
+    // Spacebar
 
-    if (state === `title`) { // if state is "title"
+    if (state === `title`) {
+      // if state is "title"
       setState(`sunset`); // state becomes "sunset"
     }
 
-    if (state === `lightsUp`) { // if state is "lightsUp"
+    if (state === `lightsUp`) {
+      // if state is "lightsUp"
       // and if playerCollidedNPC and the npc sound switch is still true (which it should initially)
-      if (player.playerCollidedNPC === true && npcSoundSwitch === true) { // player interacts with npc
+      if (player.playerCollidedNPC === true && npcSoundSwitch === true) {
+        // player interacts with npc
         // play musical notes
         synth.play(`C5`, 1, 0, 0.2);
         synth.play(`D5`, 1, 0.25, 0.2);
@@ -429,13 +445,15 @@ function keyPressed() { // when key is pressed
         canBurst = true; // turn bulb canBurst switch to true
         npcSoundSwitch = false; // so interaction only happens once, npcSoundSwitch is turned off
       }
-      if (canBurst === true) { // when bulb can burst
+      if (canBurst === true) {
+        // when bulb can burst
         keyPressCounter++; // add 1 to keyPressCounter
-        if (keyPressCounter === 2) { // first press after the npc interaction turns out light
+        if (keyPressCounter === 2) {
+          // first press after the npc interaction turns out light
           resetSongSwitch();
           setState(`lightsOut`); // state is turned to "lightsOut"
+        }
       }
     }
   }
-}
 }

@@ -6,6 +6,8 @@ This project is an aesthetic research.
 I have used images and shapes to create a background,
 and used states to have audio-visual effects
 
+- Most hard numbers will be fixed by the creation of classes -
+
 */
 
 "use strict";
@@ -134,90 +136,74 @@ function draw() {
 }
 
 // Program draw function functions //
-function handlePausePlayerState() {
-  // Pause state handler
-  if (player.isPaused === true) {
-    // if player is paused...
-    pausePlayer(); // set player x,y velocities to 0
-    // and ignore handleInput + move
-  } else if (player.isPaused === false) {
-    // if player is not paused...
+function handlePausePlayerState() { // Pause state handler
+  if (player.isPaused === true) { // if player is paused...
+    pausePlayer(); // set player x,y velocities to 0 and ignore handleInput + move
+  } else if (player.isPaused === false) { // if player is not paused...
     movePlayer(); // handle user input and move player avatar
   }
 }
 
-function pausePlayer() {
-  // pauses player
-  // turns player velocities to 0
+function pausePlayer() { // turns player velocities to 0
   player.vx = 0;
   player.vy = 0;
 }
 
-function movePlayer(){
+function movePlayer() {
   player.handleInput(); // handle player input
   player.move(); // and move player avatar
 }
 
-function displayStars() {
-  // displays background image
-  // displays artist image of a starry sky with the moon
+function displayStars() { // displays background artist image of a starry sky with the moon
   push();
   imageMode(CENTER);
-  /*?*/ image(starsBackground, width / 2, height / 2, 600, 800); // random numbers?? ** //
+  image(starsBackground, width / 2, height / 2, 600, 800);
   pop();
 }
 
-function displaySky() {
-  // displays sky blue rectangle
+function displaySky() { // displays sky blue rectangle
   push();
   noStroke();
   fill(100, 100, 255, skyAlpha); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  /*?*/ rect(width / 2, 0, 600, 800); // hard numbers!!
+  rect(width / 2, 0, 600, 800);
   pop();
 }
 
-function flickBulb() {
-  // happens when cued during the lightFlickSound in intro animation
-  if (flickerBulb) {
-    // if flickerBulb is true show lamp glow
+function flickBulb() { // happens when cued during the lightFlickSound in intro animation
+  if (flickerBulb) { // if flickerBulb is true show lamp glow
     displayLampGlow(); // small yellow ellipse around lamp head
   }
 }
 
-function displayLampGlow() {
-  // displays circle of light around lamphead
+function displayLampGlow() { // displays circle of light around lamphead
   push();
   noStroke();
   fill(200, 200, 0, 200); // light yellow and slightly transparent
   ellipseMode(CENTER);
-  /*?*/ ellipse(width / 2, height / 2 - 70, 100, 100); // ?? real numbers hmmm ** //
+  ellipse(width / 2, height / 2 - 70, 100, 100);
   pop();
 }
 
 function displayLightsOn() {
-  if (lightIsOn === true) {
-    // if the lamp is turned on
+  if (lightIsOn === true) { // if the lamp is turned on
     displaySkyGlow(); // large yellow ellipse behind lamp covering starry bg
     displayLampGlow(); // small yellow ellipse around lamp head
     lightBuzzing(); // light buzzing sound FX grows weaker the further away player is from lamp
   }
 }
 
-function displaySkyGlow() {
-  // displays circle of light over the nightsky
+function displaySkyGlow() { // displays circle of light over the nightsky
   push();
   noStroke();
   fill(225, 225, 100, 200); // light yellow and slightly transparent
   ellipseMode(CENTER);
-  /*?*/ ellipse(width / 2, height / 2 - 70, 605, 605); /*?*/
+  ellipse(width / 2, height / 2 - 70, 605, 605);
   pop();
 }
 
-function lightBuzzing() {
-  // light buzzing sound FX
-  if (lightIsOn === true) {
-    // if lightIsOn is true
+function lightBuzzing() { // light buzzing sound FX
+  if (lightIsOn === true) { // if lightIsOn is true
     push();
     lightBuzzNoise.playMode(`untilDone`); // buzz sound mode loop until done
     buzzVolume = map(playerDistLamp, 0, height - lampX, 0.1, 0);
@@ -231,8 +217,7 @@ function lightBuzzing() {
   }
 }
 
-function displayGreenGrass() {
-  // draws a green rectangle as land where player can walk around
+function displayGreenGrass() { // draws a green rectangle as land where player can walk around
   push();
   noStroke();
   fill(30, 75, 40); // middle green
@@ -241,8 +226,7 @@ function displayGreenGrass() {
   pop();
 }
 
-function displayCircleAndPath() {
-  // draws a gray path leading to the circle
+function displayCircleAndPath() { // draws a gray path leading to the circle
   // in the middle of which stands the lamppost
   push();
   noStroke();
@@ -254,47 +238,41 @@ function displayCircleAndPath() {
   pop();
 }
 
-function displayNPC() {
-  // display npc
+function displayNPC() { // display npc
   push();
   fill(20, 5, 15); // blackish
   ellipseMode(CENTER);
-  /*?*/ ellipse(340, 465, 20); // hard numbers!!
+  ellipse(340, 465, 20);
   pop();
 }
 
-function displayLampFoot() {
-  // player moves in front of lamp foot
+function displayLampFoot() { // player moves in front of lamp foot
   push();
   imageMode(CENTER);
   image(streetlampFoot, lampX, lampY + 60, 25, 25); // hard numbers
   pop();
 }
 
-function displayPlayer() {
-  // player is displayed
+function displayPlayer() { // player is displayed
   player.constrain(); // movement is constrained to the ground
   player.display(); // display player
 }
 
-function displayLamppost() {
-  // lampost is displayed
+function displayLamppost() { // lampost is displayed
   push();
   imageMode(CENTER);
-  /*?*/ image(streetlampImage, lampX, lampY - 20, 25, 140); // hard numbers!!
+  image(streetlampImage, lampX, lampY - 20, 25, 140);
   pop();
 }
 
-function titleState() {
-  // blank initial state
-  if (state === `title`) {
-    // if state is "title"
+function titleState() { // blank initial state
+  if (state === `title`) { // if state is "title"
     player.paused(); // player is paused
     runTitleState(); // runs title state
   }
 }
 
-function runTitleState(){
+function runTitleState() {
   background(255); // background is white
   push();
   textAlign(CENTER);
@@ -302,19 +280,16 @@ function runTitleState(){
   pop();
 }
 
-function sunsetState() {
-  // introduction animation, blue sky becomes dark and starry...
-  if (state === `sunset`) {
-    // if the state equals "sunset"
+function sunsetState() { // introduction animation, blue sky becomes dark and starry...
+  if (state === `sunset`) { // if the state equals "sunset"
     songSwitch++; // the songSwitch is increased
     songSwitch = constrain(songSwitch, 0, 2); // the songSwitch is constrained between 0-2
     playSunsetSong(); // the sunset theme is played
     // sunset animation with skyAlpha and dayTimer
     skyAlpha = map(dayTimer, 310, 0, 255, 0); // map skyAlpha (255,0) goes down as dayTimer (310,0) goes down
     dayTimer--; // dayTimer goes down
-    /*?*/ dayTimer = constrain(dayTimer, 0, 310); // constrain dayTimer (why?)
-    if (dayTimer === 0) {
-      // once the dayTimer reaches 0...
+    dayTimer = constrain(dayTimer, 0, 310); // constrain dayTimer
+    if (dayTimer === 0) { // once the dayTimer reaches 0...
       constellationWinkSound.play(); // a chime sound to signify the twinkling stars
       dayTimer = 1; // dayTimer is reset to 1
       resetSongSwitch(); // songSwitch is reset to 0
@@ -327,10 +302,8 @@ function setState(stateName) {
   state = stateName;
 }
 
-function playSunsetSong() {
-  // plays sunset theme
-  if (songSwitch === 1) {
-    // if songSwitch is 1
+function playSunsetSong() { // plays sunset theme
+  if (songSwitch === 1) { // if songSwitch is 1
     sunsetStarsIntro.play(0, 1, 0.2);
   }
 }
@@ -339,66 +312,52 @@ function resetSongSwitch() { // resets songSwitch to 0
   songSwitch = 0;
 }
 
-function lightsUpState() {
-  // animation when the light turns on, then simulation begins
+function lightsUpState() { // animation when the light turns on, then simulation begins
   // and player can play
-  if (state === `lightsUp`) {
-    // if state is "lightsUp"
+  if (state === `lightsUp`) { // if state is "lightsUp"
     checkPlayerNPCCollision(); // checks if player is touching npc or not
     calculatePlayerLampDist(); // calculate the distance between player and lamp every frame
     songSwitch++; // add 1 to songSwitch
     songSwitch = constrain(songSwitch, 0, 410); // constrain songSwitch to 0-410
-    if (songSwitch === 200) {
-      // when songSwitch reaches 200
+    if (songSwitch === 200) { // when songSwitch reaches 200
       lightFlickSound.play(); // play the lightFlickSound (which has visual FX cues)
     }
-    if (songSwitch === 270) {
-      // when songSwitch reaches 270
+    if (songSwitch === 270) { // when songSwitch reaches 270
       turnLightOn(); // the light is turned on
     }
-    if (songSwitch === 410) {
-      // when songSwitch reaches 410
+    if (songSwitch === 410) { // when songSwitch reaches 410
       playBGMusic(); // the backgroung music starts playing
       player.isPaused = false; // and the player can start moving the avatar
     }
   }
 }
 
-function checkPlayerNPCCollision() {
-  // check for collision between player and npc
-  /*?*/ let d = dist(player.x, player.y, 340, 465); // distance between player and npc
-  // hard numbered!! because?? //
-  if (d < 20) {
-    // if the player touches the space where the npc is at all...
+function checkPlayerNPCCollision() { // check for collision between player and npc
+  let d = dist(player.x, player.y, 340, 465); // distance between player and npc
+  if (d < 20) { // if the player touches the space where the npc is at all...
     turnPlayerNPCCollisionTrue(); // playerCollidedNPC is true
-  } else {
-    // if the player is not touching the space where the npc is...
+  } else { // if the player is not touching the space where the npc is...
     turnPlayerNPCCollisionFalse(); // playerCollidedNPC is false
   }
 }
 
-function turnPlayerNPCCollisionTrue() {
-  // turns playerCollidedNPC switch true
+function turnPlayerNPCCollisionTrue() { // turns playerCollidedNPC switch true
   player.playerCollidedNPC = true; // the playerCollidedNPC switch inside the player class is turned on
 }
 
-function turnPlayerNPCCollisionFalse() {
-  // turns playerCollidedNPC switch false
+function turnPlayerNPCCollisionFalse() { // turns playerCollidedNPC switch false
   player.playerCollidedNPC = false; // the playerCollidedNPC switch is turned off
 }
 
-function calculatePlayerLampDist() {
-  // store the distance between the player avatar and the lamp
+function calculatePlayerLampDist() { // store the distance between the player avatar and the lamp
   playerDistLamp = dist(player.x, player.y, lampX, lampY);
 }
 
-function turnLightOn() {
-  // turns lightIsOn switch on
+function turnLightOn() { // turns lightIsOn switch on
   lightIsOn = true;
 }
 
-function playBGMusic() {
-  // plays bg music
+function playBGMusic() { // plays bg music
   push();
   bgmusic2.playMode(`untilDone`); // bg music mode loops forever
   bgmusic2.setVolume(0.88); // not too loud
@@ -407,16 +366,13 @@ function playBGMusic() {
   pop();
 }
 
-function lightsOutState() {
-  // simulation when light bulb explodes. player can play. no ending
-  if (state === `lightsOut`) {
-    // if state is "lightsOut"
+function lightsOutState() { // simulation when light bulb explodes. player can play. no ending
+  if (state === `lightsOut`) { // if state is "lightsOut"
     playBGMusic(); // background music keeps playing (from "untilDone" mode)
     lightBuzzNoise.stop(); // the buzzing noise is stopped
     songSwitch++; // +1 to the songSwitch
     songSwitch = constrain(songSwitch, 0, 410); // the songSwitch is constrained from 0 to 410
-    if (songSwitch === 2) {
-      // when the song switch reaches 2
+    if (songSwitch === 2) { // when the song switch reaches 2
       // (songSwitch is turned to zero when npc is interacted with)
       bulbBursting(); // bulb bursting sound
     }
@@ -424,36 +380,29 @@ function lightsOutState() {
   }
 }
 
-function bulbBursting() {
-  // handles bulb bursting audio FX
+function bulbBursting() { // handles bulb bursting audio FX
   push();
   bulbBurstSound.setVolume(1.7); // bulb bursting soun is loud
   bulbBurstSound.play(); // play bulb bursting sound
   pop();
 }
 
-function keyPressed() {
-  // when key is pressed
-  if (keyCode === 32) {
-    // **** SPACEBAR ****
+function keyPressed() { // when key is pressed
+  if (keyCode === 32) { // **** SPACEBAR ****
 
-    if (state === `title`) {
-      // if state is "title"
+    if (state === `title`) { // if state is "title"
       setState(`sunset`); // state becomes "sunset"
     }
 
     if (state === `lightsUp`) {
       // if state is "lightsUp"
       // and if playerCollidedNPC and the npc sound switch is still true (which it should initially)
-      if (player.playerCollidedNPC === true && npcSoundSwitch === true) {
-        // player interacts with npc
-        // play musical notes
-        playNPCSound();
+      if (player.playerCollidedNPC === true && npcSoundSwitch === true) { // player interacts with npc
+        playNPCSound(); // play musical notes
         canBurst = true; // turn bulb canBurst switch to true
         npcSoundSwitch = false; // so interaction only happens once, npcSoundSwitch is turned off
       }
-      if (canBurst === true) {
-        // when bulb can burst
+      if (canBurst === true) { // when bulb can burst
         keyPressCounter++; // add 1 to keyPressCounter
         if (keyPressCounter === 2) {
           // first press after the npc interaction turns out light
@@ -465,7 +414,7 @@ function keyPressed() {
   }
 }
 
-function playNPCSound(){ // npc sound
+function playNPCSound() { // npc sound
   synth.play(`C5`, 1, 0, 0.2);
   synth.play(`D5`, 1, 0.25, 0.2);
   synth.play(`E5`, 1, 0.5, 0.2);

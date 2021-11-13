@@ -7,7 +7,7 @@ class Player {
     this.vy = 0;
     this.speed = 4;
     this.alive = true;
-    this.playerCollided = false;
+    this.playerCollidedNPC = false;
     this.isPaused = true;
   }
 

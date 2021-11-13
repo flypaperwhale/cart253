@@ -83,6 +83,14 @@ function cueLightFlicks() {
   lightFlickSound.addCue(0.8, flickBulbOff);
 }
 
+function flickBulbOn() { // on cue flicks bulb on
+  flickerBulb = true;
+}
+
+function flickBulbOff() { // on cue flicks bulb off
+  flickerBulb = false;
+}
+
 // Create player
 function createPlayer(x, y) {
   // create new player class
@@ -171,6 +179,16 @@ function flickBulb() {
   }
 }
 
+function displayLampGlow() {
+  // displays circle of light around lamphead
+  push();
+  noStroke();
+  fill(200, 200, 0, 200); // light yellow and slightly transparent
+  ellipseMode(CENTER);
+  /*?*/ ellipse(width / 2, height / 2 - 70, 100, 100); // ?? real numbers hmmm ** //
+  pop();
+}
+
 function displayLightsOn() {
   if (lightIsOn === true) {
     // if the lamp is turned on
@@ -190,14 +208,19 @@ function displaySkyGlow() {
   pop();
 }
 
-function displayLampGlow() {
-  // displays circle of light around lamphead
-  push();
-  noStroke();
-  fill(200, 200, 0, 200); // light yellow and slightly transparent
-  ellipseMode(CENTER);
-  /*?*/ ellipse(width / 2, height / 2 - 70, 100, 100); // ?? real numbers hmmm ** //
-  pop();
+function lightBuzzing() { // light buzzing sound FX
+  if (lightIsOn === true) { // if lightIsOn is true
+    push();
+    lightBuzzNoise.playMode(`untilDone`); // buzz sound mode loop until done
+    buzzVolume = map(playerDistLamp, 0, height - lampX, 0.1, 0);
+    // buzz volume increases when player is closer to lamp and decreases when further
+    lightBuzzNoise.setVolume(buzzVolume);
+    let panning = map(player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)
+    lightBuzzNoise.pan(panning);
+    lightBuzzNoise.rate(1.2); // sound a little bit higher pitched
+    lightBuzzNoise.play(); // play the sound
+    pop();
+  }
 }
 
 function displayGreenGrass() {
@@ -387,28 +410,6 @@ function bulbBursting() {
   bulbBurstSound.setVolume(1.7); // bulb bursting soun is loud
   bulbBurstSound.play(); // play bulb bursting sound
   pop();
-}
-
-function lightBuzzing() {
-  if (lightIsOn === true) {
-    push();
-    lightBuzzNoise.playMode(`untilDone`);
-    buzzVolume = map(playerDistLamp, 0, height - lampX, 0.1, 0);
-    lightBuzzNoise.setVolume(buzzVolume);
-    let panning = map(player.x, 0, width, 0.6, -0.6); //pan code from p5 reference
-    lightBuzzNoise.pan(panning);
-    lightBuzzNoise.rate(1.2);
-    lightBuzzNoise.play();
-    pop();
-  }
-}
-
-function flickBulbOn() {
-  flickerBulb = true;
-}
-
-function flickBulbOff() {
-  flickerBulb = false;
 }
 
 function keyPressed() { // when key is pressed

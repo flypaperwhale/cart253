@@ -1,36 +1,36 @@
 class Player {
-  constructor(x,y) {
-    this.x = x;
-    this.y = y;
-    this.size = 20;
-    this.vx = 0;
-    this.vy = 0;
-    this.speed = 4;
-    this.alive = true;
-    this.playerCollidedNPC = false;
-    this.isPaused = true;
+  constructor(x,y) { // feed x,y in script
+    this.x = x; // player starting x
+    this.y = y; // player starting y
+    this.size = 20; // player size is 20
+    this.vx = 0; // handled by pause or ad/arrow keys
+    this.vy = 0; // handled by pause or ws/arrow keys
+    this.speed = 4; // speed of 4
+    this.alive = true; // always alive
+    this.playerCollidedNPC = false; // switch true/false if player is in collision with npc or not
+    this.isPaused = true; // player pause state switch
   }
 
-  constrain() {
+  constrain() { // constrain player to the ground
     this.x = constrain(this.x,0,600);
     this.y = constrain(this.y,402,810);
   }
 
-  handleInput() {
-    if (keyIsDown(LEFT_ARROW)) {
+  handleInput() { // handle keys for moving player avatar
+    if (keyIsDown(LEFT_ARROW)||keyIsDown(65)) {
       this.vx = -this.speed;
     }
-    else if (keyIsDown(RIGHT_ARROW)) {
+    else if (keyIsDown(RIGHT_ARROW)||keyIsDown(68)) {
       this.vx = this.speed;
     }
     else {
       this.vx = 0;
     }
 
-    if (keyIsDown(UP_ARROW)) {
+    if (keyIsDown(UP_ARROW)||keyIsDown(87)) {
       this.vy = -this.speed;
     }
-    else if (keyIsDown(DOWN_ARROW)) {
+    else if (keyIsDown(DOWN_ARROW)||keyIsDown(83)) {
       this.vy = this.speed;
     }
     else {

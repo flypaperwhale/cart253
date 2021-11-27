@@ -22,6 +22,7 @@ function draw() {
 
   //ground
   displayGreenGrass(); // display Green Grass
+  displayCircleAndPath(); // display gray circle and path
 
   displayDollysBuilding();
   displayBackgroundBuilding();
@@ -54,7 +55,7 @@ function displayDollysBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width / 2, height / 2, 20, 50);
+  rect(0 + 50, height / 2 + 165, 100, 190);
   pop();
 }
 //Background building
@@ -64,7 +65,7 @@ function displayBackgroundBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width / 2 + 100, height / 2, 20, 50);
+  rect(0 + 50, height / 2-50, 100, 90);
   pop();
 }
 //Shop
@@ -74,7 +75,7 @@ function displayShop() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width / 2 - 100, height / 2, 20, 50);
+  rect(width / 2 + 170, height / 2+215, 160, 90);
   pop();
 }
 
@@ -82,7 +83,7 @@ function displaySky() {
   // displays sky blue rectangle
   push();
   noStroke();
-  fill(100, 100, 255); // blue with alpha value linked to dayTimer
+  fill(35,45,125); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
   rect(width / 2, 0, 500, 900);
   pop();
@@ -92,8 +93,20 @@ function displayGreenGrass() {
   // draws a green rectangle as land where player can walk around
   push();
   noStroke();
-  fill(30, 75, 40); // middle green
+  fill(20, 85, 45); // middle green
   rectMode(CENTER);
   rect(width / 2, height, 500, 1100); // displayed at bottom center
+  pop();
+}
+
+function displayCircleAndPath() { // draws a gray path leading to the circle
+  // in the middle of which stands the lamppost
+  push();
+  noStroke();
+  fill(45, 45, 45); // dark grey
+  ellipseMode(CENTER);
+  ellipse(width / 2, height / 2 + 75, 250, 150); // a circle at mid center
+  rectMode(CENTER);
+  rect(width / 2, height / 2 + 200, 50, 300); // a narrow path down the center
   pop();
 }

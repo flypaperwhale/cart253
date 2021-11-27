@@ -1,52 +1,133 @@
-"use strict";
+/**
+A primitive grid-based program that you can move around in and
+collect the letter O, and where the W serves as a wall
+*/
 
-// Our synthesizer
-let synth;
-// The scale for F minor ("b" means "flat" if you haven't seen it before)
-let notes = [`F4`, `G4`, `Ab4`, `Bb4`, `C4`, `Db4`, `Eb4`, `F5`];
-// The current note to play, start at the beginning
-let currentNote = 0;
-// To track the interval that plays note
-let interval;
+let grid = [];
+// How many rows and columns in the grid?
+let rows = 10;
+let cols = 10;
+// The unit size (how big a square for each tile)
+let unit = 50;
 
-function setup() {
-  createCanvas(600, 600);
-  userStartAudio();
+// What are the possible things can can be put in the grid?
+// Here it's just a (W) wall and (c) collectible. There empty
+// strings are there to make it more likely we put "nothing" in
+// a grid space
+let items = [`W`, `c`, ``, ``, ``, ``, ``, ``];
 
-  // Create the synthesizer
-  synth = new p5.PolySynth();
+// The player starts at 0,0 on the grid and starts out a bit small
+let player = {
+  r: 0,
+  c: 0,
+  size: unit / 5
 }
 
+/**
+Create and populate the grid
+*/
+function setup() {
+  createCanvas(rows * unit, cols * unit);
+
+  // Go through the grid's rows
+  for (let r = 0; r < rows; r++) {
+    // For each row add an empty array to represent the row
+    grid.push([]);
+    // Go through all the columns in this row
+    for (let c = 0; c < cols; c++) {
+      // Choose a random item to add at this position
+      // (A W, c, or nothing)
+      let item = random(items);
+      // Add it to the row
+      grid[r].push(item);
+    }
+  }
+  // Make the position the player starts at empty!
+  grid[player.r][player.c] = ``;
+}
+
+/**
+Handles displaying the grid and the player
+*/
 function draw() {
   background(0);
+
+  // Go through all the rows and columns
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      // Get the item at this position
+      let item = grid[r][c];
+
+      // Draw a square so we can see the grid space
+      push();
+      stroke(255);
+      noFill();
+      rect(r * unit, c * unit, unit, unit);
+      pop();
+
+      // Display the item (as text for now)
+      push();
+      textSize(unit);
+      textAlign(CENTER, CENTER);
+      fill(255);
+      text(item, r * unit + unit/2, c * unit + unit/2);
+      pop();
+    }
+  }
+
+  // Display the player
+  push();
+  fill(255,0,0);
+  noStroke();
+  rectMode(CENTER);
+  rect(player.r * unit + unit/2, player.c * unit + unit/2, player.size, player.size);
+  pop();
 }
 
-// mousePressed() starts and stops our piano playing
-function mousePressed() {
-  // First check that the piano isn't already playing
-  // The interval will be undefined if it hasn't started
-  if (interval === undefined) {
-    // Start our interval, calling playNextNote every 500 milliseconds
-    // Assign the result to interval to remember the interval
-    interval = setInterval(playNextNote, 500);
-  }
-  else {
-    // If they click when it's playing, clear the interval and set interval
-    // back to undefined to stop play
-    clearInterval(interval);
-    interval = undefined;
-  }
-}
+/**
+Key pressed are there to handle movement, but we also use this to check
+whether the player tried to walk through a wall, or whether they
+picked up a collectible
+*/
+function keyPressed() {
+  // First of all create new variables for the player's position
+  // This will enable us to check what's there without actually
+  // moving the player
+  let newR = player.r;
+  let newC = player.c;
 
-// playNextNote() plays the next note in our array
-function playNextNote() {
-  // Chose the note at the current position
-  let note = notes[currentNote];
-  // Play it
-  synth.play(note, 0.2, 0, 0.4);
-  // Increase the current position and go back to 0 when we reach the end
-  currentNote = currentNote + 1;
-  if (currentNote === notes.length) {
-    currentNote = 0;
+  // Adjust the row and column position based on the arrow key
+  if (keyCode === LEFT_ARROW) {
+    newR -= 1;
+  }
+  else if (keyCode === RIGHT_ARROW) {
+    newR += 1;
+  }
+  else if (keyCode === UP_ARROW) {
+    newC -= 1;
+  }
+  else if (keyCode === DOWN_ARROW) {
+    newC += 1;
+  }
+
+  // Constrain so the player can't walk off the edges
+  newR = constrain(newR, 0, rows - 1);
+  newC = constrain(newC, 0, cols - 1);
+
+  // Now check what is at the position the player tried to move to
+  if (grid[newR][newC] === ``) {
+    // If nothing, they can just move there
+    player.r = newR;
+    player.c = newC;
+  }
+  else if (grid[newR][newC] === `c`) {
+    // If it's a collectible then empty that spot
+    grid[newR][newC] = ``;
+    // Make the player grow (but constrain to the unit size)
+    player.size += unit/10;
+    player.size = constrain(player.size, 0, unit);
+    // And let them move to that space
+    player.r = newR;
+    player.c = newC;
   }
 }

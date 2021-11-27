@@ -1,6 +1,17 @@
 "use strict";
 
 let player; // player avatar, class Player
+let streetlampImage;
+let streetlampFoot;
+
+let lampX = 300; // lamp x value
+let lampY = 400; // lamp y value
+
+function preload(){
+  streetlampImage = loadImage("assets/images/lamp.png");
+  streetlampFoot = loadImage("assets/images/lampFoot.png");
+
+}
 
 /**
 Description of setup
@@ -29,7 +40,11 @@ function draw() {
   displayShop();
 
   movePlayer(); // handle user input and move player avatar
+
+  displayLampFoot(); // displayed before the player for correct layer effect
   displayPlayer(); // displays player and also constrains them to move only on the ground
+  displayLamppost(); // displays lamppost in front of player
+
 }
 
 // Create player
@@ -105,8 +120,22 @@ function displayCircleAndPath() { // draws a gray path leading to the circle
   noStroke();
   fill(45, 45, 45); // dark grey
   ellipseMode(CENTER);
-  ellipse(width / 2, height / 2 + 75, 250, 150); // a circle at mid center
+  ellipse(width / 2, height / 2 + 75, 165, 100); // a circle at mid center
   rectMode(CENTER);
   rect(width / 2, height / 2 + 200, 50, 300); // a narrow path down the center
+  pop();
+}
+
+function displayLampFoot() { // player moves in front of lamp foot
+  push();
+  imageMode(CENTER);
+  image(streetlampFoot, lampX, lampY + 60, 25, 25); // hard numbers
+  pop();
+}
+
+function displayLamppost() { // lampost is displayed
+  push();
+  imageMode(CENTER);
+  image(streetlampImage, lampX, lampY - 20, 25, 140);
   pop();
 }

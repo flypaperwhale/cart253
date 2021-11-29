@@ -5,8 +5,8 @@ let streetlampImage;
 let streetlampFoot;
 let stairs;
 
-let lampX = 225; // lamp x value
-let lampY = 510; // lamp y value
+let lampX = 258; // lamp x value
+let lampY = 501; // lamp y value
 
 function preload(){
   streetlampImage = loadImage("assets/images/lamp.png");
@@ -83,26 +83,28 @@ function displayBackgroundBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(0 + 50, height / 2 - 28, 100, 90);
+  rect(0 + 35, height / 2 - 50, 70, 125);
+  rect(0 + 15, height /2 + 50, 30, 100);
+  rect(0 + 50, height/2 + 200, 110, 215);
   pop();
 }
-//Shop
+//Mayorhouse
 function displayShop() {
   // displays sky blue rectangle
   push();
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width / 2, height / 2+215, 150, 100);
+  rect(width / 2+10, height / 2+127, 180, 165);
   pop();
 }
 
-/*function displayStairs(){
+function displayStairs(){
   push();
   imageMode(CENTER);
-  image(stairs, 120.5, height/2 + 181, 45, 228); // hard numbers
+  image(stairs, 371, height/2 + 130, 45, 165); // hard numbers
   pop();
-}*/
+}
 
 function displaySky() {
   // displays sky blue rectangle
@@ -128,11 +130,11 @@ function displayCircleAndPath() { // draws a gray path leading to the circle
   // in the middle of which stands the lamppost
   push();
   noStroke();
-  fill(45, 45, 45); // dark grey
+  fill(145, 145, 100); // dark grey
   ellipseMode(CENTER);
-  ellipse(width / 2 - 25, height / 2 + 70, 135, 70); // a circle at mid center
-  rectMode(CENTER);
-  rect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
+  ellipse(width / 2 + 9, height / 2 + 250, 250, 80); // a circle at mid center
+  //rectMode(CENTER);
+  //ßrect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
   pop();
 }
 

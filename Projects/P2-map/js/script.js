@@ -37,10 +37,7 @@ function draw() {
   displayGreenGrass(); // display Green Grass
   displayCircleAndPath(); // display gray circle and path
 
-  displayDollysBuilding();
   displayBackgroundBuilding();
-  displayShop();
-  displayStairs();
 
   movePlayer(); // handle user input and move player avatar
 
@@ -66,16 +63,7 @@ function movePlayer() {
   player.move(); // and move player avatar
 }
 
-//Dolly's building
-function displayDollysBuilding() {
-  // displays sky blue rectangle
-  push();
-  noStroke();
-  fill(159, 91, 114); // blue with alpha value linked to dayTimer
-  rectMode(CENTER);
-  rect(width - 50, height / 2 + 175, 100, 235);
-  pop();
-}
+
 //Background building
 function displayBackgroundBuilding() {
   // displays sky blue rectangle
@@ -88,23 +76,7 @@ function displayBackgroundBuilding() {
   rect(0 + 50, height/2 + 200, 110, 215);
   pop();
 }
-//Mayorhouse
-function displayShop() {
-  // displays sky blue rectangle
-  push();
-  noStroke();
-  fill(159, 91, 114); // blue with alpha value linked to dayTimer
-  rectMode(CENTER);
-  rect(width / 2+10, height / 2+127, 180, 165);
-  pop();
-}
 
-function displayStairs(){
-  push();
-  imageMode(CENTER);
-  image(stairs, 371, height/2 + 130, 45, 165); // hard numbers
-  pop();
-}
 
 function displaySky() {
   // displays sky blue rectangle

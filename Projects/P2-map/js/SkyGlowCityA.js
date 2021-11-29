@@ -6,13 +6,14 @@ let streetlampFoot;
 let stairs;
 
 let lampX = 258; // lamp x value
-let lampY = 501; // lamp y value
+let lampY = 510; // lamp y value
 
 function preload(){
   streetlampImage = loadImage("assets/images/lamp.png");
   streetlampFoot = loadImage("assets/images/lampFoot.png");
   streetlampFoot = loadImage("assets/images/lampFoot.png");
   stairs =  loadImage("assets/images/stairs.png");
+  garbage =  loadImage("assets/images/garbage.png");
 }
 
 /**

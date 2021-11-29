@@ -4,8 +4,10 @@ let player; // player avatar, class Player
 let streetlampImage;
 let streetlampFoot;
 let stairs;
+let garbage;
 
-let lampX = 258; // lamp x value
+
+let lampX = 378; // lamp x value
 let lampY = 501; // lamp y value
 
 function preload(){
@@ -13,6 +15,8 @@ function preload(){
   streetlampFoot = loadImage("assets/images/lampFoot.png");
   streetlampFoot = loadImage("assets/images/lampFoot.png");
   stairs =  loadImage("assets/images/stairs.png");
+  garbage =  loadImage("assets/images/garbage.png");
+
 }
 
 /**
@@ -38,6 +42,7 @@ function draw() {
   displayCircleAndPath(); // display gray circle and path
 
   displayBackgroundBuilding();
+  displayGarbage();
 
   movePlayer(); // handle user input and move player avatar
 
@@ -71,12 +76,19 @@ function displayBackgroundBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(0 + 35, height / 2 - 50, 70, 125);
-  rect(0 + 15, height /2 + 50, 30, 100);
-  rect(0 + 50, height/2 + 200, 110, 215);
+
+  rect(0 + 50, height/2 + 235, 100, 80);
   pop();
 }
 
+function displayGarbage(){
+  push();
+  imageMode(CENTER);
+  image(garbage, 109, height/2 + 248, 45, 65); // hard numbers
+  pop();
+
+
+}
 
 function displaySky() {
   // displays sky blue rectangle
@@ -102,9 +114,9 @@ function displayCircleAndPath() { // draws a gray path leading to the circle
   // in the middle of which stands the lamppost
   push();
   noStroke();
-  fill(145, 145, 100); // dark grey
+  fill(145, 145, 145); // dark grey
   ellipseMode(CENTER);
-  ellipse(width / 2 + 9, height / 2 + 250, 250, 80); // a circle at mid center
+  ellipse(width / 2 + 50, height / 2 + 290, 200, 20); // a circle at mid center
   //rectMode(CENTER);
   //ßrect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
   pop();

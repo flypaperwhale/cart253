@@ -80,14 +80,14 @@ function displayBackgroundBuilding() {
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
 
-  rect(0 + 50, height/2 + 235, 100, 80);
+  rect(0 + 50, height/2 + 225, 100, 80);
   pop();
 }
 
 function displayGarbage(){
   push();
   imageMode(CENTER);
-  image(garbage, 109, height/2 + 248, 45, 65); // hard numbers
+  image(garbage, 107, height/2 + 244, 35, 50); // hard numbers
   pop();
 }
 

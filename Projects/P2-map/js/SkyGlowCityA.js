@@ -13,7 +13,6 @@ function preload(){
   streetlampFoot = loadImage("assets/images/lampFoot.png");
   streetlampFoot = loadImage("assets/images/lampFoot.png");
   stairs =  loadImage("assets/images/stairs.png");
-  garbage =  loadImage("assets/images/garbage.png");
 }
 
 /**

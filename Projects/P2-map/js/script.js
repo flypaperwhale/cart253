@@ -3,14 +3,16 @@
 let player; // player avatar, class Player
 let streetlampImage;
 let streetlampFoot;
+let stairs;
 
-let lampX = 240; // lamp x value
-let lampY = 475; // lamp y value
+let lampX = 225; // lamp x value
+let lampY = 510; // lamp y value
 
 function preload(){
   streetlampImage = loadImage("assets/images/lamp.png");
   streetlampFoot = loadImage("assets/images/lampFoot.png");
-
+  streetlampFoot = loadImage("assets/images/lampFoot.png");
+  stairs =  loadImage("assets/images/stairs.png");
 }
 
 /**
@@ -38,6 +40,7 @@ function draw() {
   displayDollysBuilding();
   displayBackgroundBuilding();
   displayShop();
+  displayStairs();
 
   movePlayer(); // handle user input and move player avatar
 
@@ -70,7 +73,7 @@ function displayDollysBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(0 + 50, height / 2 + 165, 100, 250);
+  rect(0 + 50, height / 2 + 175, 100, 235);
   pop();
 }
 //Background building
@@ -80,7 +83,7 @@ function displayBackgroundBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(0 + 50, height / 2-50, 100, 90);
+  rect(0 + 50, height / 2 - 28, 100, 90);
   pop();
 }
 //Shop
@@ -94,13 +97,20 @@ function displayShop() {
   pop();
 }
 
+function displayStairs(){
+  push();
+  imageMode(CENTER);
+  image(stairs, 120.5, height/2 + 181, 45, 228); // hard numbers
+  pop();
+}
+
 function displaySky() {
   // displays sky blue rectangle
   push();
   noStroke();
   fill(35,45,125); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width / 2, 0, 500, 900);
+  rect(width / 2, 0, 500, 990);
   pop();
 }
 
@@ -110,7 +120,7 @@ function displayGreenGrass() {
   noStroke();
   fill(20, 85, 45); // middle green
   rectMode(CENTER);
-  rect(width / 2, height, 500, 1100); // displayed at bottom center
+  rect(width / 2, height, 500, 1010); // displayed at bottom center
   pop();
 }
 
@@ -120,9 +130,9 @@ function displayCircleAndPath() { // draws a gray path leading to the circle
   noStroke();
   fill(45, 45, 45); // dark grey
   ellipseMode(CENTER);
-  ellipse(width / 2 - 10, height / 2 + 45, 165, 100); // a circle at mid center
+  ellipse(width / 2 - 25, height / 2 + 70, 135, 70); // a circle at mid center
   rectMode(CENTER);
-  rect(width / 2 - 10, height / 2 + 200, 50, 300); // a narrow path down the center
+  rect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
   pop();
 }
 

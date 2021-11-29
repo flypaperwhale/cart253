@@ -5,6 +5,7 @@ let streetlampImage;
 let streetlampFoot;
 let stairs;
 let garbage;
+let gazebo;
 
 
 let lampX = 378; // lamp x value
@@ -16,6 +17,7 @@ function preload(){
   streetlampFoot = loadImage("assets/images/lampFoot.png");
   stairs =  loadImage("assets/images/stairs.png");
   garbage =  loadImage("assets/images/garbage.png");
+  gazebo =  loadImage("assets/images/gazebo.png");
 
 }
 
@@ -43,6 +45,7 @@ function draw() {
 
   displayBackgroundBuilding();
   displayGarbage();
+  displayGazebo();
 
   movePlayer(); // handle user input and move player avatar
 
@@ -86,9 +89,15 @@ function displayGarbage(){
   imageMode(CENTER);
   image(garbage, 109, height/2 + 248, 45, 65); // hard numbers
   pop();
-
-
 }
+
+function displayGazebo(){
+  push();
+  imageMode(CENTER);
+  image(gazebo, 119, height/2+60, 130, 105); // hard numbers
+  pop();
+}
+
 
 function displaySky() {
   // displays sky blue rectangle

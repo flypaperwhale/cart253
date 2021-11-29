@@ -4,8 +4,8 @@ let player; // player avatar, class Player
 let streetlampImage;
 let streetlampFoot;
 
-let lampX = 300; // lamp x value
-let lampY = 400; // lamp y value
+let lampX = 240; // lamp x value
+let lampY = 475; // lamp y value
 
 function preload(){
   streetlampImage = loadImage("assets/images/lamp.png");
@@ -70,7 +70,7 @@ function displayDollysBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(0 + 50, height / 2 + 165, 100, 190);
+  rect(0 + 50, height / 2 + 165, 100, 250);
   pop();
 }
 //Background building
@@ -90,7 +90,7 @@ function displayShop() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width / 2 + 170, height / 2+215, 160, 90);
+  rect(width / 2 + 175, height / 2+215, 150, 100);
   pop();
 }
 
@@ -120,22 +120,22 @@ function displayCircleAndPath() { // draws a gray path leading to the circle
   noStroke();
   fill(45, 45, 45); // dark grey
   ellipseMode(CENTER);
-  ellipse(width / 2, height / 2 + 75, 165, 100); // a circle at mid center
+  ellipse(width / 2 - 10, height / 2 + 45, 165, 100); // a circle at mid center
   rectMode(CENTER);
-  rect(width / 2, height / 2 + 200, 50, 300); // a narrow path down the center
+  rect(width / 2 - 10, height / 2 + 200, 50, 300); // a narrow path down the center
   pop();
 }
 
 function displayLampFoot() { // player moves in front of lamp foot
   push();
   imageMode(CENTER);
-  image(streetlampFoot, lampX, lampY + 60, 25, 25); // hard numbers
+  image(streetlampFoot, lampX, lampY + 50, 15, 15); // hard numbers
   pop();
 }
 
 function displayLamppost() { // lampost is displayed
   push();
   imageMode(CENTER);
-  image(streetlampImage, lampX, lampY - 20, 25, 140);
+  image(streetlampImage, lampX, lampY, 15, 90);
   pop();
 }

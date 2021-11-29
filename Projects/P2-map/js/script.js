@@ -73,7 +73,7 @@ function displayDollysBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(0 + 50, height / 2 + 175, 100, 235);
+  rect(width - 50, height / 2 + 175, 100, 235);
   pop();
 }
 //Background building
@@ -93,16 +93,16 @@ function displayShop() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width / 2 + 175, height / 2+215, 150, 100);
+  rect(width / 2, height / 2+215, 150, 100);
   pop();
 }
 
-function displayStairs(){
+/*function displayStairs(){
   push();
   imageMode(CENTER);
   image(stairs, 120.5, height/2 + 181, 45, 228); // hard numbers
   pop();
-}
+}*/
 
 function displaySky() {
   // displays sky blue rectangle

@@ -6,7 +6,7 @@ let streetlampFoot;
 let stairs;
 let garbage;
 let gazebo;
-
+let tree;
 
 let lampX = 378; // lamp x value
 let lampY = 501; // lamp y value
@@ -18,6 +18,7 @@ function preload(){
   stairs =  loadImage("assets/images/stairs.png");
   garbage =  loadImage("assets/images/garbage.png");
   gazebo =  loadImage("assets/images/gazebo.png");
+  tree = loadImage("assets/images/tree.png");
 
 }
 
@@ -53,6 +54,7 @@ function draw() {
   displayPlayer(); // displays player and also constrains them to move only on the ground
   displayLamppost(); // displays lamppost in front of player
 
+  displayTrees();
 }
 
 // Create player
@@ -94,7 +96,7 @@ function displayGarbage(){
 function displayGazebo(){
   push();
   imageMode(CENTER);
-  image(gazebo, 119, height/2+60, 130, 105); // hard numbers
+  image(gazebo, 100, height/2+50, 130, 105); // hard numbers
   pop();
 }
 
@@ -125,7 +127,7 @@ function displayCircleAndPath() { // draws a gray path leading to the circle
   noStroke();
   fill(145, 145, 145); // dark grey
   ellipseMode(CENTER);
-  ellipse(width / 2 + 50, height / 2 + 290, 200, 20); // a circle at mid center
+  ellipse(width / 2 - 100, height / 2 + 290, 200, 20); // a circle at mid center
   //rectMode(CENTER);
   //ßrect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
   pop();
@@ -142,5 +144,36 @@ function displayLamppost() { // lampost is displayed
   push();
   imageMode(CENTER);
   image(streetlampImage, lampX, lampY, 15, 90);
+  pop();
+}
+
+function displayTrees() { // lampost is displayed
+  push();
+  imageMode(CENTER);
+  image(tree, 270, 500, 100, 110);
+  pop();
+  push();
+  imageMode(CENTER);
+  image(tree, 490, 490, 90, 110);
+  pop();
+  push();
+  imageMode(CENTER);
+  image(tree, 510, 550, 80, 90);
+  pop();
+  push();
+  imageMode(CENTER);
+  image(tree, 500, 620, 80, 110);
+  pop();
+  push();
+  imageMode(CENTER);
+  image(tree, 500, 700, 100, 120);
+  pop();
+  push();
+  imageMode(CENTER);
+  image(tree, 245, 655, 85, 105);
+  pop();
+  push();
+  imageMode(CENTER);
+  image(tree, 288, 682, 100, 120);
   pop();
 }

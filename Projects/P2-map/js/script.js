@@ -4,20 +4,17 @@ let player; // player avatar, class Player
 let streetlampImage;
 let streetlampFoot;
 let stairs;
-let garbage;
-let gazebo;
+let tree;
 
-
-let lampX = 378; // lamp x value
-let lampY = 501; // lamp y value
+let lampX = 225; // lamp x value
+let lampY = 510; // lamp y value
 
 function preload(){
   streetlampImage = loadImage("assets/images/lamp.png");
   streetlampFoot = loadImage("assets/images/lampFoot.png");
   streetlampFoot = loadImage("assets/images/lampFoot.png");
   stairs =  loadImage("assets/images/stairs.png");
-  garbage =  loadImage("assets/images/garbage.png");
-  gazebo =  loadImage("assets/images/gazebo.png");
+  tree = loadImage("assets/images/tree.png");
 
 }
 
@@ -43,15 +40,17 @@ function draw() {
   displayGreenGrass(); // display Green Grass
   displayCircleAndPath(); // display gray circle and path
 
+  displayDollysBuilding();
   displayBackgroundBuilding();
-  displayGarbage();
-  displayGazebo();
+  displayShop();
+  displayStairs();
 
   movePlayer(); // handle user input and move player avatar
 
   displayLampFoot(); // displayed before the player for correct layer effect
   displayPlayer(); // displays player and also constrains them to move only on the ground
   displayLamppost(); // displays lamppost in front of player
+  displayTrees();
 
 }
 
@@ -71,7 +70,16 @@ function movePlayer() {
   player.move(); // and move player avatar
 }
 
-
+//Dolly's building
+function displayDollysBuilding() {
+  // displays sky blue rectangle
+  push();
+  noStroke();
+  fill(159, 91, 114); // blue with alpha value linked to dayTimer
+  rectMode(CENTER);
+  rect(0 + 50, height / 2 + 175, 100, 235);
+  pop();
+}
 //Background building
 function displayBackgroundBuilding() {
   // displays sky blue rectangle
@@ -79,25 +87,26 @@ function displayBackgroundBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-
-  rect(0 + 50, height/2 + 225, 100, 80);
+  rect(0 + 50, height / 2 - 28, 100, 90);
+  pop();
+}
+//Shop
+function displayShop() {
+  // displays sky blue rectangle
+  push();
+  noStroke();
+  fill(159, 91, 114); // blue with alpha value linked to dayTimer
+  rectMode(CENTER);
+  rect(width / 2 + 175, height / 2+215, 150, 100);
   pop();
 }
 
-function displayGarbage(){
+function displayStairs(){
   push();
   imageMode(CENTER);
-  image(garbage, 107, height/2 + 244, 35, 50); // hard numbers
+  image(stairs, 120.5, height/2 + 181, 45, 228); // hard numbers
   pop();
 }
-
-function displayGazebo(){
-  push();
-  imageMode(CENTER);
-  image(gazebo, 119, height/2+60, 130, 105); // hard numbers
-  pop();
-}
-
 
 function displaySky() {
   // displays sky blue rectangle
@@ -123,11 +132,11 @@ function displayCircleAndPath() { // draws a gray path leading to the circle
   // in the middle of which stands the lamppost
   push();
   noStroke();
-  fill(145, 145, 145); // dark grey
+  fill(45, 45, 45); // dark grey
   ellipseMode(CENTER);
-  ellipse(width / 2 + 50, height / 2 + 290, 200, 20); // a circle at mid center
-  //rectMode(CENTER);
-  //ßrect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
+  ellipse(width / 2 - 25, height / 2 + 70, 135, 70); // a circle at mid center
+  rectMode(CENTER);
+  rect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
   pop();
 }
 
@@ -142,5 +151,12 @@ function displayLamppost() { // lampost is displayed
   push();
   imageMode(CENTER);
   image(streetlampImage, lampX, lampY, 15, 90);
+  pop();
+}
+
+function displayTrees() { // lampost is displayed
+  push();
+  imageMode(CENTER);
+  image(tree, 440, 540, 100, 110);
   pop();
 }

@@ -27,24 +27,29 @@ class SimulationState extends State {
   update() {
     background(0);
     fill(255);
-    text(
-      `press space to talk to NPCs
+
+    // This text is in the background, gives player how to play
+    text(`press space to talk to NPCs
       press enter to see inventory (in console)!`,
-      600 / 2,
-      600 / 2
+      width/ 2, height/2
     );
 
-    if (this.player.isPaused === true) {
-      this.vx = 0;
-      this.vy = 0;
-    } else if (this.player.isPaused === false) {
-      this.player.handleInput();
-      this.player.move();
+// Check if player is paused (when textBubble appears)
+    if (this.player.isPaused === true) { // if player is paused
+      this.player.vx = 0; // turn player velocity to 0
+      this.player.vy = 0;
+    } else if (this.player.isPaused === false) { // if player is not paused
+      this.player.handleInput(); // handle player input: up, down, left, right, w,s,a,d,
+      this.player.move(); // change the player avatar's position
     }
 
-    this.player.display();
+    this.player.display(); // display the player avatar
 
-    this.npc.display();
+    this.npc.display(); // display the npc
+    /* this here should display every npc on a given map. there should be an array of npc labels
+    3 arrays for 3 maps, (and when a map is changed, the array of npcs is recalled?)
+    (or array is called once in the program and stored on map file. map file needs map.X.listOfNPCs)
+    */
 
     this.npc.playerCollide(this.player.x, this.player.y);
 

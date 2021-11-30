@@ -11,7 +11,7 @@ class SimulationState extends State {
     // Some are on the map and can be picked up by being walked on
     // Other will be on NPCs and will be tradeable.
 
-    this.textBubble = new TextBubble(`whatever`);
+    this.textBubble = undefined; 
     this.player = new Player(150, 400);
     this.npc = new Bob(450, 400);
     //this.item = new Item(200,200,`Ham`);
@@ -24,10 +24,10 @@ class SimulationState extends State {
     this.eventSwitch = 0;
   }
 
-  update() {
+  update() { // updates every frame, it serves a drawing function
     background(0);
     fill(255);
-
+    textAlign(CENTER);
     // This text is in the background, gives player how to play
     text(`press space to talk to NPCs
       press enter to see inventory (in console)!`,
@@ -51,15 +51,30 @@ class SimulationState extends State {
     (or array is called once in the program and stored on map file. map file needs map.X.listOfNPCs)
     */
 
+// check if player has collided with an npc
+/* as the specific npcs for each map will be stored at first as labels in each map
+but then created and as their specific NPC classes, which will be returned to the npc array
+with every change */
     this.npc.playerCollide(this.player.x, this.player.y);
 
-    if (this.npc.isClicked === true) {
-      this.player.paused();
+    if (this.npc.isClicked === true) { // this should only happen if player is colliding w npc
+      // if when player is colliding with npc player also presses spacebar
+      this.player.paused(); // player avatar movement becomes paused
 
-      let desiredItem = this.npc.desiredItem;
+// SimulationState desiredItem is temporarily the clicked npc's desired item (if any)
+// same holdingItem is temp the clicked npc's holding item
+      let desiredItem = this.npc.desiredItem; // clicked npc values temporarily stored in simulation
       let holdingItem = this.npc.holdingItem;
-      this.player.checkTrade(desiredItem, holdingItem);
 
+      this.player.checkTrade(desiredItem, holdingItem);
+      // using temporarily stored values inputed in player file
+      // the a match between the npc's desiredItem and an item found in player's inventory array
+      // if there is a match, the npc's holdingItem label is stored in ...
+      // in simulation the item corresponding to the acquired item label is created
+      // and stored in the player.inventory
+
+
+// this is a text assigning machine //
       if (this.npc.textNo === 1) {
         this.textBubble = new TextBubble(`Hello Dolly, can you bring me Ham?`);
       } else if (this.npc.textNo === 2) {

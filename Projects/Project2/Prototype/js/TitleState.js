@@ -9,10 +9,13 @@ class TitleState extends State {
 
   display(){
     background(0);
-
     fill(255);
+
+    push();
     textAlign(CENTER);
-    text(`Welcome. Click mouse to start.`, 600/2, 600/2);
+    text(`Welcome. Click mouse to start.`, width/2, height/2);
+    pop();
+
   }
 
   keyPressed(){

@@ -52,9 +52,10 @@ class Player {
   }
 
   displayInventory() {
-    for (let i = 0; i < this.inventory.length; i++) {
-      console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);
-    }
+    // for (let i = 0; i < this.inventory.length; i++) {
+    //   console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);
+    // }
+    console.log(this.inventory);
   }
 
   checkPlayerInventory() {

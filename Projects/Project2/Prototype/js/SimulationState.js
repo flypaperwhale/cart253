@@ -10,8 +10,8 @@ class SimulationState extends State {
     // When game is started, every Item is created and stored somewhere
     // Some are on the map and can be picked up by being walked on
     // Other will be on NPCs and will be tradeable.
-
-    this.textBubble = undefined; 
+    this.npcLIST = 
+    this.textBubble = undefined;
     this.player = new Player(150, 400);
     this.npc = new Bob(450, 400);
     //this.item = new Item(200,200,`Ham`);
@@ -80,8 +80,8 @@ with every change */
       } else if (this.npc.textNo === 2) {
         this.textBubble = new TextBubble(`Give me that Ham!`);
         this.player.inventory.shift();
-        this.item = new Item(0, 0, `Big bone`);
-        this.player.inventory.push(this.item);
+        let item = new Item(0, 0, `Big bone`);
+        this.player.inventory.push(item);
       } else if (this.npc.textNo === 3) {
         this.textBubble = new TextBubble(`Thanks for the Ham,
       you can keep the bone`);
@@ -110,7 +110,7 @@ with every change */
       this.player.isPaused = true;
       this.eventSwitch = constrain(this.eventSwitch, 0, 1);
       if (this.eventSwitch === 0) {
-        this.player.inventory.push(`Ham`);
+        this.player.inventory.push(this.item);
         this.textBubble = new TextBubble(
           `You just picked up ${this.player.inventory[0]}`
         );

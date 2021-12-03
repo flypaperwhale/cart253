@@ -11,7 +11,7 @@ class Bob extends NPC {
     this.desiredItem = `Ham`;
     this.playerCollided = false;
     this.isClicked = false;
-    this.textNo = 1;
+    this.textNo = 1; // i will create an array with the texts that will sort this out.
     this.tradeSucceeded = false;
   }
 

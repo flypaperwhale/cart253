@@ -2,16 +2,21 @@ class SimulationState extends State {
   constructor() {
     super();
 
-    this.billee = new Billee();
-    this.janine = new Janine();
-    this.sheperd = new Sheperd();
-    this.marv = new Marv();
-    this.garbage = new Garbage();
-    this.lampostA = new LampostA();
-    this.lampostC = new LampostC();
-    this.pimlico = new Pimlico();
-    this.jade = new Jade();
-    this.lamotte = new Lamotte();
+    this.simulationNPCList = [];
+
+
+    this.billee = new Billee(); // mapC
+    this.simulationNPCList.push(this.billee);
+    // this.janine = new Janine(); // mapB
+    // this.sheperd = new Sheperd(); // mapC
+    // this.marv = new Marv(); // mapB
+    // this.garbage = new Garbage(); // mapC
+    // this.lampostA = new LampostA(); // mapA
+    // this.lampostB = new LampostA(); // mapA
+    // this.lampostC = new LampostC(); // mapC
+    // this.pimlico = new Pimlico(); // mapA
+    // this.jade = new Jade(); // mapC
+    // this.lamotte = new Lamotte(); // mapA
 
 
 }
@@ -19,16 +24,20 @@ class SimulationState extends State {
 update(){
   this.display();
 
-  this.billee.display();
-  this.janine.display();
-  this.sheperd.display();
-  this.marv.display();
-  this.garbage.display();
-  this.lampostA.display();
-  this.lampostC.display();
-  this.pimlico.display();
-  this.jade.display();
-  this.lamotte.display();
+for (let i = 0; i < this.simulationNPCList.length; i++){
+  this.simulationNPCList[i].display();
+}
+
+  // this.billee.display();
+  // this.janine.display();
+  // this.sheperd.display();
+  // this.marv.display();
+  // this.garbage.display();
+  // this.lampostA.display();
+  // this.lampostC.display();
+  // this.pimlico.display();
+  // this.jade.display();
+  // this.lamotte.display();
 
 }
 

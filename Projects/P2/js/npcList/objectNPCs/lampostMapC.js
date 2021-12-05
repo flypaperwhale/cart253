@@ -2,11 +2,11 @@ class LampostC extends NPC {
   constructor() {
     super();
     this.x = 200;
-    this.y = 210;
+    this.y = 450;
     this.r = 255;
     this.g = 0;
     this.b = 0;
-    this.size = 20;
+    this.size = 10;
     this.name = `LampostC`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = undefined;

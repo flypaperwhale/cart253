@@ -2,11 +2,11 @@ class Lamotte extends NPC {
   constructor() {
     super();
     this.x = 200;
-    this.y = 300;
-    this.r = 255;
-    this.g = 0;
-    this.b = 0;
-    this.size = 20;
+    this.y = 290;
+    this.r = 135; // purple
+    this.g = 40;
+    this.b = 180;
+    this.size = 25;
     this.name = `Street Person Lamotte`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = undefined;

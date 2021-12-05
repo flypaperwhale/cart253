@@ -2,11 +2,11 @@ class Janine extends NPC {
   constructor() {
     super();
     this.x = 200;
-    this.y = 60;
-    this.r = 255;
-    this.g = 0;
-    this.b = 0;
-    this.size = 20;
+    this.y = 90;
+    this.r = 85; // baby blue
+    this.g = 100;
+    this.b = 225;
+    this.size = 25;
     this.name = `Copper Janine`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = undefined;

@@ -49,7 +49,7 @@ Description of setup
 function setup() {
   createCanvas(600, 600);
 
-  state = new TitleState();
+  state = new SimulationState();
 }
 
 

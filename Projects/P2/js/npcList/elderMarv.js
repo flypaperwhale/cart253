@@ -2,11 +2,11 @@ class Marv extends NPC {
   constructor() {
     super();
     this.x = 200;
-    this.y = 120;
-    this.r = 255;
-    this.g = 0;
-    this.b = 0;
-    this.size = 20;
+    this.y = 170;
+    this.r = 150; // beige
+    this.g = 110;
+    this.b = 90;
+    this.size = 25;
     this.name = `Elder Marv`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = undefined;

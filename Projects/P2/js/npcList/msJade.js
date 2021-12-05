@@ -2,12 +2,12 @@ class Jade extends NPC {
   constructor() {
     super();
     this.x = 200;
-    this.y = 270;
-    this.r = 255;
-    this.g = 0;
-    this.b = 0;
-    this.size = 20;
-    this.name = `LampostA`;
+    this.y = 250;
+    this.r = 200; // bluish
+    this.g = 200;
+    this.b = 100;
+    this.size = 25;
+    this.name = `Ms. Jade`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = undefined;
     this.desiredItem = undefined;

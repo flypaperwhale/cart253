@@ -6,7 +6,7 @@ class Billee extends NPC {
     this.r = 215 // orange yellow
     this.g = 90;
     this.b = 60;
-    this.size = 20;
+    this.size = 17;
     this.name = `Billee Rascal`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = undefined;

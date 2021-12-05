@@ -15,7 +15,7 @@ class Garbage extends NPC {
     this.isTriggered = false;
     //this.textNo = 0;
     this.tradeSucceeded = false;
-    this.texts = [`Mother takes me to the parc all the time!`, `Look up, doesn't that constellation look like a frog?`, `Sign me up!`];
+    this.texts = [`The garbage bin is almost full`, `You throw out the Big Bone`, `...`];
   }
 
   display() {

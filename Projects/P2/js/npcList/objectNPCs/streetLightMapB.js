@@ -1,13 +1,13 @@
-class LampostC extends NPC {
+class StreetLightB extends NPC {
   constructor() {
     super();
-    this.x = 200;
-    this.y = 450;
+    this.x = 230;
+    this.y = 410;
     this.r = 255;
     this.g = 0;
     this.b = 0;
     this.size = 10;
-    this.name = `LampostC`;
+    this.name = `StreetLightB`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = undefined;
     this.desiredItem = undefined;
@@ -15,7 +15,8 @@ class LampostC extends NPC {
     this.isTriggered = false;
     //this.textNo = 0;
     this.tradeSucceeded = false;
-    this.texts = [`Mother takes me to the parc all the time!`, `Look up, doesn't that constellation look like a frog?`, `Sign me up!`];
+    this.texts = [`...`,`Don't you see that copper down there?
+    I wouldn't use my slingshot here if I were you`,`Dolly used the wrench on the streetLight`];
   }
 
   display() {

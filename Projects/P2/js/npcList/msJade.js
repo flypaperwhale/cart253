@@ -3,7 +3,7 @@ class Jade extends NPC {
     super();
     this.x = 200;
     this.y = 250;
-    this.r = 200; // bluish
+    this.r = 200; // yellow
     this.g = 200;
     this.b = 100;
     this.size = 25;

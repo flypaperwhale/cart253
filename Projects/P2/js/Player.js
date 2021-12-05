@@ -3,7 +3,7 @@ class Player {
     // feed x,y in script
     this.x = x; // player starting x
     this.y = y; // player starting y
-    this.size = 20; // player size is 20
+    this.size = 17; // player size is 20
     this.vx = 0; // handled by pause or ad/arrow keys
     this.vy = 0; // handled by pause or ws/arrow keys
     this.speed = 4; // speed of 4

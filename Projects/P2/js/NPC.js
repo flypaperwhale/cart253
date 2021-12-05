@@ -2,6 +2,9 @@ class NPC {
   constructor() {
     this.x = undefined;
     this.y = undefined;
+    this.r = undefined;
+    this.g = undefined;
+    this.b = undefined; 
     this.size = undefined;
     this.name = undefined;
     //this.image = undefined; No they will be ellipses
@@ -17,7 +20,7 @@ class NPC {
   display() {
     // displays NPC specific image at the correct coordinates
     push();
-    fill(0, 200, 15);
+    fill(this.r,this.g,this.b);
     noStroke();
     ellipseMode(CENTER);
     ellipse(this.x, this.y, this.size);

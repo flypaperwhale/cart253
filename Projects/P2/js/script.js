@@ -60,5 +60,8 @@ function draw() {
 
   state.update();
 
+}
 
+function mouseClicked() {
+  state.mouseClicked();
 }

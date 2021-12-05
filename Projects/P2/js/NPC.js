@@ -4,7 +4,7 @@ class NPC {
     this.y = undefined;
     this.r = undefined;
     this.g = undefined;
-    this.b = undefined; 
+    this.b = undefined;
     this.size = undefined;
     this.name = undefined;
     //this.image = undefined; No they will be ellipses

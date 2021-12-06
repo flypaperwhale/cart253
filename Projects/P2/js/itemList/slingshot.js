@@ -2,10 +2,10 @@ class Slingshot extends Item {
   constructor(image){
     super();
     this.name = undefined;
-    this.x = 450;
+    this.x = 400;
     this.y = 50;
     this.height = 30;
-    this.weight = 30;
+    this.width = 30;
     this.image = image;
     this.isOnMap = true; // can be true or false
     this.playerColliding = undefined;
@@ -15,7 +15,7 @@ class Slingshot extends Item {
 display(){ // x,y for whether item is displayed on map or in inventory
   push();
   imageMode(CENTER);
-  this.image(image, this.x, this.y, this.height, this.width); // hard numbers
+  image(this.image, this.x, this.y, this.width, this.height); // hard numbers
   pop();
 }
 

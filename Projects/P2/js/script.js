@@ -32,7 +32,7 @@ function preload() {
   streetlampImg = loadImage("assets/images/decor/lamp.png");
 
 // Items image files
-  slingshotImg = loadImage("assets/images/items/slingshot2.png")
+  slingshotImg = loadImage("assets/images/items/slingshot1.png")
   hamImg = loadImage("assets/images/items/ham.png");
   bigBoneImg = loadImage("assets/images/items/bigBone.png");
   frogImg = loadImage("assets/images/items/frog1.png");

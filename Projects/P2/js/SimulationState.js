@@ -47,6 +47,7 @@ class SimulationState extends State {
   }
 
   update() {
+    console.log(itemImagesList[0])
     this.display();
 
     for (let i = 0; i < this.simulationNPCList.length; i++) {

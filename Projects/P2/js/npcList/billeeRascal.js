@@ -3,7 +3,7 @@ class Billee extends NPC {
     super();
     this.x = 200;
     this.y = 50;
-    this.r = 215 // orange yellow
+    this.r = 215; // orange yellow
     this.g = 90;
     this.b = 60;
     this.size = 17;
@@ -15,19 +15,19 @@ class Billee extends NPC {
     this.isTriggered = false;
     //this.textNo = 0;
     this.tradeSucceeded = false;
-    this.texts = [`Mother takes me to the parc all the time!`, `Look up, doesn't that constellation look like a frog?`, `Sign me up!`];
+    this.texts = [
+      `Mother takes me to the parc all the time!`,
+      `Look up, doesn't that constellation look like a frog?`,
+      `Sign me up!`,
+    ];
   }
 
   display() {
-  super.display();
+    super.display();
   }
 
-  playerCollide(playerX, playerY) {
-    let d = dist(this.x, this.y, playerX, playerY);
-    if (d < this.size / 2) {
-      this.playerColliding = true;
-    } else {
-      this.playerColliding = false;
-    }
-  }
+  playerCollide() {
+    super.playerCollide();
+}
+
 }

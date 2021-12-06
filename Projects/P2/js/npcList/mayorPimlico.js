@@ -20,12 +20,7 @@ class Pimlico extends NPC {
 
   display() {
     // displays NPC specific image at the correct coordinates
-    push();
-    fill(this.r,this.g,this.b);
-    noStroke();
-    ellipseMode(CENTER);
-    ellipse(this.x, this.y, this.size);
-    pop();
+    super.display();
   }
 
   playerCollide(playerX, playerY) {

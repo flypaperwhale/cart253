@@ -10,7 +10,9 @@ author, and this description to match your project!
 
 let state;
 
+let itemImagesList = []; // array to manage images in the simulation
 // Item image names
+let slingshotImg
 let hamImg;
 let bigBoneImg;
 let frogImg;
@@ -22,7 +24,6 @@ let streetlampImg;
 let lampfootImg;
 let garbageImg;
 
-
 /**
 Description of preload
 */
@@ -31,6 +32,7 @@ function preload() {
   streetlampImg = loadImage("assets/images/decor/lamp.png");
 
 // Items image files
+  slingshotImg = loadImage("assets/images/items/slingshot2.png")
   hamImg = loadImage("assets/images/items/ham.png");
   bigBoneImg = loadImage("assets/images/items/bigBone.png");
   frogImg = loadImage("assets/images/items/frog1.png");
@@ -49,7 +51,8 @@ Description of setup
 function setup() {
   createCanvas(600, 600);
 
-  state = new SimulationState();
+  itemImagesList.push(slingshotImg,hamImg,bigBoneImg,frogImg,wrenchImg,injunctionImg)
+  state = new SimulationState(itemImagesList);
 }
 
 

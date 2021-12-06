@@ -18,7 +18,7 @@ class NPC {
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
+    // displays NPC specific ellipse (colors, size) at the correct coordinates
     push();
     fill(this.r,this.g,this.b);
     noStroke();
@@ -30,6 +30,7 @@ class NPC {
   playerCollisionCheck(playerX, playerY) {
     let d = dist(this.x, this.y, playerX, playerY);
     if (d < this.size / 2) {
+      console.log(`player collision with ${this.name}`)
       this.playerColliding = true;
     } else {
       this.playerColliding = false;

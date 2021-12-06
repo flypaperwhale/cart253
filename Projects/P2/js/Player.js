@@ -58,10 +58,11 @@ class Player {
     console.log(this.inventory);
   }
 
-  checkPlayerInventory() {
+  checkPlayerInventory(npcDesiredItem) {
     // looks through player inventory array. Is called when interacting with NPCs
     for (let i = 0; i < this.inventory.length; i++) {
       let checkedItem = this.inventory[i];
+      // is checked item desired item?
     }
   }
 

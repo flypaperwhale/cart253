@@ -26,8 +26,8 @@ class Billee extends NPC {
     super.display();
   }
 
-  playerCollide() {
-    super.playerCollide();
+  playerCollisionCheck(playerX,playerY) {
+    super.playerCollisionCheck(playerX,playerY);
 }
 
 }

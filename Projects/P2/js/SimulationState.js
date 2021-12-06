@@ -2,7 +2,7 @@ class SimulationState extends State {
   constructor(itemImagesList) {
     super();
 
-    this.player = new Player(250,250); // TEMPORARILY UNDER ITEMS/NPCS TO USE INVENTORY FOR DEBUGGING
+    this.player = new Player(300,300); // TEMPORARILY UNDER ITEMS/NPCS TO USE INVENTORY FOR DEBUGGING
 
     this.simulationItemList = []; // array to manage items
     this.createItems(); // creating Items, to be found and exchanged
@@ -65,6 +65,8 @@ class SimulationState extends State {
   update() {
     this.display(); // simulation state display method
 
+  this.player.display(); // display the player avatar
+
     // go through the NPC array to display each NPC (according to the map player is on)
     // also, check if player is colliding and update the NPC's data if need be (from click & trade)
     for (let i = 0; i < this.simulationNPCList.length; i++) {
@@ -72,10 +74,10 @@ class SimulationState extends State {
       this.simulationNPCList[i].playerCollisionCheck(this.player.x,this.player.y);
     }
 
-    for (let i = 0; i < this.player.inventory.length; i++) {
-      this.simulationNPCList[i].display();
-      this.simulationNPCList[i].playerCollisionCheck();
-    }
+    // for (let i = 0; i < this.player.inventory.length; i++) {
+    //   this.player.inventory[i].display();
+    //   this.player.inventory[i].playerCollisionCheck(this.player.x,this.player.y);
+    // }
 
     this.slingshot.display();
     this.slingshot.playerCollisionCheck();

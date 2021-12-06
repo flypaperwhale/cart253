@@ -1,36 +1,41 @@
 class Player {
+  // the player, controlled by up, down, left, right, space and return
   constructor(x, y) {
-    // feed x,y in script
-    this.x = x; // player starting x
-    this.y = y; // player starting y
-    this.size = 17; // player size is 20
-    this.vx = 0; // handled by pause or ad/arrow keys
-    this.vy = 0; // handled by pause or ws/arrow keys
-    this.speed = 4; // speed of 4
-    this.alive = true; // always alive
-    this.playerCollidedNPC = false; // switch true/false if player is in collision with npc or not
-    this.isPaused = true; // player pause state switch
+    this.x = x;
+    this.y = y;
+    this.vx = 0;
+    this.vy = 0;
+    this.size = 20;
+    this.speed = 3;
+    this.alive = true;
+    this.inventory = [];
+    this.isCollided = false;
+    this.isPaused = false;
+    this.tradeHappens = false;
+    this.itemToAddToInventory = undefined;
   }
 
-  constrain(height,width) {
-    // constrain player to the ground
-    this.x = constrain(this.x, 0, width);
-    this.y = constrain(this.y, 452, height);
+  display() {
+    push();
+    fill(200, 0, 15);
+    noStroke();
+    ellipseMode(CENTER);
+    ellipse(this.x, this.y, this.size);
+    pop();
   }
 
   handleInput() {
-    // handle keys for moving player avatar (code from https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
-    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+    if (keyIsDown(LEFT_ARROW)) {
       this.vx = -this.speed;
-    } else if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+    } else if (keyIsDown(RIGHT_ARROW)) {
       this.vx = this.speed;
     } else {
       this.vx = 0;
     }
 
-    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+    if (keyIsDown(UP_ARROW)) {
       this.vy = -this.speed;
-    } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+    } else if (keyIsDown(DOWN_ARROW)) {
       this.vy = this.speed;
     } else {
       this.vy = 0;
@@ -38,22 +43,48 @@ class Player {
   }
 
   move() {
-    // move player
     this.x += this.vx;
     this.y += this.vy;
   }
 
   paused() {
-    // pause player turns isPaused switch to true
     this.isPaused = true;
   }
 
-  display() {
-    // display player
-    push();
-    fill(200, 50, 50); // red
-    noStroke();
-    ellipse(this.x, this.y, this.size);
-    pop();
+  displayInventory() {
+    // for (let i = 0; i < this.inventory.length; i++) {
+    //   console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);
+    // }
+    console.log(this.inventory);
+  }
+
+  checkPlayerInventory() {
+    // looks through player inventory array. Is called when interacting with NPCs
+    for (let i = 0; i < this.inventory.length; i++) {
+      let checkedItem = this.inventory[i];
+    }
+  }
+
+  checkTrade(npcDesiredItem, npcHoldingItem) {
+    // verifies what item npc desires
+    // Go through Player inventory array
+    // if item is in Player inv. array, item is removed from array and
+    // Holding Item is pushed into the inventory array
+    for (let i = 0; i < this.inventory.length; i++) {
+      let checkedItem = this.inventory[i];
+      if (checkedItem === npcDesiredItem) {
+        //splice removeFromPlayerInventory(this.inventory[i])
+        this.tradeHappens = true;
+        this.itemToAddToInventory = npcHoldingItem;
+      }
+    }
+  }
+
+  addToPlayerInventory(item) {
+    // pushes new items into the inventory array
+  }
+
+  removeFromPlayerInventory(item) {
+    // removes an item from inventory, if item is traded or used.
   }
 }

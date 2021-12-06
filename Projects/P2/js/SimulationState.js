@@ -2,22 +2,36 @@ class SimulationState extends State {
   constructor(itemImagesList) {
     super();
 
+    this.player = new Player(250,250); // TEMPORARILY UNDER ITEMS/NPCS TO USE INVENTORY FOR DEBUGGING
+
     this.simulationItemList = []; // array to manage items
     this.createItems(); // creating Items, to be found and exchanged
 
     this.simulationNPCList = [];
     this.createNPCs(); // creating NPCs and storing them in NPCList array
 
-    this.player = new Player(250,250);
+
   }
 
   createItems() {
     this.slingshot = new Slingshot(itemImagesList[0]);
+    this.player.inventory.push(this.slingshot);//
+//
     this.ham = new Ham(itemImagesList[1]);
+    this.player.inventory.push(this.ham);//
+//
     this.bigBone = new BigBone(itemImagesList[2]);
+    this.player.inventory.push(this.bigBone);//
+//
     this.frog = new Frog(itemImagesList[3]);
+    this.player.inventory.push(this.frog);//
+//
     this.wrench = new Wrench(itemImagesList[4]);
+    this.player.inventory.push(this.wrench);//
+//
     this.injunction = new Injunction(itemImagesList[5]);
+    this.player.inventory.push(this.injunction);//
+//
   }
 
   createNPCs() {
@@ -55,11 +69,16 @@ class SimulationState extends State {
     // also, check if player is colliding and update the NPC's data if need be (from click & trade)
     for (let i = 0; i < this.simulationNPCList.length; i++) {
       this.simulationNPCList[i].display();
+      this.simulationNPCList[i].playerCollisionCheck(this.player.x,this.player.y);
+    }
+
+    for (let i = 0; i < this.player.inventory.length; i++) {
+      this.simulationNPCList[i].display();
       this.simulationNPCList[i].playerCollisionCheck();
     }
 
     this.slingshot.display();
-    this.slingshot.playerCollide();
+    this.slingshot.playerCollisionCheck();
 
 
     // Check if player is paused (when textBubble appears)
@@ -70,6 +89,8 @@ class SimulationState extends State {
       this.player.handleInput(); // handle player input: up, down, left, right, w,s,a,d,
       this.player.move(); // change the player avatar's position
     }
+
+    this.player.display(); // display the player avatar
   }
 
   display() {

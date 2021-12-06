@@ -16,8 +16,8 @@ class Slingshot extends Item {
     super.display();
   }
 
-  playerCollide() {
-    super.playerCollide();
+  playerCollisionCheck() {
+    super.playerCollisionCheck();
 }
 
 }

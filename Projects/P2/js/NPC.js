@@ -27,7 +27,7 @@ class NPC {
     pop();
   }
 
-  playerCollide(playerX, playerY) {
+  playerCollisionCheck(playerX, playerY) {
     let d = dist(this.x, this.y, playerX, playerY);
     if (d < this.size / 2) {
       this.playerColliding = true;

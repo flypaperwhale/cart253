@@ -7,6 +7,8 @@ class SimulationState extends State {
 
     this.simulationNPCList = [];
     this.createNPCs(); // creating NPCs and storing them in NPCList array
+
+    this.player = new Player(250,250);
   }
 
   createItems() {
@@ -47,14 +49,27 @@ class SimulationState extends State {
   }
 
   update() {
-    this.display();
+    this.display(); // simulation state display method
 
+    // go through the NPC array to display each NPC (according to the map player is on)
+    // also, check if player is colliding and update the NPC's data if need be (from click & trade)
     for (let i = 0; i < this.simulationNPCList.length; i++) {
       this.simulationNPCList[i].display();
+      this.simulationNPCList[i].playerCollisionCheck();
     }
 
     this.slingshot.display();
     this.slingshot.playerCollide();
+
+
+    // Check if player is paused (when textBubble appears)
+    if (this.player.isPaused === true) { // if player is paused
+      this.player.vx = 0; // turn player velocity to 0
+      this.player.vy = 0;
+    } else if (this.player.isPaused === false) { // if player is not paused
+      this.player.handleInput(); // handle player input: up, down, left, right, w,s,a,d,
+      this.player.move(); // change the player avatar's position
+    }
   }
 
   display() {

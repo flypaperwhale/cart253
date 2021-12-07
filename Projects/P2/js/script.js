@@ -65,6 +65,10 @@ function draw() {
 
 }
 
+function keyPressed() {
+  state.keyPressed();
+}
+
 function mouseClicked() {
   state.mouseClicked();
 }

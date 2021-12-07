@@ -12,7 +12,7 @@ class NPC {
     this.desiredItem = undefined;
     this.playerColliding = false;
     this.isTriggered = false;
-    //this.textNo = 0;
+    this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [];
   }

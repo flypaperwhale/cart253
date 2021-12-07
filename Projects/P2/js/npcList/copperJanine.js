@@ -13,7 +13,7 @@ class Janine extends NPC {
     this.desiredItem = undefined;
     this.playerColliding = false;
     this.isTriggered = false;
-    //this.textNo = 0;
+    this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [
       `Mother takes me to the parc all the time!`,

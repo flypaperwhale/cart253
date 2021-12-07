@@ -60,7 +60,6 @@ class Player {
 
   paused() {
     // pause player turns isPaused switch to true
-
     this.isPaused = true;
   }
 

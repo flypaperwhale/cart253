@@ -11,6 +11,7 @@ class SimulationState extends State {
     this.createNPCs(); // creating NPCs and storing them in NPCList array
 
     this.eventSwitch = 0;
+    this.textBubble = undefined;
   }
 
   createItems() {
@@ -97,23 +98,23 @@ class SimulationState extends State {
         // and stored in the player.inventory
 
         // this is a text assigning machine //
-        if (this.simulationNPCList[i].textNo === 1) {
-          this.textBubble = new TextBubble(`${simulationNPCList[i].text[0]}`);
-        } else if (this.simulationNPCList[i].textNo === 2) {
-          this.textBubble = new TextBubble(`${simulationNPCList[i].text[1]}`);
+        if (this.simulationNPCList[i].textNo === 0) {
+          this.textBubble = new TextBubble(`${this.simulationNPCList[i].texts[0]}`);
+        } else if (this.simulationNPCList[i].textNo === 1) {
+          this.textBubble = new TextBubble(`${this.simulationNPCList[i].texts[1]}`);
           this.player.inventory.shift();
           let item = new Item(0, 0, `Big bone`); // this is problematic
           this.player.inventory.push(item);
-        } else if (this.simulationNPCList[i].textNo === 3) {
-          this.textBubble = new TextBubble(`${simulationNPCList[i].text[2]}`);
+        } else if (this.simulationNPCList[i].textNo === 2) {
+          this.textBubble = new TextBubble(`${this.simulationNPCList[i].texts[2]}`);
         }
 
         if (this.player.tradeHappens === true) {
-          this.npc.textNo = 2;
+          this.simulationNPCList[i].textNo = 2;
           this.player.tradeHappens = false;
         }
-        if (this.npc.tradeSucceeded === true) {
-          this.npc.textNo = 3;
+        if (this.simulationNPCList[i].tradeSucceeded === true) {
+          this.simulationNPCList[i].textNo = 3;
         }
 
         this.textBubble.display();
@@ -185,12 +186,12 @@ class SimulationState extends State {
         }
 
         if ((this.simulationNPCList[i].isTriggered === true && this.player.isPaused === true) ||
-          (this.item.playerColliding === true && this.player.isPaused === true)
+          (this.simulationNPCList[i].playerColliding === true && this.player.isPaused === true)
         ) {
           this.textBubble.break();
           this.simulationNPCList[i].isTriggered = false;
           this.player.isPaused = false;
-          this.item.playerColliding = false;
+          this.simulationNPCList[i].playerColliding = false;
           if (this.simulationNPCList[i].textNo === 2) {
             this.simulationNPCList[i].tradeSucceeded = true;
           }

@@ -1,13 +1,13 @@
 class Injunction extends Item {
-  constructor(){
+  constructor(image){
     super();
-    this.name = undefined;
-    this.x = undefined;
-    this.y = undefined;
-    this.width = undefined;
-    this.height = undefined;
-    this.image = undefined;
-    this.isOnMap = false; // always false
+    this.name = `Injunction(s)`;
+    this.x = 400;
+    this.y = 250;
+    this.width = 45;
+    this.height = 45;
+    this.image = image;
+    this.isOnMap = true; // always false
     this.playerColliding = undefined;
   }
 
@@ -16,8 +16,8 @@ class Injunction extends Item {
     super.display();
   }
 
-  playerCollide() {
-    super.playerCollide();
+  playerCollisionCheck(playerX,playerY,playerSize) {
+    super.playerCollisionCheck(playerX,playerY,playerSize);
 }
 
 }

@@ -18,10 +18,10 @@ display(){
   pop();
 }
 
-playerCollisionCheck(playerX, playerY) {
+playerCollisionCheck(playerX, playerY, playerSize) {
   let d = dist(this.x, this.y, playerX, playerY);
   if (d < this.width / 2) {
-    console.log(`player collision with ${this}`)
+    console.log(`player collision with ${this.name}`)
     this.playerColliding = true;
   } else {
     this.playerColliding = false;

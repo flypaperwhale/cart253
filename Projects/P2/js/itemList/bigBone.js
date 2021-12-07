@@ -1,13 +1,13 @@
 class BigBone extends Item {
   constructor(image){
     super();
-    this.name = undefined;
-    this.x = undefined;
-    this.y = undefined;
-    this.width = undefined;
-    this.height = undefined;
+    this.name = `Big Bone`;
+    this.x = 400;
+    this.y = 100;
+    this.width = 25;
+    this.height = 12;
     this.image = image;
-    this.isOnMap = false; // always false
+    this.isOnMap = true; // always false
     this.playerColliding = undefined;
   }
 
@@ -16,8 +16,8 @@ class BigBone extends Item {
     super.display();
   }
 
-  playerCollide() {
-    super.playerCollide();
+  playerCollisionCheck(playerX,playerY,playerSize) {
+    super.playerCollisionCheck(playerX,playerY,playerSize);
 }
 
 }

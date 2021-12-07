@@ -72,17 +72,10 @@ class SimulationState extends State {
       this.simulationNPCList[i].playerCollisionCheck(this.player.x,this.player.y,this.player.size);
     }
 
-    // for (let i = 0; i < this.player.inventory.length; i++) {
-    //   this.player.inventory[i].display();
-    //   this.player.inventory[i].playerCollisionCheck(this.player.x,this.player.y);
-    // }
-
-    this.slingshot.display();
-    this.slingshot.playerCollisionCheck(
-      this.player.x,
-      this.player.y,
-      this.player.size
-    );
+    for (let i = 0; i < this.player.inventory.length; i++) {
+      this.player.inventory[i].display();
+      this.player.inventory[i].playerCollisionCheck(this.player.x,this.player.y,this.player.size);
+    }
 
     // Check if player is paused (when textBubble appears)
     if (this.player.isPaused === true) {

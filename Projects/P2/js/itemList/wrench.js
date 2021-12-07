@@ -1,13 +1,13 @@
 class Wrench extends Item {
   constructor(image){
     super();
-    this.name = undefined;
-    this.x = undefined;
-    this.y = undefined;
-    this.width = undefined;
-    this.height = undefined;
-    this.image = undefined;
-    this.isOnMap = false; // always false
+    this.name = `Wrench`;
+    this.x = 400;
+    this.y = 300;
+    this.width = 25;
+    this.height = 35;
+    this.image = image;
+    this.isOnMap = true; // always false
     this.playerColliding = undefined;
   }
 
@@ -16,8 +16,8 @@ class Wrench extends Item {
     super.display();
   }
 
-  playerCollisionCheck() {
-    super.playerCollisionCheck();
+  playerCollisionCheck(playerX,playerY,playerSize) {
+    super.playerCollisionCheck(playerX,playerY,playerSize);
 }
 
 }

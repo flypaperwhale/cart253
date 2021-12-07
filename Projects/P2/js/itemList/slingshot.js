@@ -1,7 +1,7 @@
 class Slingshot extends Item {
   constructor(image) {
     super();
-    this.name = undefined;
+    this.name = `Slingshot`;
     this.x = 400;
     this.y = 50;
     this.width = 30;
@@ -16,8 +16,8 @@ class Slingshot extends Item {
     super.display();
   }
 
-  playerCollisionCheck() {
-    super.playerCollisionCheck();
+  playerCollisionCheck(playerX,playerY,playerSize) {
+    super.playerCollisionCheck(playerX,playerY,playerSize);
 }
 
 }

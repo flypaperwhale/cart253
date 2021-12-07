@@ -35,7 +35,7 @@ function preload() {
   slingshotImg = loadImage("assets/images/items/slingshot1.png")
   hamImg = loadImage("assets/images/items/ham.png");
   bigBoneImg = loadImage("assets/images/items/bigBone.png");
-  frogImg = loadImage("assets/images/items/frog1.png");
+  frogImg = loadImage("assets/images/items/frog2.png");
   wrenchImg = loadImage("assets/images/items/wrench.png");
   injunctionImg = loadImage("assets/images/items/letters.png");
 

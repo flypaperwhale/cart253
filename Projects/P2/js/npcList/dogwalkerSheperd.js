@@ -9,26 +9,35 @@ class Sheperd extends NPC {
     this.size = 25;
     this.name = `Dogwalker Sheperd`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = undefined;
-    this.desiredItem = undefined;
+    this.itemHeld = `Injunction`;
+    this.desiredItem = `Injunction`;
     this.playerColliding = false;
     this.isTriggered = false;
     //this.textNo = 0;
     this.tradeSucceeded = false;
-    this.texts = [`Mother takes me to the parc all the time!`, `Look up, doesn't that constellation look like a frog?`, `Sign me up!`];
+    this.texts = [
+      `Mother takes me to the parc all the time!`,
+      `Look up, doesn't that constellation look like a frog?`,
+      `Sign me up!`,
+    ];
+    this.doggyX = 222;
+    this.doggyY = 137;
+    this.doggySize = 12;
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
     super.display();
+    push();
+    fill(this.r,this.g,this.b);
+    ellipse(this.doggyX,this.doggyY,this.doggySize);
+    pop();
   }
 
-  playerCollide(playerX, playerY) {
-    let d = dist(this.x, this.y, playerX, playerY);
-    if (d < this.size / 2) {
-      this.playerColliding = true;
-    } else {
-      this.playerColliding = false;
-    }
+  playerCollisionCheck(playerX,playerY,playerSize) {
+    super.playerCollisionCheck(playerX,playerY,playerSize);
+  }
+
+  givePlayerInjunction(playerInventory){
+
   }
 }

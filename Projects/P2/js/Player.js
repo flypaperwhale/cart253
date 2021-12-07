@@ -1,21 +1,28 @@
 class Player {
   // the player, controlled by up, down, left, right, space and return
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.vx = 0;
-    this.vy = 0;
+    this.x = x; // player starting x
+    this.y = y; // player starting y
+    this.vx = 0; // handled by pause or ad/arrow keys
+    this.vy = 0; // handled by pause or ws/arrow keys
     this.size = 20;
     this.speed = 3;
-    this.alive = true;
+    this.alive = true; // always alive
     this.inventory = [];
-    this.isCollided = false;
-    this.isPaused = false;
-    this.tradeHappens = false;
-    this.itemToAddToInventory = undefined;
+    this.isCollided = false; // switch true when player is in collision with npc or item
+    this.isPaused = false; // player pause state switch
+    this.tradeHappens = false; // player/NPC item trade switch
+    this.itemToAddToInventory = undefined; // item label to create item and push in inventory ###
+  }
+
+  constrain(height, width) {
+    // constrain player to the ground
+    this.x = constrain(this.x, 0, width);
+    this.y = constrain(this.y, 452, height);
   }
 
   display() {
+    // display player
     push();
     fill(200, 0, 15);
     noStroke();
@@ -25,17 +32,19 @@ class Player {
   }
 
   handleInput() {
-    if (keyIsDown(LEFT_ARROW)) {
+    // handle keys for moving player avatar (code from https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
+
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
       this.vx = -this.speed;
-    } else if (keyIsDown(RIGHT_ARROW)) {
+    } else if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
       this.vx = this.speed;
     } else {
       this.vx = 0;
     }
 
-    if (keyIsDown(UP_ARROW)) {
+    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
       this.vy = -this.speed;
-    } else if (keyIsDown(DOWN_ARROW)) {
+    } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
       this.vy = this.speed;
     } else {
       this.vy = 0;
@@ -43,11 +52,15 @@ class Player {
   }
 
   move() {
+    // move player
+
     this.x += this.vx;
     this.y += this.vy;
   }
 
   paused() {
+    // pause player turns isPaused switch to true
+
     this.isPaused = true;
   }
 

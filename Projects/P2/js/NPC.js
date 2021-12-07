@@ -27,9 +27,9 @@ class NPC {
     pop();
   }
 
-  playerCollisionCheck(playerX, playerY) {
+  playerCollisionCheck(playerX, playerY, playerSize) {
     let d = dist(this.x, this.y, playerX, playerY);
-    if (d < this.size / 2) {
+    if (d < (this.size + playerSize ) / 2) {
       console.log(`player collision with ${this.name}`)
       this.playerColliding = true;
     } else {

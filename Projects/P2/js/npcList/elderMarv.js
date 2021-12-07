@@ -9,13 +9,17 @@ class Marv extends NPC {
     this.size = 25;
     this.name = `Elder Marv`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = undefined;
-    this.desiredItem = undefined;
+    this.itemHeld = `Wrench`; // also holds the first Injunction
+    this.desiredItem = `Frog`;
     this.playerColliding = false;
     this.isTriggered = false;
     //this.textNo = 0;
     this.tradeSucceeded = false;
-    this.texts = [`Mother takes me to the parc all the time!`, `Look up, doesn't that constellation look like a frog?`, `Sign me up!`];
+    this.texts = [
+      `Mother takes me to the parc all the time!`,
+      `Look up, doesn't that constellation look like a frog?`,
+      `Sign me up!`,
+    ];
   }
 
   display() {
@@ -23,12 +27,9 @@ class Marv extends NPC {
     super.display();
   }
 
-  playerCollide(playerX, playerY) {
-    let d = dist(this.x, this.y, playerX, playerY);
-    if (d < this.size / 2) {
-      this.playerColliding = true;
-    } else {
-      this.playerColliding = false;
-    }
+  playerCollisionCheck(playerX,playerY,playerSize) {
+    super.playerCollisionCheck(playerX,playerY,playerSize);
   }
+
+  givePlayerInjunction(playerInventory) {}
 }

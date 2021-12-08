@@ -59,15 +59,26 @@ class Player {
 
   barriers(map){
     if (map.name === `A`){
+
     }
+
     if (map.name === `B`){
-      if (this.x > 300 - 50 && this.x < 300 + 50 &&
-      this.y > 300 - 50 && this.y < 300 + 50){
-        this.speed = this.speed* -3; //
-        console.log(`player X is ${this.x}`);
+      if (this.x > 500){
+        this.x = this.x - 10;
+      } // off the right side
+      else if (this.x < 0 ){
+        this.x = this.x + 10;
+      } // off the left side
+      else if (this.y > 850){
+        this.y = this.y - 10;
+      } // off the bottom
+      else if (this.y < 500 ){ // off onto the sky border
+          console.log(`you shouldnt be here`);
+      this.y = this.y + 10;
+          }
+      else {this.speed = 4} // move normally
       }
-      else { this.speed = 4}
-    }
+
     if (map.name === `C`){
 
     }

@@ -12,7 +12,7 @@ class MapsDebugState extends State {
     // Other will be on NPCs and will be tradeable.
     this.maps = [mapsArray[0],mapsArray[1],mapsArray[2]]; // a triptych cityscape
     this.map = undefined;
-    this.player = new Player(230, 495);
+    this.player = new Player(230, 570);
     this.currentMap = mapsArray[1];
 
   }
@@ -41,7 +41,7 @@ class MapsDebugState extends State {
   display() {}
 
   mouseClicked(){ // click to check where x is, debug method
-    console.log(this.player.x);
+    console.log(this.player.x, this.player.y);
   }
 
   keyPressed() { // change state ###

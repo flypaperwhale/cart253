@@ -6,7 +6,7 @@ class Player {
     this.vx = 0; // handled by pause or ad/arrow keys
     this.vy = 0; // handled by pause or ws/arrow keys
     this.size = 20;
-    this.speed = 3;
+    this.speed = 2.5;
     this.alive = true; // always alive
     this.inventory = [];
     this.isCollided = false; // switch true when player is in collision with npc or item

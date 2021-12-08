@@ -11,7 +11,9 @@ class MapsDebugState extends State {
     // Some are on the map and can be picked up by being walked on
     // Other will be on NPCs and will be tradeable.
     this.maps = [`A`,`B`,`C`]; // a triptych cityscape
-    this.player = new Player(150, 400);
+    this.map = undefined;
+    this.player = new Player(230, 495);
+    this.currentMap = this.maps[1];
 
   }
 
@@ -24,6 +26,10 @@ class MapsDebugState extends State {
       this.player.handleInput(); // handle player input: up, down, left, right, w,s,a,d,
       this.player.move(); // change the player avatar's position
       this.player.display(); // display the player avatar
+
+      this.map = this.currentMap;
+      this.map.display();
+
     }
 
   display() {}

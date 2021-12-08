@@ -14,17 +14,28 @@ let state = undefined;
 /**
 Description of preload
 */
-function preload() {}
+function preload() {
+  streetlampImage = loadImage("assets/images/lamp.png");
+  streetlampFootImg = loadImage("assets/images/lampFoot.png");
+  stairsImg =  loadImage("assets/images/stairs.png");
+  treeImg = loadImage("assets/images/tree.png");
+}
 
 /**
 Description of setup
 */
 function setup() {
-  createCanvas(600, 600);
-
+  createCanvas(500, 1000);
+  createPlayer(230, 495); // (x,y) starting positions declared and new Player is created
   state = new TitleState();
+  map =
 }
 
+function setup() {
+  createCanvas(); // hard numbers?//
+
+
+}
 /**
 Description of draw()
 */

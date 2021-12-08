@@ -5,7 +5,7 @@ class SkyGlowCityA extends Map{
 //this.player; // player avatar, class Player
 this.streetlampImg = itemImagesList[0];
 this.streetlampFootImg = itemImagesList[1];
-this.stairs = itemImagesList[2];
+this.stairsImg = itemImagesList[2];
 
 this.lampX = 258; // lamp x value
 this.lampY = 510; // lamp y value
@@ -14,26 +14,26 @@ this.lampY = 510; // lamp y value
 /**
 Description of draw()
 */
-display() {
+display(player) {
   //background(0);
 
   //sky
-  displaySky(); // the blue sky rectangle covers the starry bg image
+  super.displaySky(); // the blue sky rectangle covers the starry bg image
 
   //ground
-  displayGreenGrass(); // display Green Grass
-  displayCircleAndPath(); // display gray circle and path
+  super.displayGreenGrass(); // display Green Grass
+  this.displayCircleAndPath(); // display gray circle and path
 
-  displayDollysBuilding();
-  displayBackgroundBuilding();
-  displayShop();
-  displayStairs();
+  this.displayDollysBuilding();
+  this.displayBackgroundBuilding();
+  this.displayShop();
+  this.displayStairs();
 
   //movePlayer(); // handle user input and move player avatar
 
-  displayLampFoot(); // displayed before the player for correct layer effect
-  //displayPlayer(); // displays player and also constrains them to move only on the ground
-  displayLamppost(); // displays lamppost in front of player
+  this.displayLampFoot(); // displayed before the player for correct layer effect
+  player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
+  this.displayLamppost(); // displays lamppost in front of player
 
 }
 
@@ -89,7 +89,7 @@ displayShop() {
 displayStairs(){
   push();
   imageMode(CENTER);
-  image(stairs, 371, height/2 + 130, 45, 165); // hard numbers
+  image(this.stairsImg, 371, height/2 + 130, 45, 165); // hard numbers
   pop();
 }
 

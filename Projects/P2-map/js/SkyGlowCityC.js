@@ -5,10 +5,9 @@ class SkyGlowCityC extends Map{
 //this.player; // player avatar, class Player
 this.streetlampImg = itemImagesList[0];
 this.streetlampFootImg = itemImagesList[1];
-this.stairs = itemImagesList[2];
-this.tree = itemImagesList[3];
-this.garbage = itemImagesList[4];
-this.gazebo = itemImagesList[5];
+this.treeImg = itemImagesList[3];
+this.garbageImg = itemImagesList[4];
+this.gazeboImg = itemImagesList[5];
 
 
 this.lampX = 378; // lamp x value
@@ -18,27 +17,27 @@ this.lampY = 501; // lamp y value
 /**
 Description of draw()
 */
-display() {
+display(player) {
   background(0);
 
   //sky
-  displaySky(); // the blue sky rectangle covers the starry bg image
+  super.displaySky(); // the blue sky rectangle covers the starry bg image
 
   //ground
-  displayGreenGrass(); // display Green Grass
-  displayCircleAndPath(); // display gray circle and path
+  super.displayGreenGrass(); // display Green Grass
+  this.displayCircleAndPath(); // display gray circle and path
 
-  displayBackgroundBuilding();
-  displayGarbage();
-  displayGazebo();
+  this.displayBackgroundBuilding();
+  this.displayGarbage();
+  this.displayGazebo();
 
   //movePlayer(); // handle user input and move player avatar
 
-  displayLampFoot(); // displayed before the player for correct layer effect
-  //displayPlayer(); // displays player and also constrains them to move only on the ground
-  displayLamppost(); // displays lamppost in front of player
+  this.displayLampFoot(); // displayed before the player for correct layer effect
+  player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
+  this.displayLamppost(); // displays lamppost in front of player
 
-  displayTrees();
+  this.displayTrees();
 }
 
 // // Create player
@@ -125,38 +124,38 @@ displayLampFoot() { // player moves in front of lamp foot
 displayLamppost() { // lampost is displayed
   push();
   imageMode(CENTER);
-  image(this.streetlampImageImg, this.lampX, this.lampY, 15, 90);
+  image(this.streetlampImg, this.lampX, this.lampY, 15, 90);
   pop();
 }
 
 displayTrees() { // trees are displayed
   push();
   imageMode(CENTER);
-  image(tree, 270, 500, 100, 110);
+  image(this.treeImg, 270, 500, 100, 110);
   pop();
   push();
   imageMode(CENTER);
-  image(tree, 490, 490, 90, 110);
+  image(this.treeImg, 490, 490, 90, 110);
   pop();
   push();
   imageMode(CENTER);
-  image(tree, 510, 550, 80, 90);
+  image(this.treeImg, 510, 550, 80, 90);
   pop();
   push();
   imageMode(CENTER);
-  image(tree, 500, 620, 80, 110);
+  image(this.treeImg, 500, 620, 80, 110);
   pop();
   push();
   imageMode(CENTER);
-  image(tree, 500, 700, 100, 120);
+  image(this.treeImg, 500, 700, 100, 120);
   pop();
   push();
   imageMode(CENTER);
-  image(tree, 245, 655, 85, 105);
+  image(this.treeImg, 245, 655, 85, 105);
   pop();
   push();
   imageMode(CENTER);
-  image(tree, 288, 682, 100, 120);
+  image(this.treeImg, 288, 682, 100, 120);
   pop();
 }
 }

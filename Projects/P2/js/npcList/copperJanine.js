@@ -15,11 +15,8 @@ class Janine extends NPC {
     this.isTriggered = false;
     this.textNo = 0;
     this.tradeSucceeded = false;
-    this.texts = [
-      `Mother takes me to the parc all the time!`,
-      `Look up, doesn't that constellation look like a frog?`,
-      `Sign me up!`,
-    ];
+    this.texts = [`Copper Janine:
+      Enjoy the night, I'll be watching over you`];
   }
 
   display() {

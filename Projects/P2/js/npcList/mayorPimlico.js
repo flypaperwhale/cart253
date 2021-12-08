@@ -13,12 +13,17 @@ class Pimlico extends NPC {
     this.desiredItem = undefined;
     this.playerColliding = false;
     this.isTriggered = false;
-    //this.textNo = 0;
+    this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [
-      `Mother takes me to the parc all the time!`,
-      `Look up, doesn't that constellation look like a frog?`,
-      `Sign me up!`,
+      `Mayor Pimlico:
+      Hello, hello! Our banquet at City Hall tonight is
+      NOT FOR KIDS. Have a ham scram kiddo`,
+      `Mayor Pimlico:
+      I'm not giving you any more food, we need to keep some
+      for the investors...`,
+      `Mayor Pimlico:
+      No, no, I'm not looking at any papers tonight. Scram`,
     ];
   }
 

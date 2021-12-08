@@ -16,9 +16,14 @@ class Jade extends NPC {
     this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [
-      `Mother takes me to the parc all the time!`,
-      `Look up, doesn't that constellation look like a frog?`,
-      `Sign me up!`,
+      `Jade:
+      Though we're best friends, I sometimes feel my
+      role is to look over Billee, because I'm the eldest`,
+      `Jade:
+      That constellation doesn't look like a frog to me,
+      I see a mouse!`,
+      `Jade:
+      Sign me up!`,
     ];
   }
 

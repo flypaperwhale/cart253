@@ -10,12 +10,12 @@ class TextBubble {
       push();
       fill(255);
       rectMode(CENTER);
-      rect(300,400,200,75);
+      rect(300,400,320,75);
       pop();
       push();
-      textAlign(CENTER);
+      //textAlign(CENTER);
       fill(0);
-      text(this.text, 300,400);
+      text(this.text, 167,390);
       pop();
     }
     else if (this.stopTextBubble === true){

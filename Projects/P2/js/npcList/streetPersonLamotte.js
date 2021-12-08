@@ -16,9 +16,15 @@ class Lamotte extends NPC {
     this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [
-      `Mother takes me to the parc all the time!`,
-      `Look up, doesn't that constellation look like a frog?`,
-      `Sign me up!`,
+      `Street Person Lamotte:
+      Hey, what's about it? Could you find me
+      something to eat, eh, on the off chance?`,
+      `Street Person Lamotte:
+      This ham for me?! *munch grmmbl munch ...burp*
+      Hey now, hun, mind throwing this in the bin?`,
+      `Street Person Lamotte:
+      You're a wise little one, I can tell
+      you've come here to set things right`,
     ];
   }
 

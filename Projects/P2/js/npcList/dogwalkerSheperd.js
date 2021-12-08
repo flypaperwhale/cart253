@@ -16,20 +16,26 @@ class Sheperd extends NPC {
     this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [
-      `Mother takes me to the parc all the time!`,
-      `Look up, doesn't that constellation look like a frog?`,
-      `Sign me up!`,
+      `Sheperd:
+      Walking the dog to take a moment
+      away from the worries of the day`,
+      `Sheperd:
+      Timsy dragged me to here, it looks like
+      she's found herself a bone`,
+      `Sheperd:
+      Sign me up!`,
     ];
     this.doggyX = 222;
     this.doggyY = 137;
-    this.doggySize = 12;
+    this.doggyW = 17;
+    this.doggyH = 12;
   }
 
   display() {
     super.display();
     push();
     fill(this.r,this.g,this.b);
-    ellipse(this.doggyX,this.doggyY,this.doggySize);
+    ellipse(this.doggyX,this.doggyY,this.doggyW, this.doggyH);
     pop();
   }
 

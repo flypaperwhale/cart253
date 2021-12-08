@@ -16,9 +16,13 @@ class Billee extends NPC {
     this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [
-      `Mother takes me to the parc all the time!`,
-      `Look up, doesn't that constellation look like a frog?`,
-      `Sign me up!`,
+      `Bille Rascal:
+      Jade! Jade! Why is she always on her cellphone?
+      Hey you! Do YOU want to play hide and seek?`,
+      `Bille Rascal:
+      Look up! That constellation looks like a frog, doesn't it?`,
+      `Bille Rascal:
+      Sign me up!`,
     ];
     this.speed = 1; // this is unique to Billie, and few other animated npcs
   }

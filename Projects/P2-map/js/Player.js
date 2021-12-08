@@ -59,30 +59,34 @@ class Player {
 
   barriers(map){
     if (map.name === `A`){
-
+this.boundaries();
     }
 
     if (map.name === `B`){
-      if (this.x > 500){
-        this.x = this.x - 10;
-      } // off the right side
-      else if (this.x < 0 ){
-        this.x = this.x + 10;
-      } // off the left side
-      else if (this.y > 850){
-        this.y = this.y - 10;
-      } // off the bottom
-      else if (this.y < 500 ){ // off onto the sky border
-          console.log(`you shouldnt be here`);
-      this.y = this.y + 10;
-          }
-      else {this.speed = 4} // move normally
+    this.boundaries();
       }
 
     if (map.name === `C`){
-
+this.boundaries();
     }
 
   }
+
+boundaries(){
+  if (this.x > 500){
+    this.x = this.x - 10;
+  } // off the right side
+  else if (this.x < 0 ){
+    this.x = this.x + 10;
+  } // off the left side
+  else if (this.y > 850){
+    this.y = this.y - 10;
+  } // off the bottom
+  else if (this.y < 500 ){
+  this.y = this.y + 10;
+      } // off onto the sky border
+      else {this.speed = 4} // move normally
+
+}
 
 }

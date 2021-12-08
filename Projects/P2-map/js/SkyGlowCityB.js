@@ -3,6 +3,7 @@ class SkyGlowCityB extends Map{
     // of which the according elements will be extracted by the map
     super();
 //this.player; // player avatar, class Player
+this.name = `B`;
 this.streetlampImg = itemImagesList[0];
 this.streetlampFootImg = itemImagesList[1];
 this.stairsImg = itemImagesList[2];
@@ -30,12 +31,16 @@ display(player){
   this.displayShop();
   this.displayStairs();
 
-  // movePlayer(); // handle user input and move player avatar
+
 
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); // displays player and also constrains them to move only on the ground
   this.displayLamppost(); // displays lamppost in front of player
   this.displayTrees();
+
+  //this.barriers();
+
+  player.barriers(this.name)
 
 }
 
@@ -147,4 +152,7 @@ displayTrees() { // lampost is displayed
   image(this.treeImg, 440, 540, 100, 110);
   pop();
 }
+
+
+
 }

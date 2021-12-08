@@ -56,4 +56,22 @@ class Player {
     ellipse(this.x, this.y, this.size);
     pop();
   }
+
+  barriers(map){
+    if (map.name === `A`){
+    }
+    if (map.name === `B`){
+      if (this.x > 300 - 50 && this.x < 300 + 50 &&
+      this.y > 300 - 50 && this.y < 300 + 50){
+        this.speed = this.speed* -3; //
+        console.log(`player X is ${this.x}`);
+      }
+      else { this.speed = 4}
+    }
+    if (map.name === `C`){
+
+    }
+
+  }
+
 }

@@ -3,6 +3,7 @@ class SkyGlowCityA extends Map{
     // of which the according elements will be extracted by the map
     super();
 //this.player; // player avatar, class Player
+this.name = `A`;
 this.streetlampImg = itemImagesList[0];
 this.streetlampFootImg = itemImagesList[1];
 this.stairsImg = itemImagesList[2];

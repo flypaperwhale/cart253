@@ -23,21 +23,32 @@ class MapsDebugState extends State {
     textAlign(CENTER);
     // This text is in the background, gives player how to play
     text(`press space to change maps!`, width/ 2, height/2);
+
+    this.map = this.currentMap;
+    this.map.display(this.player);
+    this.player.barriers(this.map);
+
       this.player.handleInput(); // handle player input: up, down, left, right, w,s,a,d,
       this.player.move(); // change the player avatar's position
       this.player.display(); // display the player avatar
 
-      this.map = this.currentMap;
-      this.map.display(this.player);
+
+
+
 
     }
 
   display() {}
 
+  mouseClicked(){ // click to check where x is, debug method
+    console.log(this.player.x);
+  }
+
   keyPressed() { // change state ###
     if (keyCode === RETURN) {
       console.log(`pressed enter current map is ${this.currentMap.lampX}`);
       this.currentMap = random(this.maps);
+      this.player.barriers(this.currentMap);
       console.log(`new map is ${this.currentMap.lampX}`)
     }
   }

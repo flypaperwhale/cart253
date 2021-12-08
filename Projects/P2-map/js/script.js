@@ -9,16 +9,30 @@ so that she might see the constellations in the sky
 
 "use strict";
 
+let streetlampImg;
+let streetlampFootImg;
+let stairsImg;
+let treeImg;
+let garbageImg;
+let gazeboImg;
+let itemImagesList = [];
+let mapsArray = [];
 let state = undefined;
+let mapNo = 3;
+let mapA;
+let mapB;
+let mapC;
 
 /**
 Description of preload
 */
 function preload() {
-  streetlampImage = loadImage("assets/images/lamp.png");
+  streetlampImg = loadImage("assets/images/lamp.png");
   streetlampFootImg = loadImage("assets/images/lampFoot.png");
   stairsImg =  loadImage("assets/images/stairs.png");
   treeImg = loadImage("assets/images/tree.png");
+  garbageImg =  loadImage("assets/images/garbage.png");
+  gazeboImg =  loadImage("assets/images/gazebo.png");
 }
 
 /**
@@ -26,16 +40,30 @@ Description of setup
 */
 function setup() {
   createCanvas(500, 1000);
-  createPlayer(230, 495); // (x,y) starting positions declared and new Player is created
-  state = new TitleState();
-  map =
+  itemImagesList.push(streetlampImg,streetlampFootImg,stairsImg,treeImg,garbageImg,gazeboImg);
+  createMapsAndStore();
+  //createPlayer(230, 495); // (x,y) starting positions declared and new Player is created
+
+  state = new TitleState(itemImagesList, mapsArray);
 }
 
-function setup() {
-  createCanvas(); // hard numbers?//
-
+function createMapsAndStore(){
+  for (let i = 0; i < mapNo; i++){
+    console.log(`map no isht ${i}`);
+    if (i === 0){
+      map = new SkyGlowCityA(itemImagesList);
+    }
+    if (i === 1){
+      map = new SkyGlowCityB(itemImagesList);
+    }
+    if (i === 2){
+      map = new SkyGlowCityC(itemImagesList);
+    }
+    mapsArray.push(map);
+  }
 
 }
+
 /**
 Description of draw()
 */

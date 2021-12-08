@@ -1,5 +1,5 @@
 class TitleState extends State {
-  constructor(){
+  constructor(itemImagesList, mapsArray){
     super();
   }
 
@@ -23,7 +23,7 @@ class TitleState extends State {
   }
 
   mouseClicked(){
-    state = new MapsDebugState();
+    state = new MapsDebugState(itemImagesList, mapsArray);
   }
 
 }

@@ -1,5 +1,5 @@
 class MapsDebugState extends State {
-  constructor() {
+  constructor(itemImagesList, mapsArray) {
     super();
 
     // this.npcArray = new NPCList(); //?! is this the equivalent of inputing an array full //
@@ -10,10 +10,10 @@ class MapsDebugState extends State {
     // When game is started, every Item is created and stored somewhere
     // Some are on the map and can be picked up by being walked on
     // Other will be on NPCs and will be tradeable.
-    this.maps = [`A`,`B`,`C`]; // a triptych cityscape
+    this.maps = [mapsArray[0],mapsArray[1],mapsArray[2]]; // a triptych cityscape
     this.map = undefined;
     this.player = new Player(230, 495);
-    this.currentMap = this.maps[1];
+    this.currentMap = mapsArray[1];
 
   }
 
@@ -28,7 +28,7 @@ class MapsDebugState extends State {
       this.player.display(); // display the player avatar
 
       this.map = this.currentMap;
-      this.map.display();
+      this.map.display(this.player);
 
     }
 
@@ -36,7 +36,9 @@ class MapsDebugState extends State {
 
   keyPressed() { // change state ###
     if (keyCode === RETURN) {
-      this.map = random(this.maps);
+      console.log(`pressed enter current map is ${this.currentMap.lampX}`);
+      this.currentMap = random(this.maps);
+      console.log(`new map is ${this.currentMap.lampX}`)
     }
   }
 }

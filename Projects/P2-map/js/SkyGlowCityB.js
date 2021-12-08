@@ -1,48 +1,41 @@
-class SkyGlowCityB {
-  constructor(){
+class SkyGlowCityB extends Map{
+  constructor(itemImagesList){ // enter item array and simNPCList
+    // of which the according elements will be extracted by the map
+    super();
 //this.player; // player avatar, class Player
-// this.streetlampImage;
-// this.streetlampFoot;
-// this.stairs;
-// this.tree;
+this.streetlampImg = itemImagesList[0];
+this.streetlampFootImg = itemImagesList[1];
+this.stairsImg = itemImagesList[2];
+this.treeImg = itemImagesList[3];
 
-// this.lampX = 225; // lamp x value
-// this.lampY = 510; // lamp y value
-
-function preload(){
-
-
+this.lampX = 225; // lamp x value
+this.lampY = 510; // lamp y value
 }
-
-/**
-Description of setup
-*/
-
 
 /**
 Description of draw()
 */
-display(){
+display(player){
   background(0);
 
   //sky
-  displaySky(); // the blue sky rectangle covers the starry bg image
+  super.displaySky(); // the blue sky rectangle covers the starry bg image
 
   //ground
-  displayGreenGrass(); // display Green Grass
-  displayCircleAndPath(); // display gray circle and path
+  super.displayGreenGrass(); // display Green Grass
+  this.displayCircleAndPath(); // display gray circle and path
 
-  displayDollysBuilding();
-  displayBackgroundBuilding();
-  displayShop();
-  displayStairs();
+  this.displayDollysBuilding();
+  this.displayBackgroundBuilding();
+  this.displayShop();
+  this.displayStairs();
 
-  movePlayer(); // handle user input and move player avatar
+  // movePlayer(); // handle user input and move player avatar
 
-  displayLampFoot(); // displayed before the player for correct layer effect
-  displayPlayer(); // displays player and also constrains them to move only on the ground
-  displayLamppost(); // displays lamppost in front of player
-  displayTrees();
+  this.displayLampFoot(); // displayed before the player for correct layer effect
+  player.display(); // displays player and also constrains them to move only on the ground
+  this.displayLamppost(); // displays lamppost in front of player
+  this.displayTrees();
 
 }
 
@@ -83,6 +76,7 @@ displayBackgroundBuilding() {
   rect(0 + 50, height / 2 - 28, 100, 90);
   pop();
 }
+
 //Shop
 displayShop() {
   // displays sky blue rectangle
@@ -97,7 +91,7 @@ displayShop() {
 displayStairs(){
   push();
   imageMode(CENTER);
-  image(stairs, 120.5, height/2 + 181, 45, 228); // hard numbers
+  image(this.stairsImg, 120.5, height/2 + 181, 45, 228); // hard numbers
   pop();
 }
 
@@ -136,20 +130,21 @@ displayCircleAndPath() { // draws a gray path leading to the circle
 displayLampFoot() { // player moves in front of lamp foot
   push();
   imageMode(CENTER);
-  image(streetlampFoot, this.lampX, this.lampY + 50, 15, 15); // hard numbers
+  image(this.streetlampFootImg, this.lampX, this.lampY + 50, 15, 15); // hard numbers
   pop();
 }
 
 displayLamppost() { // lampost is displayed
   push();
   imageMode(CENTER);
-  image(streetlampImage, this.lampX, this.lampY, 15, 90);
+  image(this.streetlampImg, this.lampX, this.lampY, 15, 90);
   pop();
 }
 
 displayTrees() { // lampost is displayed
   push();
   imageMode(CENTER);
-  image(tree, 440, 540, 100, 110);
+  image(this.treeImg, 440, 540, 100, 110);
   pop();
+}
 }

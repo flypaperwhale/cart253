@@ -1,34 +1,21 @@
-"use strict";
+class SkyGlowCityA extends Map{
+  constructor(itemImagesList){ // enter item array and simNPCList
+    // of which the according elements will be extracted by the map
+    super();
+//this.player; // player avatar, class Player
+this.streetlampImg = itemImagesList[0];
+this.streetlampFootImg = itemImagesList[1];
+this.stairs = itemImagesList[2];
 
-let player; // player avatar, class Player
-let streetlampImage;
-let streetlampFoot;
-let stairs;
-
-let lampX = 258; // lamp x value
-let lampY = 510; // lamp y value
-
-function preload(){
-  streetlampImage = loadImage("assets/images/lamp.png");
-  streetlampFoot = loadImage("assets/images/lampFoot.png");
-  streetlampFoot = loadImage("assets/images/lampFoot.png");
-  stairs =  loadImage("assets/images/stairs.png");
-}
-
-/**
-Description of setup
-*/
-function setup() {
-  createCanvas(500, 1000); // hard numbers?//
-
-  createPlayer(230, 495); // (x,y) starting positions declared and new Player is created
+this.lampX = 258; // lamp x value
+this.lampY = 510; // lamp y value
 }
 
 /**
 Description of draw()
 */
-function draw() {
-  background(0);
+display() {
+  //background(0);
 
   //sky
   displaySky(); // the blue sky rectangle covers the starry bg image
@@ -42,32 +29,32 @@ function draw() {
   displayShop();
   displayStairs();
 
-  movePlayer(); // handle user input and move player avatar
+  //movePlayer(); // handle user input and move player avatar
 
   displayLampFoot(); // displayed before the player for correct layer effect
-  displayPlayer(); // displays player and also constrains them to move only on the ground
+  //displayPlayer(); // displays player and also constrains them to move only on the ground
   displayLamppost(); // displays lamppost in front of player
 
 }
 
-// Create player
-function createPlayer(x, y) {
-  // create new player class
-  player = new Player(x, y);
-}
-
-function displayPlayer() { // player is displayed
-  player.constrain(height,width); // movement is constrained to the ground
-  player.display(); // display player
-}
-
-function movePlayer() {
-  player.handleInput(); // handle player input
-  player.move(); // and move player avatar
-}
+// // Create player
+// function createPlayer(x, y) {
+//   // create new player class
+//   player = new Player(x, y);
+// }
+//
+// function displayPlayer() { // player is displayed
+//   player.constrain(height,width); // movement is constrained to the ground
+//   player.display(); // display player
+// }
+//
+// function movePlayer() {
+//   player.handleInput(); // handle player input
+//   player.move(); // and move player avatar
+// }
 
 //Dolly's building
-function displayDollysBuilding() {
+displayDollysBuilding() {
   // displays sky blue rectangle
   push();
   noStroke();
@@ -77,7 +64,7 @@ function displayDollysBuilding() {
   pop();
 }
 //Background building
-function displayBackgroundBuilding() {
+displayBackgroundBuilding() {
   // displays sky blue rectangle
   push();
   noStroke();
@@ -89,7 +76,7 @@ function displayBackgroundBuilding() {
   pop();
 }
 //Mayorhouse
-function displayShop() {
+displayShop() {
   // displays sky blue rectangle
   push();
   noStroke();
@@ -99,14 +86,14 @@ function displayShop() {
   pop();
 }
 
-function displayStairs(){
+displayStairs(){
   push();
   imageMode(CENTER);
   image(stairs, 371, height/2 + 130, 45, 165); // hard numbers
   pop();
 }
 
-function displaySky() {
+displaySky() {
   // displays sky blue rectangle
   push();
   noStroke();
@@ -116,7 +103,7 @@ function displaySky() {
   pop();
 }
 
-function displayGreenGrass() {
+displayGreenGrass() {
   // draws a green rectangle as land where player can walk around
   push();
   noStroke();
@@ -126,7 +113,7 @@ function displayGreenGrass() {
   pop();
 }
 
-function displayCircleAndPath() { // draws a gray path leading to the circle
+displayCircleAndPath() { // draws a gray path leading to the circle
   // in the middle of which stands the lamppost
   push();
   noStroke();
@@ -138,16 +125,17 @@ function displayCircleAndPath() { // draws a gray path leading to the circle
   pop();
 }
 
-function displayLampFoot() { // player moves in front of lamp foot
+displayLampFoot() { // player moves in front of lamp foot
   push();
   imageMode(CENTER);
-  image(streetlampFoot, lampX, lampY + 50, 15, 15); // hard numbers
+  image(this.streetlampFootImg, this.lampX, this.lampY + 50, 15, 15); // hard numbers
   pop();
 }
 
-function displayLamppost() { // lampost is displayed
+displayLamppost() { // lampost is displayed
   push();
   imageMode(CENTER);
-  image(streetlampImage, lampX, lampY, 15, 90);
+  image(this.streetlampImg, this.lampX, this.lampY, 15, 90);
   pop();
+}
 }

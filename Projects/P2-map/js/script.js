@@ -1,179 +1,41 @@
+/**
+Interrupting Sky Glow
+Frankie Latreille
+
+Dolly explores the town of Sky Glow, fulfilling the needs of townsfolk
+while finding ways to turn out the lights in town
+so that she might see the constellations in the sky
+*/
+
 "use strict";
 
-let player; // player avatar, class Player
-let streetlampImage;
-let streetlampFoot;
-let stairs;
-let garbage;
-let gazebo;
-let tree;
+let state = undefined;
 
-let lampX = 378; // lamp x value
-let lampY = 501; // lamp y value
-
-function preload(){
-  streetlampImage = loadImage("assets/images/lamp.png");
-  streetlampFoot = loadImage("assets/images/lampFoot.png");
-  streetlampFoot = loadImage("assets/images/lampFoot.png");
-  stairs =  loadImage("assets/images/stairs.png");
-  garbage =  loadImage("assets/images/garbage.png");
-  gazebo =  loadImage("assets/images/gazebo.png");
-  tree = loadImage("assets/images/tree.png");
-
-}
+/**
+Description of preload
+*/
+function preload() {}
 
 /**
 Description of setup
 */
 function setup() {
-  createCanvas(500, 1000); // hard numbers?//
+  createCanvas(600, 600);
 
-  createPlayer(230, 495); // (x,y) starting positions declared and new Player is created
+  state = new TitleState();
 }
 
 /**
 Description of draw()
 */
 function draw() {
-  background(0);
-
-  //sky
-  displaySky(); // the blue sky rectangle covers the starry bg image
-
-  //ground
-  displayGreenGrass(); // display Green Grass
-  displayCircleAndPath(); // display gray circle and path
-
-  displayBackgroundBuilding();
-  displayGarbage();
-  displayGazebo();
-
-  movePlayer(); // handle user input and move player avatar
-
-  displayLampFoot(); // displayed before the player for correct layer effect
-  displayPlayer(); // displays player and also constrains them to move only on the ground
-  displayLamppost(); // displays lamppost in front of player
-
-  displayTrees();
+  state.update();
 }
 
-// Create player
-function createPlayer(x, y) {
-  // create new player class
-  player = new Player(x, y);
+function keyPressed() {
+  state.keyPressed();
 }
 
-function displayPlayer() { // player is displayed
-  player.constrain(height,width); // movement is constrained to the ground
-  player.display(); // display player
-}
-
-function movePlayer() {
-  player.handleInput(); // handle player input
-  player.move(); // and move player avatar
-}
-
-
-//Background building
-function displayBackgroundBuilding() {
-  // displays sky blue rectangle
-  push();
-  noStroke();
-  fill(159, 91, 114); // blue with alpha value linked to dayTimer
-  rectMode(CENTER);
-
-  rect(0 + 50, height/2 + 225, 100, 80);
-  pop();
-}
-
-function displayGarbage(){
-  push();
-  imageMode(CENTER);
-  image(garbage, 107, height/2 + 244, 35, 50); // hard numbers
-  pop();
-}
-
-function displayGazebo(){
-  push();
-  imageMode(CENTER);
-  image(gazebo, 100, height/2+50, 130, 105); // hard numbers
-  pop();
-}
-
-
-function displaySky() {
-  // displays sky blue rectangle
-  push();
-  noStroke();
-  fill(35,45,125); // blue with alpha value linked to dayTimer
-  rectMode(CENTER);
-  rect(width / 2, 0, 500, 990);
-  pop();
-}
-
-function displayGreenGrass() {
-  // draws a green rectangle as land where player can walk around
-  push();
-  noStroke();
-  fill(20, 85, 45); // middle green
-  rectMode(CENTER);
-  rect(width / 2, height, 500, 1010); // displayed at bottom center
-  pop();
-}
-
-function displayCircleAndPath() { // draws a gray path leading to the circle
-  // in the middle of which stands the lamppost
-  push();
-  noStroke();
-  fill(145, 145, 145); // dark grey
-  ellipseMode(CENTER);
-  ellipse(width / 2 - 100, height / 2 + 290, 200, 20); // a circle at mid center
-  //rectMode(CENTER);
-  //ßrect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
-  pop();
-}
-
-function displayLampFoot() { // player moves in front of lamp foot
-  push();
-  imageMode(CENTER);
-  image(streetlampFoot, lampX, lampY + 50, 15, 15); // hard numbers
-  pop();
-}
-
-function displayLamppost() { // lampost is displayed
-  push();
-  imageMode(CENTER);
-  image(streetlampImage, lampX, lampY, 15, 90);
-  pop();
-}
-
-function displayTrees() { // lampost is displayed
-  push();
-  imageMode(CENTER);
-  image(tree, 270, 500, 100, 110);
-  pop();
-  push();
-  imageMode(CENTER);
-  image(tree, 490, 490, 90, 110);
-  pop();
-  push();
-  imageMode(CENTER);
-  image(tree, 510, 550, 80, 90);
-  pop();
-  push();
-  imageMode(CENTER);
-  image(tree, 500, 620, 80, 110);
-  pop();
-  push();
-  imageMode(CENTER);
-  image(tree, 500, 700, 100, 120);
-  pop();
-  push();
-  imageMode(CENTER);
-  image(tree, 245, 655, 85, 105);
-  pop();
-  push();
-  imageMode(CENTER);
-  image(tree, 288, 682, 100, 120);
-  pop();
+function mouseClicked() {
+  state.mouseClicked();
 }

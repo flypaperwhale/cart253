@@ -81,7 +81,6 @@ function displayBackgroundBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-
   rect(0 + 50, height/2 + 225, 100, 80);
   pop();
 }
@@ -99,7 +98,6 @@ function displayGazebo(){
   image(gazebo, 100, height/2+50, 130, 105); // hard numbers
   pop();
 }
-
 
 function displaySky() {
   // displays sky blue rectangle

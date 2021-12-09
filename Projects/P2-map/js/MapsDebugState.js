@@ -33,16 +33,45 @@ class MapsDebugState extends State {
       //this.player.display(); // display the player avatar
 
 
+// Threshold checking to update correct map!
+if (this.player.thresholdCollision === true){
 
+  if (this.map.name === `A`){
+    this.player.x = 5;
+    this.currentMap = mapsArray[1];
+    this.player.thresholdCollision = false;
+  }
 
+  else if (this.map.name === `B`){
 
+    if (this.player.x > width/2){ // if player cross threshold to the right
+      this.player.x = 5;
+      this.currentMap = mapsArray[2]; // go to map C
+      this.player.thresholdCollision = false;
+}
+      else if (this.player.x < width/2){ // if player crosses to the left
+        this.player.x = 455;
+        this.currentMap = mapsArray[0]; // go to map A
+        this.player.thresholdCollision = false;
+      }
     }
+
+    else if (this.map.name === `C`){
+      this.player.x = 455;
+      this.currentMap = mapsArray[1];
+
+      this.player.thresholdCollision = false;
+    }
+
+  }
+}
 
   display() {}
 
   mouseClicked(){ // click to check where x is, debug method
     console.log(`x ${this.player.x} ,y ${this.player.y}
-      and speed vx vy are ${this.player.speed} ${this.player.vx} ${this.player.vy}`);
+      and speed vx vy are ${this.player.speed} ${this.player.vx} ${this.player.vy}
+      and player thresholdCollision ${this.player.thresholdCollision}`);
   }
 
   keyPressed() { // change state ###

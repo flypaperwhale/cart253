@@ -88,7 +88,7 @@ displayCityHall() {
   noStroke();
   fill(159, 91, 114);
   rectMode(CENTER);
-  rect(260, 627, 180, 185);
+  rect(260, 627, 180, 180);
   pop();
 }
 

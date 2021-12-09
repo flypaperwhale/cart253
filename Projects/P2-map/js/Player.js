@@ -18,6 +18,7 @@ class Player {
     if (this.wallCollision === true) {
       //do not handle input!
     } else if (this.wallCollision === false) {
+      this.speed = 2.5;
       // handle keys for moving player avatar (code from https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.vx = -this.speed;
@@ -105,6 +106,7 @@ class Player {
       this.y = this.y + 10;
     }
     else {
+
       this.speed = 3; // move normally
     }
   }
@@ -124,12 +126,16 @@ class Player {
       //this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+      //this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -146,12 +152,13 @@ class Player {
 
       //this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-        this.speed = 0;
         this.x = this.x + 15;
+        this.speed = 0;
+
       }
 
     } else {
-      this.speed = 3;
+      //this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -169,15 +176,21 @@ class Player {
       //this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 15;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -185,27 +198,30 @@ class Player {
   blockCityHallMapA() {
     // block out background building
     if (
-      this.x > 260 /*rectX*/ - 180 / 2 - 5 /*rectW*/ &&
-      this.x < 260 + 180 / 2 + 5 &&
-      this.y > 672 /*rectY*/ - 180 + 30 /*rectH*/ &&
-      this.y < 672 + 180 / 2 - 50
+      this.x > 260 /*rectX*/ - 180 / 2 /*rectW*/ && // coming in left (right arrow)
+      this.x < 260 + 180 / 2 + 5 && // coming in right (left arrow)
+      this.y > 672 /*rectY*/ - 180 + 35 /*rectH*/ && // coming from down (up arrow)
+      this.y < 672 + 180 / 2 - 50 // coming from up (down arrow)
     ) {
       this.wallCollision = true;
-      //this.speed = 0;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
       }
-      if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-        this.x = this.x - 10;
-      }
+        if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+            this.x = this.x - 15;
+        }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+
         this.y = this.y + 15;
       }
-      if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
-        this.y = this.y - 10;
+
+
+    if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+        this.y = this.y - 15;
       }
     } else {
-      this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -215,7 +231,7 @@ class Player {
     // Top
     if (
       this.x > 450 /*rectX*/ - 100 / 2 /*rectW*/ &&
-      this.x < 450 + 100 / 2 - 10 &&
+      this.x < 450 + 100 / 2 - 5 &&
       this.y > 675 /*rectY*/ - 235 / 2 /*rectH*/ &&
       this.y < 675 - 235 / 3
     ) {
@@ -224,16 +240,24 @@ class Player {
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-        this.x = this.x - 10;
+        this.x = this.x - 15;
+        this.speed = 0;
+
       } else if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
+        this.speed = 0;
+
       } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 15;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
 // Bottom
@@ -248,16 +272,24 @@ class Player {
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 10;
+        this.speed = 0;
+
       }
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
         this.x = this.x - 10;
+        this.speed = 0;
+
       } else if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
+        this.speed = 0;
+
       } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 10;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
 
@@ -273,13 +305,17 @@ class Player {
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 20;
+        this.speed = 0;
+
       }
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
         this.x = this.x - 10;
+        this.speed = 0;
+
 
 
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -300,15 +336,15 @@ class Player {
 
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-        this.speed = 0;
         this.x = this.x + 15;
+        this.speed = 0;
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
-          this.speed = 0;
         this.y = this.y + 15;
+        this.speed = 0;
       } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
-          this.speed = 0;
         this.y = this.y - 15;
+        this.speed = 0;
       }
     }
     // Bottom part
@@ -322,18 +358,21 @@ class Player {
 
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-          this.speed = 0;
         this.x = this.x + 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
-          this.speed = 0;
         this.y = this.y + 15;
+        this.speed = 0;
+
       } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
-          this.speed = 0;
         this.y = this.y - 20;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -352,12 +391,16 @@ class Player {
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -375,14 +418,20 @@ class Player {
       //this.speed = this.speed*-1;
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
         this.x = this.x - 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
+        this.speed = 0;
+
       } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 15;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -400,17 +449,25 @@ class Player {
       //this.speed = this.speed*-1;
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
         this.x = this.x - 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
+        this.speed = 0;
+
       } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 15;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -431,14 +488,20 @@ class Player {
       //this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
+        this.speed = 0;
+
       } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 15;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
   }
@@ -468,17 +531,25 @@ class Player {
       //this.speed = this.speed*-1;
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
         this.x = this.x - 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
+        this.speed = 0;
+
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
+        this.speed = 0;
+
       } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 15;
+        this.speed = 0;
+
       }
     } else {
-      this.speed = 3;
+    //  this.speed = 3;
       this.wallCollision = false;
     }
   }

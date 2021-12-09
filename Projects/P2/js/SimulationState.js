@@ -178,24 +178,24 @@ class SimulationState extends State {
       if (this.eventSwitch === 0) { // when switch is initialized (at 0)
 
         // actions for first item pickup //
-                if (this.player.firstItemPicked === false && this.simulationItemList[i].name === `Slingshot`
-                  || this.player.firstItemPicked === false && this.simulationItemList[i].name === `Ham`){
-                  this.player.firstItemPicked = true;
+                if (this.player.firstItemPicked === 0 && this.simulationItemList[i].name === `Slingshot`
+                  || this.player.firstItemPicked === 0 && this.simulationItemList[i].name === `Ham`){
+                  this.player.firstItemPicked = 1;
                 }
               // gets rid of inventory place holder!
-                if (this.player.firstItemPicked === true && this.simulationItemList[i].name === `Slingshot`){
+                if (this.player.firstItemPicked === 1 && this.simulationItemList[i].name === `Slingshot`){
                   this.player.inventory.splice(0,1)
-                  this.player.firstItemPicked === `void`;
+                  this.player.firstItemPicked = 3;
 
                   console.log(`first item IS picked, it's a slingshot`);}
-                  else if (this.player.firstItemPicked === true && this.simulationItemList[i].name === `Ham`){
+                  else if (this.player.firstItemPicked === 1 && this.simulationItemList[i].name === `Ham`){
                     this.player.inventory.splice(0,1)
-                    this.player.firstItemPicked === `void`;
+                    this.player.firstItemPicked = 3;
                     console.log(`first item IS picked, it's Ham`);}
 
         if (this.simulationItemList[i].name === `Slingshot`
           || this.simulationItemList[i].name === `Wrench`
-      || this.simulationItemList[i].name === `Injunction` ){
+      || this.simulationItemList[i].name === `Injunction(s)` ){
         this.player.inventory.push(this.simulationItemList[i]); // item is pushed in inventory
         this.textBubble = new TextBubble( // text is assigned to textbubble
           `You just picked up ${this.simulationItemList[i].name}`
@@ -210,12 +210,12 @@ class SimulationState extends State {
           `You just picked up ${this.simulationItemList[i].name}`
         );
       }
-
+}
         this.textBubble.display();
       this.eventSwitch++;
       }
     }
-  }
+
 
       this.player.display(); // display the player avatar
     }
@@ -234,7 +234,7 @@ class SimulationState extends State {
   keyPressed() {
     if (keyCode === RETURN) {
       this.player.displayInventory();
-      console.log(`this is inv lgt ${this.player.inventory.length}
+      console.log(`this is first item picked ${this.player.firstItemPicked}
       and last item ${this.player.inventory[this.player.inventory.length-1]}`);
     }
 

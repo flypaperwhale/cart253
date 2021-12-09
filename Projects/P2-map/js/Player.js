@@ -77,6 +77,22 @@ class Player {
         this.y = this.y + 10;
   }
 }
+
+// block out Dolly's building
+if (this.x > 50 /*rectX*/ - 100 /*rectW*/ && this.x < 50 + 100/2
+  && this.y > 675 /*rectY*/ - 235/2 /*rectH*/ && this.y < 675 + 235/2){
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      this.x = this.x + 10;
+  }
+    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      this.y = this.y + 10;
+}
+else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+  this.y = this.y - 10;
+
+}
+
+}
 }
 
     if (map.name === `C`) {

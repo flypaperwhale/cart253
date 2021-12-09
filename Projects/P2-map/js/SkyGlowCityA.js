@@ -7,7 +7,8 @@ this.name = `A`;
 this.streetlampImg = itemImagesList[0];
 this.streetlampFootImg = itemImagesList[1];
 this.stairsImg = itemImagesList[2];
-this.fountainImg = itemImagesList[7]
+this.fountainImg = itemImagesList[7];
+this.fountainTopImg = itemImagesList[8];
 
 this.lampX = 258; // lamp x value
 this.lampY = 510; // lamp y value
@@ -37,6 +38,7 @@ display(player) {
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
   this.displayLamppost(); // displays lamppost in front of player
+  this.displayFountainTop();
 
 }
 
@@ -101,7 +103,14 @@ displayStairs(){
 displayFountain(){
   push();
   imageMode(CENTER);
-  image(this.fountainImg, 260, 730, 100, 50); // hard numbers
+  image(this.fountainImg, 265, 730, 100, 55); // hard numbers
+  pop();
+}
+
+displayFountainTop(){
+  push();
+  imageMode(CENTER);
+  image(this.fountainTopImg, 265, 720, 93, 37); // hard numbers
   pop();
 }
 

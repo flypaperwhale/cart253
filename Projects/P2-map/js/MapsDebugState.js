@@ -13,7 +13,7 @@ class MapsDebugState extends State {
     this.maps = [mapsArray[0],mapsArray[1],mapsArray[2]]; // a triptych cityscape
     this.map = undefined;
     this.player = new Player(109, 597);
-    this.currentMap = mapsArray[1];
+    this.currentMap = mapsArray[0];
 
   }
 

@@ -110,7 +110,7 @@ displayFountain(){
 displayFountainTop(){
   push();
   imageMode(CENTER);
-  image(this.fountainTopImg, 265, 720, 93, 37); // hard numbers
+  image(this.fountainTopImg, 265, 719, 100, 30); // hard numbers
   pop();
 }
 

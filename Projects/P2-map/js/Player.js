@@ -122,16 +122,16 @@ class Player {
       this.y < 450 + 125 / 2
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
-        this.speed = 0;
 
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
-        this.speed = 0;
 
       }
     } else {
@@ -149,11 +149,12 @@ class Player {
       this.y < 550 + 100 / 2
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
-        this.speed = 0;
 
       }
 
@@ -172,21 +173,20 @@ class Player {
       this.y < 700 + 215 / 2
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
-        this.speed = 0;
 
       }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
         this.y = this.y + 15;
-        this.speed = 0;
 
       }
       if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 15;
-        this.speed = 0;
 
       }
     } else {
@@ -206,15 +206,19 @@ class Player {
       this.wallCollision = true;
       this.vx = this.vx * -1;
       this.vy = this.vy * -1;
+
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
+        //this.speed = 0;
       }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.x = this.x - 15;
+          //  this.speed = 0;
         }
       if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
 
         this.y = this.y + 15;
+      //  this.speed = 0;
       }
 
 
@@ -230,12 +234,14 @@ class Player {
     // block out background building
     // Top
     if (
-      this.x > 450 /*rectX*/ - 100 / 2 /*rectW*/ &&
-      this.x < 450 + 100 / 2 - 5 &&
-      this.y > 675 /*rectY*/ - 235 / 2 /*rectH*/ &&
-      this.y < 675 - 235 / 3
+      this.x > 450 /*rectX*/ - 100 / 2 /*rectW*/ && //(right arrow)
+      this.x < 450 + 100 / 2 - 5 && // (left arrow)
+      this.y > 675 /*rectY*/ - 235 / 2 /*rectH*/ && // (up arrow)
+      this.y < 675 - 235 / 3 // (down arrow)
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
@@ -260,6 +266,7 @@ class Player {
     //  this.speed = 3;
       this.wallCollision = false;
     }
+
 // Bottom
     if (
       this.x > 450 /*rectX*/ - 100 / 2 /*rectW*/ &&
@@ -268,6 +275,8 @@ class Player {
       this.y < 675 + 235 / 2
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
@@ -301,6 +310,8 @@ class Player {
       this.y < 675 + 235 / 2
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
@@ -333,6 +344,8 @@ class Player {
       this.y < 675 - 235 / 3
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
@@ -355,6 +368,8 @@ class Player {
       this.y < 675 + 235 / 2
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
@@ -387,6 +402,8 @@ class Player {
       this.y < 447 + 70
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
@@ -414,6 +431,8 @@ class Player {
       this.y < 715 + 100 / 2
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //this.speed = this.speed*-1;
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
@@ -445,6 +464,8 @@ class Player {
       this.y < 540 + 60
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //this.speed = this.speed*-1;
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
@@ -484,6 +505,8 @@ class Player {
       this.y < 725 + 80 / 2
     ) {
       this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
 
       //this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
@@ -528,7 +551,9 @@ class Player {
         this.y < 682 + 60)
     ) {
       this.wallCollision = true;
-      //this.speed = this.speed*-1;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
+
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
         this.x = this.x - 15;
         this.speed = 0;

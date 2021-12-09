@@ -7,6 +7,7 @@ this.name = `A`;
 this.streetlampImg = itemImagesList[0];
 this.streetlampFootImg = itemImagesList[1];
 this.stairsImg = itemImagesList[2];
+this.fountainImg = itemImagesList[7]
 
 this.lampX = 258; // lamp x value
 this.lampY = 510; // lamp y value
@@ -29,6 +30,7 @@ display(player) {
   this.displayLargeBuilding();
   this.displayCityHall();
   this.displayStairs();
+  this.displayFountain();
 
   //movePlayer(); // handle user input and move player avatar
 
@@ -96,25 +98,32 @@ displayStairs(){
   pop();
 }
 
-displaySky() {
-  // displays sky blue rectangle
+displayFountain(){
   push();
-  noStroke();
-  fill(35,45,125); // blue with alpha value linked to dayTimer
-  rectMode(CENTER);
-  rect(width / 2, 0, 500, 990);
+  imageMode(CENTER);
+  image(this.fountainImg, 260, 730, 100, 50); // hard numbers
   pop();
 }
 
-displayGreenGrass() {
-  // draws a green rectangle as land where player can walk around
-  push();
-  noStroke();
-  fill(20, 85, 45); // middle green
-  rectMode(CENTER);
-  rect(width / 2, height, 500, 1010); // displayed at bottom center
-  pop();
-}
+// displaySky() {
+//   // displays sky blue rectangle
+//   push();
+//   noStroke();
+//   fill(35,45,125); // blue with alpha value linked to dayTimer
+//   rectMode(CENTER);
+//   rect(width / 2, 0, 500, 990);
+//   pop();
+// }
+//
+// displayGreenGrass() {
+//   // draws a green rectangle as land where player can walk around
+//   push();
+//   noStroke();
+//   fill(20, 85, 45); // middle green
+//   rectMode(CENTER);
+//   rect(width / 2, height, 500, 1010); // displayed at bottom center
+//   pop();
+// }
 
 displayCircleAndPath() { // draws a gray path leading to the circle
   // in the middle of which stands the lamppost

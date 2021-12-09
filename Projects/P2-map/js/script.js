@@ -16,6 +16,7 @@ let treeImg;
 let garbageImg;
 let gazeboImg;
 let gazeboBaseImg;
+let fountainImg;
 let itemImagesList = [];
 let mapsArray = [];
 let state = undefined;
@@ -35,6 +36,7 @@ function preload() {
   garbageImg =  loadImage("assets/images/garbage.png");
   gazeboImg =  loadImage("assets/images/gazebo2.png");
   gazeboBaseImg = loadImage("assets/images/gazeboBase.png");
+  fountainImg = loadImage("assets/images/fountain.png");
 }
 
 /**
@@ -42,7 +44,7 @@ Description of setup
 */
 function setup() {
   createCanvas(500, 1000);
-  itemImagesList.push(streetlampImg,streetlampFootImg,stairsImg,treeImg,garbageImg,gazeboImg,gazeboBaseImg);
+  itemImagesList.push(streetlampImg,streetlampFootImg,stairsImg,treeImg,garbageImg,gazeboImg,gazeboBaseImg,fountainImg);
   createMapsAndStore();
   //createPlayer(230, 495); // (x,y) starting positions declared and new Player is created
 

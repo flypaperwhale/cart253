@@ -95,25 +95,25 @@ displayGazeboBase(){
   pop();
 }
 
-displaySky() {
-  // displays sky blue rectangle
-  push();
-  noStroke();
-  fill(35,45,125); // blue with alpha value linked to dayTimer
-  rectMode(CENTER);
-  rect(width / 2, 0, 500, 990);
-  pop();
-}
-
-displayGreenGrass() {
-  // draws a green rectangle as land where player can walk around
-  push();
-  noStroke();
-  fill(20, 85, 45); // middle green
-  rectMode(CENTER);
-  rect(width / 2, height, 500, 1010); // displayed at bottom center
-  pop();
-}
+// displaySky() {
+//   // displays sky blue rectangle
+//   push();
+//   noStroke();
+//   fill(35,45,125); // blue with alpha value linked to dayTimer
+//   rectMode(CENTER);
+//   rect(width / 2, 0, 500, 990);
+//   pop();
+// }
+//
+// displayGreenGrass() {
+//   // draws a green rectangle as land where player can walk around
+//   push();
+//   noStroke();
+//   fill(20, 85, 45); // middle green
+//   rectMode(CENTER);
+//   rect(width / 2, height, 500, 1010); // displayed at bottom center
+//   pop();
+// }
 
 displayCircleAndPath() { // draws a gray path leading to the circle
   // in the middle of which stands the lamppost

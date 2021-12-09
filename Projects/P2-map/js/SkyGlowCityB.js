@@ -96,7 +96,8 @@ displayShop() {
 displayStairs(){
   push();
   imageMode(CENTER);
-  image(this.stairsImg, 120.5, height/2 + 181, 45, 228); // hard numbers
+  console.log(`${height/2 +181}`);
+  image(this.stairsImg, 120.5, 681, 45, 228); // hard numbers
   pop();
 }
 
@@ -149,7 +150,7 @@ displayLamppost() { // lampost is displayed
 displayTrees() { // lampost is displayed
   push();
   imageMode(CENTER);
-  image(this.treeImg, 440, 540, 100, 110);
+  image(this.treeImg, 400, 540, 100, 110);
   pop();
 }
 

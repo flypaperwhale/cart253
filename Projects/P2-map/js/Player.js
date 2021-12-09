@@ -12,7 +12,7 @@ class Player {
     this.isPaused = true; // player pause state switch
   }
 
-  constrain(height,width) {
+  constrain(height, width) {
     // constrain player to the ground
     this.x = constrain(this.x, 0, width);
     this.y = constrain(this.y, 452, height);
@@ -57,36 +57,37 @@ class Player {
     pop();
   }
 
-  barriers(map){
-    if (map.name === `A`){
-this.boundaries();
+  barriers(map) {
+    if (map.name === `A`) {
+      this.boundaries();
+
+      // block out 
     }
 
-    if (map.name === `B`){
-    this.boundaries();
-      }
-
-    if (map.name === `C`){
-this.boundaries();
+    if (map.name === `B`) {
+      this.boundaries();
     }
 
+    if (map.name === `C`) {
+      this.boundaries();
+    }
   }
 
-boundaries(){
-  if (this.x > 500){
-    this.x = this.x - 10;
-  } // off the right side
-  else if (this.x < 0 ){
-    this.x = this.x + 10;
-  } // off the left side
-  else if (this.y > 850){
-    this.y = this.y - 10;
-  } // off the bottom
-  else if (this.y < 500 ){
-  this.y = this.y + 10;
-      } // off onto the sky border
-      else {this.speed = 4} // move normally
-
-}
-
+  boundaries() {
+    if (this.x > 500) {
+      this.x = this.x - 10;
+    } // off the right side
+    else if (this.x < 0) {
+      this.x = this.x + 10;
+    } // off the left side
+    else if (this.y > 850) {
+      this.y = this.y - 10;
+    } // off the bottom
+    else if (this.y < 500) {
+      this.y = this.y + 10;
+    } // off onto the sky border
+    else {
+      this.speed = 4;
+    } // move normally
+  }
 }

@@ -26,8 +26,8 @@ display(player) {
   this.displayCircleAndPath(); // display gray circle and path
 
   this.displayDollysBuilding();
-  this.displayBackgroundBuilding();
-  this.displayShop();
+  this.displayLargeBuilding();
+  this.displayCityHall();
   this.displayStairs();
 
   //movePlayer(); // handle user input and move player avatar
@@ -61,33 +61,35 @@ displayDollysBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width - 50, height / 2 + 175, 100, 235);
+  rect(450, 675, 100, 235);
   pop();
 }
-//Background building
-displayBackgroundBuilding() {
-  // displays sky blue rectangle
+//Large building acting as the left border
+displayLargeBuilding() {
+  //
   push();
   noStroke();
-  fill(159, 91, 114); // blue with alpha value linked to dayTimer
+  fill(159, 91, 114);
   rectMode(CENTER);
-  rect(0 + 35, height / 2 - 50, 70, 125);
-  rect(0 + 15, height /2 + 50, 30, 100);
-  rect(0 + 50, height/2 + 200, 110, 215);
+  rect(35, 450, 70, 125);
+  rect(15, 550, 30, 100);
+  rect(50, 700, 110, 215);
   pop();
 }
 //Mayorhouse
-displayShop() {
-  // displays sky blue rectangle
+displayCityHall() {
+  // large square rectangle representing the Mayor House.
+  // there is a party here tonight for important adults only
   push();
   noStroke();
-  fill(159, 91, 114); // blue with alpha value linked to dayTimer
+  fill(159, 91, 114);
   rectMode(CENTER);
-  rect(width / 2+10, height / 2+127, 180, 165);
+  rect(260, 627, 180, 165);
   pop();
 }
 
 displayStairs(){
+  // the stairs are blocked by the mayor. get 3 injunctions and the mayor will move
   push();
   imageMode(CENTER);
   image(this.stairsImg, 371, height/2 + 130, 45, 165); // hard numbers

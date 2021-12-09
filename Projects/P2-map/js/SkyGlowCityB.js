@@ -67,7 +67,7 @@ displayDollysBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(0 + 50, height / 2 + 175, 100, 235);
+  rect(50, 675, 100, 235);
   pop();
 }
 
@@ -78,7 +78,7 @@ displayBackgroundBuilding() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(0 + 50, height / 2 - 28, 100, 90);
+  rect(50, 472, 100, 90);
   pop();
 }
 
@@ -89,7 +89,7 @@ displayShop() {
   noStroke();
   fill(159, 91, 114); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width / 2 + 175, height / 2+215, 150, 100);
+  rect(715, 425, 150, 100);
   pop();
 }
 

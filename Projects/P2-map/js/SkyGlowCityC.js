@@ -9,6 +9,7 @@ this.streetlampFootImg = itemImagesList[1];
 this.treeImg = itemImagesList[3];
 this.garbageImg = itemImagesList[4];
 this.gazeboImg = itemImagesList[5];
+this.gazeboBaseImg = itemImagesList[6];
 
 
 this.lampX = 378; // lamp x value
@@ -28,15 +29,17 @@ display(player) {
   super.displayGreenGrass(); // display Green Grass
   this.displayCircleAndPath(); // display gray circle and path
 
-  this.displayBackgroundBuilding();
+  this.displayShopBack();
   this.displayGarbage();
-  this.displayGazebo();
+
+  this.displayGazeboBase();
 
   //movePlayer(); // handle user input and move player avatar
 
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
   this.displayLamppost(); // displays lamppost in front of player
+  this.displayGazebo();
 
   this.displayTrees();
 }
@@ -59,27 +62,36 @@ display(player) {
 
 
 //Background building
-displayBackgroundBuilding() {
-  // displays sky blue rectangle
+displayShopBack() {
+  // displays shop
   push();
   noStroke();
-  fill(159, 91, 114); // blue with alpha value linked to dayTimer
+  fill(159, 91, 114);
   rectMode(CENTER);
-  rect(0 + 50, height/2 + 225, 100, 80);
+  rect(50, 725, 100, 80);
   pop();
 }
 
 displayGarbage(){
+  // displays garbage in which player can throw out bone!
+  // ### need to find out how to click garbage and have bone appear behind the garbage
   push();
   imageMode(CENTER);
-  image(this.garbageImg, 107, height/2 + 244, 35, 50); // hard numbers
+  image(this.garbageImg, 107, 744, 35, 50); // hard numbers
   pop();
 }
 
 displayGazebo(){
   push();
   imageMode(CENTER);
-  image(this.gazeboImg, 100, height/2+50, 130, 105); // hard numbers
+  image(this.gazeboImg, 100, 540, 130, 105); // hard numbers
+  pop();
+}
+
+displayGazeboBase(){
+  push();
+  imageMode(CENTER);
+  image(this.gazeboBaseImg, 100, 600, 115, 15); // hard numbers
   pop();
 }
 
@@ -118,6 +130,8 @@ displayCircleAndPath() { // draws a gray path leading to the circle
 displayLampFoot() { // player moves in front of lamp foot
   push();
   imageMode(CENTER);
+  console.log(`lampY is ${this.lampY+50}, and ${`d`}`);
+
   image(this.streetlampFootImg, this.lampX, this.lampY + 50, 15, 15); // hard numbers
   pop();
 }

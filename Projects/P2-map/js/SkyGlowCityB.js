@@ -73,10 +73,10 @@ displayDollysBuilding() {
 
 //Background building
 displayBackgroundBuilding() {
-  // displays sky blue rectangle
+  // displays building at top left
   push();
   noStroke();
-  fill(159, 91, 114); // blue with alpha value linked to dayTimer
+  fill(159, 91, 114);
   rectMode(CENTER);
   rect(50, 472, 100, 90);
   pop();
@@ -84,12 +84,12 @@ displayBackgroundBuilding() {
 
 //Shop
 displayShop() {
-  // displays sky blue rectangle
+  // displays shop, bottom right
   push();
   noStroke();
-  fill(159, 91, 114); // blue with alpha value linked to dayTimer
+  fill(159, 91, 114);
   rectMode(CENTER);
-  rect(715, 425, 150, 100);
+  rect(425, 715, 150, 100);
   pop();
 }
 
@@ -101,10 +101,10 @@ displayStairs(){
 }
 
 displaySky() {
-  // displays sky blue rectangle
+  // displays sky rectangle
   push();
   noStroke();
-  fill(35,45,125); // blue with alpha value linked to dayTimer
+  fill(35,45,125);
   rectMode(CENTER);
   rect(width / 2, 0, 500, 990);
   pop();

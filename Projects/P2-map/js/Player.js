@@ -61,12 +61,23 @@ class Player {
     if (map.name === `A`) {
       this.boundaries();
 
-      // block out 
+      // block out
     }
 
     if (map.name === `B`) {
       this.boundaries();
+
+  // block out background building
+  if (this.x > 50 /*rectX*/ - 100 /*rectW*/ && this.x < 50 + 100/2
+    && this.y > 472 /*rectY*/ - 90 /*rectH*/ && this.y < 447 + 70){
+      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+        this.x = this.x + 10;
     }
+      if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+        this.y = this.y + 10;
+  }
+}
+}
 
     if (map.name === `C`) {
       this.boundaries();

@@ -8,11 +8,12 @@ class Player {
     this.size = 20;
     this.speed = 2.5;
     this.alive = true; // always alive
-    this.inventory = [];
+    this.inventory = [`PlaceHolder`];
     this.isCollided = false; // switch true when player is in collision with npc or item
     this.isPaused = false; // player pause state switch
     this.tradeHappens = false; // player/NPC item trade switch
     this.itemToAddToInventory = undefined; // item label to create item and push in inventory ###
+    this.firstItemPicked = false;
   }
 
   constrain(height, width) {
@@ -84,8 +85,12 @@ class Player {
     // if item is in Player inv. array, item is removed from array and
     // Holding Item is pushed into the inventory array
     for (let i = 0; i < this.inventory.length; i++) {
-      let checkedItem = this.inventory[i];
-      if (checkedItem === npcDesiredItem) {
+      console.log(`current item checked in inventory ${this.inventory[i].name}
+        and npcdesires ${npcDesiredItem}`);
+      this.checkedItem = this.inventory[i];
+      console.log(`repeat item checked in inventory ${this.checkedItem.name}`);
+
+      if (this.checkedItem.name === npcDesiredItem) {
         //splice removeFromPlayerInventory(this.inventory[i])
         this.tradeHappens = true;
         this.itemToAddToInventory = npcHoldingItem;

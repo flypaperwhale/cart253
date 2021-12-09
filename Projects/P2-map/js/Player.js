@@ -195,7 +195,7 @@ class Player {
     }
   }
 
-  blockCityHallMapA() {
+  blockCityHallMapA() {  // ### THIS IS MY STANDARD ###
     // block out background building
     if (
       this.x > 260 /*rectX*/ - 180 / 2 /*rectW*/ && // coming in left (right arrow)

@@ -66,6 +66,7 @@ class SimulationState extends State {
   update() {
     this.display(); // simulation state display method
 
+
     // Check if player is paused (when textBubble appears)
     if (this.player.isPaused === true) {
       // if player is paused
@@ -92,15 +93,30 @@ class SimulationState extends State {
         this.player.paused(); // player avatar movement becomes paused
         // SimulationState desiredItem is temporarily the clicked npc's desired item (if any)
         // same holdingItem is temp the clicked npc's holding item
-        let desiredItem = this.simulationNPCList[i].desiredItem; // clicked npc values temporarily stored in simulation
-        let holdingItem = this.simulationNPCList[i].itemHeld;
+        //console.log(`NPC desire and held : ${this.simulationNPCList[i]}${this.simulationNPCList[i].desiredItem}${this.simulationNPCList[i].itemHeld}`);
 
-        this.player.checkTrade(desiredItem, holdingItem);
+        this.NPCdesiredItem = this.simulationNPCList[i].desiredItem; // clicked npc values temporarily stored in simulation
+        this.NPCholdingItem = this.simulationNPCList[i].itemHeld;
+        //console.log(`NPC desire and held : ${this.simulationNPCList[i]}${this.NPCdesiredItem}${this.NPCitemHeld}`);
+
+        this.player.checkTrade(this.NPCdesiredItem, this.NPCholdingItem);
         // using temporarily stored values inputed in player file
         // the a match between the npc's desiredItem and an item found in player's inventory array
         // if there is a match, the npc's holdingItem label is stored in ...
         // in simulation the item corresponding to the acquired item label is created
         // and stored in the player.inventory
+
+        if (this.player.tradeHappens === true){ // when trade happens
+          if (this.firstItemName === `Slingshot`|| this.firstItemName === `Wrench`){
+            this.lastIteminInventory = this.player.inventory[this.player.inventory.length-1];
+            this.lastIteminInventory = this.player.inventory.pop(); // remove last item in array
+            this.player.inventory.push(this.simulationItemList[this.player.itemToAddToInventory]);
+          }
+          else {
+            this.player.inventory.shift(); // remove first item from array
+            this.player.inventory.push(this.simulationItemList[this.player.itemToAddToInventory]);
+          }
+        }
 
         // this is a text assigning machine //
         if (this.simulationNPCList[i].textNo === 0) {
@@ -160,19 +176,46 @@ class SimulationState extends State {
 
       this.eventSwitch = constrain(this.eventSwitch, 0, 1); // switch can be 0 or 1
       if (this.eventSwitch === 0) { // when switch is initialized (at 0)
-          this.player.inventory.push(this.simulationItemList[i]); // item is pushed in inventory
-          console.log(
-            `you just pushed an item ${this.simulationItemList[i].name} in inventory. inv lgt now ${this.player.inventory.length}`
-          );
-          this.textBubble = new TextBubble( // text is assigned to textbubble
-            `You just picked up ${this.player.inventory[0].name}`
-          );
-        }
+
+        // actions for first item pickup //
+                if (this.player.firstItemPicked === false && this.simulationItemList[i].name === `Slingshot`
+                  || this.player.firstItemPicked === false && this.simulationItemList[i].name === `Ham`){
+                  this.player.firstItemPicked = true;
+                }
+              // gets rid of inventory place holder!
+                if (this.player.firstItemPicked === true && this.simulationItemList[i].name === `Slingshot`){
+                  this.player.inventory.splice(0,1)
+                  this.player.firstItemPicked === `void`;
+
+                  console.log(`first item IS picked, it's a slingshot`);}
+                  else if (this.player.firstItemPicked === true && this.simulationItemList[i].name === `Ham`){
+                    this.player.inventory.splice(0,1)
+                    this.player.firstItemPicked === `void`;
+                    console.log(`first item IS picked, it's Ham`);}
+
+        if (this.simulationItemList[i].name === `Slingshot`
+          || this.simulationItemList[i].name === `Wrench`
+      || this.simulationItemList[i].name === `Injunction` ){
+        this.player.inventory.push(this.simulationItemList[i]); // item is pushed in inventory
+        this.textBubble = new TextBubble( // text is assigned to textbubble
+          `You just picked up ${this.simulationItemList[i].name}`
+        );
+      }
+      else{
+        this.player.inventory.unshift(this.simulationItemList[i]); // item is pushed in inventory
+        // console.log(
+        //   `you just unshifted an item ${this.simulationItemList[i].name} in inventory. inv lgt now ${this.player.inventory.length}`
+        // );
+        this.textBubble = new TextBubble( // text is assigned to textbubble
+          `You just picked up ${this.simulationItemList[i].name}`
+        );
+      }
+
         this.textBubble.display();
       this.eventSwitch++;
       }
     }
-
+  }
 
       this.player.display(); // display the player avatar
     }
@@ -191,6 +234,8 @@ class SimulationState extends State {
   keyPressed() {
     if (keyCode === RETURN) {
       this.player.displayInventory();
+      console.log(`this is inv lgt ${this.player.inventory.length}
+      and last item ${this.player.inventory[this.player.inventory.length-1]}`);
     }
 
     if (keyCode === 32) {

@@ -17,8 +17,8 @@ class Jade extends NPC {
     this.tradeSucceeded = false;
     this.texts = [
       `Jade:
-      Though we're best friends, I sometimes feel my
-      role is to look over Billee, because I'm the eldest`,
+      Although we're best friends, I sometimes feel I
+      have to look over Billee because I'm older`,
       `Jade:
       That constellation doesn't look like a frog to me,
       I see a mouse!`,

@@ -7,7 +7,7 @@ class Wrench extends Item {
     this.width = 25;
     this.height = 35;
     this.image = image;
-    this.isOnMap = true; // always false
+    this.isOnMap = false; // always false
     this.playerColliding = undefined;
   }
 

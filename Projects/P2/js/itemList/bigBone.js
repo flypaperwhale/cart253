@@ -7,7 +7,7 @@ class BigBone extends Item {
     this.width = 25;
     this.height = 12;
     this.image = image;
-    this.isOnMap = true; // always false
+    this.isOnMap = false; // can be true when garbage is triggered!
     this.playerColliding = undefined;
   }
 

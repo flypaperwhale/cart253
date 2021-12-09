@@ -10,6 +10,7 @@ class Player {
     this.alive = true; // always alive
     this.playerCollidedNPC = false; // switch true/false if player is in collision with npc or not
     this.isPaused = true; // player pause state switch
+    this.wallCollision = false;
   }
 
   // constrain(height, width) {
@@ -19,22 +20,28 @@ class Player {
   // }
 
   handleInput() {
-    // handle keys for moving player avatar (code from https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
-    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-      this.vx = -this.speed;
-    } else if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-      this.vx = this.speed;
-    } else {
-      this.vx = 0;
+    if (this.wallCollision === true){
+      //do not handle input!
+    }
+    else if (this.wallCollision === false){
+      // handle keys for moving player avatar (code from https://github.com/pippinbarr/cc/tree/main/1/activities/inheritance-activity)
+      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+        this.vx = -this.speed;
+      } else if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+        this.vx = this.speed;
+      } else {
+        this.vx = 0;
+      }
+
+      if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+        this.vy = -this.speed;
+      } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+        this.vy = this.speed;
+      } else {
+        this.vy = 0;
+      }
     }
 
-    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
-      this.vy = -this.speed;
-    } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
-      this.vy = this.speed;
-    } else {
-      this.vy = 0;
-    }
   }
 
   move() {
@@ -64,7 +71,7 @@ class Player {
       this.blockBackBuildingMapA();
       this.blockAlleyMapA();
       this.blockFrontBuildingMapA();
-      this.blockCityHall();
+      this.blockCityHallMapA();
 
       // block out
     }
@@ -75,26 +82,13 @@ class Player {
       this.blockDollyBuildingMapB();
       this.blockShopMapB();
       this.blockTreesMapB();
-
-// // block stairs
-//       if (
-//         this.x > 142.5/*rectX*/ - 2 /*rectW*/ &&
-//         this.x < 142.5 + 2 &&
-//         this.y > 681 /*rectY*/ - 228/2 /*rectH*/ &&
-//         this.y < 681 + 228/2
-//       ) {
-//         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-//           this.x = this.x - 15;
-//         }
-//         if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-//           this.x = this.x + 10;
-//         }
-//
-//       }
      }
 
     if (map.name === `C`) {
       this.boundaries();
+      this.blockShopMapC();
+      this.blockGazeboMapC(); // might drop like stairs... ###
+      this.blockTreesMapC();
     }
   }
 
@@ -116,6 +110,195 @@ class Player {
     } // move normally
   }
 
+// MAP A WALLS //
+
+blockBackBuildingMapA(){
+  // block out background building
+  if (
+    this.x > 35 /*rectX*/ - 70 / 2 /*rectW*/ &&
+    this.x < 35 + 70 / 2 &&
+    this.y > 450 /*rectY*/ - 125 / 2 /*rectH*/ &&
+    this.y < 450 + 125 / 2
+  ) {
+    this.wallCollision = true;
+
+    //this.speed = this.speed*-1;
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      this.x = this.x + 15;
+    }
+    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      this.y = this.y + 15;
+    }
+  }
+  else {
+    this.speed = 3;
+    this.wallCollision = false;
+
+  }
+}
+
+blockAlleyMapA(){
+  // block out background building
+  if (
+    this.x > 15 /*rectX*/ - 30 / 2 /*rectW*/ &&
+    this.x < 15 + 30 / 2 &&
+    this.y > 550 /*rectY*/ - 100 / 2 /*rectH*/ &&
+    this.y < 550 + 100 / 2
+  ) {
+    this.wallCollision = true;
+
+    //this.speed = this.speed*-1;
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      this.x = this.x + 15;
+    }
+    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      this.y = this.y + 15;
+    }
+  }
+  else {
+    this.speed = 3;
+    this.wallCollision = false;
+
+  }
+}
+
+blockFrontBuildingMapA(){
+  // block out background building
+  if (
+    this.x > 50 /*rectX*/ - 110 / 2 /*rectW*/ &&
+    this.x < 50 + 110 / 2 &&
+    this.y > 700 /*rectY*/ - 215 / 2 /*rectH*/ &&
+    this.y < 700 + 215 / 2
+  ) {
+    this.wallCollision = true;
+
+    //this.speed = this.speed*-1;
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      this.x = this.x + 15;
+    }
+    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      this.y = this.y + 15;
+    }
+    if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+      this.y = this.y - 15;
+    }
+  }
+  else {
+    this.speed = 3;
+    this.wallCollision = false;
+
+  }
+}
+
+blockCityHallMapA(){  // block out background building
+  if (
+    this.x > 260 /*rectX*/ - 180 / 2 - 5 /*rectW*/ &&
+    this.x < 260 + 180 / 2 + 5 &&
+    this.y > 672 /*rectY*/ - 180 + 30 /*rectH*/ &&
+    this.y < 672 + 180/2 - 50
+  ) {
+    this.wallCollision = true;
+    //this.speed = 0;
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      this.x = this.x + 10;
+    }
+    if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+      this.x = this.x - 10;
+    }
+    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      this.y = this.y + 10;
+    }
+    if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+      this.y = this.y - 10;
+    }
+  }
+  else {
+    this.speed = 3;
+    this.wallCollision = false;
+  }
+}
+
+blockDollyBuildingMapA() {
+  // block out background building
+  if (
+    this.x > 450 /*rectX*/ - 100/2 /*rectW*/ &&
+    this.x < 450 + 100 / 2 - 10 &&
+    this.y > 675 /*rectY*/ - 235 / 2 /*rectH*/ &&
+    this.y < 675 + 235 / 2
+  ) {
+    this.wallCollision = true;
+
+  //  this.speed = this.speed*-1;
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      this.x = this.x + 10;
+    }
+    if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+      this.x = this.x - 10;
+    }
+    else if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      this.y = this.y + 15;
+    }
+    else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+      this.y = this.y - 10;
+    }
+  }
+  else {
+    this.speed = 3;
+    this.wallCollision = false;
+
+  }
+}
+
+// END OF MAP A WALLS //
+
+blockDollyBuildingMapB() {
+  // block out Dolly's building
+  // Top part
+  if (
+    this.x  > 50 /*rectX*/ - 100 /*rectW*/ &&
+    this.x  < 50 + 100 / 2 &&
+    this.y  > 675 /*rectY*/ - 235 / 2 /*rectH*/ &&
+    this.y  < 675 -235/3
+  ) {
+    this.wallCollision = true;
+
+  //  this.speed = this.speed*-1;
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      this.x = this.x + 15;
+    }
+    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      this.y = this.y + 15;
+    } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+      this.y = this.y - 15;
+    }
+  }
+  // Bottom part
+  else if (
+    this.x  > 50 /*rectX*/ - 100 /*rectW*/ &&
+    this.x  < 50 + 100 / 2 &&
+    this.y  > 675 -50 /*rectY*/  /*rectH*/ &&
+    this.y  < 675 + 235 / 2
+  ) {
+    this.wallCollision = true;
+
+  //  this.speed = this.speed*-1;
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      this.x = this.x + 15;
+    }
+    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      this.y = this.y + 15;
+    } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+      this.y = this.y - 15;
+    }
+  }
+  else {
+    this.speed = 3;
+    this.wallCollision = false;
+
+  }
+}
+
+// MAP B WALLS //
   blockBackBuildingMapB() {
     // block out background building
     if (
@@ -124,6 +307,9 @@ class Player {
       this.y > 472 /*rectY*/ - 90 /*rectH*/ &&
       this.y < 447 + 70
     ) {
+      this.wallCollision = true;
+
+    //  this.speed = this.speed*-1;
       if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
         this.x = this.x + 15;
       }
@@ -131,24 +317,10 @@ class Player {
         this.y = this.y + 15;
       }
     }
-  }
+    else {
+      this.speed = 3;
+      this.wallCollision = false;
 
-  blockDollyBuildingMapB() {
-    // block out Dolly's building
-    if (
-      this.x  > 50 /*rectX*/ - 100 /*rectW*/ &&
-      this.x  < 50 + 100 / 2 &&
-      this.y  > 675 /*rectY*/ - 235 / 2 /*rectH*/ &&
-      this.y  < 675 + 235 / 2
-    ) {
-      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-        this.x = this.x + 15;
-      }
-      if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
-        this.y = this.y + 15;
-      } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
-        this.y = this.y - 15;
-      }
     }
   }
 
@@ -160,6 +332,9 @@ class Player {
       this.y > 715 /*rectY*/ - 100 / 2 /*rectH*/ &&
       this.y < 715 + 100 / 2
     ) {
+      this.wallCollision = true;
+
+      //this.speed = this.speed*-1;
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
         this.x = this.x - 15;
       }
@@ -168,6 +343,11 @@ class Player {
       } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 15;
       }
+    }
+    else {
+      this.speed = 3;
+      this.wallCollision = false;
+
     }
   }
 
@@ -179,6 +359,9 @@ class Player {
       this.y > 540 /*rectY*/ /*rectH*/ &&
       this.y < 540 + 60
     ) {
+      this.wallCollision = true;
+
+      //this.speed = this.speed*-1;
       if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
         this.x = this.x - 15;
       }
@@ -191,5 +374,85 @@ class Player {
         this.y = this.y - 15;
       }
     }
+    else {
+      this.speed = 3;
+      this.wallCollision = false;
+
+    }
   }
+// END MAP B WALLS //
+
+
+// MAP C WALLS //
+
+blockShopMapC(){
+    // block out Shop
+    if (
+      this.x > 50 /*rectX*/ - 100 / 2 /*rectW*/ &&
+      this.x < 50 + 100 / 2 &&
+      this.y > 725 /*rectY*/ - 80 / 2 /*rectH*/ &&
+      this.y < 725 + 80 / 2
+    ) {
+      this.wallCollision = true;
+
+      //this.speed = this.speed*-1;
+      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+        this.x = this.x + 15;
+      }
+      if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+        this.y = this.y + 15;
+      } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+        this.y = this.y - 15;
+      }
+    }
+    else {
+      this.speed = 3;
+      this.wallCollision = false;
+
+    }
+  }
+
+blockGazeboMapC(){ // I'm going to skip this ### considering the issues
+  // I'm having with walls!
+
+} // might drop like stairs... ###
+blockTreesMapC(){
+    // block out trees
+    // tree 1
+    if (
+      this.x > 270 /*rectX*/ - 28 /*rectW*/ &&
+      this.x < 270 + 45 &&
+      this.y > 500 /*rectY*/ /*rectH*/ &&
+      this.y < 500 + 60
+    || this.x > 245 /*rectX*/ - 28 /*rectW*/ &&
+    this.x < 245 + 45 &&
+    this.y > 655 /*rectY*/ /*rectH*/ &&
+    this.y < 655 + 60
+  || this.x > 288 /*rectX*/ - 28 /*rectW*/ &&
+  this.x < 288 + 45 &&
+  this.y > 682 /*rectY*/ /*rectH*/ &&
+  this.y < 682 + 60) {
+      this.wallCollision = true;
+      //this.speed = this.speed*-1;
+      if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+        this.x = this.x - 15;
+      }
+      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+        this.x = this.x + 15;
+      }
+      if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+        this.y = this.y + 15;
+      } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+        this.y = this.y - 15;
+      }
+    }
+    else {
+      this.speed = 3;
+      this.wallCollision = false;
+
+    }
+
+}
+
+// END MAP C WALLS //
 }

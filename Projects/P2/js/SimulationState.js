@@ -97,14 +97,6 @@ class SimulationState extends State {
         // if player presses spacebar when colliding with npc
         this.player.paused(); // player avatar movement becomes paused
 
-
-        // else if (this.simulationItemList[i].name === `Ham`){
-        //   this.player.inventory.splice(0, 1);   // gets rid of inventory place holder!
-        //   this.player.inventory.unshift(this.simulationItemList[i]);
-        //   this.textBubble = new TextBubble(`you just picked up ham`);
-        //   this.player.itemPickingLevel = 1;
-        // }
-
         // % // First interaction with Mayor Pimlico // % //
         if ( // if the triggered npc is the Mayor and player has either
           // the placeholder or the slingshot in their inventory
@@ -113,6 +105,7 @@ class SimulationState extends State {
           || this.simulationNPCList[i].name === `Mayor Pimlico` &&
           this.player.inventory[0].name === `Slingshot`
         ) {
+          console.log(`this should only happen once`)
           this.eventSwitch1 = 0; // initialize event switch
           this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
           if (this.eventSwitch1 === 0) {
@@ -133,7 +126,7 @@ class SimulationState extends State {
         // same holdingItem is temp the clicked npc's holding item
 
         console.log(
-          //`NPC desire and held : ${this.simulationNPCList[i]}${this.NPCdesiredItem}${this.NPCitemHeld}`
+          `NPC desire and held : ${this.simulationNPCList[i]}${this.NPCdesiredItem}${this.NPCholdingItem}`
         );
 
         this.player.checkTrade(this.NPCdesiredItem, this.NPCholdingItem);
@@ -148,25 +141,30 @@ class SimulationState extends State {
 
         // !!! THIS HERE RELATES to item.isPicked !!!
 
-        if (this.player.tradeHappens === true) {
+// npcs display text[0] first... when player has the item they desire and trade happens
+        if (this.simulationNPCList[i].textNo === 0 && this.player.tradeHappens === true) {
           console.log(`trade happens, you comin in here?`);
-          this.player.inventory.unshift(this.player.itemToAddToInventory);
-          this.simulationNPCList[i].textNo = 1;
-          this.player.tradeHappens = false;
+          this.player.inventory.unshift(this.player.itemToAddToInventory); //the item being traded is added to player inventory
+          this.simulationNPCList[i].textNo = 1; // npc text is updated to the next in the sequence
+          this.player.tradeHappens = false; // trade is over
         }
 
-        if (this.simulationNPCList[i].tradeSucceeded === true) {
+        if (this.simulationNPCList[i].tradeSucceeded === true) { // after trade text is shown,
+          // update NPC to having succeeded trade
           console.log(`you're not sup to b here!`);
           this.simulationNPCList[i].textNo = 2;
         }
 
-        // * // this is a text assigning machine // * //
-
+        // * // this is a text assigning machine to display appropriate text // * //
+console.log(`what is pims textno ${this.simulationNPCList[i].textNo}`)
         if (this.simulationNPCList[i].textNo === 0) { // when triggered npc text is index 0
+          console.log(`do you keep coming here?`)
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[0]}`
           );
-        } else if (this.simulationNPCList[i].textNo === 1) { // when tirggered npc text index 1
+        }
+        else if (this.simulationNPCList[i].textNo === 1) { // when tirggered npc text index 1
+          console.log(`you need to come here`);
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[1]}`
           );
@@ -184,6 +182,10 @@ class SimulationState extends State {
         // Display assigned text
         this.textBubble.display();
         this.textBubble.textIsUp = true;
+        if (this.simulationNPCList[i].name === `Mayor Pimlico` && this.simulationNPCList[i].textNo === 0){
+          //console.log(`please come here`); he does
+          this.simulationNPCList[i].textNo = 1;
+        }
       }
     }
 
@@ -212,7 +214,7 @@ class SimulationState extends State {
         if (
           this.simulationItemList[i].playerColliding === true
         ) {
-          console.log(`why you keep coming here?`);
+        //  console.log(`why you keep coming here?`);
           this.player.paused(); // the player movements are paused
           this.player.isPaused = true;
           this.player.isCollided = true;
@@ -324,7 +326,9 @@ class SimulationState extends State {
       console.log(`
         is player paused? ${this.player.isPaused}
 
-        trade happens?? ${this.player.tradeHappens}`);
+        trade happens?? ${this.player.tradeHappens}
+
+        pims text ${this.simulationNPCList[1].textNo}`);
     }
 
   // this txtbubl stop? ${this.textBubble.stopTextBubble}

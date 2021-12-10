@@ -92,6 +92,7 @@ class Player {
 
 //console.log(`thischeckeditemname is and npcdesire ${this.checkedItem.name} ${npcDesiredItem}`);
       if (this.checkedItem.name === npcDesiredItem && ! undefined === undefined) {
+        console.log(`we're not coming here anymore`)
         //splice removeFromPlayerInventory(this.inventory[i])
         this.tradeHappens = true;
         this.itemToAddToInventory = npcHoldingItem;

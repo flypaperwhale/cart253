@@ -33,4 +33,18 @@ displayGreenGrass() {
   rect(width / 2, height, 500, 1010); // displayed at bottom center
   pop();
 }
+
+addWindow(x,y,w,h,onOff){
+  push();
+  noStroke();
+if (onOff === 1){ // Light is on
+  fill(225,180,100);
+}
+else if (onOff === 0){ // Light is off
+  fill(50,50,70);
+  }
+  rectMode(CENTER);
+  rect(x, y, w, h);
+  pop();
+}
 }

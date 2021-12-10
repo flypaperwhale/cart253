@@ -42,11 +42,8 @@ display(player, npcList){
 // npcList[3].display(); // janine
 // npcList[5].display(); // streetlamp
 
-for (let i= 0; i < npcList.length; i++){
-  if (npcList[i].map === this.name){
-    npcList[i].display();
-  npcList[i].playerCollisionCheck(player.x,player.y,player.size);  }
-}
+this.displayNPCs(npcList);
+
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); // displays player and also constrains them to move only on the ground
   this.displayLamppost(); // displays lamppost in front of player
@@ -109,106 +106,131 @@ displayShop() {
 
 displayWindows(){
   //background building
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(30, 450, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(70, 450, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(30, 490, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(50, 50, 70);
-  rectMode(CENTER);
-  rect(70, 490, 22, 25);
-  pop();
+  //this.addWindow(x,y,onOff)
+
+  super.addWindow(30,450,22,25,1)
+    super.addWindow(70,450,22,25,1)
+      super.addWindow(30,490,22,25,1)
+        super.addWindow(70,490,22,25,0)
+  //
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(30, 450, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(70, 450, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(30, 490, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(50, 50, 70);
+  // rectMode(CENTER);
+  // rect(70, 490, 22, 25);
+  // pop();
 
   //Dolly building
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(30, 582, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(70, 582, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(50, 50, 70);
-  rectMode(CENTER);
-  rect(30, 622, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(50, 50, 70);
-  rectMode(CENTER);
-  rect(70, 622, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(30, 662, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(70, 662, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(30, 702, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(70, 702, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(225, 180, 100);
-  rectMode(CENTER);
-  rect(30, 742, 22, 25);
-  pop();
-  push();
-  noStroke();
-  fill(50, 50, 70);
-  rectMode(CENTER);
-  rect(70, 742, 22, 25);
-  pop();
+  super.addWindow(30,582,22,25,1)
+    super.addWindow(30,622,22,25,0)
+    super.addWindow(70,582,22,25,1)
+      super.addWindow(70,622,22,25,0)
+      super.addWindow(70,662,22,25,1)
+        super.addWindow(70,702,22,25,0)
+        super.addWindow(30,662,22,25,1)
+          super.addWindow(30,702,22,25,0)
+          super.addWindow(70,742,22,25,1)
+            super.addWindow(30,742,22,25,0)
+
+
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(30, 582, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(70, 582, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(50, 50, 70);
+  // rectMode(CENTER);
+  // rect(30, 622, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(50, 50, 70);
+  // rectMode(CENTER);
+  // rect(70, 622, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(30, 662, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(70, 662, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(30, 702, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(70, 702, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(225, 180, 100);
+  // rectMode(CENTER);
+  // rect(30, 742, 22, 25);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(50, 50, 70);
+  // rectMode(CENTER);
+  // rect(70, 742, 22, 25);
+  // pop();
 
   //shop
-  push();
-  noStroke();
-  fill(50, 50, 70);
-  rectMode(CENTER);
-  rect(392, 710, 60, 50);
-  pop();
-  push();
-  noStroke();
-  fill(50, 50, 70);
-  rectMode(CENTER);
-  rect(462, 710, 60, 50);
-  pop();
+
+  super.addWindow(392,710,60,50,0);
+    super.addWindow(462,710,60,50,0);
+
+  // push();
+  // noStroke();
+  // fill(50, 50, 70);
+  // rectMode(CENTER);
+  // rect(392, 710, 60, 50);
+  // pop();
+  // push();
+  // noStroke();
+  // fill(50, 50, 70);
+  // rectMode(CENTER);
+  // rect(462, 710, 60, 50);
+  // pop();super
+
+
 }
 
 displayStairs(){
@@ -249,6 +271,15 @@ displayCircleAndPath() { // draws a gray path leading to the circle
   rectMode(CENTER);
   rect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
   pop();
+}
+
+displayNPCs(npcList){
+  for (let i= 0; i < npcList.length; i++){
+    if (npcList[i].map === this.name){
+      npcList[i].display();
+    //npcList[i].playerCollisionCheck(player.x,player.y,player.size);
+    }
+  }
 }
 
 displayLampFoot() { // player moves in front of lamp foot

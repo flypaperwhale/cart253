@@ -15,6 +15,7 @@ class NPC {
     this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [];
+    this.map = undefined;
   }
 
   display() {
@@ -30,7 +31,7 @@ class NPC {
   playerCollisionCheck(playerX, playerY, playerSize) {
     let d = dist(this.x, this.y, playerX, playerY);
     if (d < (this.size + playerSize ) / 2) {
-      console.log(`player collision with ${this.name}`)
+      //console.log(`player collision with ${this.name}`)
       this.playerColliding = true;
     } else {
       this.playerColliding = false;

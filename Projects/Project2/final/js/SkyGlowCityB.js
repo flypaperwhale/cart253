@@ -42,7 +42,13 @@ display(player, npcList){
 // npcList[3].display(); // janine
 // npcList[5].display(); // streetlamp
 
-this.displayNPCs(npcList);
+for (let i= 0; i < npcList.length; i++){
+  if (npcList[i].map === this.name){
+    npcList[i].display();
+    npcList[i].playerCollisionCheck(player.x,player.y,player.size);
+
+  }
+}
 
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); // displays player and also constrains them to move only on the ground
@@ -271,15 +277,6 @@ displayCircleAndPath() { // draws a gray path leading to the circle
   rectMode(CENTER);
   rect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
   pop();
-}
-
-displayNPCs(npcList){
-  for (let i= 0; i < npcList.length; i++){
-    if (npcList[i].map === this.name){
-      npcList[i].display();
-    //npcList[i].playerCollisionCheck(player.x,player.y,player.size);
-    }
-  }
 }
 
 displayLampFoot() { // player moves in front of lamp foot

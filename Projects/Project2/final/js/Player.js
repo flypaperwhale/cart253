@@ -3,15 +3,31 @@ class Player {
     // feed x,y in Simulation state
     this.x = x; // player starting x
     this.y = y; // player starting y
-    this.size = 20; // player size is 20
     this.vx = 0; // handled by pause or ad/arrow keys
     this.vy = 0; // handled by pause or ws/arrow keys
     this.speed = 2.5; // speed of 4
+    this.size = 20; // player size is 20
+    this.inventory = [`PlaceHolder`];
+    this.isCollided = false; // switch true when player is in collision with npc or item
+
     this.alive = true; // always alive
     this.playerCollidedNPC = false; // switch true/false if player is in collision with npc or not
-    this.isPaused = true; // player pause state switch
+    this.isPaused = false; // player pause state switch
     this.wallCollision = false;
     this.thresholdCollision = false;
+
+    this.tradeHappens = false; // player/NPC item trade switch
+  this.itemToAddToInventory = undefined; // item label to create item and push in inventory ###
+  this.itemPickingLevel = 0; // 0 = false,1 = true, 3 =void
+  }
+
+  display() {
+    // display player
+    push();
+    fill(200, 50, 50); // red
+    noStroke();
+    ellipse(this.x, this.y, this.size);
+    pop();
   }
 
   handleInput() {
@@ -49,14 +65,14 @@ class Player {
     this.isPaused = true;
   }
 
-  display() {
-    // display player
-    push();
-    fill(200, 50, 50); // red
-    noStroke();
-    ellipse(this.x, this.y, this.size);
-    pop();
+  displayInventory() {
+    // for (let i = 0; i < this.inventory.length; i++) {
+    //   console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);
+    // }
+    console.log(this.inventory);
   }
+
+  
 
   barriers(map) {
     if (map.name === `A`) {

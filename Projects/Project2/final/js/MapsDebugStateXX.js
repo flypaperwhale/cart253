@@ -258,6 +258,9 @@ class MapsDebugState extends State {
 
             else if (this.map.name === `C`){
               this.player.x = 455;
+              if (this.player.y > 675 && this.player.y < 685 ){
+                this.player.y = 650;
+              }
               this.currentMap = mapsArray[1];
 
               this.player.thresholdCollision = false;

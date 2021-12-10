@@ -35,10 +35,16 @@ display(player, npcList) {
 
   this.displayGazeboBase();
 
-  npcList[6].display(); // billee
-  npcList[10].display(); // jade
-  npcList[7].display(); // sheperd
-  npcList[9].display(); // streetlamp
+  // npcList[6].display(); // billee
+  // npcList[10].display(); // jade
+  // npcList[7].display(); // sheperd
+  // npcList[9].display(); // streetlamp
+
+  for (let i= 0; i < npcList.length; i++){
+    if (npcList[i].map === this.name){
+      npcList[i].display();
+    }
+  }
 
   //movePlayer(); // handle user input and move player avatar
 

@@ -35,10 +35,15 @@ display(player, npcList){
   this.displayShop();
   this.displayStairs();
 
-npcList[4].display(); // marv
-npcList[3].display(); // janine
-npcList[5].display(); // streetlamp
+// npcList[4].display(); // marv
+// npcList[3].display(); // janine
+// npcList[5].display(); // streetlamp
 
+for (let i= 0; i < npcList.length; i++){
+  if (npcList[i].map === this.name){
+    npcList[i].display();
+  }
+}
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); // displays player and also constrains them to move only on the ground
   this.displayLamppost(); // displays lamppost in front of player

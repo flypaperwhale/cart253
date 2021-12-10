@@ -99,14 +99,9 @@ class MapsDebugState extends State {
         // manageNPCs(){ //
           // go through the NPC array to display each NPC (according to the map player is on)
           // also, check if player is colliding and update the NPC's data if need be (from click & trade)
-          for (let i = 0; i < this.simulationNPCList.length; i++) {
+          for (let i = 0; i < this.simulationNPCList.length; i++) {// Look through NPC List
 
-            // Look through NPC List
-
-            // if (this.simulationNPCList[i].map === this.map){ // if NPC are currently on map
-              console.log(`hi, what is ${this.simulationNPCList[i].name} plus map ${this.simulationNPCList[i].map}
-                plus my map ${this.map}`);
-            this.simulationNPCList[i].display(); // display every NPC
+            //this.simulationNPCList[i].display(); // display every NPC
             this.simulationNPCList[i].playerCollisionCheck(
               //NPC/Player Collision check
               this.player.x,
@@ -238,7 +233,7 @@ class MapsDebugState extends State {
             // }
           }
         }
-        
+
         // Threshold checking to update correct map!
         if (this.player.thresholdCollision === true){
 

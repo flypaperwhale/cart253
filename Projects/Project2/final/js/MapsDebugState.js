@@ -1,5 +1,5 @@
 class MapsDebugState extends State {
-  constructor(itemImagesList, mapsArray) {
+  constructor(simulationImagesList, mapsArray) {
     super();
 
     // this.npcArray = new NPCList(); //?! is this the equivalent of inputing an array full //

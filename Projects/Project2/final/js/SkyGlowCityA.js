@@ -4,11 +4,11 @@ class SkyGlowCityA extends Map{
     super();
 //this.player; // player avatar, class Player
 this.name = `A`;
-this.streetlampImg = itemImagesList[0];
-this.streetlampFootImg = itemImagesList[1];
-this.stairsImg = itemImagesList[2];
-this.fountainImg = itemImagesList[7];
-this.fountainTopImg = itemImagesList[8];
+this.streetlampImg = itemImagesList[6];
+this.streetlampFootImg = itemImagesList[7];
+this.stairsImg = itemImagesList[8];
+this.fountainImg = itemImagesList[13];
+this.fountainTopImg = itemImagesList[14];
 
 this.lampX = 258; // lamp x value
 this.lampY = 510; // lamp y value

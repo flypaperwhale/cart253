@@ -92,7 +92,7 @@ class Player {
       //console.log(`repeat item checked in inventory ${this.checkedItem.name}`);
 
 console.log(`thischeckeditemname is and npcdesire ${this.checkedItem.name} ${npcDesiredItem}`);
-      if (this.checkedItem.name === npcDesiredItem /*&& ! undefined === undefined*/) { // I put undefineds so Pimlico would not come in here
+      if (this.checkedItem.name === npcDesiredItem && ! undefined === undefined) { // I put undefineds so Pimlico would not come in here
         console.log(`we're not coming here anymore`)
         //splice removeFromPlayerInventory(this.inventory[i])
         this.tradeHappens = true;

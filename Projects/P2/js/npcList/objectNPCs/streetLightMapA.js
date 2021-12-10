@@ -29,8 +29,11 @@ class StreetLightA extends NPC {
   }
 
   playerCollide(playerX, playerY) {
+    console.log(`1why you die?`)
+
     let d = dist(this.x, this.y, playerX, playerY);
     if (d < this.size / 2) {
+      console.log(`2why you die?`)
       this.playerColliding = true;
     } else {
       this.playerColliding = false;

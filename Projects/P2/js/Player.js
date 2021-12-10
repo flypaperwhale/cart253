@@ -13,14 +13,14 @@ class Player {
     this.isPaused = false; // player pause state switch
     this.tradeHappens = false; // player/NPC item trade switch
     this.itemToAddToInventory = undefined; // item label to create item and push in inventory ###
-    this.firstItemPicked = 0; // 0 = false,1 = true, 3 =void
+    this.itemPickingLevel = 0; // 0 = false,1 = true, 3 =void
   }
 
-  constrain(height, width) {
-    // constrain player to the ground
-    this.x = constrain(this.x, 0, width);
-    this.y = constrain(this.y, 452, height);
-  }
+  // constrain(height, width) {
+  //   // constrain player to the ground
+  //   this.x = constrain(this.x, 0, width);
+  //   this.y = constrain(this.y, 452, height);
+  // }
 
   display() {
     // display player

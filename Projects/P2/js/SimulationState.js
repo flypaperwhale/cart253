@@ -142,13 +142,13 @@ class SimulationState extends State {
         // in simulation the item corresponding to the acquired item index is created
         // and stored in the player.inventory
 
-        // #####  if (this.player.tradeHappens === true) {
+        //if (this.player.tradeHappens === true) {
         // when trade happens
 
         // !!! THIS HERE RELATES to item.isPicked !!!
 
 this.eventSwitch3=0;
-this.eventSwitch3 = constrain(this.eventSwitch2, 0, 1); // switch can be 0 or 1
+this.eventSwitch3 = constrain(this.eventSwitch3, 0, 1); // switch can be 0 or 1
 // npcs display text[0] first... when player has the item they desire and trade happens
         if (this.simulationNPCList[i].textNo === 0 && this.player.tradeHappens === true) {
           if (this.eventSwitch3 === 0) {
@@ -180,7 +180,7 @@ this.eventSwitch3 = constrain(this.eventSwitch2, 0, 1); // switch can be 0 or 1
 
         else if (this.simulationNPCList[i].textNo === 1) { // when tirggered npc text index 1
             // if (this.eventSwitch3 === 0) {
-          console.log(`you need to come here`);
+          //console.log(`you need to come here`);
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[1]}`
           );
@@ -203,7 +203,7 @@ this.eventSwitch3 = constrain(this.eventSwitch2, 0, 1); // switch can be 0 or 1
         // and so on...
 
         // Display assigned text
-        console.log(`before display what is pims textno ${this.simulationNPCList[i].textNo}`)
+        //console.log(`before display what is pims textno ${this.simulationNPCList[i].textNo}`)
 
         this.textBubble.display();
         this.textBubble.textIsUp = true;
@@ -363,7 +363,10 @@ this.eventSwitch3 = constrain(this.eventSwitch2, 0, 1); // switch can be 0 or 1
 
         lamottes text ${this.simulationNPCList[2].textNo}
 
-        pmlicoswitch ${this.pimlicoSwitch}`);
+        pmlicoswitch ${this.pimlicoSwitch}
+
+        player.inventory lgt ${this.player.inventory.length}`);
+
     }
 
   // this txtbubl stop? ${this.textBubble.stopTextBubble}

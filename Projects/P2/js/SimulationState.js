@@ -153,7 +153,8 @@ this.eventSwitch3 = constrain(this.eventSwitch3, 0, 1); // switch can be 0 or 1
         if (this.simulationNPCList[i].textNo === 0 && this.player.tradeHappens === true) {
           if (this.eventSwitch3 === 0) {
           console.log(`trade happens, you comin in here?`);
-          this.player.inventory.unshift(this.player.itemToAddToInventory); //the item being traded is added to player inventory
+          this.player.inventory.shift(0,1);
+          this.player.inventory.unshift(this.simulationItemList[this.player.itemToAddToInventory]); //the item being traded is added to player inventory
           this.simulationNPCList[i].textNo = 1; // npc text is updated to the next in the sequence
           this.player.tradeHappens = false; // trade is over
         }

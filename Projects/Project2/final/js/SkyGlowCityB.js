@@ -33,6 +33,9 @@ display(player, npcList){
   this.displayDollysBuilding();
   this.displayBackgroundBuilding();
   this.displayShop();
+
+  this.displayWindows();
+
   this.displayStairs();
 
 // npcList[4].display(); // marv
@@ -101,6 +104,110 @@ displayShop() {
   fill(159, 91, 114);
   rectMode(CENTER);
   rect(425, 715, 150, 100);
+  pop();
+}
+
+displayWindows(){
+  //background building
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(30, 450, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(70, 450, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(30, 490, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(50, 50, 70);
+  rectMode(CENTER);
+  rect(70, 490, 22, 25);
+  pop();
+
+  //Dolly building
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(30, 582, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(70, 582, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(50, 50, 70);
+  rectMode(CENTER);
+  rect(30, 622, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(50, 50, 70);
+  rectMode(CENTER);
+  rect(70, 622, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(30, 662, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(70, 662, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(30, 702, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(70, 702, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(225, 180, 100);
+  rectMode(CENTER);
+  rect(30, 742, 22, 25);
+  pop();
+  push();
+  noStroke();
+  fill(50, 50, 70);
+  rectMode(CENTER);
+  rect(70, 742, 22, 25);
+  pop();
+
+  //shop
+  push();
+  noStroke();
+  fill(50, 50, 70);
+  rectMode(CENTER);
+  rect(392, 710, 60, 50);
+  pop();
+  push();
+  noStroke();
+  fill(50, 50, 70);
+  rectMode(CENTER);
+  rect(462, 710, 60, 50);
   pop();
 }
 

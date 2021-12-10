@@ -23,7 +23,7 @@ class Pimlico extends NPC {
       I'm not giving you any more food, we need to keep some
       for the investors...`,
       `Mayor Pimlico:
-      No, no, I'm not looking at any papers tonight. Scram`,
+      I'm not looking at any papers tonight. Scram`,
     ];
   }
 

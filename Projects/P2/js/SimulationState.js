@@ -110,16 +110,18 @@ class SimulationState extends State {
           this.simulationNPCList[i].name === `Mayor Pimlico` &&
           this.simulationNPCList[i].textNo === 0
         ) {
-          //CONSTRAIN
-          if (this.eventCounter1 === 0) {
+          this.eventSwitch1 = 0; // initialize event switch
+          this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
+          if (this.eventSwitch1 === 0) {
             this.player.inventory.unshift(this.simulationItemList[1]); // Pimlico gives you Ham!
-            if (this.player.inventory[0] === `PlaceHolder`) {
-              this.player.inventory.splice(0, 1);
+            if (this.player.inventory[1] === `PlaceHolder`) { // remove place holder if you don'T already have the slingshot
+              this.player.inventory.splice(1, 1);
+              console.log(`i keep on a splicin`);
             }
             this.simulationNPCList[i].textNo = 1; // Pimlico's text is changed
             // next time Pimlico is triggered this new text will be displayed
           }
-          this.eventCounter1++;
+          this.eventSwitch1++;
         }
 
         // clicked npc values temporarily stored in simulation
@@ -129,7 +131,7 @@ class SimulationState extends State {
         // same holdingItem is temp the clicked npc's holding item
 
         console.log(
-          `NPC desire and held : ${this.simulationNPCList[i]}${this.NPCdesiredItem}${this.NPCitemHeld}`
+          //`NPC desire and held : ${this.simulationNPCList[i]}${this.NPCdesiredItem}${this.NPCitemHeld}`
         );
 
         this.player.checkTrade(this.NPCdesiredItem, this.NPCholdingItem);
@@ -142,53 +144,39 @@ class SimulationState extends State {
         // #####  if (this.player.tradeHappens === true) {
         // when trade happens
 
-        //     this.firstItemName === `Slingshot` ||
-        //     this.firstItemName === `Wrench`
-        //   ) {
-        //     this.lastIteminInventory = this.player.inventory[
-        //       this.player.inventory.length - 1
-        //     ];
-        //     this.lastIteminInventory = this.player.inventory.pop(); // remove last item in array
-        //     this.player.inventory.push(
-        //       this.simulationItemList[this.player.itemToAddToInventory]
-        //     );
-        //   } else {
-        //     this.player.inventory.shift(); // remove first item from array
-        //     this.player.inventory.push(
-        //       this.simulationItemList[this.player.itemToAddToInventory]
-        //     );
-        //   }
-        //}
-
         // !!! THIS HERE RELATES to item.isPicked !!!
 
         if (this.player.tradeHappens === true) {
+          console.log(`trade happens, you comin in here?`);
           this.player.inventory.unshift(this.player.itemToAddToInventory);
           this.simulationNPCList[i].textNo = 1;
           this.player.tradeHappens = false;
         }
 
         if (this.simulationNPCList[i].tradeSucceeded === true) {
+          console.log(`you're not sup to b here!`);
           this.simulationNPCList[i].textNo = 2;
         }
 
         // this is a text assigning machine //
-        if (this.simulationNPCList[i].textNo === 0) {
+        if (this.simulationNPCList[i].textNo === 0) { // when triggered npc text is index 0
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[0]}`
           );
-        } else if (this.simulationNPCList[i].textNo === 1) {
+        } else if (this.simulationNPCList[i].textNo === 1) { // when tirggered npc text index 1
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[1]}`
           );
-          this.player.inventory.shift();
-          let item = new Item(0, 0, `Big bone`); // this is problematic
-          this.player.inventory.push(item);
-        } else if (this.simulationNPCList[i].textNo === 2) {
+          // this.player.inventory.shift();
+          // console.log(`does pimpim come here?`);
+          // let item = new Item(0, 0, `Big bone`); // this is problematic
+          // this.player.inventory.push(item);
+        } else if (this.simulationNPCList[i].textNo === 2) { // when trigerred npc text index 2
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[2]}`
           );
         }
+        // and so on...
 
         // Display assigned text
         this.textBubble.display();
@@ -257,16 +245,12 @@ class SimulationState extends State {
             }
           }
         }
-        }
+      }
       // end of items on map section //
 
         // IS TRADED COMING UP
         // if item is picked or traded
         // to be added to player.INVENTORY
-
-
-
-
 
         // manage all items //
         if (
@@ -334,8 +318,11 @@ class SimulationState extends State {
       this.player.displayInventory();
       console.log(`
         is player paused? ${this.player.isPaused}
-        this txtbubl stop? ${this.textBubble.stopTextBubble}`);
+
+        trade happens?? ${this.player.tradeHappens}`);
     }
+
+  // this txtbubl stop? ${this.textBubble.stopTextBubble}
 
     if (keyCode === 32) {
       // When the player presses SPACEBAR
@@ -361,7 +348,7 @@ class SimulationState extends State {
           // if (this.simulationNPCList[i].textNo === 2) {
           //   this.simulationNPCList[i].tradeSucceeded = true;
           // } // Might be pertinent for trades?? ##
-        
+
       for (let i = 0; i < this.simulationNPCList.length; i++) {
         if (this.simulationNPCList[i].playerColliding === true) {
           this.simulationNPCList[i].isTriggered = true;

@@ -26,6 +26,7 @@ display(player, npcList){
   //sky
   super.displaySky(); // the blue sky rectangle covers the starry bg image
 
+this.displayStars();
   //ground
   super.displayGreenGrass(); // display Green Grass
   this.displayCircleAndPath(); // display gray circle and path
@@ -76,6 +77,39 @@ for (let i= 0; i < npcList.length; i++){
 //   this.player.handleInput(); // handle player input
 //   this.player.move(); // and move player avatar
 // }
+
+// display stars
+displayStars(){
+  // ARROW CONSTELLATION
+  super.addStar(230,300,2,1)
+  super.addStar(180,326,1.5,0)
+    super.addStar(255,342,1.5,0)
+      super.addStar(210,350,2,0)
+        super.addStar(190,395,1.25,1)
+          super.addStar(155,420,1.5,0)
+            super.addStar(185,440,1.5,0)
+              super.addStar(188,458,2,0)
+              // //
+
+              //more random stars//
+              super.addStar(10,298,2,1)
+              super.addStar(59,224,1.5,0)
+                super.addStar(335,138,1.5,0)
+                  super.addStar(90,78,2,0)
+                    super.addStar(412,393,1.25,1)
+                      super.addStar(35,418,1.5,0)
+                        super.addStar(165,438,1.5,0)
+                          super.addStar(63,423,2,0)
+                          super.addStar(10,298,2,1)
+                          super.addStar(59,124,1.5,0)
+                            super.addStar(435,458,1.5,0)
+                              super.addStar(450,358,1.5,3)
+                                super.addStar(380,190,1.25,1)
+                                  super.addStar(25,218,1.5,0)
+                                    super.addStar(65,238,1.5,0)
+                                      super.addStar(63,453,2,0)
+
+}
 
 //Dolly's building
 displayDollysBuilding() {
@@ -139,6 +173,8 @@ displayStairs(){
   image(this.stairsImg, 120.5, 681, 45, 228); // hard numbers
   pop();
 }
+
+
 
 // displaySky() {
 //   // displays sky rectangle

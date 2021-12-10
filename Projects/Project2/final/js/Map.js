@@ -47,4 +47,31 @@ else if (onOff === 0){ // Light is off
   rect(x, y, w, h);
   pop();
 }
+
+addStar(x,y,s,onOff){
+  push();
+  noStroke();
+if (onOff === 1){ //
+  this.r = random (50,225);
+  this.g = 225;
+  this.b = 225;
+  fill(this.r,this.g,this.b); //flashing red/white
+}
+else if (onOff === 0){ //
+    this.r = 225;
+    this.g = 225;
+    this.b = 50;
+    fill(this.r,this.g,this.b); //flashing red/white
+  }
+  else if (onOff === 3){ //
+      this.r = 225;
+      this.g = random (50,200);
+      this.b = 50;
+      fill(this.r,this.g,this.b); //flashing red/white
+    }
+  ellipseMode(CENTER);
+  ellipse(x, y, s);
+  pop();
+}
+
 }

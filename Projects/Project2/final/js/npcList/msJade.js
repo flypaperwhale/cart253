@@ -6,7 +6,7 @@ class Jade extends NPC {
     this.r = 200; // yellow
     this.g = 200;
     this.b = 100;
-    this.size = 25;
+    this.size = 20;
     this.name = `Ms. Jade`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = `Injunction`;

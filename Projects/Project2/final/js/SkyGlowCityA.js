@@ -37,9 +37,17 @@ display(player, npcList) {
   this.displayStairs();
   this.displayFountain();
 
-  npcList[1].display(); // display mayor
-  npcList[2].display(); // display street person
-  //movePlayer(); // handle user input and move player avatar
+for (let i= 0; i < npcList.length; i++){
+  if (npcList[i].map === this.name){
+    npcList[i].display();
+    npcList[i].playerCollisionCheck(player.x,player.y,player.size);
+
+  }
+}
+// if (npcList)
+//   npcList[1].display(); // display mayor
+//   npcList[2].display(); // display street person
+//   //movePlayer(); // handle user input and move player avatar
 
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground

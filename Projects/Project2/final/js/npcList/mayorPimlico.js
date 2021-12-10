@@ -1,8 +1,8 @@
 class Pimlico extends NPC {
   constructor() {
     super();
-    this.x = 200;
-    this.y = 210;
+    this.x = 356;
+    this.y = 734;
     this.r = 255; // pink
     this.g = 75;
     this.b = 175;

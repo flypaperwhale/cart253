@@ -1,8 +1,8 @@
 class Marv extends NPC {
   constructor() {
     super();
-    this.x = 200;
-    this.y = 170;
+    this.x = 259;
+    this.y = 567;
     this.r = 150; // beige
     this.g = 110;
     this.b = 90;

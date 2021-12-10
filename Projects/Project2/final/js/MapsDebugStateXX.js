@@ -100,14 +100,13 @@ class MapsDebugState extends State {
           // go through the NPC array to display each NPC (according to the map player is on)
           // also, check if player is colliding and update the NPC's data if need be (from click & trade)
           for (let i = 0; i < this.simulationNPCList.length; i++) {// Look through NPC List
-
-            //this.simulationNPCList[i].display(); // display every NPC
-            this.simulationNPCList[i].playerCollisionCheck(
-              //NPC/Player Collision check
-              this.player.x,
-              this.player.y,
-              this.player.size
-            );
+            // //this.simulationNPCList[i].display(); // display every NPC
+            // this.simulationNPCList[i].playerCollisionCheck(
+            //   //NPC/Player Collision check
+            //   this.player.x,
+            //   this.player.y,
+            //   this.player.size
+            // );
 
             if (this.simulationNPCList[i].isTriggered === true) {
               // if player presses spacebar when colliding with npc
@@ -279,7 +278,7 @@ class MapsDebugState extends State {
         keyPressed() { // change state ###
           if (keyCode === RETURN) {
             console.log(`pressed enter current map is ${this.map.name}`);
-            //this.currentMap = random(this.maps);
+            this.currentMap = random(this.maps);
             this.player.barriers(this.currentMap);
             console.log(`new map is ${this.currentMap.lampX}`)
           }

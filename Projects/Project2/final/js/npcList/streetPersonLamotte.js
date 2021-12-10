@@ -1,8 +1,8 @@
 class Lamotte extends NPC {
   constructor() {
     super();
-    this.x = 200;
-    this.y = 290;
+    this.x = 51;
+    this.y = 539;
     this.r = 135; // purple
     this.g = 40;
     this.b = 180;

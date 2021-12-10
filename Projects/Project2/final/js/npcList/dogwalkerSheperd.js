@@ -1,8 +1,8 @@
 class Sheperd extends NPC {
   constructor() {
     super();
-    this.x = 200;
-    this.y = 130;
+    this.x = 425;
+    this.y = 762;
     this.r = 50; // teal
     this.g = 150;
     this.b = 130;

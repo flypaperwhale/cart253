@@ -43,6 +43,7 @@ display(player, npcList) {
   for (let i= 0; i < npcList.length; i++){
     if (npcList[i].map === this.name){
       npcList[i].display();
+  npcList[i].playerCollisionCheck(player.x,player.y,player.size);
     }
   }
 

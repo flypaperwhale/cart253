@@ -1,8 +1,8 @@
 class Jade extends NPC {
   constructor() {
     super();
-    this.x = 200;
-    this.y = 250;
+    this.x = 150;
+    this.y = 622;
     this.r = 200; // yellow
     this.g = 200;
     this.b = 100;

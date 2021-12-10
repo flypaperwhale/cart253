@@ -11,11 +11,13 @@ class SimulationState extends State {
     this.createNPCs(); // creating NPCs and storing them in NPCList array
 
     this.eventCounter1 = 0;
-    this.eventSwitch1 = 0;
-    this.eventSwitch2 = 0;
+    this.eventSwitch1 = 0; // event for ham aquisition
+    this.eventSwitch2 = 0; // event for slingshot aquisition
+    this.eventSwitch3 = 0; //
     this.textBubble = undefined;
 
     this.textBubbleIsLoaded = false;
+    this.pimlicoSwitch = 0;
   }
 
   createItems() {
@@ -112,28 +114,32 @@ class SimulationState extends State {
             this.player.inventory.unshift(this.simulationItemList[1]); // Pimlico gives you Ham!
             if (this.player.inventory[1] === `PlaceHolder`) { // remove place holder if you don'T already have the slingshot
               this.player.inventory.splice(1, 1);
+              this.textBubble = new TextBubble(
+                `${this.simulationNPCList[i].texts[0]}`
+              );
+              this.simulationNPCList[i].textNo = 1;
             }
             //this.simulationNPCList[i].textNo = 1; // Pimlico's text is changed
             // next time Pimlico is triggered this new text will be displayed
           }
           this.eventSwitch1++;
         }
+                              // % //
 
-        // clicked npc values temporarily stored in simulation
+        // set up clicked npc values temporarily stored in simulation
         this.NPCdesiredItem = this.simulationNPCList[i].desiredItem;
         // SimulationState desiredItem is temporarily the clicked npc's desired item (if any)
         this.NPCholdingItem = this.simulationNPCList[i].itemHeld;
         // same holdingItem is temp the clicked npc's holding item
 
-        console.log(
-          `NPC desire and held : ${this.simulationNPCList[i]}${this.NPCdesiredItem}${this.NPCholdingItem}`
-        );
+
 
         this.player.checkTrade(this.NPCdesiredItem, this.NPCholdingItem);
         // using temporarily stored values inputed in player file
-        // the a match between the npc's desiredItem and an item found in player's inventory array
-        // if there is a match, the npc's holdingItem label is stored in ...
-        // in simulation the item corresponding to the acquired item label is created
+        // compare the npc's desiredItem and an item found in player's inventory array
+        // if there is a match, the npc's holdingItem simulationItemList index number
+        // is stored in player itemToAddToInventory
+        // in simulation the item corresponding to the acquired item index is created
         // and stored in the player.inventory
 
         // #####  if (this.player.tradeHappens === true) {
@@ -141,13 +147,18 @@ class SimulationState extends State {
 
         // !!! THIS HERE RELATES to item.isPicked !!!
 
+this.eventSwitch3=0;
+this.eventSwitch3 = constrain(this.eventSwitch2, 0, 1); // switch can be 0 or 1
 // npcs display text[0] first... when player has the item they desire and trade happens
         if (this.simulationNPCList[i].textNo === 0 && this.player.tradeHappens === true) {
+          if (this.eventSwitch3 === 0) {
           console.log(`trade happens, you comin in here?`);
           this.player.inventory.unshift(this.player.itemToAddToInventory); //the item being traded is added to player inventory
           this.simulationNPCList[i].textNo = 1; // npc text is updated to the next in the sequence
           this.player.tradeHappens = false; // trade is over
         }
+        this.eventSwitch3++;
+      }
 
         if (this.simulationNPCList[i].tradeSucceeded === true) { // after trade text is shown,
           // update NPC to having succeeded trade
@@ -156,14 +167,19 @@ class SimulationState extends State {
         }
 
         // * // this is a text assigning machine to display appropriate text // * //
-console.log(`what is pims textno ${this.simulationNPCList[i].textNo}`)
         if (this.simulationNPCList[i].textNo === 0) { // when triggered npc text is index 0
+          // if (this.eventSwitch3 === 0) {
           console.log(`do you keep coming here?`)
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[0]}`
           );
+          console.log(`what is pims textno ${this.simulationNPCList[i].textNo}`)
+          // }
+          // this.eventSwitch3++;
         }
+
         else if (this.simulationNPCList[i].textNo === 1) { // when tirggered npc text index 1
+            // if (this.eventSwitch3 === 0) {
           console.log(`you need to come here`);
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[1]}`
@@ -172,22 +188,37 @@ console.log(`what is pims textno ${this.simulationNPCList[i].textNo}`)
           // console.log(`does pimpim come here?`);
           // let item = new Item(0, 0, `Big bone`); // this is problematic
           // this.player.inventory.push(item);
-        } else if (this.simulationNPCList[i].textNo === 2) { // when trigerred npc text index 2
+        // }
+        //   this.eventSwitch3++;
+      }
+
+      else if (this.simulationNPCList[i].textNo === 2) { // when trigerred npc text index 2
+          // if (this.eventSwitch3 === 0) {
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[2]}`
           );
-        }
+        // }
+        // this.eventSwitch3++;
+      }
         // and so on...
 
         // Display assigned text
+        console.log(`before display what is pims textno ${this.simulationNPCList[i].textNo}`)
+
         this.textBubble.display();
         this.textBubble.textIsUp = true;
-        if (this.simulationNPCList[i].name === `Mayor Pimlico` && this.simulationNPCList[i].textNo === 0){
-          //console.log(`please come here`); he does
-          this.simulationNPCList[i].textNo = 1;
-        }
-      }
+
+      //   if (this.simulationNPCList[i] === this.simulationNPCList[1]){
+      //     if (this.pimlicoSwitch = 1){
+      //   // } && this.simulationNPCList[i].textNo === 0 &&
+      //     //console.log(`please come here`); he does
+      //     this.simulationNPCList[i].textNo = 1;
+      //   }
+      //   console.log(`endd what is pims textno ${this.simulationNPCList[i].textNo}`)
+      //
+      // }
     }
+  }
 
     // * // Here begins the managing of items! // * //
 
@@ -328,7 +359,11 @@ console.log(`what is pims textno ${this.simulationNPCList[i].textNo}`)
 
         trade happens?? ${this.player.tradeHappens}
 
-        pims text ${this.simulationNPCList[1].textNo}`);
+        pims text ${this.simulationNPCList[1].textNo}
+
+        lamottes text ${this.simulationNPCList[2].textNo}
+
+        pmlicoswitch ${this.pimlicoSwitch}`);
     }
 
   // this txtbubl stop? ${this.textBubble.stopTextBubble}
@@ -361,14 +396,19 @@ console.log(`what is pims textno ${this.simulationNPCList[i].textNo}`)
       for (let i = 0; i < this.simulationNPCList.length; i++) {
         if (this.simulationNPCList[i].playerColliding === true) {
           this.simulationNPCList[i].isTriggered = true;
+
         }
 
         if (
           this.simulationNPCList[i].isTriggered === true &&
           this.player.isPaused === true
         ) {
+          if (this.simulationNPCList[1].textNo === 1){this.pimlicoSwitch = 1;}
           if (this.textBubble.textIsUp === true) {
             this.textBubble.break();
+            console.log(
+              `NPC desire and held : ${this.simulationNPCList[i].name} ${this.NPCdesiredItem} ${this.NPCholdingItem}`
+            );
           }
           this.simulationNPCList[i].isTriggered = false;
           this.player.isPaused = false;

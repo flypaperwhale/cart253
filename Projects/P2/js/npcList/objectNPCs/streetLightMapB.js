@@ -5,7 +5,7 @@ class StreetLightB extends NPC {
     this.y = 410;
     this.r = 255;
     this.g = 0;
-    this.b = 0;
+    this.b = 255;
     this.size = 10;
     this.name = `StreetLightB`;
     //this.image = undefined; No they will be ellipses

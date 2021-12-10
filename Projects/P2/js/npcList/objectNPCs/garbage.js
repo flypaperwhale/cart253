@@ -4,13 +4,13 @@ class Garbage extends NPC {
     this.x = 200;
     this.y = 330;
     this.r = 255;
-    this.g = 0;
+    this.g = 255;
     this.b = 0;
     this.size = 10;
     this.name = `Garbage`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = undefined;
-    this.desiredItem = undefined;
+    this.itemHeld = -1;
+    this.desiredItem = `Big Bone`;
     this.playerColliding = false;
     this.isTriggered = false;
     //this.textNo = 0;

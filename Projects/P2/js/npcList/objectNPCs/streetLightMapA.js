@@ -3,11 +3,11 @@ class StreetLightA extends NPC {
     super();
     this.x = 200;
     this.y = 370;
-    this.r = 255;
+    this.r = 0;
     this.g = 0;
-    this.b = 0;
+    this.b = 255;
     this.size = 10;
-    this.name = `StreetLightA`;
+    this.name = `LampostA`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = undefined;
     this.desiredItem = undefined;
@@ -15,7 +15,7 @@ class StreetLightA extends NPC {
     this.isTriggered = false;
     //this.textNo = 0;
     this.tradeSucceeded = false;
-    this.texts = [`Dolly used the wrench on the streetLight`];
+    this.texts = [`Dolly used the wrench on the lampost`];
   }
 
   display() {

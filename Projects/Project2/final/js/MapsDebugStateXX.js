@@ -250,7 +250,7 @@ class MapsDebugState extends State {
               this.player.thresholdCollision = false;
         }
               else if (this.player.x < width/2){ // if player crosses to the left
-                this.player.x = 455;
+                this.player.x = 495;
                 this.currentMap = mapsArray[0]; // go to map A
                 this.player.thresholdCollision = false;
               }

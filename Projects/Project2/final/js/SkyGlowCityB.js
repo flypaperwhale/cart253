@@ -110,133 +110,26 @@ displayShop() {
   pop();
 }
 
-displayWindows(){
+displayWindows(){ //this.addWindow(x,y,onOff)
   //background building
-  //this.addWindow(x,y,onOff)
-
   super.addWindow(30,450,22,25,1)
     super.addWindow(70,450,22,25,1)
       super.addWindow(30,490,22,25,1)
         super.addWindow(70,490,22,25,0)
-  //
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(30, 450, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(70, 450, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(30, 490, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(50, 50, 70);
-  // rectMode(CENTER);
-  // rect(70, 490, 22, 25);
-  // pop();
-
   //Dolly building
   super.addWindow(30,582,22,25,1)
     super.addWindow(30,622,22,25,0)
     super.addWindow(70,582,22,25,1)
       super.addWindow(70,622,22,25,0)
       super.addWindow(70,662,22,25,1)
-        super.addWindow(70,702,22,25,0)
+        super.addWindow(70,702,22,25,1)
         super.addWindow(30,662,22,25,1)
           super.addWindow(30,702,22,25,0)
           super.addWindow(70,742,22,25,1)
-            super.addWindow(30,742,22,25,0)
-
-
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(30, 582, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(70, 582, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(50, 50, 70);
-  // rectMode(CENTER);
-  // rect(30, 622, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(50, 50, 70);
-  // rectMode(CENTER);
-  // rect(70, 622, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(30, 662, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(70, 662, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(30, 702, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(70, 702, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(225, 180, 100);
-  // rectMode(CENTER);
-  // rect(30, 742, 22, 25);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(50, 50, 70);
-  // rectMode(CENTER);
-  // rect(70, 742, 22, 25);
-  // pop();
-
+            super.addWindow(30,742,22,25,1)
   //shop
-
   super.addWindow(392,710,60,50,0);
     super.addWindow(462,710,60,50,0);
-
-  // push();
-  // noStroke();
-  // fill(50, 50, 70);
-  // rectMode(CENTER);
-  // rect(392, 710, 60, 50);
-  // pop();
-  // push();
-  // noStroke();
-  // fill(50, 50, 70);
-  // rectMode(CENTER);
-  // rect(462, 710, 60, 50);
-  // pop();super
-
-
 }
 
 displayStairs(){

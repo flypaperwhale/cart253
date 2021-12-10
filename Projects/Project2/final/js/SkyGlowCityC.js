@@ -31,6 +31,8 @@ display(player, npcList) {
   this.displayCircleAndPath(); // display gray circle and path
 
   this.displayShopBack();
+  this.displayWindows();
+
   this.displayGarbage();
 
   this.displayGazeboBase();
@@ -83,6 +85,9 @@ displayShopBack() {
   rectMode(CENTER);
   rect(50, 725, 100, 80);
   pop();
+}
+displayWindows(){
+  super.addWindow(50,720,60,30,0);
 }
 
 displayGarbage(){

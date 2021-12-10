@@ -106,9 +106,12 @@ class SimulationState extends State {
         // }
 
         // % // First interaction with Mayor Pimlico // % //
-        if (
+        if ( // if the triggered npc is the Mayor and player has either
+          // the placeholder or the slingshot in their inventory
           this.simulationNPCList[i].name === `Mayor Pimlico` &&
-          this.simulationNPCList[i].textNo === 0
+          this.player.inventory[0] === `PlaceHolder`
+          || this.simulationNPCList[i].name === `Mayor Pimlico` &&
+          this.player.inventory[0].name === `Slingshot`
         ) {
           this.eventSwitch1 = 0; // initialize event switch
           this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
@@ -116,9 +119,8 @@ class SimulationState extends State {
             this.player.inventory.unshift(this.simulationItemList[1]); // Pimlico gives you Ham!
             if (this.player.inventory[1] === `PlaceHolder`) { // remove place holder if you don'T already have the slingshot
               this.player.inventory.splice(1, 1);
-              console.log(`i keep on a splicin`);
             }
-            this.simulationNPCList[i].textNo = 1; // Pimlico's text is changed
+            //this.simulationNPCList[i].textNo = 1; // Pimlico's text is changed
             // next time Pimlico is triggered this new text will be displayed
           }
           this.eventSwitch1++;
@@ -158,7 +160,8 @@ class SimulationState extends State {
           this.simulationNPCList[i].textNo = 2;
         }
 
-        // this is a text assigning machine //
+        // * // this is a text assigning machine // * //
+
         if (this.simulationNPCList[i].textNo === 0) { // when triggered npc text is index 0
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[0]}`
@@ -232,7 +235,9 @@ class SimulationState extends State {
             this.eventSwitch2 = 0; // initialize event switch
             this.eventSwitch2 = constrain(this.eventSwitch2, 0, 1); // switch can be 0 or 1
             if (this.eventSwitch2 === 0) {
-              this.player.inventory.splice(0, 1); // gets rid of inventory place holder!
+              if (this.player.inventory[0] === `PlaceHolder`) { // remove place holder if you don'T already have the slingshot
+                this.player.inventory.splice(0, 1);
+              }
               this.player.inventory.push(this.simulationItemList[i]); // item is pushed in inventory
               this.textBubble = new TextBubble( // text is assigned to textbubble
                 `You just picked up ${this.simulationItemList[i].name}`

@@ -90,9 +90,8 @@ class Player {
       this.checkedItem = this.inventory[i];
       //console.log(`repeat item checked in inventory ${this.checkedItem.name}`);
 
-console.log(`thischeckeditemname is and npcdesire ${this.checkedItem.name}${npcDesiredItem}`);
+//console.log(`thischeckeditemname is and npcdesire ${this.checkedItem.name} ${npcDesiredItem}`);
       if (this.checkedItem.name === npcDesiredItem && ! undefined === undefined) {
-        console.log(`how did that work Pimlico?`);
         //splice removeFromPlayerInventory(this.inventory[i])
         this.tradeHappens = true;
         this.itemToAddToInventory = npcHoldingItem;

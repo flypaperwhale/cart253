@@ -26,6 +26,7 @@ class Pimlico extends NPC {
       `Mayor Pimlico:
       I'm not looking at any papers tonight. Scram`,
     ];
+    this.map = `A`;
   }
 
   display() {

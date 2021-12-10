@@ -17,6 +17,7 @@ class Janine extends NPC {
     this.tradeSucceeded = false;
     this.texts = [`Copper Janine:
       Enjoy the night, I'll be watching over you`];
+      this.map = `B`;
   }
 
   display() {

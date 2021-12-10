@@ -31,6 +31,7 @@ class Marv extends NPC {
       `Elder Marv:
       Good show sprout`,
     ];
+    this.map = `B`;
   }
 
   display() {

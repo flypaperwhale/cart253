@@ -1,8 +1,8 @@
 class Billee extends NPC {
   constructor() {
     super();
-    this.x = 200;
-    this.y = 50;
+    this.x = 100;
+    this.y = 500;
     this.r = 215; // orange yellow
     this.g = 90;
     this.b = 60;
@@ -24,6 +24,7 @@ class Billee extends NPC {
       `Bille Rascal:
       Sign me up!`,
     ];
+    this.map = `C`;
     this.speed = 1; // this is unique to Billie, and few other animated npcs
   }
 

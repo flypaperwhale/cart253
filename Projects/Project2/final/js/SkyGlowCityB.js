@@ -1,22 +1,26 @@
 class SkyGlowCityB extends Map{
-  constructor(itemImagesList){ // enter item array and simNPCList
+  constructor(simulationImagesList){ // enter item array and simNPCList
     // of which the according elements will be extracted by the map
     super();
-//this.player; // player avatar, class Player
-this.name = `B`;
-this.streetlampImg = itemImagesList[6];
-this.streetlampFootImg = itemImagesList[7];
-this.stairsImg = itemImagesList[8];
-this.treeImg = itemImagesList[9];
 
+this.name = `B`; // map name
+
+//image files
+this.streetlampImg = simulationImagesList[6];
+this.streetlampFootImg = simulationImagesList[7];
+this.stairsImg = simulationImagesList[8];
+this.treeImg = simulationImagesList[9];
+
+//Lamp coordinates
 this.lampX = 225; // lamp x value
 this.lampY = 510; // lamp y value
+
 }
 
 /**
 Description of draw()
 */
-display(player){
+display(player, npcList){
   background(0);
 
   //sky
@@ -31,7 +35,9 @@ display(player){
   this.displayShop();
   this.displayStairs();
 
-
+npcList[4].display(); // marv
+npcList[3].display(); // janine
+npcList[5].display(); // streetlamp
 
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); // displays player and also constrains them to move only on the ground
@@ -40,7 +46,7 @@ display(player){
 
   //this.barriers();
 
-  player.barriers(this.name)
+  //player.barriers(this.name)
 
 }
 

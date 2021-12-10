@@ -25,6 +25,7 @@ class Sheperd extends NPC {
       `Sheperd:
       Sign me up!`,
     ];
+    this.map = `C`;
     this.doggyX = 222;
     this.doggyY = 137;
     this.doggyW = 17;

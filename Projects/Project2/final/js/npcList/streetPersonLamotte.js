@@ -26,6 +26,7 @@ class Lamotte extends NPC {
       You're a wise little one, I can tell
       you've come here to set things right`,
     ];
+    this.map = `A`;
   }
 
   display() {

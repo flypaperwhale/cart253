@@ -25,6 +25,7 @@ class Jade extends NPC {
       `Jade:
       Sign me up!`,
     ];
+    this.map = `C`;
   }
 
   display() {

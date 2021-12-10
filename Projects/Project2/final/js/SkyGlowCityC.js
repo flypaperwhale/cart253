@@ -1,17 +1,18 @@
 class SkyGlowCityC extends Map{
-  constructor(itemImagesList){ // enter item array and simNPCList
+  constructor(simulationImagesList){ // enter item array and simNPCList
     // of which the according elements will be extracted by the map
     super();
 //this.player; // player avatar, class Player
 this.name = `C`;
-this.streetlampImg = itemImagesList[6];
-this.streetlampFootImg = itemImagesList[7];
-this.treeImg = itemImagesList[9];
-this.garbageImg = itemImagesList[10];
-this.gazeboImg = itemImagesList[11];
-this.gazeboBaseImg = itemImagesList[12];
+// image files
+this.streetlampImg = simulationImagesList[6];
+this.streetlampFootImg = simulationImagesList[7];
+this.treeImg = simulationImagesList[9];
+this.garbageImg = simulationImagesList[10];
+this.gazeboImg = simulationImagesList[11];
+this.gazeboBaseImg = simulationImagesList[12];
 
-
+//lamp coordinates
 this.lampX = 378; // lamp x value
 this.lampY = 501; // lamp y value
 }
@@ -19,7 +20,7 @@ this.lampY = 501; // lamp y value
 /**
 Description of draw()
 */
-display(player) {
+display(player, npcList) {
   background(0);
 
   //sky
@@ -33,6 +34,11 @@ display(player) {
   this.displayGarbage();
 
   this.displayGazeboBase();
+
+  npcList[6].display(); // billee
+  npcList[10].display(); // jade
+  npcList[7].display(); // sheperd
+  npcList[9].display(); // streetlamp
 
   //movePlayer(); // handle user input and move player avatar
 

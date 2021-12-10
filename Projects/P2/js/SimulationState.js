@@ -10,7 +10,8 @@ class SimulationState extends State {
     this.simulationNPCList = [];
     this.createNPCs(); // creating NPCs and storing them in NPCList array
 
-    this.eventSwitch = 0;
+    this.eventSwitch1 = 0;
+    this.eventSwitch2 = 0;
     this.textBubble = undefined;
   }
 
@@ -172,6 +173,7 @@ if (this.simulationNPCList[i].tradeSucceeded === true) {
 
         // Display assigned text
         this.textBubble.display();
+        this.textBubble.textIsUp = true;
       }
     }
 
@@ -194,15 +196,12 @@ if (this.simulationNPCList[i].tradeSucceeded === true) {
               this.player.size
             );
             // check for player collision with each item
-
+}
                   // If player collides with item, its isPicked value becomes true
                   if (this.simulationItemList[i].playerColliding === true) {
-                    this.simulationItemList[i].isPicked = true;}
-
-            // when an item isPicked
-                  if (this.simulationItemList[i].isPicked === true){
                     this.player.paused(); // the player movements are paused
-
+                    this.player.isPaused = true;
+                    this.simulationItemList[i].isPicked = true;
                     this.simulationItemList[i].isOnMap = false; // item is declared off of the map
                     if (this.simulationItemList[i].isOnMap === false) {
                     // when item is declared off of the map
@@ -210,93 +209,108 @@ if (this.simulationNPCList[i].tradeSucceeded === true) {
                       // vanishing item
                     }
 
-                    // this.eventSwitch = constrain(this.eventSwitch, 0, 1); // switch can be 0 or 1
-                    // if (this.eventSwitch === 0) {
+                  }
 
-                      // actions for map first item pickup Slingshot//
-                      if (
-                        this.player.firstItemPicked === 0 &&         // when switch is initialized (at 0)
 
-                          this.simulationItemList[i].name === `Slingshot`)
-                          {
-                            this.player.firstItemPicked = 1;
-                          }
-                          if (
-                            this.player.firstItemPicked === 1 &&
-                            this.simulationItemList[i].name === `Slingshot`
-                          ) {
-                            this.player.inventory.splice(0, 1);         // gets rid of inventory place holder!
-                            this.player.inventory.push(this.simulationItemList[i]); // item is pushed in inventory
-                            this.player.firstItemPicked = 3;
-                            console.log(`first item IS picked, it's a slingshot`);
-                          }
-                        }
+                  //!!!!    // // actions for map first item pickup Slingshot//
+                      // if (this.player.firstItemPicked === 0 && this.eventSwitch1 === 0){
+                      //   this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
+                      //
+                      // if (this.player.firstItemPicked === 0 &&         // when switch is initialized (at 0)
+                      //     this.simulationItemList[i].name === `Slingshot`)
+                      //     {
+                      //       this.player.firstItemPicked = 1;
+                      //     }
+                      //
+                      //       console.log(`first item IS picked, it's a slingshot`);
+                      //     }
+                      //
+                      //
+                      //         this.textBubble.display();
+                      //         this.textBubble.textIsUp();
+                //!!!!!      //         this.eventSwitch1++;
 
-                              // this.textBubble.display(); ### THIS is managed in NPCSlistloop!
-                              this.eventSwitch++;
-
-                      }
+                  //     }
+                  //   }
+                  // }
                     // end of items on map section //
 
+// // manage Ham as first item picked // this never happens if slingshot is picked first
+// //#### could be irrelevant, must get on to the sequence!
+// //!!!!!!!
+//       if (this.player.firstItemPicked === 0 && this.eventSwitch1 === 0) {
+//         this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
+//
+//         // actions for trade first item pickup Ham //
+//         if (this.player.firstItemPicked === 0 &&
+//             this.simulationItemList[i].name === `Ham`)
+//          {
+//           this.player.firstItemPicked = 1;
+//         }
+//
+//             //this.textBubble.display();
+//             this.eventSwitch1++; // ### with firstItemPicked I may not need eventswitch here!
+//       }
+//       // end actions for Ham as first item //!!!!!!!!!!!
+
 // manage all items //
-
-      if (this.player.firstItemPicked === 0 && this.eventSwitch === 0) {
-
-        // actions for trade first item pickup Ham //
-
-        if (this.player.firstItemPicked === 0 &&
-            this.simulationItemList[i].name === `Ham`)
-         {
-          this.player.firstItemPicked = 1;
-        }
-      if (
-        this.player.firstItemPicked === 1 &&
-        this.simulationItemList[i].name === `Ham`
-      ) {
-        this.player.inventory.splice(0, 1);   // gets rid of inventory place holder!
-        this.player.firstItemPicked = 3;
-        console.log(`first item IS picked, it's Ham`);
-      }
-
-            //this.textBubble.display();
-            this.eventSwitch++;
-      }
-      // end actions for Ham as first item //
-
-      // ### LOOK OUT item.isPicked true or false to have simulation add or remove Items
-      // during trade sequence ##
-
-if (this.simulationItemList[i].isPicked === true){ // if item is "picked"
+if (this.simulationItemList[i].isPicked === true
+  || this.simulationItemList[i].isTraded === true){
+  // if item is "picked"
   // to be added to player.INVENTORY
 
-  this.eventSwitch = constrain(this.eventSwitch, 0, 1); // switch can be 0 or 1
+// Using label, put items in inventory through here! //
 
-  if (this.eventSwitch === 0){
+  if (this.eventSwitch2 === 0){
+    this.eventSwitch2 = constrain(this.eventSwitch2, 0, 1); // switch can be 0 or 1
+
+if (this.player.firstItemPicked === 0){
+  if (this.simulationItemList[i].name === `Slingshot`){
+    this.player.inventory.splice(0, 1);         // gets rid of inventory place holder!
+    this.player.inventory.push(this.simulationItemList[i]); // item is pushed in inventory
+    this.textBubble = new TextBubble( // text is assigned to textbubble
+      `You just picked up ${this.simulationItemList[i].name}`);
+    this.player.firstItemPicked = 1;
+}
+  else if (this.simulationItemList[i].name === `Ham`){
+    this.player.inventory.splice(0, 1);   // gets rid of inventory place holder!
+    this.player.inventory.unshift(this.simulationItemList[i]);
+    this.textBubble = new TextBubble(`you just picked up ham`);
+    this.player.firstItemPicked = 1;
+  }
+}
+
+  else if (this.player.firstItemPicked === 2){
     if (this.simulationItemList[i].name === `Slingshot` || // if item added to inventory is
       // slingshot, wrench, or injunction, push them from the right side into array
     this.simulationItemList[i].name === `Wrench` ||
       this.simulationItemList[i].name === `Injunction(s)`){
         this.player.inventory.push(this.simulationItemList[i]); // item is pushed in inventory
         this.textBubble = new TextBubble( // text is assigned to textbubble
-          `You just picked up ${this.simulationItemList[i].name}`
-        );
-      }
-      else { // every other item is tradeable so
-          this.player.inventory.unshift(this.simulationItemList[i]); // item is unshifted from the left in inventory
-          // console.log(
-          //   `you just unshifted an item ${this.simulationItemList[i].name} in inventory. inv lgt now ${this.player.inventory.length}`
-          // );
-          this.textBubble = new TextBubble( // text is assigned to textbubble
-            `You just picked up ${this.simulationItemList[i].name}`
-          );
-        }
-              this.textBubble.display();
-              this.eventSwitch++;
+          `You just picked up ${this.simulationItemList[i].name}`);
+  }
+  else { // every other item is tradeable so
+      this.player.inventory.unshift(this.simulationItemList[i]); // item is unshifted from the left in inventory
+      // console.log(
+      //   `you just unshifted an item ${this.simulationItemList[i].name} in inventory. inv lgt now ${this.player.inventory.length}`
+      // );
+      this.textBubble = new TextBubble( // text is assigned to textbubble
+        `You just picked up ${this.simulationItemList[i].name}`
+      );
       }
     }
-
-    this.player.display(); // display the player avatar
+              this.firstItemPicked = 2;
+              this.textBubble.textIsUp = true;
+              this.eventSwitch2++;
+      }
+        this.textBubble.display();}
   }
+
+  //this.eventSwitch = 0;
+
+  this.player.display(); // display the player avatar
+
+}
 
   display() {
     background(0);
@@ -313,8 +327,9 @@ if (this.simulationItemList[i].isPicked === true){ // if item is "picked"
       this.player.displayInventory();
       console.log(`this is first item picked ${this.player.firstItemPicked}
       and last item ${
-        this.player.inventory[this.player.inventory.length - 1]
-      }`);
+        this.player.inventory[this.player.inventory.length - 1]}
+        and textbuv
+        is player paused? ${this.player.isPaused}`);
     }
 
     if (keyCode === 32) {
@@ -324,10 +339,12 @@ if (this.simulationItemList[i].isPicked === true){ // if item is "picked"
           this.simulationItemList[i].isPicked === true &&
           this.player.isPaused === true
         ) {
-          this.textBubble.break();
+          if (this.textBubble.textIsUp === true){
+                this.textBubble.break();
+          }
           this.simulationItemList[i].isPicked = false;
           this.player.isPaused = false;
-          this.eventSwitch = 0;
+          this.eventSwitch2 = 0;
           this.simulationNPCList[i].playerColliding = false;
           if (this.simulationNPCList[i].textNo === 2) {
             this.simulationNPCList[i].tradeSucceeded = true;
@@ -344,7 +361,9 @@ if (this.simulationItemList[i].isPicked === true){ // if item is "picked"
           this.simulationNPCList[i].isTriggered === true &&
           this.player.isPaused === true
         ) {
-          this.textBubble.break();
+          if (this.textBubble.textIsUp === true){
+                this.textBubble.break();
+          }
           this.simulationNPCList[i].isTriggered = false;
           this.player.isPaused = false;
           this.simulationNPCList[i].playerColliding = false;
@@ -355,4 +374,5 @@ if (this.simulationItemList[i].isPicked === true){ // if item is "picked"
       }
     }
   }
+
 }

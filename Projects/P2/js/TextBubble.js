@@ -3,6 +3,7 @@ class TextBubble {
     this.text = text;
     this.loop = true;
     this.stopTextBubble = false;
+    this.textIsUp = false; // true or false
   }
 
   display(){

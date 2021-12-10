@@ -8,6 +8,8 @@ class Item {
     this.image = undefined;
     this.isOnMap = undefined; // can be true or false
     this.playerColliding = undefined;
+    this.isPicked = undefined;
+    this.isTraded = false;
   }
 
 

@@ -1,7 +1,7 @@
 class Injunction extends Item {
   constructor(image){
     super();
-    this.name = `Injunction(s)`;
+    this.name = `City Injunction`;
     this.x = 400;
     this.y = 250;
     this.width = 45;

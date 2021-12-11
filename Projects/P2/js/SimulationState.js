@@ -375,7 +375,7 @@ this.eventSwitch3 = constrain(this.eventSwitch3, 0, 1); // switch can be 0 or 1
       console.log(`
         is player paused? ${this.player.isPaused}
         trade happens?? ${this.player.tradeHappens}
-        pims text ${this.simulationNPCList[1].textNo}
+        lamot trig text ${this.simulationNPCList[2].isTriggered}
         lamottes text ${this.simulationNPCList[2].textNo}
         player.inventory lgt ${this.player.inventory.length}`);
     }
@@ -399,6 +399,7 @@ if (this.ham.isPicked === true && this.player.isPaused === true){
   this.textBubble.break();
   this.textBubbleIsLoaded = false;
   this.player.isPaused = false;
+  this.ham.isPicked = false;
 }
       for (let i = 0; i < this.simulationNPCList.length; i++) {
         // when space is keyPressed
@@ -421,6 +422,7 @@ if (this.simulationNPCList[i].isTriggered === true
     // if (this.textBubble.textIsUp === true) {
     //   this.textBubble.break();
     this.simulationNPCList[i].isTriggered = false;
+    console.log(`this is working but.. why am i still paused?`)
   this.player.isPaused = false;
   //this.player.isCollided = false;
  }

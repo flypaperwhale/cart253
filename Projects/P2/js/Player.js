@@ -80,7 +80,6 @@ class Player {
   }
 
   checkTrade(npc, npcDesiredItem, npcHoldingItem) {
-
     // verifies what item npc desires
     // Go through Player inventory array
     // if item is in Player inv. array, item is removed from array and
@@ -96,17 +95,21 @@ if (this.checkedItem.name === undefined){
   // do nothing
 }
       else if (this.checkedItem.name === npcDesiredItem) { // && undefined !== undefined I put undefineds so Pimlico would not come in here
-        console.log(`we're not coming here anymore`)
+
+        this.methodSwitch=1;
+        if (this.methodSwtich === 1){
+          console.log(`we're not coming here anymore`)
+
         //splice removeFromPlayerInventory(this.inventory[i])
         this.tradeHappens = true;
         this.itemToAddToInventory = npcHoldingItem;
         console.log(`${npcHoldingItem}`);
-
         npc.textNo=1;
-
+        this.methodSwitch =0;
       }
     }
   }
+}
 
   addToPlayerInventory(item) {
     // pushes new items into the inventory array

@@ -24,7 +24,7 @@ class TitleState extends State {
   }
 
   mouseClicked(){
-    state = new SunsetState(simulationImagesList, mapsArray, simulationSoundsArray);
+    state = new MapsDebugState(simulationImagesList, mapsArray, simulationSoundsArray);
   }
 
 }

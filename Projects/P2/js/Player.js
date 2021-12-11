@@ -96,17 +96,17 @@ if (this.checkedItem.name === undefined){
 }
       else if (this.checkedItem.name === npcDesiredItem) { // && undefined !== undefined I put undefineds so Pimlico would not come in here
 
-        this.methodSwitch=1;
-        if (this.methodSwtich === 1){
+        //this.methodSwitch=1;
+        //if (this.methodSwtich === 1){
           console.log(`we're not coming here anymore`)
 
         //splice removeFromPlayerInventory(this.inventory[i])
         this.tradeHappens = true;
         this.itemToAddToInventory = npcHoldingItem;
         console.log(`${npcHoldingItem}`);
-        npc.textNo=1;
-        this.methodSwitch =0;
-      }
+
+        //this.methodSwitch =0;
+      //}
     }
   }
 }

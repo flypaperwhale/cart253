@@ -9,8 +9,8 @@ class Lamotte extends NPC {
     this.size = 25;
     this.name = `Street Person Lamotte`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = 2; // the Big Bone INDEX in itemList
-    this.desiredItem = `Ham`; 
+    this.itemHeld = 1; // the Big Bone INDEX in itemList
+    this.desiredItem = `Ham`;
     this.playerColliding = false;
     this.isTriggered = false;
     this.textNo = 0;

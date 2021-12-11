@@ -84,7 +84,6 @@ class SimulationState extends State {
 
   update() {
     this.display(); // simulation state display method
-
     // Check if player is paused (when textBubble appears)
     if (this.player.isPaused === true) {
       // if player is paused
@@ -160,12 +159,13 @@ class SimulationState extends State {
 
         // !!! THIS HERE RELATES to item.isPicked !!!
 
-this.eventSwitch3=0;
-this.eventSwitch3 = constrain(this.eventSwitch3, 0, 1); // switch can be 0 or 1
+
 // npcs display text[0] first... when player has the item they desire and trade happens
 //console.log(`current npc ${this.simulationNPCList[i].name}, textno is ${this.simulationNPCList[i].textNo}
   //and player trade is ${this.player.tradeHappens}`);
         if (this.simulationNPCList[i].textNo === 0 && this.player.tradeHappens === true) {
+          this.eventSwitch3=0;
+          this.eventSwitch3 = constrain(this.eventSwitch3, 0, 1); // switch can be 0 or 1
           if (this.eventSwitch3 === 0) {
           console.log(`trade happens, you comin in here?`);
           this.player.inventory.shift(0,1);
@@ -416,7 +416,7 @@ if (this.simulationNPCList[i].isTriggered === true
   && this.player.isPaused === true
 ){ //|| this.ham.playerCollided === true && this.player.isPaused === true
     this.textBubble.break(); // the text Bubble vanishes
-    if (this.simulationNPCList[1].textNo === 1) // if the current npc's being interacted with
+    if (this.simulationNPCList[i].textNo === 1) // if the current npc's being interacted with
     //text is #1, it will be changed to #2 as #1 should only happen once during the trade
     {this.simulationNPCList[i].textNo = 2;} // npc text is set to no 2
     // if (this.textBubble.textIsUp === true) {

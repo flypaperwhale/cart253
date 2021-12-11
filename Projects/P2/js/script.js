@@ -32,12 +32,17 @@ function preload() {
   streetlampImg = loadImage("assets/images/decor/lamp.png");
 
 // Items image files
-  slingshotImg = loadImage("assets/images/items/slingshot1.png")
   hamImg = loadImage("assets/images/items/ham.png");
   bigBoneImg = loadImage("assets/images/items/bigBone.png");
+  slingshotImg = loadImage("assets/images/items/slingshot1.png")
+frogConstellationImg = loadImage("assets/images/items/frogConstellation.png") /// ###
   frogImg = loadImage("assets/images/items/frog2.png");
   wrenchImg = loadImage("assets/images/items/wrench.png");
+arrowConstellationImg = loadImage("assets/images/items/arrowConstellation.png") /// ###
   injunctionImg = loadImage("assets/images/items/letters.png");
+  keyImg = loadImage("assets/images/items/key.png"); //####
+  eagleConstellationImg = loadImage("assets/images/items/eagleConstellation.png") /// ###
+
 
 // NPC image files
   lampfootImg = loadImage("assets/images/npcs/lampFoot.png");

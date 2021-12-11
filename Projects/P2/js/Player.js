@@ -112,4 +112,11 @@ if (this.checkedItem.name === undefined){
   removeFromPlayerInventory(item) {
     // removes an item from inventory, if item is traded or used.
   }
+
+  checkForKey(){
+      for (let i = 0; i < this.inventory.length; i++) {
+        if (this.inventory[i].name === `Key`){
+          //CITY HALL BARRIER DISAPPEARS
+        }
+  }
 }

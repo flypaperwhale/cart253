@@ -9,7 +9,7 @@ class Marv extends NPC {
     this.size = 25;
     this.name = `Elder Marv`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = `Wrench`; // also holds the first Injunction
+    this.itemHeld = 5; //wrench 
     this.desiredItem = `Frog`;
     this.playerColliding = false;
     this.isTriggered = false;

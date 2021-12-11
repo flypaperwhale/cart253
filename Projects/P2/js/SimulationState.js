@@ -187,7 +187,7 @@ console.log(`current npc ${this.simulationNPCList[i].name}, textno is ${this.sim
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[0]}`
           );
-          console.log(`what is pims textno ${this.simulationNPCList[i].textNo}`)
+          //console.log(`what is pims textno ${this.simulationNPCList[i].textNo}`)
           // }
           // this.eventSwitch3++;
         }

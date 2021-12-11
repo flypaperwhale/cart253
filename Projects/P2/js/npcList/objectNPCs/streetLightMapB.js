@@ -9,7 +9,7 @@ class StreetLightB extends NPC {
     this.size = 10;
     this.name = `StreetLightB`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = `Arrow Constellation`;
+    this.itemHeld = 6; //arrow constellation
     this.desiredItem = `Wrench`;
     this.playerColliding = false;
     this.isTriggered = false;
@@ -20,21 +20,10 @@ class StreetLightB extends NPC {
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
-    push();
-    fill(this.r,this.g,this.b);
-    noStroke();
-    ellipseMode(CENTER);
-    ellipse(this.x, this.y, this.size);
-    pop();
+    super.display();
   }
 
-  playerCollide(playerX, playerY) {
-    let d = dist(this.x, this.y, playerX, playerY);
-    if (d < this.size / 2) {
-      this.playerColliding = true;
-    } else {
-      this.playerColliding = false;
-    }
+  playerCollisionCheck(playerX,playerY,playerSize) {
+    super.playerCollisionCheck(playerX,playerY,playerSize);
   }
 }

@@ -9,8 +9,8 @@ class Sheperd extends NPC {
     this.size = 25;
     this.name = `Dogwalker Sheperd`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = `Injunction`;
-    this.desiredItem = `Injunction`;
+    this.itemHeld = undefined;
+    this.desiredItem = undefined;
     this.playerColliding = false;
     this.isTriggered = false;
     this.textNo = 0;

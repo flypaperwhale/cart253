@@ -9,7 +9,7 @@ class Pimlico extends NPC {
     this.size = 32;
     this.name = `Mayor Pimlico`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = `Key`;
+    this.itemHeld = 8;//key
     this.desiredItem = `City Injunction`;
     this.playerColliding = false;
     this.isTriggered = false;

@@ -9,7 +9,7 @@ class Jade extends NPC {
     this.size = 25;
     this.name = `Ms. Jade`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = `Frog`;
+    this.itemHeld = 4; //Frog
     this.desiredItem = `Frog Constellation`;
     this.playerColliding = false;
     this.isTriggered = false;

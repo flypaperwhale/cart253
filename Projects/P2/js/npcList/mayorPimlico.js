@@ -16,7 +16,6 @@ class Pimlico extends NPC {
     this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [
-      `VOID`,
       `Mayor Pimlico:
       Hello, hello! Our banquet at City Hall tonight is
       NOT FOR KIDS. Have a ham scram kiddo`,

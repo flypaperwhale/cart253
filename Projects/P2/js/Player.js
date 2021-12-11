@@ -79,7 +79,7 @@ class Player {
     }
   }
 
-  checkTrade(npcDesiredItem, npcHoldingItem) {
+  checkTrade(npc, npcDesiredItem, npcHoldingItem) {
 
     // verifies what item npc desires
     // Go through Player inventory array
@@ -91,7 +91,7 @@ class Player {
       this.checkedItem = this.inventory[i];
       //console.log(`repeat item checked in inventory ${this.checkedItem.name}`);
 
-console.log(`thischeckeditemname is and npcdesire ${this.checkedItem.name} ${npcDesiredItem}`);
+//console.log(`thischeckeditemname is and npcdesire ${this.checkedItem.name} ${npcDesiredItem}`);
 if (this.checkedItem.name === undefined){
   // do nothing
 }
@@ -101,6 +101,9 @@ if (this.checkedItem.name === undefined){
         this.tradeHappens = true;
         this.itemToAddToInventory = npcHoldingItem;
         console.log(`${npcHoldingItem}`);
+
+        npc.textNo=1;
+
       }
     }
   }

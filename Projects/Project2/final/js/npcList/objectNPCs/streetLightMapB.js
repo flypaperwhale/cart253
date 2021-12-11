@@ -25,31 +25,28 @@ class StreetLightB extends NPC {
 
   flickBulbOn() {
     // on cue flicks bulb on
-    console.log(`yes bulb on?`);
     this.flickerBulb = true;
+    console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
+    // currentLampost.displayLampGlow(); // small yellow ellipse around lamp head
   }
 
   flickBulbOff() {
     // on cue flicks bulb off
     console.log(`yes bulb off?`);
-
     this.flickerBulb = false;
-  }
+    console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
 
-  flickBulb() { // happens when cued during the lightFlickSound in intro animation
-    if (this.flickerBulb === true) { // if flickerBulb is true show lamp glow
-      this.displayLampGlow(); // small yellow ellipse around lamp head
-    }
   }
 
   displayLampGlow() { // displays circle of light around lamphead
-  push();
-  noStroke();
-  fill(200, 200, 0, 200); // light yellow and slightly transparent
-  ellipseMode(CENTER);
-  ellipse(this.x, this.y - 100, 100, 100);
-  pop();
-}
+      push();
+      noStroke();
+      fill(200, 200, 0, 200); // light yellow and slightly transparent
+      ellipseMode(CENTER);
+      ellipse(this.x, this.y - 100, 100, 100);
+      pop();
+    }
+
 
     display() {
       super.display();
@@ -59,4 +56,16 @@ class StreetLightB extends NPC {
     super.playerCollisionCheck(playerX,playerY,playerSize);
   }
 
+
+
+
+  flickBulb() { // happens when cued during the lightFlickSound in intro animation
+console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
+if (this.flickerBulb === true) { // if flickerBulb is true show lamp glow
+console.log(`but not flashing`)
+this.displayLampGlow(); // small yellow ellipse around lamp head
+  //   }
+
+}
+}
 }

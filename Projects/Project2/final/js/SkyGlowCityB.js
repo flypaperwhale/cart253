@@ -14,7 +14,7 @@ this.treeImg = simulationImagesList[9];
 //Lamp coordinates
 this.lampX = 225; // lamp x value
 this.lampY = 510; // lamp y value
-this.flickerBulb = false;
+//this.flickerBulb = false;
 
 this.buzzVolume =0.05;
 }
@@ -30,8 +30,12 @@ display(player, npcList, soundList){
 
 this.displayStars();
 
-npcList[5].flickBulb();
+npcList[5].flickBulb(this);
+
 this.displayLightsOn(npcList[5], soundList[3],player); // call method with map B lamp and light buzz sound
+
+//this.flickBulb(npcList[5]);
+
   //ground
   super.displayGreenGrass(); // display Green Grass
   this.displayCircleAndPath(); // display gray circle and path
@@ -74,6 +78,8 @@ this.calculatePlayerLampDist(player, npcList[5]);
    //##!!
 
 }
+
+
 
 // display stars
 displayStars(){
@@ -118,6 +124,7 @@ displayLightsOn(lampost,sound,player) {
   }
 }
 
+// this.flickBulb(this.currentLampost);
 
     calculatePlayerLampDist(player,lampost) { // store the distance between the player avatar and the lamp
       this.playerDistLamp = dist(player.x, player.y, lampost.x, lampost.y);
@@ -205,7 +212,7 @@ displayWindows(){ //this.addWindow(x,y,onOff)
 displayStairs(){
   push();
   imageMode(CENTER);
-  console.log(`${height/2 +181}`);
+  //console.log(`${height/2 +181}`);
   image(this.stairsImg, 120.5, 681, 45, 228); // hard numbers
   pop();
 }

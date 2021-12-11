@@ -31,6 +31,7 @@ this.lightFlickSound = simulationSoundsArray[2];
       this.songSwitch = 0;
       this.dayTimer = 500; // Counter used to map skyAlpha. 500 = day, 0 = night
       this.skyAlpha = 255; // the blue sky's alpha value is manipulated by mapping it to dayTime
+//this.flickerBulb = false;
 
       this.animationState = undefined;
     this.textBubbleIsLoaded = false;
@@ -128,6 +129,8 @@ else if (this.map.name === `C`){
     //   setState(`sunset`); // state becomes "sunset"
     // }
 
+
+
     //sunset // // introduction animation, blue sky becomes dark and starry...
     if (this.animationState === `SunsetState`){ // if the state equals "sunset"
       this.player.paused(); // player is paused
@@ -146,6 +149,8 @@ else if (this.map.name === `C`){
       }
     }
 
+
+
     // animation when the light turns on, then simulation begins
       // and player can play
       if (this.animationState === `lightsUp`) { // if state is "lightsUp"
@@ -155,6 +160,7 @@ else if (this.map.name === `C`){
         this.songSwitch = constrain(this.songSwitch, 0, 410); // constrain songSwitch to 0-410
         if (this.songSwitch === 200) { // when songSwitch reaches 200
           this.lightFlickSound.play(); // play the lightFlickSound (which has visual FX cues)
+
         }
         if (this.songSwitch === 270) { // when songSwitch reaches 270
           console.log(`turnlight on!`);
@@ -165,6 +171,9 @@ else if (this.map.name === `C`){
           this.player.isPaused = false; // and the player can start moving the avatar
         }
       }
+      if (this.flickerBulb === true) { // if flickerBulb is true show lamp glow
+               console.log(`but not flashing`)
+               this.currentLampost.displayLampGlow(); // small yellow ellipse around lamp head
 
       // simulation when light bulb explodes. player can play. no ending
         if (this.animationState === `lightsOut`) { // if state is "lightsOut"
@@ -191,10 +200,16 @@ else if (this.map.name === `C`){
               this.player.move(); // change the player avatar's position
             }
 
-            // manageNPCs(){ //
+            //this.flickBulb(this.currentLampost);
+            console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
+
+
+}
+            // * // manageNPCs(){ // * //
               // go through the NPC array to display each NPC (according to the map player is on)
               // also, check if player is colliding and update the NPC's data if need be (from click & trade)
-              for (let i = 0; i < this.simulationNPCList.length; i++) {// Look through NPC List
+
+    for (let i = 0; i < this.simulationNPCList.length; i++) {// Look through NPC List
                 // //this.simulationNPCList[i].display(); // display every NPC
                 // this.simulationNPCList[i].playerCollisionCheck(
                 //   //NPC/Player Collision check
@@ -212,8 +227,8 @@ else if (this.map.name === `C`){
                     // the placeholder or the slingshot in their inventory
                     this.simulationNPCList[i].name === `Mayor Pimlico` &&
                     this.player.inventory[0] === `PlaceHolder`
-                    || this.simulationNPCList[i].name === `Mayor Pimlico` &&
-                    this.player.inventory[0].name === `Slingshot`
+                    // || this.simulationNPCList[i].name === `Mayor Pimlico` &&
+                    // this.player.inventory[0].name === `Slingshot`
                   ) {
                     console.log(`this should only happen once`)
                     this.eventSwitch1 = 0; // initialize event switch
@@ -362,7 +377,6 @@ else if (this.map.name === `C`){
                 }
 
               }
-
             }
 
     // METHODS //
@@ -386,6 +400,8 @@ else if (this.map.name === `C`){
       this.currentLampost.lightIsOn = true;
     }
 
+
+
     playBGMusic() { // plays bg music
       push();
       this.bgMusic.playMode(`untilDone`); // bg music mode loops forever
@@ -401,15 +417,6 @@ else if (this.map.name === `C`){
       this.bulbBurstSound.play(); // play bulb bursting sound
       pop();
     }
-
-        // cueLightFlicks(lightFlickSound, currentLamp) {
-        //   lightFlickSound.addCue(0.1, currentLamp.flickBulbOn);
-        //   lightFlickSound.addCue(0.2, currentLamp.flickBulbOff);
-        //   lightFlickSound.addCue(0.3, currentLamp.flickBulbOn);
-        //   lightFlickSound.addCue(0.4, currentLamp.flickBulbOff);
-        //   lightFlickSound.addCue(0.75, currentLamp.flickBulbOn);
-        //   lightFlickSound.addCue(0.8, currentLamp.flickBulbOff);
-        // }
 
           display() {}
 

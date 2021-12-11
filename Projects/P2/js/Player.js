@@ -120,3 +120,4 @@ if (this.checkedItem.name === undefined){
         }
   }
 }
+}

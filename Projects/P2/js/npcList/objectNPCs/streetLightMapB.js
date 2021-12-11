@@ -10,7 +10,7 @@ class StreetLightB extends NPC {
     this.name = `StreetLightB`;
     //this.image = undefined; No they will be ellipses
     this.itemHeld = `Arrow Constellation`;
-    this.desiredItem = undefined;
+    this.desiredItem = `Wrench`;
     this.playerColliding = false;
     this.isTriggered = false;
     //this.textNo = 0;

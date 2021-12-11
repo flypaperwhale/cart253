@@ -9,8 +9,8 @@ class Billee extends NPC {
     this.size = 17;
     this.name = `Billee Rascal`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = `Injunction`;
-    this.desiredItem = `Injunction`;
+    this.itemHeld = `Slingshot`;
+    this.desiredItem = `Big Bone`;
     this.playerColliding = false;
     this.isTriggered = false;
     this.textNo = 0;

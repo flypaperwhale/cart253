@@ -9,8 +9,8 @@ class Janine extends NPC {
     this.size = 25;
     this.name = `Copper Janine`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = `Place Holder`;
-    this.desiredItem = undefined;
+    this.itemHeld = `City Injunction`;
+    this.desiredItem = `Arrow Constellation`;
     this.playerColliding = false;
     this.isTriggered = false;
     this.textNo = 0;

@@ -132,8 +132,6 @@ class SimulationState extends State {
         this.NPCholdingItem = this.simulationNPCList[i].itemHeld;
         // same holdingItem is temp the clicked npc's holding item
 
-
-
         this.player.checkTrade(this.NPCdesiredItem, this.NPCholdingItem);
         // using temporarily stored values inputed in player file
         // compare the npc's desiredItem and an item found in player's inventory array
@@ -150,6 +148,8 @@ class SimulationState extends State {
 this.eventSwitch3=0;
 this.eventSwitch3 = constrain(this.eventSwitch3, 0, 1); // switch can be 0 or 1
 // npcs display text[0] first... when player has the item they desire and trade happens
+console.log(`current npc ${this.simulationNPCList[i].name}, textno is ${this.simulationNPCList[i].textNo}
+  and player trade is ${this.player.tradeHappens}`);
         if (this.simulationNPCList[i].textNo === 0 && this.player.tradeHappens === true) {
           if (this.eventSwitch3 === 0) {
           console.log(`trade happens, you comin in here?`);
@@ -170,7 +170,7 @@ this.eventSwitch3 = constrain(this.eventSwitch3, 0, 1); // switch can be 0 or 1
         // * // this is a text assigning machine to display appropriate text // * //
         if (this.simulationNPCList[i].textNo === 0) { // when triggered npc text is index 0
           // if (this.eventSwitch3 === 0) {
-          console.log(`do you keep coming here?`)
+          //console.log(`do you keep coming here?`)
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[0]}`
           );

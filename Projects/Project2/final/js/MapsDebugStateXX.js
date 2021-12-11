@@ -129,8 +129,6 @@ else if (this.map.name === `C`){
     //   setState(`sunset`); // state becomes "sunset"
     // }
 
-
-
     //sunset // // introduction animation, blue sky becomes dark and starry...
     if (this.animationState === `SunsetState`){ // if the state equals "sunset"
       this.player.paused(); // player is paused
@@ -148,8 +146,6 @@ else if (this.map.name === `C`){
         this.setAnimationState(`lightsUp`); // ... and then, no time to admire the stars, the lights go on!
       }
     }
-
-
 
     // animation when the light turns on, then simulation begins
       // and player can play
@@ -171,9 +167,9 @@ else if (this.map.name === `C`){
           this.player.isPaused = false; // and the player can start moving the avatar
         }
       }
-      if (this.flickerBulb === true) { // if flickerBulb is true show lamp glow
-               console.log(`but not flashing`)
-               this.currentLampost.displayLampGlow(); // small yellow ellipse around lamp head
+      // if (this.flickerBulb === true) { // if flickerBulb is true show lamp glow
+      //          console.log(`but not flashing`)
+      //          this.currentLampost.displayLampGlow(); // small yellow ellipse around lamp head
 
       // simulation when light bulb explodes. player can play. no ending
         if (this.animationState === `lightsOut`) { // if state is "lightsOut"
@@ -204,7 +200,7 @@ else if (this.map.name === `C`){
             console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
 
 
-}
+
             // * // manageNPCs(){ // * //
               // go through the NPC array to display each NPC (according to the map player is on)
               // also, check if player is colliding and update the NPC's data if need be (from click & trade)

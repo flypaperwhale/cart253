@@ -30,7 +30,7 @@ display(player, npcList, soundList){
 
 this.displayStars();
 
-npcList[5].flickBulb(this);
+//npcList[5].flickBulb(this);
 
 this.displayLightsOn(npcList[5], soundList[3],player); // call method with map B lamp and light buzz sound
 

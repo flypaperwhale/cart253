@@ -1,8 +1,8 @@
 class StreetLightA extends NPC {
   constructor() {
     super();
-    this.x = 200;
-    this.y = 370;
+    this.x = 258;
+    this.y = 560;
     this.r = 0;
     this.g = 0;
     this.b = 255;
@@ -16,6 +16,8 @@ class StreetLightA extends NPC {
     //this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [`Dolly used the wrench on the lampost`];
+    this.map = `A`;
+
   }
 
   display() {

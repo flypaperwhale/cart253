@@ -25,6 +25,18 @@ let gazeboBaseImg;
 let fountainImg;
 let fountainTopImg;
 
+// sounds
+let sunsetStarsIntro; // sunset introduction theme
+let constellationWinkSound; // constellation wink
+let lightFlickSound; // light flick
+let lightBuzzNoise; // light buzz
+let bulbBurstSound; // bulb burst
+let bgmusic1; // background music 1
+let bgmusic2; // background music 2
+let bgmusic3; // background music 3
+
+let simulationSoundsArray = [];
+
 let simulationImagesList = [];
 let mapsArray = [];
 let state = undefined;
@@ -54,6 +66,16 @@ function preload() {
   gazeboBaseImg = loadImage("assets/images/gazeboBase.png");
   fountainImg = loadImage("assets/images/fountain.png");
   fountainTopImg = loadImage("assets/images/fountainTop.png");
+
+  // sounds
+  sunsetStarsIntro = loadSound(`assets/sounds/intro-constellation.mp3`);
+  constellationWinkSound = loadSound(`assets/sounds/constellationWink.wav`);
+  lightFlickSound = loadSound("assets/sounds/lightFlick.wav");
+  lightBuzzNoise = loadSound("assets/sounds/lightBuzz.wav");
+  bulbBurstSound = loadSound("assets/sounds/bulbBurst.wav");
+  bgmusic1 = loadSound("assets/sounds/skyglowbgmusic.mp3");
+  bgmusic2 = loadSound("assets/sounds/testbgmusic.mp3");
+  bgmusic3 = loadSound("assets/sounds/testbgmusic2.mp3");
 }
 
 /**
@@ -65,7 +87,13 @@ function setup() {
     slingshotImg,hamImg,bigBoneImg,frogImg,wrenchImg,injunctionImg,streetlampImg,
     streetlampFootImg,stairsImg,treeImg,garbageImg,gazeboImg,gazeboBaseImg,
     fountainImg,fountainTopImg);
+    simulationSoundsArray.push(sunsetStarsIntro,constellationWinkSound,lightFlickSound,lightBuzzNoise,bulbBurstSound,bgmusic1);
   createMapsAndStore();
+
+  userStartAudio();
+
+//###
+
   //createPlayer(230, 495); // (x,y) starting positions declared and new Player is created
 
   state = new TitleState(simulationImagesList, mapsArray);

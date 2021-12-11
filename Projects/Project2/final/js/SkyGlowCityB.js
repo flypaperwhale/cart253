@@ -14,19 +14,22 @@ this.treeImg = simulationImagesList[9];
 //Lamp coordinates
 this.lampX = 225; // lamp x value
 this.lampY = 510; // lamp y value
-
+this.flickerBulb = false;
 }
 
 /**
 Description of draw()
 */
-display(player, npcList){
+display(player, npcList, soundList){
   background(0);
 
   //sky
   super.displaySky(); // the blue sky rectangle covers the starry bg image
 
 this.displayStars();
+
+this.cueLightFlicks(soundList[2]);
+
   //ground
   super.displayGreenGrass(); // display Green Grass
   this.displayCircleAndPath(); // display gray circle and path
@@ -57,26 +60,8 @@ for (let i= 0; i < npcList.length; i++){
   this.displayTrees();
 
   //this.barriers();
-
   //player.barriers(this.name)
-
 }
-
-// // Create player
-// createPlayer(x, y) {
-//   // create new player class
-//   this.player = new Player(x, y);
-// }
-
-// displayPlayer() { // player is displayed
-//   this.player.constrain(height,width); // movement is constrained to the ground
-//   this.player.display(); // display player
-// }
-
-// movePlayer() {
-//   this.player.handleInput(); // handle player input
-//   this.player.move(); // and move player avatar
-// }
 
 // display stars
 displayStars(){
@@ -91,7 +76,7 @@ displayStars(){
               super.addStar(188,458,2,0)
               // //
 
-              //more random stars//
+              //more random stars// 16 of 'em
               super.addStar(10,298,2,1)
               super.addStar(59,224,1.5,0)
                 super.addStar(335,138,1.5,0)
@@ -109,6 +94,26 @@ displayStars(){
                                     super.addStar(65,238,1.5,0)
                                       super.addStar(63,453,2,0)
 
+}
+
+// Setup program functions //
+cueLightFlicks(lightFlickSound) {
+  lightFlickSound.addCue(0.1, this.flickBulbOn);
+  lightFlickSound.addCue(0.2, this.flickBulbOff);
+  lightFlickSound.addCue(0.3, this.flickBulbOn);
+  lightFlickSound.addCue(0.4, this.flickBulbOff);
+  lightFlickSound.addCue(0.75, this.flickBulbOn);
+  lightFlickSound.addCue(0.8, this.flickBulbOff);
+}
+
+flickBulbOn() {
+  // on cue flicks bulb on
+  this.flickerBulb = true;
+}
+
+flickBulbOff() {
+  // on cue flicks bulb off
+  this.flickerBulb = false;
 }
 
 //Dolly's building

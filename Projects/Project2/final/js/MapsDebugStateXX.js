@@ -1,5 +1,5 @@
 class MapsDebugState extends State {
-  constructor(simulationImagesList, mapsArray) {
+  constructor(simulationImagesList, mapsArray, simulationSoundsArray) {
     super();
 
     this.simulationItemList = []; // array to manage items
@@ -22,6 +22,7 @@ class MapsDebugState extends State {
       this.player = new Player(109, 597);
 
     this.textBubbleIsLoaded = false;
+
 
   }
 
@@ -82,7 +83,7 @@ class MapsDebugState extends State {
     text(`press enter to change maps!`, width/ 2, height/2);
 
     this.map = this.currentMap;
-    this.map.display(this.player, this.simulationNPCList);
+    this.map.display(this.player, this.simulationNPCList, simulationSoundsArray);
     this.player.barriers(this.map);
 
     // Check if player is paused (when textBubble appears)
@@ -268,6 +269,7 @@ class MapsDebugState extends State {
 
           }
         }
+
 
 
           display() {}

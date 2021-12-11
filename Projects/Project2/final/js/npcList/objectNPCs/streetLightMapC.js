@@ -1,8 +1,8 @@
 class StreetLightC extends NPC {
   constructor() {
     super();
-    this.x = 200;
-    this.y = 450;
+    this.x = 378;
+    this.y = 551;
     this.r = 255;
     this.g = 100;
     this.b = 100;
@@ -16,6 +16,8 @@ class StreetLightC extends NPC {
     //this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [`The dog walker will get the copper if you shoot the light now`,`Dolly uses slingshot on the lampost`];
+    this.map = `C`;
+
   }
 
   display() {

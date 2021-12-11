@@ -21,23 +21,36 @@ class SimulationState extends State {
   }
 
   createItems() {
-    this.slingshot = new Slingshot(itemImagesList[0]);
-    this.simulationItemList.push(this.slingshot); //
-    //
-    this.ham = new Ham(itemImagesList[1]);
+
+    this.ham = new Ham(itemImagesList[0]);
     this.simulationItemList.push(this.ham); //
     //
-    this.bigBone = new BigBone(itemImagesList[2]);
+    this.bigBone = new BigBone(itemImagesList[1]);
     this.simulationItemList.push(this.bigBone); //
     //
-    this.frog = new Frog(itemImagesList[3]);
+    this.slingshot = new Slingshot(itemImagesList[2]);
+    this.simulationItemList.push(this.slingshot); //
+    //
+    this.frogConstellation = new FrogConstellation(itemImagesList[3]);
+    this.simulationItemList.push(this.frogConstellation); //
+    //
+    this.frog = new Frog(itemImagesList[4]);
     this.simulationItemList.push(this.frog); //
     //
-    this.wrench = new Wrench(itemImagesList[4]);
+    this.wrench = new Wrench(itemImagesList[5]);
     this.simulationItemList.push(this.wrench); //
     //
-    this.injunction = new Injunction(itemImagesList[5]);
+    this.arrowConstellation = new ArrowConstellation(itemImagesList[6]);
+    this.simulationItemList.push(this.arrowConstellation); //
+    //
+    this.injunction = new Injunction(itemImagesList[7]);
     this.simulationItemList.push(this.injunction); //
+    //
+    this.key = new Key(itemImagesList[8]);
+    this.simulationItemList.push(this.key); //
+    //
+    this.eagleConstellation = new EagleConstellation(itemImagesList[9]);
+    this.simulationItemList.push(this.eagleConstellation); //
     //
   }
 

@@ -7,7 +7,7 @@ class Ham extends Item {
     this.width = 30;
     this.height = 20;
     this.image = image;
-    this.isOnMap = false; // always false
+    this.isOnMap = true; // always false
     this.playerColliding = undefined;
   }
 

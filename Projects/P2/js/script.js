@@ -12,12 +12,16 @@ let state;
 
 let itemImagesList = []; // array to manage images in the simulation
 // Item image names
-let slingshotImg
 let hamImg;
 let bigBoneImg;
+let slingshotImg;
+let frogConstellationImg;
 let frogImg;
 let wrenchImg;
+let arrowConstellationImg;
 let injunctionImg;
+let keyImg;
+let eagleConstellationImg;
 
 // NPC images
 let streetlampImg;
@@ -56,7 +60,8 @@ Description of setup
 function setup() {
   createCanvas(600, 600);
 
-  itemImagesList.push(slingshotImg,hamImg,bigBoneImg,frogImg,wrenchImg,injunctionImg)
+  itemImagesList.push(hamImg,bigBoneImg,slingshotImg,frogConstellationImg,frogImg,wrenchImg,
+    arrowConstellationImg,injunctionImg,keyImg,eagleConstellationImg);
   state = new SimulationState(itemImagesList);
 }
 

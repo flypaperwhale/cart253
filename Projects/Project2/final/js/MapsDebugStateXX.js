@@ -157,6 +157,7 @@ else if (this.map.name === `C`){
           this.lightFlickSound.play(); // play the lightFlickSound (which has visual FX cues)
         }
         if (this.songSwitch === 270) { // when songSwitch reaches 270
+          console.log(`turnlight on!`);
           this.turnLightOn(this.currentLampost); // the light is turned on
         }
         if (this.songSwitch === 410) { // when songSwitch reaches 410
@@ -381,6 +382,7 @@ else if (this.map.name === `C`){
     }
 
     turnLightOn(currentLampost) { // turns lightIsOn switch on
+      console.log(`when do you come in here?`)
       this.currentLampost.lightIsOn = true;
     }
 

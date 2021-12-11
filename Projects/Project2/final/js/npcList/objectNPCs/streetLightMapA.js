@@ -3,9 +3,6 @@ class StreetLightA extends NPC {
     super();
     this.x = 258;
     this.y = 560;
-    this.r = 0;
-    this.g = 0;
-    this.b = 255;
     this.size = 10;
     this.name = `LampostA`;
     //this.image = undefined; No they will be ellipses
@@ -20,22 +17,12 @@ class StreetLightA extends NPC {
 
   }
 
-  display() {
-    // displays NPC specific image at the correct coordinates
-    push();
-    fill(this.r,this.g,this.b);
-    noStroke();
-    ellipseMode(CENTER);
-    ellipse(this.x, this.y, this.size);
-    pop();
-  }
 
-  playerCollide(playerX, playerY) {
-    let d = dist(this.x, this.y, playerX, playerY);
-    if (d < this.size / 2) {
-      this.playerColliding = true;
-    } else {
-      this.playerColliding = false;
+    display() {
+      super.display();
     }
+
+  playerCollisionCheck(playerX,playerY,playerSize) {
+    super.playerCollisionCheck(playerX,playerY,playerSize);
   }
 }

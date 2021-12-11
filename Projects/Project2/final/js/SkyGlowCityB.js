@@ -50,7 +50,12 @@ this.displayLightsOn(npcList[5], soundList[3],player); // call method with map B
 
 for (let i= 0; i < npcList.length; i++){
   if (npcList[i].map === this.name){
-    npcList[i].display();
+    if(npcList[i] === npcList[0]||npcList[i] === npcList[5]||npcList[i] === npcList[9]) //0,5,9 the lampostsABC
+    {}
+    else{
+        npcList[i].display();
+    }
+
     npcList[i].playerCollisionCheck(player.x,player.y,player.size);
 
   }
@@ -106,6 +111,7 @@ displayStars(){
 
 displayLightsOn(lampost,sound,player) {
   if (lampost.lightIsOn === true) { // if the lamp is turned on
+    console.log(`is it bro is it?`)
     this.displaySkyGlow(); // large yellow ellipse behind lamp covering starry bg
     lampost.displayLampGlow(); // small yellow ellipse around lamp head
     this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
@@ -121,7 +127,7 @@ lightBuzzing(lampost,sound,player) { // light buzzing sound FX
   if (lampost.lightIsOn === true) { // if lightIsOn is true
     push();
     sound.playMode(`untilDone`); // buzz sound mode loop until done
-    //lampost.buzzVolume = map(lampost.distPlayer, 0, height - lampost.x, 0.1, 0);
+    //lampost.buzzVolume = map(this.playerDistLamp, 0, height - lampost.x, 0.1, 0);
     // buzz volume increases when player is closer to lamp and decreases when further
     sound.setVolume(this.buzzVolume); //index ##
     //this.panning = map(this.player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)

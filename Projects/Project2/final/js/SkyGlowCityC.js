@@ -15,12 +15,14 @@ this.gazeboBaseImg = simulationImagesList[12];
 //lamp coordinates
 this.lampX = 378; // lamp x value
 this.lampY = 501; // lamp y value
+this.buzzVolume =0.025;
+
 }
 
 /**
 Description of draw()
 */
-display(player, npcList) {
+display(player, npcList, soundList) {
   background(0);
 
   //sky
@@ -28,8 +30,11 @@ display(player, npcList) {
 
 this.displayStars();
 
+this.displaySkyGlow(npcList[9]); // call method with map B lamp and light buzz sound
+
   //ground
   super.displayGreenGrass(); // display Green Grass
+
   this.displayCircleAndPath(); // display gray circle and path
 
   this.displayShopBack();
@@ -46,8 +51,14 @@ this.displayStars();
 
   for (let i= 0; i < npcList.length; i++){
     if (npcList[i].map === this.name){
-      npcList[i].display();
-  npcList[i].playerCollisionCheck(player.x,player.y,player.size);
+      if(npcList[i] === npcList[9]) //0,5,9 the lampostsABC
+      {}
+      else{
+          npcList[i].display();
+      }
+
+      npcList[i].playerCollisionCheck(player.x,player.y,player.size);
+
     }
   }
 
@@ -55,6 +66,8 @@ this.displayStars();
 
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
+  this.displayLightsOn(npcList[9], soundList[3],player); // call method with map B lamp and light buzz sound
+
   this.displayLamppost(); // displays lamppost in front of player
   this.displayGazebo();
 
@@ -110,6 +123,40 @@ displayStars(){
 //   player.move(); // and move player avatar
 // }
 
+displayLightsOn(lampost,sound,player) {
+  if (lampost.lightIsOn === true) { // if the lamp is turned on
+    console.log(`is it bro is it?`)
+    lampost.displayLampGlow(); // small yellow ellipse around lamp head
+    this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
+  }
+}
+
+displaySkyGlow(lampost){ // large yellow ellipse behind lamp covering starry bg
+  if (lampost.lightIsOn === true) {
+    console.log(`whathow?`)
+    push();
+    noStroke();
+    fill(225, 225, 100, 200); // light yellow and slightly transparent
+    ellipseMode(CENTER);
+    ellipse(width / 2, height / 2 - 70, 605, 605);
+    pop();
+}
+}
+
+lightBuzzing(lampost,sound,player) { // light buzzing sound FX
+  if (lampost.lightIsOn === true) { // if lightIsOn is true
+    push();
+    sound.playMode(`untilDone`); // buzz sound mode loop until done
+    //lampost.buzzVolume = map(this.playerDistLamp, 0, height - lampost.x, 0.1, 0);
+    // buzz volume increases when player is closer to lamp and decreases when further
+    sound.setVolume(this.buzzVolume); //index ##
+    //this.panning = map(this.player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)
+  //  sound.pan(this.panning);
+    sound.rate(1.2); // sound a little bit higher pitched
+    sound.play(); // play the sound
+    pop();
+  }
+}
 
 //Background building
 displayShopBack() {

@@ -16,7 +16,7 @@ this.lampX = 225; // lamp x value
 this.lampY = 510; // lamp y value
 //this.flickerBulb = false;
 
-this.buzzVolume =0.05;
+this.buzzVolume =0.025;
 }
 
 /**
@@ -32,12 +32,14 @@ this.displayStars();
 
 //npcList[5].flickBulb(this);
 
-this.displayLightsOn(npcList[5], soundList[3],player); // call method with map B lamp and light buzz sound
+this.displaySkyGlow(npcList[5]);
 
 //this.flickBulb(npcList[5]);
 
   //ground
   super.displayGreenGrass(); // display Green Grass
+
+
   this.displayCircleAndPath(); // display gray circle and path
 
   this.displayDollysBuilding();
@@ -54,7 +56,7 @@ this.displayLightsOn(npcList[5], soundList[3],player); // call method with map B
 
 for (let i= 0; i < npcList.length; i++){
   if (npcList[i].map === this.name){
-    if(npcList[i] === npcList[0]||npcList[i] === npcList[5]||npcList[i] === npcList[9]) //0,5,9 the lampostsABC
+    if(npcList[i] === npcList[5]) //0,5,9 the lampostsABC
     {}
     else{
         npcList[i].display();
@@ -67,6 +69,8 @@ for (let i= 0; i < npcList.length; i++){
 
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); // displays player and also constrains them to move only on the ground
+  this.displayLightsOn(npcList[5], soundList[3],player); // call method with map B lamp and light buzz sound
+
   this.displayLamppost(); // displays lamppost in front of player
   this.displayTrees();
 
@@ -118,10 +122,21 @@ displayStars(){
 displayLightsOn(lampost,sound,player) {
   if (lampost.lightIsOn === true) { // if the lamp is turned on
     console.log(`is it bro is it?`)
-    this.displaySkyGlow(); // large yellow ellipse behind lamp covering starry bg
     lampost.displayLampGlow(); // small yellow ellipse around lamp head
     this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
   }
+}
+
+displaySkyGlow(lampost){ // large yellow ellipse behind lamp covering starry bg
+  if (lampost.lightIsOn === true) {
+    console.log(`whathow?`)
+    push();
+    noStroke();
+    fill(225, 225, 100, 200); // light yellow and slightly transparent
+    ellipseMode(CENTER);
+    ellipse(width / 2, height / 2 - 70, 605, 605);
+    pop();
+}
 }
 
 // this.flickBulb(this.currentLampost);
@@ -145,14 +160,14 @@ lightBuzzing(lampost,sound,player) { // light buzzing sound FX
   }
 }
 
-displaySkyGlow() { // displays circle of light over the nightsky
-  push();
-  noStroke();
-  fill(225, 225, 100, 200); // light yellow and slightly transparent
-  ellipseMode(CENTER);
-  ellipse(width / 2, height / 2 - 70, 605, 605);
-  pop();
-}
+// displaySkyGlow() { // displays circle of light over the nightsky
+//   push();
+//   noStroke();
+//   fill(225, 225, 100, 200); // light yellow and slightly transparent
+//   ellipseMode(CENTER);
+//   ellipse(width / 2, height / 2 - 70, 605, 605);
+//   pop();
+// }
 
 //Dolly's building
 displayDollysBuilding() {

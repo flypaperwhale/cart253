@@ -14,26 +14,40 @@ class StreetLightC extends NPC {
     this.tradeSucceeded = false;
     this.texts = [`The dog walker will get the copper if you shoot the light now`,`Dolly uses slingshot on the lampost`];
     this.map = `C`;
+    this.flickerBulb = false; // switch true/false to activate lamp bulb flicker animation
+    this.lightIsOn = true; // switch true/false that draws light a.-v. FX when true
+    this.buzzVolume; // lamp buzz sound volume, to be mapped on playerDistLamp values
+    // this.distPlayer = undefined;
+    this.canBurst = false; // when true, player can burst the lamp's bulb
 
   }
 
-  display() {
-    // displays NPC specific image at the correct coordinates
-    // push();
-    // fill(this.r,this.g,this.b);
-    // noStroke();
-    // ellipseMode(CENTER);
-    // ellipse(this.x, this.y, this.size);
-    // pop();
-  }
 
-  playerCollide(playerX, playerY) {
-    let d = dist(this.x, this.y, playerX, playerY);
-    if (d < this.size / 2) {
+    displayLampGlow() { // displays circle of light around lamphead
+        push();
+        noStroke();
+        fill(200, 200, 0, 200); // light yellow and slightly transparent
+        ellipseMode(CENTER);
+        ellipse(this.x, this.y - 100, 100, 100);
+        pop();
+      }
       
-      this.playerColliding = true;
-    } else {
-      this.playerColliding = false;
+    display() {
+      super.display();
     }
+
+  playerCollisionCheck(playerX,playerY,playerSize) {
+    super.playerCollisionCheck(playerX,playerY,playerSize);
   }
+
+  flickBulb() { // happens when cued during the lightFlickSound in intro animation
+console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
+if (this.flickerBulb === true) { // if flickerBulb is true show lamp glow
+console.log(`but not flashing`)
+this.displayLampGlow(); // small yellow ellipse around lamp head
+  //   }
+
+}
+}
+
 }

@@ -21,9 +21,15 @@ class MapsDebugState extends State {
     this.currentMap = mapsArray[1];
       this.player = new Player(109, 597);
 
+      this.songSwitch = 0;
+
     this.textBubbleIsLoaded = false;
 
+    this.cueLightFlicks(this.simulationNPCList[5]); // add light cues to the lamp on map B
 
+    this.setAnimationState(`SunsetState`);//##
+
+console.log(`yay lightflicks!`)
   }
 
   createItems() {
@@ -75,6 +81,16 @@ class MapsDebugState extends State {
     this.simulationNPCList.push(this.jade); // !!!
   }
 
+  cueLightFlicks() { //simulationSoundsArray[2],npcList[5]
+    console.log(`lightflix?`);
+    simulationSoundsArray[2].addCue(0.1, this.simulationNPCList[5].flickBulbOn);
+    simulationSoundsArray[2].addCue(0.2, this.simulationNPCList[5].flickBulbOff);
+    simulationSoundsArray[2].addCue(0.3, this.simulationNPCList[5].flickBulbOn);
+    simulationSoundsArray[2].addCue(0.4, this.simulationNPCList[5].flickBulbOff);
+    simulationSoundsArray[2].addCue(0.75, this.simulationNPCList[5].flickBulbOn);
+    simulationSoundsArray[2].addCue(0.8, this.simulationNPCList[5].flickBulbOff);
+  }
+
   update() { // updates every frame, it serves a drawing function
     background(0);
     fill(255);
@@ -85,6 +101,88 @@ class MapsDebugState extends State {
     this.map = this.currentMap;
     this.map.display(this.player, this.simulationNPCList, simulationSoundsArray);
     this.player.barriers(this.map);
+
+    // if (animationState === `title`) { // if state is "title"
+    //   setState(`sunset`); // state becomes "sunset"
+    // }
+
+    //sunset // // introduction animation, blue sky becomes dark and starry...
+    if (animationState === `SunsetState`){ // if the state equals "sunset"
+      this.songSwitch++; // the songSwitch is increased
+      this.songSwitch = constrain(this.songSwitch, 0, 2); // the songSwitch is constrained between 0-2
+      playSunsetSong(); // the sunset theme is played
+      // sunset animation with skyAlpha and dayTimer
+      skyAlpha = map(dayTimer, 310, 0, 255, 0); // map skyAlpha (255,0) goes down as dayTimer (310,0) goes down
+      dayTimer--; // dayTimer goes down
+      dayTimer = constrain(dayTimer, 0, 310); // constrain dayTimer
+      if (dayTimer === 0) { // once the dayTimer reaches 0...
+        constellationWinkSound.play(); // a chime sound to signify the twinkling stars
+        dayTimer = 1; // dayTimer is reset to 1
+        resetSongSwitch(); // songSwitch is reset to 0
+        setAnimationState(`lightsUp`); // ... and then, no time to admire the stars, the lights go on!
+      }
+    }
+
+    setAnimationState(animationState) {
+      this.animationState = animationState;
+    }
+
+    playSunsetSong() { // plays sunset theme
+      if (songSwitch === 1) { // if songSwitch is 1
+        this.sunsetStarsIntro.play(0, 1, 0.2); //## eh?
+      }
+    }
+
+    resetSongSwitch() { // resets songSwitch to 0
+      this.songSwitch = 0;
+    }
+
+    lightsUpState() { // animation when the light turns on, then simulation begins
+      // and player can play
+      if (this.animationState === `lightsUp`) { // if state is "lightsUp"
+        checkPlayerNPCCollision(); // checks if player is touching npc or not
+        calculatePlayerLampDist(); // calculate the distance between player and lamp every frame
+        songSwitch++; // add 1 to songSwitch
+        songSwitch = constrain(songSwitch, 0, 410); // constrain songSwitch to 0-410
+        if (songSwitch === 200) { // when songSwitch reaches 200
+          lightFlickSound.play(); // play the lightFlickSound (which has visual FX cues)
+        }
+        if (songSwitch === 270) { // when songSwitch reaches 270
+          turnLightOn(); // the light is turned on
+        }
+        if (songSwitch === 410) { // when songSwitch reaches 410
+          playBGMusic(); // the backgroung music starts playing
+          player.isPaused = false; // and the player can start moving the avatar
+        }
+      }
+    }
+
+
+
+    turnLightOn() { // turns lightIsOn switch on
+      lightIsOn = true;
+    }
+
+    lightsOutState() { // simulation when light bulb explodes. player can play. no ending
+      if (animationState === `lightsOut`) { // if state is "lightsOut"
+        playBGMusic(); // background music keeps playing (from "untilDone" mode)
+        lightBuzzNoise.stop(); // the buzzing noise is stopped
+        songSwitch++; // +1 to the songSwitch
+        songSwitch = constrain(songSwitch, 0, 410); // the songSwitch is constrained from 0 to 410
+        if (songSwitch === 2) { // when the song switch reaches 2
+          // (songSwitch is turned to zero when npc is interacted with)
+          bulbBursting(); // bulb bursting sound
+        }
+        lightIsOn = false; // lightIsOn switch is turned off
+      }
+    }
+
+    bulbBursting() { // handles bulb bursting audio FX
+      push();
+      bulbBurstSound.setVolume(1.7); // bulb bursting soun is loud
+      bulbBurstSound.play(); // play bulb bursting sound
+      pop();
+    }
 
     // Check if player is paused (when textBubble appears)
         if (this.player.isPaused === true) {
@@ -268,8 +366,26 @@ class MapsDebugState extends State {
             }
 
           }
+
         }
 
+        cueLightFlicks(lightFlickSound, currentLamp) {
+          lightFlickSound.addCue(0.1, currentLamp.flickBulbOn);
+          lightFlickSound.addCue(0.2, currentLamp.flickBulbOff);
+          lightFlickSound.addCue(0.3, currentLamp.flickBulbOn);
+          lightFlickSound.addCue(0.4, currentLamp.flickBulbOff);
+          lightFlickSound.addCue(0.75, currentLamp.flickBulbOn);
+          lightFlickSound.addCue(0.8, currentLamp.flickBulbOff);
+        }
+
+        playBGMusic() { // plays bg music
+          push();
+          bgmusic2.playMode(`untilDone`); // bg music mode loops forever
+          bgmusic2.setVolume(0.88); // not too loud
+          bgmusic2.rate(0.77); // not too quick
+          bgmusic2.play(); // play bg music
+          pop();
+        }
 
 
           display() {}
@@ -287,5 +403,29 @@ class MapsDebugState extends State {
             this.player.barriers(this.currentMap);
             console.log(`new map is ${this.currentMap.lampX}`)
           }
+
+          function keyPressed() { // when key is pressed
+    if (keyCode === 32) { // **** SPACEBAR ****
+
+
+
+      if (animationState === `lightsUp`) {
+        // if state is "lightsUp"
+        // and if playerCollidedNPC and the npc sound switch is still true (which it should initially)
+        // if (player.playerCollidedNPC === true && npcSoundSwitch === true) { // player interacts with npc
+        //   playNPCSound(); // play musical notes
+        //   canBurst = true; // turn bulb canBurst switch to true
+        //   npcSoundSwitch = false; // so interaction only happens once, npcSoundSwitch is turned off
+        // }
+        if (canBurst === true) { // when bulb can burst
+          keyPressCounter++; // add 1 to keyPressCounter
+          if (keyPressCounter === 2) {
+            // first press after the npc interaction turns out light
+            resetSongSwitch();
+            setAnimationState(`lightsOut`); // state is turned to "lightsOut"
+          }
         }
+      }
+    }
+  }}
         }

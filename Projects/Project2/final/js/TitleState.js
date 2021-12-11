@@ -1,6 +1,7 @@
 class TitleState extends State {
-  constructor(simulationImagesList, mapsArray){
+  constructor(simulationImagesList, mapsArray, simulationSoundsArray){
     super();
+    this.name = `Title State`;
   }
 
   update(){
@@ -23,7 +24,7 @@ class TitleState extends State {
   }
 
   mouseClicked(){
-    state = new MapsDebugState(simulationImagesList, mapsArray);
+    state = new SunsetState(simulationImagesList, mapsArray, simulationSoundsArray);
   }
 
 }

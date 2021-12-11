@@ -1,7 +1,7 @@
 class MapsDebugState extends State {
   constructor(simulationImagesList, mapsArray) {
     super();
-
+    this.name = `Simulation State`;
     // this.npcArray = new NPCList(); //?! is this the equivalent of inputing an array full //
     // of NPC class object? will I be able to call upon the NPCs in this array
     // to display them and have player interact with them?

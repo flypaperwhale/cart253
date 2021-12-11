@@ -28,8 +28,8 @@ display(player, npcList, soundList){
 
 this.displayStars();
 
-this.cueLightFlicks(soundList[2]);
-
+npcList[5].flickBulb();
+this.displayLightsOn();
   //ground
   super.displayGreenGrass(); // display Green Grass
   this.displayCircleAndPath(); // display gray circle and path
@@ -61,6 +61,9 @@ for (let i= 0; i < npcList.length; i++){
 
   //this.barriers();
   //player.barriers(this.name)
+
+  this.setAnimationState(animationStateName); //##!!
+
 }
 
 // display stars
@@ -97,23 +100,103 @@ displayStars(){
 }
 
 // Setup program functions //
-cueLightFlicks(lightFlickSound) {
-  lightFlickSound.addCue(0.1, this.flickBulbOn);
-  lightFlickSound.addCue(0.2, this.flickBulbOff);
-  lightFlickSound.addCue(0.3, this.flickBulbOn);
-  lightFlickSound.addCue(0.4, this.flickBulbOff);
-  lightFlickSound.addCue(0.75, this.flickBulbOn);
-  lightFlickSound.addCue(0.8, this.flickBulbOff);
+
+displayLightsOn(lamp) {
+  if (this.lightIsOn === true) { // if the lamp is turned on
+    this.displaySkyGlow(); // large yellow ellipse behind lamp covering starry bg
+    lamp.displayLampGlow(); // small yellow ellipse around lamp head
+    super.lightBuzzing(); // light buzzing sound FX grows weaker the further away player is from lamp
+  }
 }
 
-flickBulbOn() {
-  // on cue flicks bulb on
-  this.flickerBulb = true;
+displaySkyGlow() { // displays circle of light over the nightsky
+  push();
+  noStroke();
+  fill(225, 225, 100, 200); // light yellow and slightly transparent
+  ellipseMode(CENTER);
+  ellipse(width / 2, height / 2 - 70, 605, 605);
+  pop();
 }
 
-flickBulbOff() {
-  // on cue flicks bulb off
-  this.flickerBulb = false;
+
+
+sunsetState() { // introduction animation, blue sky becomes dark and starry...
+  if (state === `sunset`) { // if the state equals "sunset"
+    songSwitch++; // the songSwitch is increased
+    songSwitch = constrain(songSwitch, 0, 2); // the songSwitch is constrained between 0-2
+    playSunsetSong(); // the sunset theme is played
+    // sunset animation with skyAlpha and dayTimer
+    skyAlpha = map(dayTimer, 310, 0, 255, 0); // map skyAlpha (255,0) goes down as dayTimer (310,0) goes down
+    dayTimer--; // dayTimer goes down
+    dayTimer = constrain(dayTimer, 0, 310); // constrain dayTimer
+    if (dayTimer === 0) { // once the dayTimer reaches 0...
+      constellationWinkSound.play(); // a chime sound to signify the twinkling stars
+      dayTimer = 1; // dayTimer is reset to 1
+      resetSongSwitch(); // songSwitch is reset to 0
+      setState(`lightsUp`); // ... and then, no time to admire the stars, the lights go on!
+    }
+  }
+}
+
+
+
+setAnimationState(animationState) {
+  this.animationState = animationState;
+}
+
+playSunsetSong() { // plays sunset theme
+  if (songSwitch === 1) { // if songSwitch is 1
+    this.sunsetStarsIntro.play(0, 1, 0.2); //## eh?
+  }
+}
+
+resetSongSwitch() { // resets songSwitch to 0
+  this.songSwitch = 0;
+}
+
+function lightsUpState() { // animation when the light turns on, then simulation begins
+  // and player can play
+  if (this.animationState === `lightsUp`) { // if state is "lightsUp"
+    checkPlayerNPCCollision(); // checks if player is touching npc or not
+    calculatePlayerLampDist(); // calculate the distance between player and lamp every frame
+    songSwitch++; // add 1 to songSwitch
+    songSwitch = constrain(songSwitch, 0, 410); // constrain songSwitch to 0-410
+    if (songSwitch === 200) { // when songSwitch reaches 200
+      lightFlickSound.play(); // play the lightFlickSound (which has visual FX cues)
+    }
+    if (songSwitch === 270) { // when songSwitch reaches 270
+      turnLightOn(); // the light is turned on
+    }
+    if (songSwitch === 410) { // when songSwitch reaches 410
+      playBGMusic(); // the backgroung music starts playing
+      player.isPaused = false; // and the player can start moving the avatar
+    }
+  }
+}
+
+turnLightOn() { // turns lightIsOn switch on
+  lightIsOn = true;
+}
+
+lightsOutState() { // simulation when light bulb explodes. player can play. no ending
+  if (animationState === `lightsOut`) { // if state is "lightsOut"
+    playBGMusic(); // background music keeps playing (from "untilDone" mode)
+    lightBuzzNoise.stop(); // the buzzing noise is stopped
+    songSwitch++; // +1 to the songSwitch
+    songSwitch = constrain(songSwitch, 0, 410); // the songSwitch is constrained from 0 to 410
+    if (songSwitch === 2) { // when the song switch reaches 2
+      // (songSwitch is turned to zero when npc is interacted with)
+      bulbBursting(); // bulb bursting sound
+    }
+    lightIsOn = false; // lightIsOn switch is turned off
+  }
+}
+
+bulbBursting() { // handles bulb bursting audio FX
+  push();
+  bulbBurstSound.setVolume(1.7); // bulb bursting soun is loud
+  bulbBurstSound.play(); // play bulb bursting sound
+  pop();
 }
 
 //Dolly's building

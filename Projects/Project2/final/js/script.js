@@ -91,6 +91,7 @@ Description of setup
 */
 function setup() {
   createCanvas(500, 1000);
+
   simulationImagesList.push( // simulationImagesList Array
     hamImg, // [0]
     bigBoneImg, // [1]
@@ -121,10 +122,8 @@ function setup() {
       bgmusic1); // [5]
 
   createMapsAndStore(); // inputs map files into the program to be stored in simulationMapsArray
-
   userStartAudio();
-
-  state = new TitleState(simulationImagesList, simulationMapsArray); // initial state is TitleState
+  state = new TitleState(simulationImagesList, simulationMapsArray, simulationMapsArray); // initial state is TitleState
   // other states are SimulationState and EndingState
 }
 
@@ -132,22 +131,18 @@ function createMapsAndStore(){
   for (let i = 0; i < mapNo; i++){
     console.log(`map no isht ${i}`);
     if (i === 0){
-      map = new SkyGlowCityA(simulationImagesList); // Map A, full left
+      map = new SkyGlowCityA(simulationMapsArray); // Map A, full left
     }
     if (i === 1){
-      map = new SkyGlowCityB(simulationImagesList); // Map B, middle
+      map = new SkyGlowCityB(simulationMapsArray); // Map B, middle
     }
     if (i === 2){
-      map = new SkyGlowCityC(simulationImagesList); // Map C, full right
+      map = new SkyGlowCityC(simulationMapsArray); // Map C, full right
     }
     simulationMapsArray.push(map);
   }
-
 }
 
-/**
-Description of draw()
-*/
 function draw() {
   state.update();
 }

@@ -22,62 +22,82 @@ class SimulationState extends State {
     this.currentMap = mapsArray[1]; // current map updated according to where the player goes
     // mapsArray[1] = map B, where the player begins
     this.player = new Player(109, 597);
+    this.textBubbleIsLoaded = false; // checks if a new text has been fed to a new textBubble
 
 // animation bits and bobbles
-    this.textBubbleIsLoaded = false; // checks if a new text has been fed to a new textBubble
     this.animationState = undefined; // states used inside the Simulation to manage animations
     this.songSwitch = 0; // switch used for the animations
     this.cueLightFlicks(this.simulationNPCList[5]); // add light cues to the lamp on map B
     this.setAnimationState(`SunsetState`); //##
+
+// Trade sequence bits and bobbles
+this.eventCounter1 = 0;
+  this.eventSwitch1 = 0; // event for ham aquisition
+  this.eventSwitch2 = 0; // event for slingshot aquisition
+  this.eventSwitch3 = 0; //
   }
 
-  createItems() {
-    this.slingshot = new Slingshot(simulationImagesList[0]);
-    this.simulationItemList.push(this.slingshot); //
-    //
-    this.ham = new Ham(simulationImagesList[1]);
-    this.simulationItemList.push(this.ham); //
-    //
-    this.bigBone = new BigBone(simulationImagesList[2]);
-    this.simulationItemList.push(this.bigBone); //
-    //
-    this.frog = new Frog(simulationImagesList[3]);
-    this.simulationItemList.push(this.frog); //
-    //
-    this.wrench = new Wrench(simulationImagesList[4]);
-    this.simulationItemList.push(this.wrench); //
-    //
-    this.injunction = new Injunction(simulationImagesList[5]);
-    this.simulationItemList.push(this.injunction); //
-    //
+  createItems() { // create individual copies of each item class
+    // to be stored in the simulationItemList
+  this.ham = new Ham(itemImagesList[0]);
+  this.simulationItemList.push(this.ham); //
+  //
+  this.bigBone = new BigBone(itemImagesList[1]);
+  this.simulationItemList.push(this.bigBone); //
+  //
+  this.slingshot = new Slingshot(itemImagesList[2]);
+  this.simulationItemList.push(this.slingshot); //
+  //
+  this.frogConstellation = new FrogConstellation(itemImagesList[3]);
+  this.simulationItemList.push(this.frogConstellation); //
+  //
+  this.frog = new Frog(itemImagesList[4]);
+  this.simulationItemList.push(this.frog); //
+  //
+  this.wrench = new Wrench(itemImagesList[5]);
+  this.simulationItemList.push(this.wrench); //
+  //
+  this.arrowConstellation = new ArrowConstellation(itemImagesList[6]);
+  this.simulationItemList.push(this.arrowConstellation); //
+  //
+  this.injunction = new Injunction(itemImagesList[7]);
+  this.simulationItemList.push(this.injunction); //
+  //
+  this.key = new Key(itemImagesList[8]);
+  this.simulationItemList.push(this.key); //
+  //
+  this.eagleConstellation = new EagleConstellation(itemImagesList[9]);
+  this.simulationItemList.push(this.eagleConstellation); //
+  //
   }
 
-  createNPCs() {
+  createNPCs() { // create individual copies of each NPC class
+    // to be stored in simulationNPCList
     // map A NPCs
-    this.streetLightA = new StreetLightA(); // mapA
-    this.simulationNPCList.push(this.streetLightA); // √
+    this.streetLightA = new StreetLightA();
+    this.simulationNPCList.push(this.streetLightA); // mapA
     this.pimlico = new Pimlico(); // mapA
-    this.simulationNPCList.push(this.pimlico); // √
+    this.simulationNPCList.push(this.pimlico);
     this.lamotte = new Lamotte(); // mapA
-    this.simulationNPCList.push(this.lamotte); // !!!
+    this.simulationNPCList.push(this.lamotte);
     // map B NPCs
     this.janine = new Janine(); // mapB
-    this.simulationNPCList.push(this.janine); // √
+    this.simulationNPCList.push(this.janine);
     this.marv = new Marv(); // mapB
-    this.simulationNPCList.push(this.marv); // √
+    this.simulationNPCList.push(this.marv);
     this.streetLightB = new StreetLightB(); // mapB
-    this.simulationNPCList.push(this.streetLightB); // √
+    this.simulationNPCList.push(this.streetLightB);
     // map C NPCs
     this.billee = new Billee(); // mapC
-    this.simulationNPCList.push(this.billee); // !!!
+    this.simulationNPCList.push(this.billee);
     this.sheperd = new Sheperd(); // mapC
-    this.simulationNPCList.push(this.sheperd); // !!!
+    this.simulationNPCList.push(this.sheperd);
     this.garbage = new Garbage(); // mapC
-    this.simulationNPCList.push(this.garbage); // √
+    this.simulationNPCList.push(this.garbage);
     this.streetLightC = new StreetLightC(); // mapC
-    this.simulationNPCList.push(this.streetLightC); // √
+    this.simulationNPCList.push(this.streetLightC);
     this.jade = new Jade(); // mapC
-    this.simulationNPCList.push(this.jade); // !!!
+    this.simulationNPCList.push(this.jade); 
   }
 
   cueLightFlicks() {

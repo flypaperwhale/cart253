@@ -9,13 +9,11 @@ class SimulationState extends State {
 
     this.simulationNPCList = [];
     this.createNPCs(); // creating NPCs and storing them in NPCList array
-
     this.eventCounter1 = 0;
-    this.eventSwitch1 = 0; // event for ham aquisition
-    this.eventSwitch2 = 0; // event for slingshot aquisition
-    this.eventSwitch3 = 0; //
-    this.textBubble = undefined;
-
+      this.eventSwitch1 = 0; // event for ham aquisition
+      this.eventSwitch2 = 0; // event for slingshot aquisition
+      this.eventSwitch3 = 0; //
+      
     this.textBubbleIsLoaded = false;
     //this.pimlicoSwitch = 0;
   }

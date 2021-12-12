@@ -47,7 +47,7 @@ displayItem(item){
 
 addWindow(x,y,w,h,onOff){
   push();
-  noStroke();
+  //noStroke();
 if (onOff === 1){ // Light is on
   fill(225,180,100);
 }

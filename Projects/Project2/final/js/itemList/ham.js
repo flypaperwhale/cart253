@@ -2,8 +2,8 @@ class Ham extends Item {
   constructor(image){
     super();
     this.name = `Ham`;
-    this.x = 400;
-    this.y = 200;
+    this.x = 286;
+    this.y = 740;
     this.width = 30;
     this.height = 20;
     this.image = image;

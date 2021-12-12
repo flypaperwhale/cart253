@@ -58,13 +58,15 @@ this.displayWindows();
     }
   }
 
-
 // if (npcList)
 //   npcList[1].display(); // display mayor
 //   npcList[2].display(); // display street person
 //   //movePlayer(); // handle user input and move player avatar
 
   this.displayLampFoot(); // displayed before the player for correct layer effect
+
+super.displayItem();
+
   player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
   this.displayLightsOn(npcList[0], soundList[3],player); // call method with map B lamp and light buzz sound
 

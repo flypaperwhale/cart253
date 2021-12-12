@@ -73,7 +73,7 @@ for (let i= 0; i < npcList.length; i++){
 
 
 
-// display stars
+//display stars // THE GOOD ONE !!
 displayStars(){
   // ARROW CONSTELLATION
   super.addStar(230,300,2,1)
@@ -104,6 +104,9 @@ displayStars(){
                                     super.addStar(65,238,1.5,0)
                                       super.addStar(63,453,2,0)
 }
+
+
+
 
 // Setup program functions //
 

@@ -82,38 +82,36 @@ this.displaySkyGlow(npcList[9]); // call method with map B lamp and light buzz s
 
 }
 
-// display stars
 displayStars(){
-  // ARROW CONSTELLATION
-  super.addStar(230,300,2,1)
-  super.addStar(180,326,1.5,0)
-    super.addStar(255,342,1.5,0)
-      super.addStar(210,350,2,0)
-        super.addStar(190,395,1.25,1)
-          super.addStar(155,420,1.5,0)
-            super.addStar(185,440,1.5,0)
-              super.addStar(188,458,2,0)
+  // Frog CONSTELLATION
+  super.addStar(455,255,2,1)
+  super.addStar(425,255,1.5,0)
+
+    super.addStar(385,290,1.5,0)
+      super.addStar(384,345,2,0)
+
+        super.addStar(317,249,1.25,1)
+          super.addStar(313,300,1.5,0)
+
+            super.addStar(255,200,1.5,0)
+              super.addStar(185,240,2,0)
+              super.addStar(217,305,2,0)
+
               // //
 
               //more random stars// 16 of 'em
-              super.addStar(10,298,2,1)
-              super.addStar(59,224,1.5,0)
                 super.addStar(335,138,1.5,0)
-                  super.addStar(90,78,2,0)
-                    super.addStar(412,393,1.25,1)
-                      super.addStar(35,418,1.5,0)
-                        super.addStar(165,438,1.5,0)
-                          super.addStar(63,423,2,0)
-                          super.addStar(10,298,2,1)
-                          super.addStar(59,124,1.5,0)
-                            super.addStar(435,458,1.5,0)
+                  super.addStar(450,478,2,0)
+                    super.addStar(112,393,1.25,1)
+                        super.addStar(165,378,1.5,0)
+                          super.addStar(20,403,1,0)
+                            super.addStar(335,458,1.5,0)
                               super.addStar(450,358,1.5,3)
-                                super.addStar(380,190,1.25,1)
-                                  super.addStar(25,218,1.5,0)
-                                    super.addStar(65,238,1.5,0)
-                                      super.addStar(63,453,2,0)
-
+                                super.addStar(200,390,1.25,1)
+                                  super.addStar(222,308,1,0)
+                                    super.addStar(65,288,1,0)
 }
+
 
 // displayLightsOn(lampost,sound,player) {
 //   if (lampost.lightIsOn === true) { // if the lamp is turned on

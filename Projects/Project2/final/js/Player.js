@@ -11,7 +11,7 @@ class Player {
     this.isCollided = false; // switch true when player is in collision with npc or item
 
     this.alive = true; // always alive
-    this.playerCollidedNPC = false; // switch true/false if player is in collision with npc or not
+    //this.playerCollidedNPC = false; // switch true/false if player is in collision with npc or not
     this.isPaused = false; // player pause state switch
     this.wallCollision = false;
     this.thresholdCollision = false;
@@ -74,7 +74,45 @@ class Player {
     console.log(this.inventory);
   }
 
+  checkPlayerInventory(npcDesiredItem) {
+    // looks through player inventory array. Is called when interacting with NPCs
+    for (let i = 0; i < this.inventory.length; i++) {
+      this.checkedItem = this.inventory[i];
+      // is checked item desired item?
+    }
+  }
 
+  checkTrade(npc, npcDesiredItem, npcHoldingItem) {
+  // verifies what item npc desires
+  // Go through Player inventory array
+  // if item is in Player inv. array, item is removed from array and
+  // Holding Item is pushed into the inventory array
+  for (let i = 0; i < this.inventory.length; i++) {
+    //console.log(`current item checked in inventory ${this.inventory[i].name}
+      //and npcdesires ${npcDesiredItem}`);
+    this.checkedItem = this.inventory[i];
+    //console.log(`repeat item checked in inventory ${this.checkedItem.name}`);
+
+//console.log(`thischeckeditemname is and npcdesire ${this.checkedItem.name} ${npcDesiredItem}`);
+if (this.checkedItem.name === undefined){
+// do nothing
+}
+    else if (this.checkedItem.name === npcDesiredItem) { // && undefined !== undefined I put undefineds so Pimlico would not come in here
+
+      //this.methodSwitch=1;
+      //if (this.methodSwtich === 1){
+        console.log(`we're not coming here anymore`)
+
+      //splice removeFromPlayerInventory(this.inventory[i])
+      this.tradeHappens = true;
+      this.itemToAddToInventory = npcHoldingItem;
+      console.log(`${npcHoldingItem}`);
+
+      //this.methodSwitch =0;
+    //}
+  }
+}
+}
 
   barriers(map) {
     if (map.name === `A`) {
@@ -405,53 +443,12 @@ class Player {
         this.x = this.x - 10;
         this.speed = 0;
 
-
-
     } else {
     //  this.speed = 3;
       this.wallCollision = false;
     }
   }
 }
-
-blockMapAStairs(){
-    // block out stairs in map a
-    if (
-      this.x > 371 /*rectX*/ - 10 /*rectW*/ &&
-      this.x < 371 + 10 &&
-      this.y > 630 /*rectY*/ - 80 /*rectH*/ &&
-      this.y < 630 + 80
-    ) {
-      this.wallCollision = true;
-      this.vx = this.vx * -1;
-      this.vy = this.vy * -1;
-
-      }
-      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-        this.x = this.x + 15;
-        this.speed = 0;
-
-      }
-      if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
-        this.y = this.y + 15;
-        this.speed = 0;
-
-      }
-      if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
-        this.y = this.y - 15;
-        this.speed = 0;
-
-
-    } if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-        this.x = this.x - 15;
-        this.speed = 0;
-
-      //  this.speed = 0;
-    }else {
-    //  this.speed = 3;
-      this.wallCollision = false;
-    }
-  }
 
   // END OF MAP A WALLS //
 

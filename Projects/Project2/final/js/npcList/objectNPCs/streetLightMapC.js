@@ -6,8 +6,8 @@ class StreetLightC extends NPC {
     this.size = 10;
     this.name = `LampostC`;
     //this.image = undefined; No they will be ellipses
-    this.itemHeld = undefined;
-    this.desiredItem = undefined;
+    this.itemHeld = 3;
+    this.desiredItem = `Slingshot`;
     this.playerColliding = false;
     this.isTriggered = false;
     //this.textNo = 0;

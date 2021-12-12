@@ -1,5 +1,6 @@
 class SimulationState extends State {
-  constructor(simulationImagesList, simulationMapsArray, simulationSoundsArray) {
+  constructor(simulationImagesList, simulationMapsArray, simulationSoundsArray,
+    flickerBulb) {
     super();
 
 this.name = `SimulationState`;
@@ -19,7 +20,7 @@ this.name = `SimulationState`;
     this.createItems(); // create Items and store them in the itemList array
 // Array to hold all the simulation NPCs
     this.simulationNPCList = [];
-    this.createNPCs(); // creating NPCs and storing them in NPCList array
+    this.createNPCs(flickerBulb); // creating NPCs and storing them in NPCList array
 
     this.maps = [this.simulationMapsArray[0], this.simulationMapsArray[1],this.simulationMapsArray[2]]; // load game maps into the state
     // to be called upon and displayed
@@ -77,7 +78,7 @@ this.eventCounter1 = 0;
   this.simulationItemList.push(this.placeHolder); //
   }
 
-  createNPCs() { // create individual copies of each NPC class
+  createNPCs(flickerBulb) { // create individual copies of each NPC class
     // to be stored in simulationNPCList
     // map A NPCs
     this.streetLightA = new StreetLightA();
@@ -91,7 +92,7 @@ this.eventCounter1 = 0;
     this.simulationNPCList.push(this.janine);
     this.marv = new Marv(); // mapB
     this.simulationNPCList.push(this.marv);
-    this.streetLightB = new StreetLightB(); // mapB
+    this.streetLightB = new StreetLightB(flickerBulb); // mapB
     this.simulationNPCList.push(this.streetLightB);
     // map C NPCs
     this.billee = new Billee(); // mapC

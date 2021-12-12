@@ -139,9 +139,8 @@ function setup() {
   cueLightFlicks(); // sets up time cues for light visual effect to the flicker sound
   setNPCSynth(); // set the npc Sound switch on and create a new synthesizer
 
-console.log(`before creating state simmapsarray is ${simulationMapsArray.length}`);
-  userStartAudio();
-  state = new TitleState(simulationImagesList, simulationMapsArray, simulationMapsArray); // initial state is TitleState
+  state = new TitleState(simulationImagesList, simulationMapsArray, simulationMapsArray,
+  flickerBulb); // initial state is TitleState
   // other states are SimulationState and EndingState
 }
 
@@ -195,7 +194,7 @@ function draw() {
 sunsetAnimationState();
   lightsUpAnimationState(); // animation when the light turns on, then simulation begins
   // and player can play
-lightsOutAnimationState();
+//lightsOutAnimationState();
   // if lantern is shut, bulb break sound
 
     //playBGMusic(); // the backgroung music starts playing

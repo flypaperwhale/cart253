@@ -25,7 +25,7 @@ class SimulationState extends State {
     this.map = undefined; // temporary map variable
     this.currentMap = this.simulationMapsArray[1]; // current map updated according to where the player goes
     // mapsArray[1] = map B, where the player begins
-    this.player = new Player(109, 597);
+
     this.textBubbleIsLoaded = false; // checks if a new text has been fed to a new textBubble
 this.showInventory = 0;
 // animation bits and bobbles
@@ -72,6 +72,8 @@ this.eventCounter1 = 0;
   this.eagleConstellation = new EagleConstellation(this.simulationImagesList[9]);
   this.simulationItemList.push(this.eagleConstellation); //
   //
+  this.placeHolder = new PlaceHolder(this.simulationImagesList[19]);
+  this.simulationItemList.push(this.placeHolder); //
   }
 
   createNPCs() { // create individual copies of each NPC class
@@ -101,7 +103,11 @@ this.eventCounter1 = 0;
     this.simulationNPCList.push(this.streetLightC);
     this.jade = new Jade(); // mapC
     this.simulationNPCList.push(this.jade);
+
+    this.player = new Player(109,597,this.placeHolder);
   }
+
+
 
   update() {
     // updates every frame, it serves a drawing function
@@ -335,7 +341,7 @@ if (this.currentMap.name === this.simulationItemList[i].map){
               this.eventSwitch2 = 0; // initialize event switch
               this.eventSwitch2 = constrain(this.eventSwitch2, 0, 1); // switch can be 0 or 1
               if (this.eventSwitch2 === 0) {
-                if (this.player.inventory[0] === `PlaceHolder`) { // remove place holder if you don'T already have the slingshot
+                if (this.player.inventory[0].name === `Place Holder`) { // remove place holder if you don'T already have the slingshot
                   this.player.inventory.splice(0, 1);
                 }
                 this.player.inventory.push(this.simulationItemList[i]); // item is pushed in inventory
@@ -669,17 +675,20 @@ if (this.currentMap.name === this.simulationItemList[i].map){
       }
 
       if (keyCode === RETURN) {
-        if (this.showInventory === 1){
-          this.showInventory = 0;
-          this.player.isPaused = false;
+        if (this.player.isPaused ===true){
+          //
         }
-        else if (this.showInventory === 0){
-          this.showInventory = 1;
-          this.player.paused();
-          // LITERALLY DISPLAY ITEM IN INVENTORY!
+        else {
+          if (this.showInventory === 1){
+            this.showInventory = 0;
+            //this.player.isPaused = false;
+          }
+          else if (this.showInventory === 0){
+            this.showInventory = 1;
+            //this.player.paused();
+            // LITERALLY DISPLAY ITEM IN INVENTORY!
+          }
         }
-
-
       }
 
       if (keyCode === 32) { // When the player presses SPACEBAR

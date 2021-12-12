@@ -5,7 +5,7 @@ class Key extends Item {
     this.x = 400;
     this.y = 200;
     this.width = 30;
-    this.height = 20;
+    this.height = 10;
     this.image = image;
     this.isOnMap = false; // always false
     this.map = undefined;

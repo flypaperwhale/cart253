@@ -30,6 +30,7 @@ let gazeboImg;
 let gazeboBaseImg;
 let fountainImg;
 let fountainTopImg;
+let emptyImg;
 // sounds
 let sunsetStarsIntro; // sunset introduction theme
 let constellationWinkSound; // constellation wink
@@ -57,13 +58,14 @@ function preload() {
   hamImg = loadImage("assets/images/items/ham.png");
   bigBoneImg = loadImage("assets/images/items/bigBone.png");
   slingshotImg = loadImage("assets/images/items/slingshot1.png")
-  frogConstellationImg = loadImage("assets/images/items/frogConstellation.png") 
+  frogConstellationImg = loadImage("assets/images/items/frogConstellation.png")
   frogImg = loadImage("assets/images/items/frog2.png");
   wrenchImg = loadImage("assets/images/items/wrench.png");
   arrowConstellationImg = loadImage("assets/images/items/arrowConstellation.png")
   injunctionImg = loadImage("assets/images/items/letters.png");
   keyImg = loadImage("assets/images/items/key.png");
   eagleConstellationImg = loadImage("assets/images/items/eagleConstellation.png")
+  emptyImg = loadImage("assets/images/empty.png")
 
 // decor image files
   streetlampImg = loadImage("assets/images/lamp.png");
@@ -112,7 +114,8 @@ function setup() {
     gazeboImg, // [15]
     gazeboBaseImg, // [16]
     fountainImg, // [17]
-    fountainTopImg); // [18]
+    fountainTopImg, // [18]
+    emptyImg,); // [19]
 
     simulationSoundsArray.push( // simulationSoundsArray
       sunsetStarsIntro, // [0]

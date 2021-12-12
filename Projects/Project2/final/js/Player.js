@@ -1,5 +1,5 @@
 class Player {
-  constructor(x, y) {
+  constructor(x, y, placeHolder) {
     // feed x,y in Simulation state
     this.x = x; // player starting x
     this.y = y; // player starting y
@@ -7,7 +7,7 @@ class Player {
     this.vy = 0; // handled by pause or ws/arrow keys
     this.speed = 2.5; // speed of 4
     this.size = 20; // player size is 20
-    this.inventory = [`PlaceHolder`];
+    this.inventory = [placeHolder];
     this.isCollided = false; // switch true when player is in collision with npc or item
 
     this.alive = true; // always alive
@@ -68,17 +68,17 @@ class Player {
   }
 
   displayInventory() { // CODE A DISPLAY INVENTORY THINGY
-    push();
-    fill(255);
-    rectMode(CENTER);
-    rect(300,400,320,75);
-    pop();
-    push();
+    // push();
+    // fill(255);
+    // rectMode(CENTER);
+    // rect(300,400,320,75);
+    // pop();
+    // push();
     for (let i = 0; i < this.inventory.length; i++) {
   console.log(this.inventory[i].name);
   push();
   imageMode(CENTER);
-  image(this.inventory[i].image, 300, 400, this.inventory[i].width, this.inventory[i].height); // hard numbers
+  image(this.inventory[i].image, this.x + 3, this.y - 20, this.inventory[i].width, this.inventory[i].height); // hard numbers
   pop();
     // for (let i = 0; i < this.inventory.length; i++) {
     //   console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);

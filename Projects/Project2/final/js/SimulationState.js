@@ -27,7 +27,7 @@ class SimulationState extends State {
     // mapsArray[1] = map B, where the player begins
     this.player = new Player(109, 597);
     this.textBubbleIsLoaded = false; // checks if a new text has been fed to a new textBubble
-
+this.showInventory = 0;
 // animation bits and bobbles
     this.animationState = undefined; // states used inside the Simulation to manage animations
     this.songSwitch = 0; // switch used for the animations
@@ -608,6 +608,9 @@ if (this.currentMap.name === this.simulationItemList[i].map){
         this.player.thresholdCollision = false;
       }
     }
+    if (this.showInventory ===1){
+      this.player.displayInventory();
+    }
     //this.player.display(); // display the player avatar
   }
 
@@ -666,8 +669,17 @@ if (this.currentMap.name === this.simulationItemList[i].map){
       }
 
       if (keyCode === RETURN) {
-        this.player.displayInventory();
-        // LITERALLY DISPLAY ITEM IN INVENTORY!
+        if (this.showInventory === 1){
+          this.showInventory = 0;
+          this.player.isPaused = false;
+        }
+        else if (this.showInventory === 0){
+          this.showInventory = 1;
+          this.player.paused();
+          // LITERALLY DISPLAY ITEM IN INVENTORY!
+        }
+
+
       }
 
       if (keyCode === 32) { // When the player presses SPACEBAR

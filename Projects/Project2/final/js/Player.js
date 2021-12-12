@@ -68,17 +68,29 @@ class Player {
   }
 
   displayInventory() { // CODE A DISPLAY INVENTORY THINGY
-
+    push();
+    fill(255);
+    rectMode(CENTER);
+    rect(300,400,320,75);
+    pop();
+    push();
+    for (let i = 0; i < this.inventory.length; i++) {
+  console.log(this.inventory[i].name);
+  push();
+  imageMode(CENTER);
+  image(this.inventory[i].image, 300, 400, this.inventory[i].width, this.inventory[i].height); // hard numbers
+  pop();
     // for (let i = 0; i < this.inventory.length; i++) {
     //   console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);
     // }
     console.log(this.inventory);
-  }
+  }}
 
   checkPlayerInventory(npcDesiredItem) {
     // looks through player inventory array. Is called when interacting with NPCs
     for (let i = 0; i < this.inventory.length; i++) {
       this.checkedItem = this.inventory[i];
+
       // is checked item desired item?
     }
   }

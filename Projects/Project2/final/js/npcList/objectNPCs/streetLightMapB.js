@@ -36,13 +36,21 @@ class StreetLightB extends NPC {
   }
 
   displayLampGlow() { // displays circle of light around lamphead
+    if (this.lightIsOn === false){
+      //
+    } else if (this.lightIsOn === true){
       push();
       noStroke();
-      fill(200, 200, 0, 200); // light yellow and slightly transparent
+      fill(210, 190, 0, 200); // light yellow and slightly transparent
       ellipseMode(CENTER);
       ellipse(this.x, this.y - 100, 100, 100);
       pop();
-    }
+    }}
+
+
+          turnOutLampGlow(){
+    this.lightIsOn = false;
+          }
 
     display() {
       super.display();

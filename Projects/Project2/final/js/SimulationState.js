@@ -31,7 +31,7 @@ this.showInventory = 0;
 // animation bits and bobbles
     this.animationState = undefined; // states used inside the Simulation to manage animations
     this.songSwitch = 0; // switch used for the animations
-    this.setAnimationState(`lightsup`); //##
+    this.setAnimationState(`lightsUp`); //## SurpriseEnd
 
 // Trade sequence bits and bobbles
 this.eventCounter1 = 0;
@@ -111,7 +111,7 @@ this.eventCounter1 = 0;
 
   update() {
     // updates every frame, it serves a drawing function
-    background(0);
+    background(35,45,125);//
 
     // Check if player is paused (when textBubble appears)
     if (this.player.isPaused === true) {
@@ -146,51 +146,17 @@ this.eventCounter1 = 0;
       this.currentLampost = this.simulationNPCList[9]; // lampostC
     }
 
-
+console.log(this.currentLampost.name)
 
     // go through the NPC array to display each NPC (according to the map player is on)
       // also, check if player is colliding and update the NPC's data if need be (from click & trade)
       for (let i = 0; i < this.simulationNPCList.length; i++) {
-        // Look through NPC List
-        //this.simulationNPCList[i].display(); // display every NPC
-        // this.simulationNPCList[i].playerCollisionCheck(
-        //   //NPC/Player Collision check
-        //   this.player.x,
-        //   this.player.y,
-        //   this.player.size
-        // );
 
         if (this.simulationNPCList[i].isTriggered === true) {
         // if player presses spacebar when colliding with npc
         this.player.paused(); // player avatar movement becomes paused
 
 
-        //
-        //   // % // First interaction with Mayor Pimlico // % //
-        //   if ( // if the triggered npc is the Mayor and player has either
-        //     // the placeholder or the slingshot in their inventory
-        //     this.simulationNPCList[i].name === `Mayor Pimlico` &&
-        //     this.player.inventory[0] === `PlaceHolder`
-        //     || this.simulationNPCList[i].name === `Mayor Pimlico` &&
-        //     this.player.inventory[0].name === `Slingshot`
-        //   ) {
-        //     console.log(`this should only happen once`)
-        //     this.eventSwitch1 = 0; // initialize event switch
-        //     this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
-        //     if (this.eventSwitch1 === 0) {
-        //       this.player.inventory.unshift(this.simulationItemList[1]); // Pimlico gives you Ham!
-        //       if (this.player.inventory[1] === `PlaceHolder`) { // remove place holder if you don'T already have the slingshot
-        //         this.player.inventory.splice(1, 1);
-        //         this.textBubble = new TextBubble(
-        //           `${this.simulationNPCList[i].texts[0]}`
-        //         );
-        //         this.simulationNPCList[i].textNo = 1;
-        //       }
-        //       //this.simulationNPCList[i].textNo = 1; // Pimlico's text is changed
-        //       // next time Pimlico is triggered this new text will be displayed
-        //     }
-        //     this.eventSwitch1++;
-        //   }
                                 // % //
 
           // set up clicked npc values temporarily stored in simulation
@@ -206,11 +172,6 @@ this.eventCounter1 = 0;
           // is stored in player itemToAddToInventory
           // in simulation the item corresponding to the acquired item index is created
           // and stored in the player.inventory
-
-          //if (this.player.tradeHappens === true) {
-          // when trade happens
-
-          // !!! THIS HERE RELATES to item.isPicked !!!
 
 
   // npcs display text[0] first... when player has the item they desire and trade happens
@@ -229,63 +190,27 @@ this.eventCounter1 = 0;
           this.eventSwitch3++;
         }
 
-          // if (this.simulationNPCList[i].tradeSucceeded === true) { // after trade text is shown,
-          //   // update NPC to having succeeded trade
-          //   console.log(`you're not sup to b here!`);
-          //   this.simulationNPCList[i].textNo = 2;
-          // }
-
           // * // this is a text assigning machine to display appropriate text // * //
           if (this.simulationNPCList[i].textNo === 0) { // when triggered npc text is index 0
-            // if (this.eventSwitch3 === 0) {
-            //console.log(`do you keep coming here?`)
             this.textBubble = new TextBubble(
               `${this.simulationNPCList[i].texts[0]}`
             );
-            //console.log(`what is pims textno ${this.simulationNPCList[i].textNo}`)
-            // }
-            // this.eventSwitch3++;
           }
-
           else if (this.simulationNPCList[i].textNo === 1) { // when tirggered npc text index 1
-              // if (this.eventSwitch3 === 0) {
-            //console.log(`you need to come here`);
             this.textBubble = new TextBubble(
               `${this.simulationNPCList[i].texts[1]}`
             );
-            // this.player.inventory.shift();
-            // console.log(`does pimpim come here?`);
-            // let item = new Item(0, 0, `Big bone`); // this is problematic
-            // this.player.inventory.push(item);
-          // }
-          //   this.eventSwitch3++;
         }
 
         else if (this.simulationNPCList[i].textNo === 2) { // when trigerred npc text index 2
-            // if (this.eventSwitch3 === 0) {
             this.textBubble = new TextBubble(
               `${this.simulationNPCList[i].texts[2]}`
             );
-          // }
-          // this.eventSwitch3++;
         }
           // and so on...
 
           // Display assigned text
-          //console.log(`before display what is pims textno ${this.simulationNPCList[i].textNo}`)
-
           this.textBubble.display();
-          //this.textBubble.textIsUp = true;
-
-        //   if (this.simulationNPCList[i] === this.simulationNPCList[1]){
-             //if (this.pimlicoSwitch = 1){
-        //   // } && this.simulationNPCList[i].textNo === 0 &&
-        //     //console.log(`please come here`); he does
-        //     this.simulationNPCList[i].textNo = 1;
-        //   }
-        //   console.log(`endd what is pims textno ${this.simulationNPCList[i].textNo}`)
-        //
-        // }
       }
     }
 
@@ -302,8 +227,7 @@ this.eventCounter1 = 0;
         if (this.simulationItemList[i].isOnMap === true) {
 
 if (this.currentMap.name === this.simulationItemList[i].map){
-  this.currentMap.displayItem(this.simulationItemList[i]);
-  // display game items ( ### can be used in inventory display, x y determined right before display)
+  this.currentMap.displayItem(this.simulationItemList[i]); // display game items
   this.simulationItemList[i].playerCollisionCheck(
     // check for player collision with each item
     this.player.x,
@@ -311,7 +235,6 @@ if (this.currentMap.name === this.simulationItemList[i].map){
     this.player.size
   );
 }
-
 
           // Items shown on map vanish when player collides with them
           if (
@@ -329,14 +252,12 @@ if (this.currentMap.name === this.simulationItemList[i].map){
               // vanishing item
             }
 
-          // items on map collided with get added to player INVENTORY... ###
-
-            // Slingshot First Item Picked //
+          // items on map collided with get added to player INVENTORY...
+            // Ham First Item Picked //
             if (
               this.player.itemPickingLevel === 0 &&
               this.simulationItemList[i].name === `Ham`
             ) {
-              //console.log(`oyu cant keep coming here`);// its ok this only happens once
               // if the item being picked is slingshot
               this.eventSwitch2 = 0; // initialize event switch
               this.eventSwitch2 = constrain(this.eventSwitch2, 0, 1); // switch can be 0 or 1
@@ -371,72 +292,45 @@ if (this.currentMap.name === this.simulationItemList[i].map){
     // this visual is also disfunctional, as the map() function does not seem to work
     // when used in class states, or have to be applied differently...
     // unfortunately no darkening sky for now...
-    if (this.animationState === `SunsetState`) {
-      // if the animationState equals "sunset"
-      this.player.paused(); // player is paused
-      this.songSwitch++; // the songSwitch is increased
-      //this.songSwitch = constrain(this.songSwitch, 0, 2); // the songSwitch is constrained between 0-2
-      //this.playSunsetSong(); // the sunset theme is played
-      // sunset animation with skyAlpha and dayTimer
-      //this.skyAlpha = map(this.dayTimer, 310, 0, 255, 0); // map skyAlpha (255,0) goes down as dayTimer (310,0) goes down
-      this.dayTimer--; // dayTimer goes down
-      this.dayTimer = constrain(this.dayTimer, 0, 310); // constrain dayTimer
-      if (this.dayTimer === 0) {
-        // once the dayTimer reaches 0...
-        //this.constellationWink.play(); // a chime sound to signify the twinkling stars
-        this.dayTimer = 1; // dayTimer is reset to 1
-        //this.resetSongSwitch(); // songSwitch is reset to 0
-        this.setAnimationState(`lightsUp`); // ... and then, no time to admire the stars, the lights go on!
-      }
-    }
+    // if (this.animationState === `SunsetState`) {
+    //   // if the animationState equals "sunset"
+    //   this.player.paused(); // player is paused
+    //   this.songSwitch++; // the songSwitch is increased
+    //   //this.songSwitch = constrain(this.songSwitch, 0, 2); // the songSwitch is constrained between 0-2
+    //   //this.playSunsetSong(); // the sunset theme is played
+    //   // sunset animation with skyAlpha and dayTimer
+    //   //this.skyAlpha = map(this.dayTimer, 310, 0, 255, 0); // map skyAlpha (255,0) goes down as dayTimer (310,0) goes down
+    //   this.dayTimer--; // dayTimer goes down
+    //   this.dayTimer = constrain(this.dayTimer, 0, 310); // constrain dayTimer
+    //   if (this.dayTimer === 0) {
+    //     // once the dayTimer reaches 0...
+    //     //this.constellationWink.play(); // a chime sound to signify the twinkling stars
+    //     this.dayTimer = 1; // dayTimer is reset to 1
+    //     //this.resetSongSwitch(); // songSwitch is reset to 0
+    //     this.setAnimationState(`lightsUp`); // ... and then, no time to admire the stars, the lights go on!
+    //   }
+    // }
 
     // LightsUp // animation when the light turns on, then simulation begins
     // and player can play
     if (this.animationState === `lightsUp`) {
-      // if state is "lightsUp"
-      // checkPlayerNPCCollision(); // checks if player is touching npc or not
-      // calculatePlayerLampDist(); // calculate the distance between player and lamp every frame
-      this.songSwitch++; // add 1 to songSwitch
-      this.songSwitch = constrain(this.songSwitch, 0, 410); // constrain songSwitch to 0-410
-      if (this.songSwitch === 200) {
-        // when songSwitch reaches 200
-        this.lightFlickSound.play(); // play the lightFlickSound (which has visual FX cues)
+      if (this.currentLampost.tradeSucceeded === true){
+        this.currentLampost.lightIsOn = false;
       }
-      if (this.songSwitch === 270) {
-        // when songSwitch reaches 270
-        console.log(`turnlight on!`);
-        this.turnLightOn(this.currentLampost); // the light is turned on
+      else {
+        this.currentLampost.lightIsOn = true;
       }
-      if (this.songSwitch === 410) {
-        // when songSwitch reaches 410
-        this.playBGMusic(); // the backgroung music starts playing
-        this.player.isPaused = false; // and the player can start moving the avatar
-      }
-    }
-    // if (this.flickerBulb === true) { // if flickerBulb is true show lamp glow
-    //          console.log(`but not flashing`)
-    //          this.currentLampost.displayLampGlow(); // small yellow ellipse around lamp head
 
-    // simulation when light bulb explodes. player can play. no ending
-    // ### LIGHTS OUT ENDING WHEN PLAYER HAS LAST CONSTELLATION IN INVENTORY //
-    if (this.animationState === `lightsOut`) {
-      // if state is "lightsOut"
-      this.playBGMusic(); // background music keeps playing (from "untilDone" mode)
-      this.buzzingSound.stop(); // the buzzing noise is stopped
-      this.songSwitch++; // +1 to the songSwitch
-      this.songSwitch = constrain(this.songSwitch, 0, 410); // the songSwitch is constrained from 0 to 410
-      if (this.songSwitch === 2) {
-        // when the song switch reaches 2
-        // (songSwitch is turned to zero when npc is interacted with)
-        this.bulbBursting(); // bulb bursting sound
-      }
-      this.currentLampost.lightIsOn = false; // lightIsOn switch is turned off
-    }
+        }
 
-
-
-    //this.flickBulb(this.currentLampost);
-    //console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
+        if (this.animationState === `SurpriseEnd`){
+          this.simulationMapsArray[0].allLightsOut = true;
+          this.simulationMapsArray[0].galaxyDisplayed = true;
+          this.simulationMapsArray[1].allLightsOut = true;
+          this.simulationMapsArray[1].galaxyDisplayed = true;
+          this.simulationMapsArray[2].allLightsOut = true;
+          this.simulationMapsArray[2].galaxyDisplayed = true;
+        }
 
     // * // manageNPCs(){ // * //
     // go through the NPC array to display each NPC (according to the map player is on)
@@ -444,13 +338,6 @@ if (this.currentMap.name === this.simulationItemList[i].map){
 
     for (let i = 0; i < this.simulationNPCList.length; i++) {
       // Look through NPC List
-      // //this.simulationNPCList[i].display(); // display every NPC
-      // this.simulationNPCList[i].playerCollisionCheck(
-      //   //NPC/Player Collision check
-      //   this.player.x,
-      //   this.player.y,
-      //   this.player.size
-      // );
 
       if (this.simulationNPCList[i].isTriggered === true) {
         // if player presses spacebar when colliding with npc
@@ -523,12 +410,12 @@ if (this.currentMap.name === this.simulationItemList[i].map){
           this.eventSwitch3++;
         }
 
-        if (this.simulationNPCList[i].tradeSucceeded === true) {
-          // after trade text is shown,
-          // update NPC to having succeeded trade
-          console.log(`you're not sup to b here!`);
-          this.simulationNPCList[i].textNo = 2;
-        }
+        // if (this.simulationNPCList[i].tradeSucceeded === true) {
+        //   // after trade text is shown,
+        //   // update NPC to having succeeded trade
+        //   console.log(`you're not sup to b here!`);
+        //   this.simulationNPCList[i].textNo = 2;
+        // }
 
         // * // this is a text assigning machine to display appropriate text // * //
 
@@ -616,6 +503,10 @@ if (this.currentMap.name === this.simulationItemList[i].map){
     }
     if (this.showInventory ===1){
       this.player.displayInventory();
+      if (this.player.inventory[0].name === `Eagle Constellation`){
+      this.player.paused();
+        this.animationState = `SurpriseEnd`;
+      }
     }
     //this.player.display(); // display the player avatar
   }
@@ -641,19 +532,19 @@ if (this.currentMap.name === this.simulationItemList[i].map){
 
   turnLightOn(currentLampost) {
     // turns lightIsOn switch on
-    console.log(`when do you come in here?`);
+    console.log(`when do you come in here?`); //never parently
     this.currentLampost.lightIsOn = true;
   }
 
-  playBGMusic() {
-    // plays bg music
-    push();
-    this.bgMusic.playMode(`untilDone`); // bg music mode loops forever
-    this.bgMusic.setVolume(0.88); // not too loud
-    this.bgMusic.rate(0.77); // not too quick
-    this.bgMusic.play(); // play bg music
-    pop();
-  }
+  // playBGMusic() {
+  //   // plays bg music
+  //   push();
+  //   this.bgMusic.playMode(`untilDone`); // bg music mode loops forever
+  //   this.bgMusic.setVolume(0.88); // not too loud
+  //   this.bgMusic.rate(0.77); // not too quick
+  //   this.bgMusic.play(); // play bg music
+  //   pop();
+  // }
 
   bulbBursting() {
     // handles bulb bursting audio FX
@@ -699,6 +590,15 @@ if (this.currentMap.name === this.simulationItemList[i].map){
     this.player.isPaused = false; // player is not labelled as paused anymore
     this.ham.isPicked = false; // to avoid looping in here again, ham becomes unpicked
   }
+
+  // surprise ending
+
+if (this.player.isPaused === true && this.animationState === `SurpriseEnd`){
+  this.showInventory = 0;
+  this.player.isPaused = false;
+  this.animationState = undefined;
+}
+
         for (let i = 0; i < this.simulationNPCList.length; i++) {
           // when player presses spacebar at any time,
           // the simulation looks through the npc list
@@ -722,15 +622,7 @@ if (this.currentMap.name === this.simulationItemList[i].map){
    }
 
           }
-          if (this.animationState === `lightsUp`) {
-            // if state is "lightsUp"
-            //   canBurst = true; // turn bulb canBurst switch to true
-            // }
-            if (this.currentLampost.canBurst === true) {
-              // when bulb can burst
-              // BURST IT...
-              }
-            }
+
             }
 
 

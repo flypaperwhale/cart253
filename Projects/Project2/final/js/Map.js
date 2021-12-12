@@ -14,13 +14,14 @@ display(){
 
 }
 
+
 displaySky() {
   // displays sky blue rectangle
   push();
   noStroke();
   fill(35,45,125); // blue with alpha value linked to dayTimer
   rectMode(CENTER);
-  rect(width / 2, 0, 500, 990);
+  rect(width / 2, 0, 500, 200);
   pop();
 }
 

@@ -4,33 +4,36 @@ class SkyGlowCityB extends Map{
     super();
 
 this.name = `B`; // map name
-
 //image files
 this.streetlampImg = simulationImagesList[10];
 this.streetlampFootImg = simulationImagesList[11];
 this.stairsImg = simulationImagesList[12];
 this.treeImg = simulationImagesList[13];
+this.galaxyImg = simulationImagesList[20];
 
 //Lamp coordinates
 this.lampX = 225; // lamp x value
 this.lampY = 510; // lamp y value
-//this.flickerBulb = false;
+//this.buzzVolume =0.025;
 
-this.buzzVolume =0.025;
+this.galaxyDisplayed = false;
+this.allLightsOut = false;
+
 }
 
 /**
 Description of draw()
 */
 display(player, npcList, soundList){
-  background(0);
-
   //sky
+  if (this.galaxyDisplayed === true){
+    this.displayGalaxy();
+  }
   super.displaySky(); // the blue sky rectangle covers the starry bg image
+
 this.displayStars();
-//npcList[5].flickBulb(this);
-this.displaySkyGlow(npcList[5]);
-//this.flickBulb(npcList[5]);
+this.displaySkyGlow(npcList[5]); // call method with map B lamp and light buzz sound
+
   //ground
   super.displayGreenGrass(); // display Green Grass
   this.displayCircleAndPath(); // display gray circle and path
@@ -39,7 +42,7 @@ this.displaySkyGlow(npcList[5]);
   this.displayShop();
   this.displayWindows();
   this.displayStairs();
-
+  // display map B npcs and check for collision //
 for (let i= 0; i < npcList.length; i++){
   if (npcList[i].map === this.name){
     if(npcList[i] === npcList[5]) //0,5,9 the lampostsABC
@@ -51,29 +54,22 @@ for (let i= 0; i < npcList.length; i++){
 
   }
 }
-
   this.displayLampFoot(); // displayed before the player for correct layer effect
   super.displayItem();
-
-
   player.display(); // displays player and also constrains them to move only on the ground
-  this.displayLightsOn(npcList[5], soundList[3],player); // call method with map B lamp and light buzz sound
-
+  this.displayLampGlow(npcList[5]); // call method with map B lamp and light buzz sound
   this.displayLamppost(); // displays lamppost in front of player
   this.displayTrees();
-
-//this.calculatePlayerLampDist(player, npcList[5]);
-
-  //this.barriers();
-  //player.barriers(this.name)
-
-   //##!!
-
 }
 
+displayGalaxy(){
+  push();
+  imageMode(CENTER);
+  image(this.galaxyImg, 245, 255, 800, 500); // hard numbers
+  pop();
+}
 
-
-//display stars // THE GOOD ONE !!
+//display stars //
 displayStars(){
   // ARROW CONSTELLATION
   super.addStar(230,300,2,1)
@@ -85,7 +81,6 @@ displayStars(){
             super.addStar(185,440,1.5,0)
               super.addStar(188,458,2,0)
               // //
-
               //more random stars// 16 of 'em
               super.addStar(10,298,2,1)
               super.addStar(59,224,1.5,0)
@@ -105,60 +100,32 @@ displayStars(){
                                       super.addStar(63,453,2,0)
 }
 
+// methods //
 
 
-
-// Setup program functions //
-
-displayLightsOn(lampost,sound,player) {
+displaySkyGlow(lampost) {
+  //console.log(`sky glow no ${lampost.lightIsOn}`)
   if (lampost.lightIsOn === true) { // if the lamp is turned on
-    //console.log(`is it bro is it?`)
-    lampost.displayLampGlow(); // small yellow ellipse around lamp head
-    this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
-  }
-}
-
-displaySkyGlow(lampost){ // large yellow ellipse behind lamp covering starry bg
-  if (lampost.lightIsOn === true) {
-    //console.log(`whathow?`)
     push();
     noStroke();
     fill(225, 225, 100, 200); // light yellow and slightly transparent
     ellipseMode(CENTER);
     ellipse(width / 2, height / 2 - 70, 605, 605);
     pop();
+  }
+  // else if (lampost.lightIsOn === false){
+  //   lampost.turnOutLampGlow();
+  // }
 }
+
+displayLampGlow(lampost){
+  if (lampost.lightIsOn === true) { // if the lamp is turned on
+    lampost.displayLampGlow(); // small yellow ellipse around lamp head
+  }
+  // else if (lampost.lightIsOn === false){
+  //   lampost.turnOutLampGlow();
+  // }
 }
-
-// this.flickBulb(this.currentLampost);
-
-    // calculatePlayerLampDist(player,lampost) { // store the distance between the player avatar and the lamp
-    //   this.playerDistLamp = dist(player.x, player.y, lampost.x, lampost.y);
-    // }
-
-// lightBuzzing(lampost,sound,player) { // light buzzing sound FX
-//   if (lampost.lightIsOn === true) { // if lightIsOn is true
-//     push();
-//     sound.playMode(`untilDone`); // buzz sound mode loop until done
-//     //lampost.buzzVolume = map(this.playerDistLamp, 0, height - lampost.x, 0.1, 0);
-//     // buzz volume increases when player is closer to lamp and decreases when further
-//     sound.setVolume(this.buzzVolume); //index ##
-//     //this.panning = map(this.player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)
-//   //  sound.pan(this.panning);
-//     sound.rate(1.2); // sound a little bit higher pitched
-//     sound.play(); // play the sound
-//     pop();
-//   }
-// }
-
-// displaySkyGlow() { // displays circle of light over the nightsky
-//   push();
-//   noStroke();
-//   fill(225, 225, 100, 200); // light yellow and slightly transparent
-//   ellipseMode(CENTER);
-//   ellipse(width / 2, height / 2 - 70, 605, 605);
-//   pop();
-// }
 
 //Dolly's building
 displayDollysBuilding() {
@@ -194,26 +161,50 @@ displayShop() {
 }
 
 displayWindows(){ //this.addWindow(x,y,onOff)
-  //background building
-  super.addWindow(30,450,22,25,1)
-    super.addWindow(70,450,22,25,1)
-      super.addWindow(30,490,22,25,1)
-        super.addWindow(70,490,22,25,0)
-  //Dolly building
-  super.addWindow(30,582,22,25,1)
-    super.addWindow(30,622,22,25,0)
-    super.addWindow(70,582,22,25,1)
-      super.addWindow(70,622,22,25,0)
-      super.addWindow(70,662,22,25,1)
-        super.addWindow(70,702,22,25,1)
-        super.addWindow(30,662,22,25,1)
-          super.addWindow(30,702,22,25,0)
-          super.addWindow(70,742,22,25,1)
-            super.addWindow(30,742,22,25,1)
-  //shop
-  super.addWindow(392,710,60,50,0);
-    super.addWindow(462,710,60,50,0);
-}
+    if (this.allLightsOut === false){
+      //background building
+      super.addWindow(30,450,22,25,1)
+        super.addWindow(70,450,22,25,1)
+          super.addWindow(30,490,22,25,1)
+            super.addWindow(70,490,22,25,0)
+      //Dolly building
+      super.addWindow(30,582,22,25,1)
+        super.addWindow(30,622,22,25,0)
+        super.addWindow(70,582,22,25,1)
+          super.addWindow(70,622,22,25,0)
+          super.addWindow(70,662,22,25,1)
+            super.addWindow(70,702,22,25,1)
+            super.addWindow(30,662,22,25,1)
+              super.addWindow(30,702,22,25,0)
+              super.addWindow(70,742,22,25,1)
+                super.addWindow(30,742,22,25,1)
+      //shop
+      super.addWindow(392,710,60,50,0);
+        super.addWindow(462,710,60,50,0);
+    }
+    else if (this.allLightsOut === true){
+      //background building
+      super.addWindow(30,450,22,25,0)
+        super.addWindow(70,450,22,25,0)
+          super.addWindow(30,490,22,25,0)
+            super.addWindow(70,490,22,25,0)
+      //Dolly building
+      super.addWindow(30,582,22,25,0)
+        super.addWindow(30,622,22,25,0)
+        super.addWindow(70,582,22,25,0)
+          super.addWindow(70,622,22,25,0)
+          super.addWindow(70,662,22,25,1)
+            super.addWindow(70,702,22,25,0)
+            super.addWindow(30,662,22,25,0)
+              super.addWindow(30,702,22,25,0)
+              super.addWindow(70,742,22,25,0)
+                super.addWindow(30,742,22,25,1)
+      //shop
+      super.addWindow(392,710,60,50,0);
+        super.addWindow(462,710,60,50,0);
+    }
+  }
+
 
 displayStairs(){
   push();

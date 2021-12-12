@@ -118,6 +118,8 @@ if (this.checkedItem.name === undefined){
 
       //splice removeFromPlayerInventory(this.inventory[i])
       this.tradeHappens = true;
+      npc.tradeSucceeded = true;
+      console.log(`npc trade success? ${npc.tradeSucceeded} with ${npc}`)
       this.itemToAddToInventory = npcHoldingItem;
       console.log(`${npcHoldingItem}`);
 

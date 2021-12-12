@@ -2,20 +2,23 @@ class SkyGlowCityC extends Map{
   constructor(simulationImagesList){ // enter item array and simNPCList
     // of which the according elements will be extracted by the map
     super();
-//this.player; // player avatar, class Player
-this.name = `C`;
-// image files
+this.name = `C`; // map name
+// image files //
 this.streetlampImg = simulationImagesList[10];
 this.streetlampFootImg = simulationImagesList[11];
 this.treeImg = simulationImagesList[13];
 this.garbageImg = simulationImagesList[14];
 this.gazeboImg = simulationImagesList[15];
 this.gazeboBaseImg = simulationImagesList[16];
+this.galaxyImg = simulationImagesList[20];
 
 //lamp coordinates
 this.lampX = 378; // lamp x value
 this.lampY = 501; // lamp y value
-this.buzzVolume =0.025;
+//this.buzzVolume =0.025;
+
+super.galaxyDisplayed = false;
+this.allLightsOut = false;
 
 }
 
@@ -23,83 +26,63 @@ this.buzzVolume =0.025;
 Description of draw()
 */
 display(player, npcList, soundList) {
-  background(0);
-
   //sky
+  if (this.galaxyDisplayed === true){
+    this.displayGalaxy();
+  }
   super.displaySky(); // the blue sky rectangle covers the starry bg image
 
 this.displayStars();
-
-this.displaySkyGlow(npcList[9]); // call method with map B lamp and light buzz sound
-
+this.displaySkyGlow(npcList[9]);
   //ground
   super.displayGreenGrass(); // display Green Grass
-
   this.displayCircleAndPath(); // display gray circle and path
-
   this.displayShopBack();
   this.displayWindows();
-
   this.displayGarbage();
-
   this.displayGazeboBase();
   npcList[7].showDoggy();
-
-
-
-  // npcList[6].display(); // billee
-  // npcList[10].display(); // jade
-  // npcList[7].display(); // sheperd
-  // npcList[9].display(); // streetlamp
-
+// display map C npcs and check for collision //
   for (let i= 0; i < npcList.length; i++){
     if (npcList[i].map === this.name){
       if(npcList[i] === npcList[9]) //0,5,9 the lampostsABC
       {}
       else{
-
           npcList[i].display();
       }
-
       npcList[i].playerCollisionCheck(player.x,player.y,player.size);
-
     }
   }
-
   this.displayLampFoot(); // displayed before the player for correct layer effect
-
   super.displayItem();
-
   player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
-
-  //this.displayLightsOn(npcList[9],soundList[3],player); // call method with map B lamp and light buzz sound
-
+  this.displayLampGlow(npcList[9]); // call method with map B lamp and light buzz sound
   this.displayLamppost(); // displays lamppost in front of player
   this.displayGazebo();
-
   this.displayTrees();
-  npcList[6].move();
+  npcList[6].move(); // Billee moves
+}
 
+displayGalaxy(){
+  push();
+  imageMode(CENTER);
+  image(this.galaxyImg, 245, 255, 800, 500); // hard numbers
+  pop();
 }
 
 displayStars(){
   // Frog CONSTELLATION
   super.addStar(455,255,2,1)
   super.addStar(425,255,1.5,0)
-
     super.addStar(385,290,1.5,0)
       super.addStar(384,345,2,0)
-
         super.addStar(317,249,1.25,1)
           super.addStar(313,300,1.5,0)
-
             super.addStar(255,200,1.5,0)
               super.addStar(185,240,2,0)
               super.addStar(217,305,2,0)
-
               // //
-
-              //more random stars// 16 of 'em
+              //more random stars// 10 of 'em
                 super.addStar(335,138,1.5,0)
                   super.addStar(450,478,2,0)
                     super.addStar(112,393,1.25,1)
@@ -112,41 +95,26 @@ displayStars(){
                                     super.addStar(65,288,1,0)
 }
 
-
-// displayLightsOn(lampost,sound,player) {
-//   if (lampost.lightIsOn === true) { // if the lamp is turned on
-//     //console.log(`is it bro is it?`)
-//     lampost.displayLampGlow(); // small yellow ellipse around lamp head
-//     this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
-//   }
-// }
-
-displaySkyGlow(lampost){ // large yellow ellipse behind lamp covering starry bg
-  if (lampost.lightIsOn === true) {
-    //console.log(`whathow?`)
+displaySkyGlow(lampost) {
+  //console.log(`sky glow no ${lampost.lightIsOn}`)
+  if (lampost.lightIsOn === true) { // if the lamp is turned on
     push();
     noStroke();
     fill(225, 225, 100, 200); // light yellow and slightly transparent
     ellipseMode(CENTER);
     ellipse(width / 2, height / 2 - 70, 605, 605);
     pop();
-}
+  }
 }
 
-// lightBuzzing(lampost,sound,player) { // light buzzing sound FX
-//   if (lampost.lightIsOn === true) { // if lightIsOn is true
-//     push();
-//     sound.playMode(`untilDone`); // buzz sound mode loop until done
-//     //lampost.buzzVolume = map(this.playerDistLamp, 0, height - lampost.x, 0.1, 0);
-//     // buzz volume increases when player is closer to lamp and decreases when further
-//     sound.setVolume(this.buzzVolume); //index ##
-//     //this.panning = map(this.player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)
-//   //  sound.pan(this.panning);
-//     sound.rate(1.2); // sound a little bit higher pitched
-//     sound.play(); // play the sound
-//     pop();
-//   }
-// }
+displayLampGlow(lampost){
+  if (lampost.lightIsOn === true) { // if the lamp is turned on
+    lampost.displayLampGlow(); // small yellow ellipse around lamp head
+  }
+  // else if (lampost.lightIsOn === false){
+  //   lampost.turnOutLampGlow();
+  // }
+}
 
 //Background building
 displayShopBack() {
@@ -158,8 +126,15 @@ displayShopBack() {
   rect(50, 725, 100, 80);
   pop();
 }
+
 displayWindows(){
-  super.addWindow(50,720,60,30,1);
+  if (this.allLightsOut === false){
+    super.addWindow(50,720,60,30,1);
+
+  }
+  else if (this.allLightsOut === true){
+    super.addWindow(50,720,60,30,0);
+  }
 }
 
 displayGarbage(){
@@ -220,8 +195,6 @@ displayCircleAndPath() { // draws a gray path leading to the circle
 displayLampFoot() { // player moves in front of lamp foot
   push();
   imageMode(CENTER);
-  console.log(`lampY is ${this.lampY+50}, and ${`d`}`);
-
   image(this.streetlampFootImg, this.lampX, this.lampY + 50, 15, 15); // hard numbers
   pop();
 }

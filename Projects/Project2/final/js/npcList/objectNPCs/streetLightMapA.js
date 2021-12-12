@@ -15,7 +15,7 @@ class StreetLightA extends NPC {
     this.texts = [`Dolly used the wrench on the lampost`];
     this.map = `A`;
     this.flickerBulb = false; // switch true/false to activate lamp bulb flicker animation
-    this.lightIsOn = true; // switch true/false that draws light a.-v. FX when true
+    this.lightIsOn = false; // switch true/false that draws light a.-v. FX when true
     this.buzzVolume; // lamp buzz sound volume, to be mapped on playerDistLamp values
     // this.distPlayer = undefined;
     this.canBurst = false; // when true, player can burst the lamp's bulb
@@ -24,12 +24,20 @@ class StreetLightA extends NPC {
 
 
     displayLampGlow() { // displays circle of light around lamphead
+      if (this.lightIsOn === false){
+        //
+      } else if (this.lightIsOn === true){
         push();
         noStroke();
-        fill(200, 200, 0, 200); // light yellow and slightly transparent
+        fill(210, 190, 0, 200); // light yellow and slightly transparent
         ellipseMode(CENTER);
         ellipse(this.x, this.y - 100, 100, 100);
         pop();
+      }
+    }
+
+      turnOutLampGlow(){
+this.lightIsOn = false;
       }
 
     display() {

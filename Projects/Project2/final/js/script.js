@@ -32,6 +32,15 @@ let fountainImg;
 let fountainTopImg;
 let emptyImg;
 let galaxyImg;
+// visual simulation handling
+let simulationSoundsArray = []; // array holding sounds for the game
+let simulationImagesList = []; // array holding images for the games
+let simulationMapsArray = []; // array holding game maps
+let state = undefined; // state can be new State, substates: Title, Simulation, Ending
+let mapNo = 3; // there are 3 "maps" in a triptych
+let mapA; // full left
+let mapB; // middle
+let mapC; // full right
 // sounds
 let sunsetStarsIntro; // sunset introduction theme
 let constellationWinkSound; // constellation wink
@@ -41,15 +50,13 @@ let bulbBurstSound; // bulb burst
 let bgmusic1; // background music 1
 let bgmusic2; // background music 2
 let bgmusic3; // background music 3
-
-let simulationSoundsArray = []; // array holding sounds for the game
-let simulationImagesList = []; // array holding images for the games
-let simulationMapsArray = []; // array holding game maps
-let state = undefined; // state can be new State, substates: Title, Simulation, Ending
-let mapNo = 3; // there are 3 "maps" in a triptych
-let mapA; // full left
-let mapB; // middle
-let mapC; // full right
+// audio and animation handling //
+let animationState; // can be, sunset, lightsUp, lightsOut
+let songSwitch = 0; // ticker switch to play sounds at certain time frames (a Counter?)
+let skyAlpha = 255; // the blue sky's alpha value is manipulated by mapping it to dayTimer
+let dayTimer = 500; // Counter used to map skyAlpha. 500 = day, 0 = night
+let flickerBulb; // switch true/false to activate lamp bulb flicker animation
+let npcSoundSwitch; // switch true/false used to play npc synth sound only once
 
 /**
 Description of preload
@@ -94,8 +101,8 @@ Description of setup
 */
 function setup() {
   createCanvas(500, 1000);
-
-  simulationImagesList.push( // simulationImagesList Array
+// simulationImagesList Array //
+  simulationImagesList.push(
     hamImg, // [0]
     bigBoneImg, // [1]
     slingshotImg, // [2]
@@ -117,8 +124,8 @@ function setup() {
     fountainTopImg, // [18]
     emptyImg, // [19]
     galaxyImg,); // [20]
-
-    simulationSoundsArray.push( // simulationSoundsArray
+ // simulationSoundsArray //
+    simulationSoundsArray.push(
       sunsetStarsIntro, // [0]
       constellationWinkSound, // [1]
       lightFlickSound, // [2]
@@ -129,6 +136,8 @@ function setup() {
   createMapsAndStore(); // inputs map files into the program to be stored in simulationMapsArray
 
   userStartAudio();
+  cueLightFlicks(); // sets up time cues for light visual effect to the flicker sound
+  setNPCSynth(); // set the npc Sound switch on and create a new synthesizer
 
 console.log(`before creating state simmapsarray is ${simulationMapsArray.length}`);
   userStartAudio();
@@ -136,9 +145,8 @@ console.log(`before creating state simmapsarray is ${simulationMapsArray.length}
   // other states are SimulationState and EndingState
 }
 
-function createMapsAndStore(){
-  for (let i = 0; i < mapNo; i++){
-    console.log(`map no isht ${i}`);
+function createMapsAndStore(){ // create maps and store in the maps array
+  for (let i = 0; i < mapNo; i++){ // there are 3 total maps
     if (i === 0){
       map = new SkyGlowCityA(simulationImagesList); // Map A, full left
     }
@@ -148,18 +156,131 @@ function createMapsAndStore(){
     if (i === 2){
       map = new SkyGlowCityC(simulationImagesList); // Map C, full right
     }
-    simulationMapsArray.push(map);
-    console.log(`simmaparray ${simulationMapsArray[0].name}
-      ${simulationMapsArray[1]}
-      ${simulationMapsArray[2]}`)
+    simulationMapsArray.push(map); // pushed into maps array
   }
+}
+
+// Setup program functions //
+function cueLightFlicks() {
+  lightFlickSound.addCue(0.1, flickBulbOn);
+  lightFlickSound.addCue(0.2, flickBulbOff);
+  lightFlickSound.addCue(0.3, flickBulbOn);
+  lightFlickSound.addCue(0.4, flickBulbOff);
+  lightFlickSound.addCue(0.75, flickBulbOn);
+  lightFlickSound.addCue(0.8, flickBulbOff);
+}
+
+function flickBulbOn() {
+  // on cue flicks bulb on
+  flickerBulb = true;
+}
+
+function flickBulbOff() {
+  // on cue flicks bulb off
+  flickerBulb = false;
+}
+
+// Create Synthesizer (for npc sound)
+function setNPCSynth() {
+  npcSoundSwitch = true; // when this switch is true, when npc is interacted with
+  // npc makes a sound. when false, no more sound/interaction.
+  let synth = new p5.PolySynth();
 }
 
 function draw() {
   state.update();
 
   if (state.name === `SimulationState`){
-    playBGMusic(); // the backgroung music starts playing
+
+sunsetAnimationState();
+  lightsUpAnimationState(); // animation when the light turns on, then simulation begins
+  // and player can play
+lightsOutAnimationState();
+  // if lantern is shut, bulb break sound
+
+    //playBGMusic(); // the backgroung music starts playing
+  }
+}
+
+function resetSongSwitch() { // resets songSwitch to 0
+  songSwitch = 0;
+}
+
+function setAnimationState(animationStateName) {
+  animationState = animationStateName;
+}
+
+function sunsetAnimationState() { // introduction animation, blue sky becomes dark and starry...
+  if (animationState === `sunset`) { // if the state equals "sunset"
+    songSwitch++; // the songSwitch is increased
+    songSwitch = constrain(songSwitch, 0, 2); // the songSwitch is constrained between 0-2
+    playSunsetSong(); // the sunset theme is played
+    // sunset animation with skyAlpha and dayTimer
+    skyAlpha = map(dayTimer, 310, 0, 255, 0); // map skyAlpha (255,0) goes down as dayTimer (310,0) goes down
+    dayTimer--; // dayTimer goes down
+    dayTimer = constrain(dayTimer, 0, 310); // constrain dayTimer
+    if (dayTimer === 0) { // once the dayTimer reaches 0...
+      constellationWinkSound.play(); // a chime sound to signify the twinkling stars
+      dayTimer = 1; // dayTimer is reset to 1
+      resetSongSwitch(); // songSwitch is reset to 0
+      setAnimationState(`lightsUp`); // ... and then, no time to admire the stars, the lights go on!
+    }
+  }
+}
+
+  function lightsUpAnimationState() { // animation when the light turns on, then simulation begins
+    // and player can play
+    if (animationState === `lightsUp`) { // if state is "lightsUp"
+      calculatePlayerLampDist(); // calculate the distance between player and lamp every frame
+      songSwitch++; // add 1 to songSwitch
+      songSwitch = constrain(songSwitch, 0, 410); // constrain songSwitch to 0-410
+      if (songSwitch === 200) { // when songSwitch reaches 200
+        lightFlickSound.play(); // play the lightFlickSound (which has visual FX cues)
+      }
+      if (songSwitch === 270) { // when songSwitch reaches 270
+        turnLightOn(); // the light is turned on
+      }
+      if (songSwitch === 410) { // when songSwitch reaches 410
+        playBGMusic(); // the backgroung music starts playing
+        player.isPaused = false; // and the player can start moving the avatar
+      }
+    }
+  }
+//
+// ## I have an animation state in simulationstate when every lamppost is off!
+//
+//   function lightsOutAnimationState() { // simulation when light bulb explodes. player can play. no ending
+//   if (state === `lightsOut`) { // if state is "lightsOut"
+//     playBGMusic(); // background music keeps playing (from "untilDone" mode)
+//     lightBuzzNoise.stop(); // the buzzing noise is stopped
+//     songSwitch++; // +1 to the songSwitch
+//     songSwitch = constrain(songSwitch, 0, 410); // the songSwitch is constrained from 0 to 410
+//     if (songSwitch === 2) { // when the song switch reaches 2
+//       // (songSwitch is turned to zero when npc is interacted with)
+//       bulbBursting(); // bulb bursting sound
+//     }
+//     lightIsOn = false; // lightIsOn switch is turned off
+//   }
+// }
+
+  function playSunsetSong() { // plays sunset theme
+  if (songSwitch === 1) { // if songSwitch is 1
+    sunsetStarsIntro.play(0, 1, 0.2);
+  }
+}
+
+function lightBuzzing() { // light buzzing sound FX
+  if (lightIsOn === true) { // if lightIsOn is true
+    push();
+    lightBuzzNoise.playMode(`untilDone`); // buzz sound mode loop until done
+    buzzVolume = map(playerDistLamp, 0, height - lampX, 0.1, 0);
+    // buzz volume increases when player is closer to lamp and decreases when further
+    lightBuzzNoise.setVolume(buzzVolume);
+    let panning = map(player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)
+    lightBuzzNoise.pan(panning);
+    lightBuzzNoise.rate(1.2); // sound a little bit higher pitched
+    lightBuzzNoise.play(); // play the sound
+    pop();
   }
 }
 
@@ -169,6 +290,19 @@ function playBGMusic() { // plays bg music
   bgmusic1.setVolume(0.88); // not too loud
   bgmusic1.rate(0.77); // not too quick
   bgmusic1.play(); // play bg music
+  pop();
+}
+
+function playNPCSound() { // npc sound
+  synth.play(`C5`, 1, 0, 0.2);
+  synth.play(`D5`, 1, 0.25, 0.2);
+  synth.play(`E5`, 1, 0.5, 0.2);
+}
+
+function bulbBursting() { // handles bulb bursting audio FX
+  push();
+  bulbBurstSound.setVolume(1.7); // bulb bursting soun is loud
+  bulbBurstSound.play(); // play bulb bursting sound
   pop();
 }
 

@@ -213,10 +213,40 @@ class Player {
 
   blockCityHallMapA() {  // ### THIS IS MY STANDARD ###
     // block out background building
+    //Top//
     if (
       this.x > 260 /*rectX*/ - 180 / 2 /*rectW*/ && // coming in left (right arrow)
       this.x < 260 + 180 / 2 + 5 && // coming in right (left arrow)
-      this.y > 672 /*rectY*/ - 180 + 35 /*rectH*/ && // coming from down (up arrow)
+      this.y > 672 /*rectY*/ - 180 + 30 /*rectH*/ && // coming from down (up arrow)
+      this.y < 672 - 122 // coming from up (down arrow)
+    ) {
+      this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
+
+      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+        this.x = this.x + 15;
+        //this.speed = 0;
+      }
+        if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+            this.x = this.x - 15;
+          //  this.speed = 0;
+        }
+      if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+
+        this.y = this.y + 15;
+      //  this.speed = 0;
+      }
+      if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+          this.y = this.y - 15;
+        }
+    }
+
+//Bottom
+    if (
+      this.x > 260 /*rectX*/ - 180 / 2 /*rectW*/ && // coming in left (right arrow)
+      this.x < 260 + 180 / 2 + 5 && // coming in right (left arrow)
+      this.y > 672 /*rectY*/- 92 /*rectH*/ && // coming from down (up arrow)
       this.y < 672 + 180 / 2 - 50 // coming from up (down arrow)
     ) {
       this.wallCollision = true;
@@ -237,14 +267,42 @@ class Player {
       //  this.speed = 0;
       }
 
-
     if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
         this.y = this.y - 15;
       }
     } else {
       this.wallCollision = false;
     }
+
+    //left side
+        if (
+          this.x > 175 /*rectX*/ - 15 /*rectW*/ &&
+          this.x < 175 + 15 &&
+          this.y > 672 /*rectY*/ - 180 + 35 /*rectH*/ && // coming from down (up arrow)
+          this.y < 672 + 180 / 2 - 50 // coming from up (down arrow)
+        ) {
+          this.wallCollision = true;
+          this.vx = this.vx * -1;
+          this.vy = this.vy * -1;
+
+          //  this.speed = this.speed*-1;
+          if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+            this.x = this.x + 20;
+            this.speed = 0;
+
+          }
+          if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+            this.x = this.x - 10;
+            this.speed = 0;
+
+        } else {
+        //  this.speed = 3;
+          this.wallCollision = false;
+        }
+      }
+
   }
+
 
   blockDollyBuildingMapA() {
     // block out background building

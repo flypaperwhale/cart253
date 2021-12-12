@@ -109,8 +109,6 @@ console.log(`yay lightflicks!`)
     // This text is in the background, gives player how to play
     text(`press enter to change maps!`, width/ 2, height/2);
 
-this.billee.move();
-
 // assign current map so state class can manage accordingly (npcs, decor, sounds)
 // where the player is in relation to other elements
     this.map = this.currentMap;
@@ -346,6 +344,9 @@ else if (this.map.name === `C`){
 
               if (this.map.name === `A`){
                 this.player.x = 5;
+                if (this.player.y > 500 && this.player.y < 510 ){
+                  this.player.y = 520;
+                }
                 this.currentMap = mapsArray[1];
                 this.player.thresholdCollision = false;
               }
@@ -421,7 +422,8 @@ else if (this.map.name === `C`){
         mouseClicked(){ // click to check where x is, debug method
           console.log(`x ${this.player.x} ,y ${this.player.y}
             and speed vx vy are ${this.player.speed} ${this.player.vx} ${this.player.vy}
-            and player thresholdCollision ${this.player.thresholdCollision}`);
+            and player thresholdCollision ${this.player.thresholdCollision}
+            Billee? ${this.simulationNPCList[6].name}`);
         }
 
         keyPressed() { // change state ###

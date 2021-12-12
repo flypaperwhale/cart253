@@ -11,7 +11,7 @@ this.fountainImg = simulationImagesList[13];
 this.fountainTopImg = simulationImagesList[14];
 //lamp coordinates
 this.lampX = 258; // lamp x value
-this.lampY = 510; // lamp y value
+this.lampY = 500; // lamp y value
 //NPCs
 this.buzzVolume =0.025;
 

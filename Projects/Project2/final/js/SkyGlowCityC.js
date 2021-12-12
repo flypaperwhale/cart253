@@ -45,6 +45,8 @@ this.displaySkyGlow(npcList[9]); // call method with map B lamp and light buzz s
   this.displayGazeboBase();
   npcList[7].showDoggy();
 
+
+
   // npcList[6].display(); // billee
   // npcList[10].display(); // jade
   // npcList[7].display(); // sheperd
@@ -55,6 +57,7 @@ this.displaySkyGlow(npcList[9]); // call method with map B lamp and light buzz s
       if(npcList[i] === npcList[9]) //0,5,9 the lampostsABC
       {}
       else{
+
           npcList[i].display();
       }
 
@@ -73,6 +76,8 @@ this.displaySkyGlow(npcList[9]); // call method with map B lamp and light buzz s
   this.displayGazebo();
 
   this.displayTrees();
+  npcList[6].move();
+
 }
 
 // display stars

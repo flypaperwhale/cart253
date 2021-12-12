@@ -39,7 +39,7 @@ class Billee extends NPC {
   move() { // from https://pippinbarr.github.io/cc/1/topics/conditionals/conditionals.html
     this.x = this.x + this.speed;
     // If the npc is off the right side
-    if (this.x > 250 || this.x < 150) {
+    if (this.x > 250 || this.x < 140) {
       // Send it back to the left by making its speed negative
       this.speed = -this.speed;
     }

@@ -1,7 +1,7 @@
 class Billee extends NPC {
   constructor() {
     super();
-    this.x = 75;
+    this.x = 80;
     this.y = 627;
     this.r = 215; // orange yellow
     this.g = 90;
@@ -40,7 +40,7 @@ class Billee extends NPC {
   move() { // from https://pippinbarr.github.io/cc/1/topics/conditionals/conditionals.html
     this.x = this.x + this.speed;
     // If the npc is off the right side
-    if (this.x > 250 || this.x < 150) {
+    if (this.x > 110 || this.x < 40) {
       // Send it back to the left by making its speed negative
       this.speed = -this.speed;
     }

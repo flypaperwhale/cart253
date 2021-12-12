@@ -19,6 +19,8 @@ class Player {
     this.tradeHappens = false; // player/NPC item trade switch
   this.itemToAddToInventory = undefined; // item label to create item and push in inventory ###
   this.itemPickingLevel = 0; // 0 = false,1 = true, 3 =void
+
+  this.stairsAreClosed = true;
   }
 
   display() {
@@ -83,6 +85,11 @@ class Player {
       this.blockFrontBuildingMapA();
       this.blockCityHallMapA();
 
+      //this.blockMapAStairs();
+
+      if(this.stairsAreClosed === true){
+      }
+
       // block out
     }
 
@@ -128,6 +135,7 @@ class Player {
   }
 
   // MAP A WALLS //
+
 
   blockBackBuildingMapA() {
     // block out background building
@@ -215,7 +223,7 @@ class Player {
     // block out background building
     //Top//
     if (
-      this.x > 260 /*rectX*/ - 180 / 2 /*rectW*/ && // coming in left (right arrow)
+      this.x > 260 /*rectX*/ - 180 / 2 - 5/*rectW*/ && // coming in left (right arrow)
       this.x < 260 + 180 / 2 + 5 && // coming in right (left arrow)
       this.y > 672 /*rectY*/ - 180 + 30 /*rectH*/ && // coming from down (up arrow)
       this.y < 672 - 122 // coming from up (down arrow)
@@ -405,6 +413,45 @@ class Player {
     }
   }
 }
+
+blockMapAStairs(){
+    // block out stairs in map a
+    if (
+      this.x > 371 /*rectX*/ - 10 /*rectW*/ &&
+      this.x < 371 + 10 &&
+      this.y > 630 /*rectY*/ - 80 /*rectH*/ &&
+      this.y < 630 + 80
+    ) {
+      this.wallCollision = true;
+      this.vx = this.vx * -1;
+      this.vy = this.vy * -1;
+
+      }
+      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+        this.x = this.x + 15;
+        this.speed = 0;
+
+      }
+      if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+        this.y = this.y + 15;
+        this.speed = 0;
+
+      }
+      if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+        this.y = this.y - 15;
+        this.speed = 0;
+
+
+    } if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+        this.x = this.x - 15;
+        this.speed = 0;
+
+      //  this.speed = 0;
+    }else {
+    //  this.speed = 3;
+      this.wallCollision = false;
+    }
+  }
 
   // END OF MAP A WALLS //
 

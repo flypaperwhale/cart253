@@ -95,7 +95,7 @@ function setup() {
     hamImg, // [0]
     bigBoneImg, // [1]
     slingshotImg, // [2]
-    frogConstellationImg // [3]
+    frogConstellationImg, // [3]
     frogImg, // [4]
     wrenchImg, // [5]
     arrowConstellationImg, // [6]
@@ -124,7 +124,7 @@ function setup() {
 
   userStartAudio();
 
-  state = new TitleState(simulationImagesList, mapsArray); // initial state is TitleState
+  state = new TitleState(simulationImagesList, simulationMapsArray); // initial state is TitleState
   // other states are SimulationState and EndingState
 }
 
@@ -140,7 +140,7 @@ function createMapsAndStore(){
     if (i === 2){
       map = new SkyGlowCityC(simulationImagesList); // Map C, full right
     }
-    mapsArray.push(map);
+    simulationMapsArray.push(map);
   }
 
 }

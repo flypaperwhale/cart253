@@ -8,6 +8,7 @@ class Slingshot extends Item {
     this.height = 30;
     this.image = image;
     this.isOnMap = true; // can be true or false
+    this.map = undefined;
     this.playerColliding = undefined;
   }
 

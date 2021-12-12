@@ -125,7 +125,7 @@ displayLightsOn(lampost,sound,player) {
   if (lampost.lightIsOn === true) { // if the lamp is turned on
     //console.log(`is it bro is it?`)
     lampost.displayLampGlow(); // small yellow ellipse around lamp head
-    this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
+    //this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
   }
 }
 
@@ -141,20 +141,20 @@ displaySkyGlow(lampost){ // large yellow ellipse behind lamp covering starry bg
 }
 }
 
-lightBuzzing(lampost,sound,player) { // light buzzing sound FX
-  if (lampost.lightIsOn === true) { // if lightIsOn is true
-    push();
-    sound.playMode(`untilDone`); // buzz sound mode loop until done
-    //lampost.buzzVolume = map(this.playerDistLamp, 0, height - lampost.x, 0.1, 0);
-    // buzz volume increases when player is closer to lamp and decreases when further
-    sound.setVolume(this.buzzVolume); //index ##
-    //this.panning = map(this.player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)
-  //  sound.pan(this.panning);
-    sound.rate(1.2); // sound a little bit higher pitched
-    sound.play(); // play the sound
-    pop();
-  }
-}
+// lightBuzzing(lampost,sound,player) { // light buzzing sound FX
+//   if (lampost.lightIsOn === true) { // if lightIsOn is true
+//     push();
+//     sound.playMode(`untilDone`); // buzz sound mode loop until done
+//     //lampost.buzzVolume = map(this.playerDistLamp, 0, height - lampost.x, 0.1, 0);
+//     // buzz volume increases when player is closer to lamp and decreases when further
+//     sound.setVolume(this.buzzVolume); //index ##
+//     //this.panning = map(this.player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)
+//   //  sound.pan(this.panning);
+//     sound.rate(1.2); // sound a little bit higher pitched
+//     sound.play(); // play the sound
+//     pop();
+//   }
+// }
 
 //Dolly's building
 displayDollysBuilding() {

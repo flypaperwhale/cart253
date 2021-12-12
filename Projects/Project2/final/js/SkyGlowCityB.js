@@ -48,7 +48,7 @@ for (let i= 0; i < npcList.length; i++){
         npcList[i].display();
     }
     npcList[i].playerCollisionCheck(player.x,player.y,player.size);
-    console.log(`player is colliding with ${npcList[i].name}`)
+  
   }
 }
 

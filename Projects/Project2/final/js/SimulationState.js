@@ -147,12 +147,12 @@ this.eventCounter1 = 0;
       for (let i = 0; i < this.simulationNPCList.length; i++) {
         // Look through NPC List
         //this.simulationNPCList[i].display(); // display every NPC
-        this.simulationNPCList[i].playerCollisionCheck(
-          //NPC/Player Collision check
-          this.player.x,
-          this.player.y,
-          this.player.size
-        );
+        // this.simulationNPCList[i].playerCollisionCheck(
+        //   //NPC/Player Collision check
+        //   this.player.x,
+        //   this.player.y,
+        //   this.player.size
+        // );
 
         if (this.simulationNPCList[i].isTriggered === true) {
         // if player presses spacebar when colliding with npc
@@ -294,15 +294,18 @@ this.eventCounter1 = 0;
 
         // Manage items displayed on the map //
         if (this.simulationItemList[i].isOnMap === true) {
-          this.simulationItemList[i].display();
-          // display game items ( ### can be used in inventory display, x y determined right before display)
 
-          this.simulationItemList[i].playerCollisionCheck(
-            // check for player collision with each item
-            this.player.x,
-            this.player.y,
-            this.player.size
-          );
+if (this.currentMap.name === this.simulationItemList[i].map){
+  this.currentMap.displayItem(this.simulationItemList[i]);
+  // display game items ( ### can be used in inventory display, x y determined right before display)
+  this.simulationItemList[i].playerCollisionCheck(
+    // check for player collision with each item
+    this.player.x,
+    this.player.y,
+    this.player.size
+  );
+}
+
 
           // Items shown on map vanish when player collides with them
           if (
@@ -424,16 +427,7 @@ this.eventCounter1 = 0;
       this.currentLampost.lightIsOn = false; // lightIsOn switch is turned off
     }
 
-    // Check if player is paused (when textBubble appears)
-    if (this.player.isPaused === true) {
-      // if player is paused
-      this.player.vx = 0; // turn player velocity to 0
-      this.player.vy = 0;
-    } else if (this.player.isPaused === false) {
-      // if player is not paused
-      this.player.handleInput(); // handle player input: up, down, left, right, w,s,a,d,
-      this.player.move(); // change the player avatar's position
-    }
+
 
     //this.flickBulb(this.currentLampost);
     //console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
@@ -456,34 +450,34 @@ this.eventCounter1 = 0;
         // if player presses spacebar when colliding with npc
         this.player.paused(); // player avatar movement becomes paused
 
-        // % // First interaction with Mayor Pimlico // % //
-        if (
-          // if the triggered npc is the Mayor and player has either
-          // the placeholder or the slingshot in their inventory
-          this.simulationNPCList[i].name === `Mayor Pimlico` &&
-          this.player.inventory[0] === `PlaceHolder`
-          // || this.simulationNPCList[i].name === `Mayor Pimlico` &&
-          // this.player.inventory[0].name === `Slingshot`
-        ) {
-          console.log(`this should only happen once`);
-          this.eventSwitch1 = 0; // initialize event switch
-          this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
-          if (this.eventSwitch1 === 0) {
-            this.player.inventory.unshift(this.simulationItemList[1]); // Pimlico gives you Ham!
-            if (this.player.inventory[1] === `PlaceHolder`) {
-              // remove place holder if you don'T already have the slingshot
-              this.player.inventory.splice(1, 1);
-              this.textBubble = new TextBubble(
-                `${this.simulationNPCList[i].texts[0]}`
-              );
-              this.simulationNPCList[i].textNo = 1;
-            }
-            //this.simulationNPCList[i].textNo = 1; // Pimlico's text is changed
-            // next time Pimlico is triggered this new text will be displayed
-          }
-          this.eventSwitch1++;
-        }
-        // % //
+        // // % // First interaction with Mayor Pimlico // % //
+        // if (
+        //   // if the triggered npc is the Mayor and player has either
+        //   // the placeholder or the slingshot in their inventory
+        //   this.simulationNPCList[i].name === `Mayor Pimlico` &&
+        //   this.player.inventory[0] === `PlaceHolder`
+        //   // || this.simulationNPCList[i].name === `Mayor Pimlico` &&
+        //   // this.player.inventory[0].name === `Slingshot`
+        // ) {
+        //   console.log(`this should only happen once`);
+        //   this.eventSwitch1 = 0; // initialize event switch
+        //   this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
+        //   if (this.eventSwitch1 === 0) {
+        //     this.player.inventory.unshift(this.simulationItemList[1]); // Pimlico gives you Ham!
+        //     if (this.player.inventory[1] === `PlaceHolder`) {
+        //       // remove place holder if you don'T already have the slingshot
+        //       this.player.inventory.splice(1, 1);
+        //       this.textBubble = new TextBubble(
+        //         `${this.simulationNPCList[i].texts[0]}`
+        //       );
+        //       this.simulationNPCList[i].textNo = 1;
+        //     }
+        //     //this.simulationNPCList[i].textNo = 1; // Pimlico's text is changed
+        //     // next time Pimlico is triggered this new text will be displayed
+        //   }
+        //   this.eventSwitch1++;
+        // }
+        // // % //
 
         // set up clicked npc values temporarily stored in simulation
         this.NPCdesiredItem = this.simulationNPCList[i].desiredItem;
@@ -535,13 +529,10 @@ this.eventCounter1 = 0;
         if (this.simulationNPCList[i].textNo === 0) {
           // when triggered npc text is index 0
           // if (this.eventSwitch3 === 0) {
-          console.log(`do you keep coming here?`);
           this.textBubble = new TextBubble(
             `${this.simulationNPCList[i].texts[0]}`
           );
-          console.log(
-            `what is pims textno ${this.simulationNPCList[i].textNo}`
-          );
+
           // }
           // this.eventSwitch3++;
         } else if (this.simulationNPCList[i].textNo === 1) {
@@ -617,7 +608,7 @@ this.eventCounter1 = 0;
         this.player.thresholdCollision = false;
       }
     }
-    this.player.display(); // display the player avatar
+    //this.player.display(); // display the player avatar
   }
 
   // METHODS //
@@ -663,15 +654,7 @@ this.eventCounter1 = 0;
     pop();
   }
 
-  mouseClicked() { // A way to pause the game by clicking
-    // when game is paused this way, proposition to quit the game
-    // "If you wish to quit the game, you can simply shut the window."
-  if (this.player.isPaused === false){
-    this.player.paused();
-  }
-  if (this.player.isPaused === true){
-    this.player.isPaused = false;
-  }
+  mouseClicked() {
   }
 
     keyPressed() {

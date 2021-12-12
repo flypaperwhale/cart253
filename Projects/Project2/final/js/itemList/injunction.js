@@ -8,6 +8,7 @@ class Injunction extends Item {
     this.height = 45;
     this.image = image;
     this.isOnMap = false; // always false
+    this.map = undefined;
     this.playerColliding = undefined;
   }
 

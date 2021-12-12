@@ -8,6 +8,7 @@ class FrogConstellation extends Item {
     this.height = 20;
     this.image = image;
     this.isOnMap = false; // always false
+    this.map = undefined;
     this.playerColliding = undefined;
   }
 

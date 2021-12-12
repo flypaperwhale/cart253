@@ -67,6 +67,9 @@ this.displaySkyGlow(npcList[9]); // call method with map B lamp and light buzz s
   }
 
   this.displayLampFoot(); // displayed before the player for correct layer effect
+
+  super.displayItem();
+
   player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
 
   //this.displayLightsOn(npcList[9],soundList[3],player); // call method with map B lamp and light buzz sound

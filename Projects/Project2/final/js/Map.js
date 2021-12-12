@@ -34,6 +34,17 @@ displayGreenGrass() {
   pop();
 }
 
+displayItem(item){
+  if (item === undefined){
+
+  }
+  else {
+  push();
+  imageMode(CENTER);
+  image(item.image, item.x, item.y, item.width, item.height); // hard numbers
+  pop();}
+}
+
 addWindow(x,y,w,h,onOff){
   push();
   noStroke();

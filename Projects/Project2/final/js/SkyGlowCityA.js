@@ -164,19 +164,24 @@ displayWindows(){
             super.addWindow(430,702,22,25,0)
             super.addWindow(470,742,22,25,1)
               super.addWindow(430,742,22,25,0)
-
-              //blockBackBuildingMapA
+              //BackBuildingMapA
                 super.addWindow(30,619,22,25,1)
                   super.addWindow(70,619,22,25,1)
                   super.addWindow(70,659,22,25,1)
                     super.addWindow(70,699,22,25,0)
                     super.addWindow(30,659,22,25,1)
                       super.addWindow(30,699,22,25,1)
-                      //super.addWindow(70,739,22,25,1)
                         super.addWindow(30,739,22,25,0)
-                        //super.addWindow(30,779,22,25,1)
-                        //super.addWindow(70,779,22,25,1)
                         super.addWindow(30,420,22,25,0)
+                        // City Hall
+                        super.addWindow(260,613,90,40,0)
+                        super.addWindow(203,613,15,40,1)
+                        super.addWindow(317,613,15,40,0)
+                        super.addWindow(260,683,90,40,1)
+                        super.addWindow(206,683,5,40,1)
+                        super.addWindow(314,683,5,40,1)
+                        super.addWindow(195,688,5,40,1)
+                        super.addWindow(325,688,5,40,1)
   }
   else if (this.allLightsOut === true){
     //Dolly building
@@ -190,7 +195,6 @@ displayWindows(){
             super.addWindow(430,702,22,25,0)
             super.addWindow(470,742,22,25,0)
               super.addWindow(430,742,22,25,0)
-
               //blockBackBuildingMapA
                 super.addWindow(30,619,22,25,0)
                   super.addWindow(70,619,22,25,0)
@@ -198,51 +202,20 @@ displayWindows(){
                     super.addWindow(70,699,22,25,0)
                     super.addWindow(30,659,22,25,1)
                       super.addWindow(30,699,22,25,0)
-                      //super.addWindow(70,739,22,25,1)
                         super.addWindow(30,739,22,25,0)
-                        //super.addWindow(30,779,22,25,1)
-                        //super.addWindow(70,779,22,25,1)
                         super.addWindow(30,420,22,25,0)
+                        // City Hall
+                        super.addWindow(260,613,90,40,0)
+                        super.addWindow(203,613,15,40,0)
+                        super.addWindow(317,613,15,40,0)
+                        super.addWindow(260,683,90,40,0)
+                        super.addWindow(206,683,5,40,0)
+                        super.addWindow(314,683,5,40,0)
+                        super.addWindow(195,688,5,40,0)
+                        super.addWindow(325,688,5,40,0)
   }
 }
 
-displayWindows(){
-  //Dolly building
-  super.addWindow(430,582,22,25,1)
-    super.addWindow(430,622,22,25,1)
-    super.addWindow(470,582,22,25,1)
-      super.addWindow(470,622,22,25,0)
-      super.addWindow(470,662,22,25,1)
-        super.addWindow(470,702,22,25,0)
-        super.addWindow(430,662,22,25,1)
-          super.addWindow(430,702,22,25,0)
-          super.addWindow(470,742,22,25,1)
-            super.addWindow(430,742,22,25,0)
-
-            //blockBackBuildingMapA
-              super.addWindow(30,619,22,25,1)
-                super.addWindow(70,619,22,25,1)
-                super.addWindow(70,659,22,25,1)
-                  super.addWindow(70,699,22,25,0)
-                  super.addWindow(30,659,22,25,1)
-                    super.addWindow(30,699,22,25,1)
-                    //super.addWindow(70,739,22,25,1)
-                      super.addWindow(30,739,22,25,0)
-                      //super.addWindow(30,779,22,25,1)
-                      //super.addWindow(70,779,22,25,1)
-                      super.addWindow(30,420,22,25,0)
-
-// City Hall
-super.addWindow(260,613,90,40,0)
-super.addWindow(203,613,15,40,1)
-super.addWindow(317,613,15,40,0)
-super.addWindow(260,683,90,40,1)
-super.addWindow(206,683,5,40,1)
-super.addWindow(314,683,5,40,1)
-
-super.addWindow(195,688,5,40,1)
-super.addWindow(325,688,5,40,1)
-}
 
 displayStairs(){
   // the stairs are blocked by the mayor. get 3 injunctions and the mayor will move

@@ -2,6 +2,7 @@ class SimulationState extends State {
   constructor(simulationImagesList, simulationMapsArray, simulationSoundsArray) {
     super();
 
+this.name = `SimulationState`;
     this.simulationImagesList = simulationImagesList;
     this.simulationMapsArray = simulationMapsArray;
     this.simulationSoundsArray = simulationSoundsArray;

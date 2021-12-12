@@ -157,6 +157,19 @@ function createMapsAndStore(){
 
 function draw() {
   state.update();
+
+  if (state.name === `SimulationState`){
+    playBGMusic(); // the backgroung music starts playing
+  }
+}
+
+function playBGMusic() { // plays bg music
+  push();
+  bgmusic1.playMode(`untilDone`); // bg music mode loops forever
+  bgmusic1.setVolume(0.88); // not too loud
+  bgmusic1.rate(0.77); // not too quick
+  bgmusic1.play(); // play bg music
+  pop();
 }
 
 function keyPressed() {

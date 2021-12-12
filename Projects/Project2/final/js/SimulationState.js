@@ -1,14 +1,18 @@
 class SimulationState extends State {
-  constructor(simulationImagesList, mapsArray, simulationSoundsArray) {
+  constructor(simulationImagesList, simulationMapsArray, simulationSoundsArray) {
     super();
 
+    this.simulationImagesList = simulationImagesList;
+    this.simulationMapsArray = simulationMapsArray;
+    this.simulationSoundsArray = simulationSoundsArray;
+
 // Save simulation sounds into variables for this class
-    this.sunsetStarsIntro = simulationSoundsArray[0];
-    this.constellationWink = simulationSoundsArray[1];
-    this.lightFlickSound = simulationSoundsArray[2];
-    this.buzzingSound = simulationSoundsArray[3];
-    this.bulbBurstSound = simulationSoundsArray[4];
-    this.bgMusic = simulationSoundsArray[5];
+    this.sunsetStarsIntro = this.simulationSoundsArray[0];
+    this.constellationWink = this.simulationSoundsArray[1];
+    this.lightFlickSound = this.simulationSoundsArray[2];
+    this.buzzingSound = this.simulationSoundsArray[3];
+    this.bulbBurstSound = this.simulationSoundsArray[4];
+    this.bgMusic = this.simulationSoundsArray[5];
 // Array to hold all the simulation items
     this.simulationItemList = [];
     this.createItems(); // create Items and store them in the itemList array
@@ -16,10 +20,10 @@ class SimulationState extends State {
     this.simulationNPCList = [];
     this.createNPCs(); // creating NPCs and storing them in NPCList array
 
-    this.maps = [mapsArray[0], mapsArray[1], mapsArray[2]]; // load game maps into the state
+    this.maps = [this.simulationMapsArray[0], this.simulationMapsArray[1],this.simulationMapsArray[2]]; // load game maps into the state
     // to be called upon and displayed
     this.map = undefined; // temporary map variable
-    this.currentMap = mapsArray[1]; // current map updated according to where the player goes
+    this.currentMap = this.simulationMapsArray[1]; // current map updated according to where the player goes
     // mapsArray[1] = map B, where the player begins
     this.player = new Player(109, 597);
     this.textBubbleIsLoaded = false; // checks if a new text has been fed to a new textBubble
@@ -27,8 +31,7 @@ class SimulationState extends State {
 // animation bits and bobbles
     this.animationState = undefined; // states used inside the Simulation to manage animations
     this.songSwitch = 0; // switch used for the animations
-    this.cueLightFlicks(this.simulationNPCList[5]); // add light cues to the lamp on map B
-    this.setAnimationState(`SunsetState`); //##
+    this.setAnimationState(`lightsup`); //##
 
 // Trade sequence bits and bobbles
 this.eventCounter1 = 0;
@@ -39,34 +42,34 @@ this.eventCounter1 = 0;
 
   createItems() { // create individual copies of each item class
     // to be stored in the simulationItemList
-  this.ham = new Ham(itemImagesList[0]);
+  this.ham = new Ham(this.simulationImagesList[0]);
   this.simulationItemList.push(this.ham); //
   //
-  this.bigBone = new BigBone(itemImagesList[1]);
+  this.bigBone = new BigBone(this.simulationImagesList[1]);
   this.simulationItemList.push(this.bigBone); //
   //
-  this.slingshot = new Slingshot(itemImagesList[2]);
+  this.slingshot = new Slingshot(this.simulationImagesList[2]);
   this.simulationItemList.push(this.slingshot); //
   //
-  this.frogConstellation = new FrogConstellation(itemImagesList[3]);
+  this.frogConstellation = new FrogConstellation(this.simulationImagesList[3]);
   this.simulationItemList.push(this.frogConstellation); //
   //
-  this.frog = new Frog(itemImagesList[4]);
+  this.frog = new Frog(this.simulationImagesList[4]);
   this.simulationItemList.push(this.frog); //
   //
-  this.wrench = new Wrench(itemImagesList[5]);
+  this.wrench = new Wrench(this.simulationImagesList[5]);
   this.simulationItemList.push(this.wrench); //
   //
-  this.arrowConstellation = new ArrowConstellation(itemImagesList[6]);
+  this.arrowConstellation = new ArrowConstellation(this.simulationImagesList[6]);
   this.simulationItemList.push(this.arrowConstellation); //
   //
-  this.injunction = new Injunction(itemImagesList[7]);
+  this.injunction = new Injunction(this.simulationImagesList[7]);
   this.simulationItemList.push(this.injunction); //
   //
-  this.key = new Key(itemImagesList[8]);
+  this.key = new Key(this.simulationImagesList[8]);
   this.simulationItemList.push(this.key); //
   //
-  this.eagleConstellation = new EagleConstellation(itemImagesList[9]);
+  this.eagleConstellation = new EagleConstellation(this.simulationImagesList[9]);
   this.simulationItemList.push(this.eagleConstellation); //
   //
   }
@@ -100,30 +103,9 @@ this.eventCounter1 = 0;
     this.simulationNPCList.push(this.jade);
   }
 
-  cueLightFlicks() { // Currently this animation can only be viewed on the console
-    // I couldn't get the light to flicker on cue like it did in my Make Some Noise exercise...
-    this.lightFlickSound.addCue(0.1, this.simulationNPCList[5].flickBulbOn);
-    this.lightFlickSound.addCue(0.2, this.simulationNPCList[5].flickBulbOff);
-    this.lightFlickSound.addCue(0.3, this.simulationNPCList[5].flickBulbOn);
-    this.lightFlickSound.addCue(0.4, this.simulationNPCList[5].flickBulbOff);
-    this.lightFlickSound.addCue(0.75, this.simulationNPCList[5].flickBulbOn);
-    this.lightFlickSound.addCue(0.8, this.simulationNPCList[5].flickBulbOff);
-  }
-
   update() {
     // updates every frame, it serves a drawing function
     background(0);
-    // assign the current map so the SimulationState can manage npcs, decor, sounds accordingly
-    // with relation to the player's actions
-    this.map = this.currentMap;
-    this.map.display(
-      this.player,
-      this.simulationNPCList,
-      simulationSoundsArray
-    );
-    this.player.barriers(this.map); // barriers are stated in the Player file
-    // because they control where the player can and cannot go
-    // the actual map is fed as each map has varying walls
 
     // Check if player is paused (when textBubble appears)
     if (this.player.isPaused === true) {
@@ -135,6 +117,18 @@ this.eventCounter1 = 0;
       this.player.handleInput(); // handle player input: up, down, left, right, w,s,a,d,
       this.player.move(); // change the player avatar's position
     }
+
+    // assign the current map so the SimulationState can manage npcs, decor, sounds accordingly
+    // with relation to the player's actions
+    this.map = this.currentMap;
+    this.map.display(
+      this.player,
+      this.simulationNPCList,
+      this.simulationSoundsArray
+    );
+    this.player.barriers(this.map); // barriers are stated in the Player file
+    // because they control where the player can and cannot go
+    // the actual map is fed as each map has varying walls
 
     // current lampost is assigned to have sound/visual effects related
     // to which map it is on
@@ -146,22 +140,13 @@ this.eventCounter1 = 0;
       this.currentLampost = this.simulationNPCList[9]; // lampostC
     }
 
-    // Check if player is paused (when textBubble appears)
-    if (this.player.isPaused === true) {
-      // if player is paused
-      this.player.vx = 0; // turn player velocity to 0
-      this.player.vy = 0;
-    } else if (this.player.isPaused === false) {
-      // if player is not paused
-      this.player.handleInput(); // handle player input: up, down, left, right, w,s,a,d,
-      this.player.move(); // change the player avatar's position
-    }
+
 
     // go through the NPC array to display each NPC (according to the map player is on)
       // also, check if player is colliding and update the NPC's data if need be (from click & trade)
       for (let i = 0; i < this.simulationNPCList.length; i++) {
         // Look through NPC List
-        this.simulationNPCList[i].display(); // display every NPC
+        //this.simulationNPCList[i].display(); // display every NPC
         this.simulationNPCList[i].playerCollisionCheck(
           //NPC/Player Collision check
           this.player.x,
@@ -365,49 +350,6 @@ this.eventCounter1 = 0;
         }
         // end of items on map section //
 
-          // IS TRADED COMING UP
-          // if item is picked or traded
-          // to be added to player.INVENTORY
-
-          // manage all items //
-      //     if (
-      //      this.simulationItemList[i].isPicked === true ||
-      //       this.simulationItemList[i].isTraded === true
-      //     ) {
-      //     if (this.player.itemPickingLevel === 2) {
-      //       // at picking lvl 2
-      //       console.log(`been here pick lvl2 tool`);
-      //       // if (this.simulationItemList[i].name === `Slingshot` || // if item added to inventory is
-      //       // slingshot, wrench, or injunction, push them from the right side into array
-      //       // Tools stay inside the inventory (Slingshot, Wrench, Injunctions)//
-      //       if (
-      //         this.simulationItemList[i].name === `Wrench` ||
-      //         this.simulationItemList[i].name === `Injunction(s)`
-      //       ) {
-      //         this.player.inventory.push(this.simulationItemList[i]); // item is pushed in inventory
-      //         this.textBubble = new TextBubble( // text is assigned to textbubble
-      //           `You just picked up ${this.simulationItemList[i].name}`
-      //         );
-      //         this.simulationItemList[i].isPicked === false; // that way I don't make a million
-      //       }
-      //       else {
-      //         // every other item is tradeable //
-      //         //console.log(`been here pick lvl 2 tradeable`);
-      //         this.player.inventory.unshift(this.simulationItemList[i]); // item is unshifted from the left in inventory
-      //         // console.log(
-      //         //   `you just unshifted an item ${this.simulationItemList[i].name} in inventory. inv lgt now ${this.player.inventory.length}`
-      //         // );
-      //         this.textBubble = new TextBubble( // text is assigned to textbubble
-      //           `You just picked up ${this.simulationItemList[i].name}`
-      //         );
-      //         this.simulationItemList[i].isPicked === false; // that way I don't make a million
-      //       }
-      //     }
-      //     if (this.player.itemPickingLevel === 1 && this.player.isPaused === false) {
-      //       console.log(`how you get in here?`);
-      //       this.player.itemPickingLevel = 2;
-      //     }
-      // }
       this.eventSwitch2++;
       if (this.textBubbleIsLoaded === true){
         console.log(`so tbb is loaded...`);
@@ -424,17 +366,17 @@ this.eventCounter1 = 0;
       // if the animationState equals "sunset"
       this.player.paused(); // player is paused
       this.songSwitch++; // the songSwitch is increased
-      this.songSwitch = constrain(this.songSwitch, 0, 2); // the songSwitch is constrained between 0-2
-      this.playSunsetSong(); // the sunset theme is played
+      //this.songSwitch = constrain(this.songSwitch, 0, 2); // the songSwitch is constrained between 0-2
+      //this.playSunsetSong(); // the sunset theme is played
       // sunset animation with skyAlpha and dayTimer
       //this.skyAlpha = map(this.dayTimer, 310, 0, 255, 0); // map skyAlpha (255,0) goes down as dayTimer (310,0) goes down
       this.dayTimer--; // dayTimer goes down
       this.dayTimer = constrain(this.dayTimer, 0, 310); // constrain dayTimer
       if (this.dayTimer === 0) {
         // once the dayTimer reaches 0...
-        this.constellationWink.play(); // a chime sound to signify the twinkling stars
+        //this.constellationWink.play(); // a chime sound to signify the twinkling stars
         this.dayTimer = 1; // dayTimer is reset to 1
-        this.resetSongSwitch(); // songSwitch is reset to 0
+        //this.resetSongSwitch(); // songSwitch is reset to 0
         this.setAnimationState(`lightsUp`); // ... and then, no time to admire the stars, the lights go on!
       }
     }
@@ -651,18 +593,18 @@ this.eventCounter1 = 0;
         if (this.player.y > 500 && this.player.y < 510) {
           this.player.y = 520;
         }
-        this.currentMap = mapsArray[1];
+        this.currentMap = this.simulationMapsArray[1];
         this.player.thresholdCollision = false;
       } else if (this.map.name === `B`) {
         if (this.player.x > width / 2) {
           // if player cross threshold to the right
           this.player.x = 5;
-          this.currentMap = mapsArray[2]; // go to map C
+          this.currentMap = this.simulationMapsArray[2]; // go to map C
           this.player.thresholdCollision = false;
         } else if (this.player.x < width / 2) {
           // if player crosses to the left
           this.player.x = 495;
-          this.currentMap = mapsArray[0]; // go to map A
+          this.currentMap = this.simulationMapsArray[0]; // go to map A
           this.player.thresholdCollision = false;
         }
       } else if (this.map.name === `C`) {
@@ -670,7 +612,7 @@ this.eventCounter1 = 0;
         if (this.player.y > 670 && this.player.y < 685) {
           this.player.y = 650;
         }
-        this.currentMap = mapsArray[1];
+        this.currentMap = this.simulationMapsArray[1];
 
         this.player.thresholdCollision = false;
       }
@@ -684,7 +626,7 @@ this.eventCounter1 = 0;
     // plays sunset theme
     if (this.songSwitch === 1) {
       // if songSwitch is 1
-      this.sunsetStarsIntro.play(0, 1, 0.2); //## eh?
+      //this.sunsetStarsIntro.play(0, 1, 0.2); //## eh?
     }
   }
 
@@ -776,7 +718,7 @@ this.eventCounter1 = 0;
    }
 
           }
-          if (animationState === `lightsUp`) {
+          if (this.animationState === `lightsUp`) {
             // if state is "lightsUp"
             //   canBurst = true; // turn bulb canBurst switch to true
             // }

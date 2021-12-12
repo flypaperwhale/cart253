@@ -2,10 +2,15 @@ class TitleState extends State {
   constructor(simulationImagesList, mapsArray, simulationSoundsArray){
     super();
     this.name = `Title State`;
+    this.mapsArray = mapsArray;
+    this.simulationImagesList = simulationImagesList;
+    this.simulationSoundsArray = simulationSoundsArray;
   }
 
   update(){
     this.display();
+
+    console.log(`what is ${this.mapsArray}`)
   }
 
   display(){
@@ -24,7 +29,7 @@ class TitleState extends State {
   }
 
   mouseClicked(){
-    state = new SimulationState(simulationImagesList, mapsArray, simulationSoundsArray);
+    state = new SimulationState(this.simulationImagesList, this.mapsArray, this.simulationSoundsArray);
   }
 
 }

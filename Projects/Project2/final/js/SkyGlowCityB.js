@@ -6,10 +6,10 @@ class SkyGlowCityB extends Map{
 this.name = `B`; // map name
 
 //image files
-this.streetlampImg = simulationImagesList[6];
-this.streetlampFootImg = simulationImagesList[7];
-this.stairsImg = simulationImagesList[8];
-this.treeImg = simulationImagesList[9];
+this.streetlampImg = simulationImagesList[10];
+this.streetlampFootImg = simulationImagesList[11];
+this.stairsImg = simulationImagesList[12];
+this.treeImg = simulationImagesList[13];
 
 //Lamp coordinates
 this.lampX = 225; // lamp x value
@@ -27,32 +27,18 @@ display(player, npcList, soundList){
 
   //sky
   super.displaySky(); // the blue sky rectangle covers the starry bg image
-
 this.displayStars();
-
 //npcList[5].flickBulb(this);
-
 this.displaySkyGlow(npcList[5]);
-
 //this.flickBulb(npcList[5]);
-
   //ground
   super.displayGreenGrass(); // display Green Grass
-
-
   this.displayCircleAndPath(); // display gray circle and path
-
   this.displayDollysBuilding();
   this.displayBackgroundBuilding();
   this.displayShop();
-
   this.displayWindows();
-
   this.displayStairs();
-
-// npcList[4].display(); // marv
-// npcList[3].display(); // janine
-// npcList[5].display(); // streetlamp
 
 for (let i= 0; i < npcList.length; i++){
   if (npcList[i].map === this.name){
@@ -61,9 +47,8 @@ for (let i= 0; i < npcList.length; i++){
     else{
         npcList[i].display();
     }
-
     npcList[i].playerCollisionCheck(player.x,player.y,player.size);
-
+    console.log(`player is colliding with ${npcList[i].name}`)
   }
 }
 
@@ -231,28 +216,6 @@ displayStairs(){
   image(this.stairsImg, 120.5, 681, 45, 228); // hard numbers
   pop();
 }
-
-
-
-// displaySky() {
-//   // displays sky rectangle
-//   push();
-//   noStroke();
-//   fill(35,45,125);
-//   rectMode(CENTER);
-//   rect(width / 2, 0, 500, 990);
-//   pop();
-// }
-//
-// displayGreenGrass() {
-//   // draws a green rectangle as land where player can walk around
-//   push();
-//   noStroke();
-//   fill(20, 85, 45); // middle green
-//   rectMode(CENTER);
-//   rect(width / 2, height, 500, 1010); // displayed at bottom center
-//   pop();
-// }
 
 displayCircleAndPath() { // draws a gray path leading to the circle
   // in the middle of which stands the lamppost

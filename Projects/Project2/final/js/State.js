@@ -1,5 +1,5 @@
 class State {
-  constructor(mapsArray){
+  constructor(){
     this.name = undefined;
     noCursor();
   }

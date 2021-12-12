@@ -5,12 +5,12 @@ class SkyGlowCityC extends Map{
 //this.player; // player avatar, class Player
 this.name = `C`;
 // image files
-this.streetlampImg = simulationImagesList[6];
-this.streetlampFootImg = simulationImagesList[7];
-this.treeImg = simulationImagesList[9];
-this.garbageImg = simulationImagesList[10];
-this.gazeboImg = simulationImagesList[11];
-this.gazeboBaseImg = simulationImagesList[12];
+this.streetlampImg = simulationImagesList[10];
+this.streetlampFootImg = simulationImagesList[11];
+this.treeImg = simulationImagesList[13];
+this.garbageImg = simulationImagesList[14];
+this.gazeboImg = simulationImagesList[15];
+this.gazeboBaseImg = simulationImagesList[16];
 
 //lamp coordinates
 this.lampX = 378; // lamp x value

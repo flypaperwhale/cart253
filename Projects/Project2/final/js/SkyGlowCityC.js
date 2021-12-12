@@ -5,12 +5,12 @@ class SkyGlowCityC extends Map{
 //this.player; // player avatar, class Player
 this.name = `C`;
 // image files
-this.streetlampImg = simulationImagesList[6];
-this.streetlampFootImg = simulationImagesList[7];
-this.treeImg = simulationImagesList[9];
-this.garbageImg = simulationImagesList[10];
-this.gazeboImg = simulationImagesList[11];
-this.gazeboBaseImg = simulationImagesList[12];
+this.streetlampImg = simulationImagesList[10];
+this.streetlampFootImg = simulationImagesList[11];
+this.treeImg = simulationImagesList[13];
+this.garbageImg = simulationImagesList[14];
+this.gazeboImg = simulationImagesList[15];
+this.gazeboBaseImg = simulationImagesList[16];
 
 //lamp coordinates
 this.lampX = 378; // lamp x value
@@ -66,11 +66,10 @@ this.displaySkyGlow(npcList[9]); // call method with map B lamp and light buzz s
     }
   }
 
-  //movePlayer(); // handle user input and move player avatar
-
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
-  this.displayLightsOn(npcList[9], soundList[3],player); // call method with map B lamp and light buzz sound
+
+  //this.displayLightsOn(npcList[9],soundList[3],player); // call method with map B lamp and light buzz sound
 
   this.displayLamppost(); // displays lamppost in front of player
   this.displayGazebo();
@@ -113,29 +112,13 @@ displayStars(){
 
 }
 
-// // Create player
-// function createPlayer(x, y) {
-//   // create new player class
-//   player = new Player(x, y);
+// displayLightsOn(lampost,sound,player) {
+//   if (lampost.lightIsOn === true) { // if the lamp is turned on
+//     //console.log(`is it bro is it?`)
+//     lampost.displayLampGlow(); // small yellow ellipse around lamp head
+//     this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
+//   }
 // }
-//
-// function displayPlayer() { // player is displayed
-//   player.constrain(height,width); // movement is constrained to the ground
-//   player.display(); // display player
-// }
-//
-// function movePlayer() {
-//   player.handleInput(); // handle player input
-//   player.move(); // and move player avatar
-// }
-
-displayLightsOn(lampost,sound,player) {
-  if (lampost.lightIsOn === true) { // if the lamp is turned on
-    //console.log(`is it bro is it?`)
-    lampost.displayLampGlow(); // small yellow ellipse around lamp head
-    this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
-  }
-}
 
 displaySkyGlow(lampost){ // large yellow ellipse behind lamp covering starry bg
   if (lampost.lightIsOn === true) {
@@ -149,20 +132,20 @@ displaySkyGlow(lampost){ // large yellow ellipse behind lamp covering starry bg
 }
 }
 
-lightBuzzing(lampost,sound,player) { // light buzzing sound FX
-  if (lampost.lightIsOn === true) { // if lightIsOn is true
-    push();
-    sound.playMode(`untilDone`); // buzz sound mode loop until done
-    //lampost.buzzVolume = map(this.playerDistLamp, 0, height - lampost.x, 0.1, 0);
-    // buzz volume increases when player is closer to lamp and decreases when further
-    sound.setVolume(this.buzzVolume); //index ##
-    //this.panning = map(this.player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)
-  //  sound.pan(this.panning);
-    sound.rate(1.2); // sound a little bit higher pitched
-    sound.play(); // play the sound
-    pop();
-  }
-}
+// lightBuzzing(lampost,sound,player) { // light buzzing sound FX
+//   if (lampost.lightIsOn === true) { // if lightIsOn is true
+//     push();
+//     sound.playMode(`untilDone`); // buzz sound mode loop until done
+//     //lampost.buzzVolume = map(this.playerDistLamp, 0, height - lampost.x, 0.1, 0);
+//     // buzz volume increases when player is closer to lamp and decreases when further
+//     sound.setVolume(this.buzzVolume); //index ##
+//     //this.panning = map(this.player.x, 0, width, 0.6, -0.6); // (pan code from p5 reference)
+//   //  sound.pan(this.panning);
+//     sound.rate(1.2); // sound a little bit higher pitched
+//     sound.play(); // play the sound
+//     pop();
+//   }
+// }
 
 //Background building
 displayShopBack() {

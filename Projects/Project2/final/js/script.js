@@ -39,6 +39,7 @@ let bulbBurstSound; // bulb burst
 let bgmusic1; // background music 1
 let bgmusic2; // background music 2
 let bgmusic3; // background music 3
+
 let simulationSoundsArray = []; // array holding sounds for the game
 let simulationImagesList = []; // array holding images for the games
 let simulationMapsArray = []; // array holding game maps
@@ -56,13 +57,13 @@ function preload() {
   hamImg = loadImage("assets/images/items/ham.png");
   bigBoneImg = loadImage("assets/images/items/bigBone.png");
   slingshotImg = loadImage("assets/images/items/slingshot1.png")
-  frogConstellationImg = loadImage("assets/images/items/frogConstellation.png") /// ###
+  frogConstellationImg = loadImage("assets/images/items/frogConstellation.png") 
   frogImg = loadImage("assets/images/items/frog2.png");
   wrenchImg = loadImage("assets/images/items/wrench.png");
-  arrowConstellationImg = loadImage("assets/images/items/arrowConstellation.png") /// ###
+  arrowConstellationImg = loadImage("assets/images/items/arrowConstellation.png")
   injunctionImg = loadImage("assets/images/items/letters.png");
-  keyImg = loadImage("assets/images/items/key.png"); //####
-  eagleConstellationImg = loadImage("assets/images/items/eagleConstellation.png") /// ###
+  keyImg = loadImage("assets/images/items/key.png");
+  eagleConstellationImg = loadImage("assets/images/items/eagleConstellation.png")
 
 // decor image files
   streetlampImg = loadImage("assets/images/lamp.png");
@@ -122,6 +123,10 @@ function setup() {
       bgmusic1); // [5]
 
   createMapsAndStore(); // inputs map files into the program to be stored in simulationMapsArray
+
+  userStartAudio();
+
+console.log(`before creating state simmapsarray is ${simulationMapsArray.length}`);
   userStartAudio();
   state = new TitleState(simulationImagesList, simulationMapsArray, simulationMapsArray); // initial state is TitleState
   // other states are SimulationState and EndingState
@@ -131,15 +136,18 @@ function createMapsAndStore(){
   for (let i = 0; i < mapNo; i++){
     console.log(`map no isht ${i}`);
     if (i === 0){
-      map = new SkyGlowCityA(simulationMapsArray); // Map A, full left
+      map = new SkyGlowCityA(simulationImagesList); // Map A, full left
     }
     if (i === 1){
-      map = new SkyGlowCityB(simulationMapsArray); // Map B, middle
+      map = new SkyGlowCityB(simulationImagesList); // Map B, middle
     }
     if (i === 2){
-      map = new SkyGlowCityC(simulationMapsArray); // Map C, full right
+      map = new SkyGlowCityC(simulationImagesList); // Map C, full right
     }
     simulationMapsArray.push(map);
+    console.log(`simmaparray ${simulationMapsArray[0].name}
+      ${simulationMapsArray[1]}
+      ${simulationMapsArray[2]}`)
   }
 }
 

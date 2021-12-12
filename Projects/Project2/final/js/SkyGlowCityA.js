@@ -4,11 +4,11 @@ class SkyGlowCityA extends Map{
     super();
 this.name = `A`;
 // image files
-this.streetlampImg = simulationImagesList[6];
-this.streetlampFootImg = simulationImagesList[7];
-this.stairsImg = simulationImagesList[8];
-this.fountainImg = simulationImagesList[13];
-this.fountainTopImg = simulationImagesList[14];
+this.streetlampImg = simulationImagesList[10];
+this.streetlampFootImg = simulationImagesList[11];
+this.stairsImg = simulationImagesList[12];
+this.fountainImg = simulationImagesList[17];
+this.fountainTopImg = simulationImagesList[18];
 //lamp coordinates
 this.lampX = 258; // lamp x value
 this.lampY = 500; // lamp y value

@@ -68,7 +68,7 @@ class Player {
   }
 
   displayInventory() { // CODE A DISPLAY INVENTORY THINGY
-    
+
     // for (let i = 0; i < this.inventory.length; i++) {
     //   console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);
     // }

@@ -4,11 +4,11 @@ class SkyGlowCityA extends Map{
     super();
 this.name = `A`;
 // image files
-this.streetlampImg = simulationImagesList[6];
-this.streetlampFootImg = simulationImagesList[7];
-this.stairsImg = simulationImagesList[8];
-this.fountainImg = simulationImagesList[13];
-this.fountainTopImg = simulationImagesList[14];
+this.streetlampImg = simulationImagesList[10];
+this.streetlampFootImg = simulationImagesList[11];
+this.stairsImg = simulationImagesList[12];
+this.fountainImg = simulationImagesList[17];
+this.fountainTopImg = simulationImagesList[18];
 //lamp coordinates
 this.lampX = 258; // lamp x value
 this.lampY = 510; // lamp y value
@@ -21,27 +21,17 @@ this.buzzVolume =0.025;
 Description of draw()
 */
 display(player, npcList, soundList) {
-  //background(0);
-
   //sky
   super.displaySky(); // the blue sky rectangle covers the starry bg image
-
   this.displayStars();
-
   this.displaySkyGlow(npcList[0]); // call method with map B lamp and light buzz sound
-
   //ground
   super.displayGreenGrass(); // display Green Grass
-
-
   this.displayCircleAndPath(); // display gray circle and path
-
   this.displayDollysBuilding();
   this.displayLargeBuilding();
   this.displayCityHall();
-
 this.displayWindows();
-
   this.displayStairs();
   this.displayFountain();
 
@@ -52,29 +42,21 @@ this.displayWindows();
       else{
           npcList[i].display();
       }
-
       npcList[i].playerCollisionCheck(player.x,player.y,player.size);
-
     }
   }
 
-
-// if (npcList)
-//   npcList[1].display(); // display mayor
-//   npcList[2].display(); // display street person
-//   //movePlayer(); // handle user input and move player avatar
-
   this.displayLampFoot(); // displayed before the player for correct layer effect
   player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
-  this.displayLightsOn(npcList[0], soundList[3],player); // call method with map B lamp and light buzz sound
-
+  this.displayLightsOn(npcList[0],soundList[3],player); // call method with map B lamp and light buzz sound
   this.displayLamppost(); // displays lamppost in front of player
   this.displayFountainTop();
-
 }
 
-// display stars
-displayStars(){
+// METHODS //
+
+
+displayStars(){ // displays stars
   // ARROW CONSTELLATION
   super.addStar(230,300,2,1)
   super.addStar(180,326,1.5,0)
@@ -105,21 +87,6 @@ displayStars(){
                                       super.addStar(63,453,2,0)
 
 }
-// // Create player
-// function createPlayer(x, y) {
-//   // create new player class
-//   player = new Player(x, y);
-// }
-//
-// function displayPlayer() { // player is displayed
-//   player.constrain(height,width); // movement is constrained to the ground
-//   player.display(); // display player
-// }
-//
-// function movePlayer() {
-//   player.handleInput(); // handle player input
-//   player.move(); // and move player avatar
-// }
 
 displayLightsOn(lampost,sound,player) {
   if (lampost.lightIsOn === true) { // if the lamp is turned on

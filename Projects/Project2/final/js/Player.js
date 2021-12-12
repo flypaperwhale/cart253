@@ -72,7 +72,7 @@ class Player {
     console.log(this.inventory);
   }
 
-  
+
 
   barriers(map) {
     if (map.name === `A`) {

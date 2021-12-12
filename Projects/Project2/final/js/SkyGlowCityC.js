@@ -43,6 +43,7 @@ this.displaySkyGlow(npcList[9]); // call method with map B lamp and light buzz s
   this.displayGarbage();
 
   this.displayGazeboBase();
+  npcList[7].showDoggy();
 
   // npcList[6].display(); // billee
   // npcList[10].display(); // jade
@@ -125,7 +126,7 @@ displayStars(){
 
 displayLightsOn(lampost,sound,player) {
   if (lampost.lightIsOn === true) { // if the lamp is turned on
-    console.log(`is it bro is it?`)
+    //console.log(`is it bro is it?`)
     lampost.displayLampGlow(); // small yellow ellipse around lamp head
     this.lightBuzzing(lampost,sound,player); // light buzzing sound FX grows weaker the further away player is from lamp
   }
@@ -133,7 +134,7 @@ displayLightsOn(lampost,sound,player) {
 
 displaySkyGlow(lampost){ // large yellow ellipse behind lamp covering starry bg
   if (lampost.lightIsOn === true) {
-    console.log(`whathow?`)
+    //console.log(`whathow?`)
     push();
     noStroke();
     fill(225, 225, 100, 200); // light yellow and slightly transparent
@@ -169,7 +170,7 @@ displayShopBack() {
   pop();
 }
 displayWindows(){
-  super.addWindow(50,720,60,30,0);
+  super.addWindow(50,720,60,30,1);
 }
 
 displayGarbage(){

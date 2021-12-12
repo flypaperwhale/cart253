@@ -29,8 +29,8 @@ class Billee extends NPC {
   }
 
   display() {
+    // displays NPC specific image at the correct coordinates
     super.display();
-    this.move();
   }
 
   playerCollisionCheck(playerX,playerY,playerSize) {

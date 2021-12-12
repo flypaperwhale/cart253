@@ -2,7 +2,7 @@ class Janine extends NPC {
   constructor() {
     super();
     this.x = 329;
-    this.y = 785;
+    this.y = 774;
     this.r = 85; // baby blue
     this.g = 100;
     this.b = 225;
@@ -21,6 +21,7 @@ class Janine extends NPC {
   }
 
   display() {
+    // displays NPC specific image at the correct coordinates
     super.display();
   }
 

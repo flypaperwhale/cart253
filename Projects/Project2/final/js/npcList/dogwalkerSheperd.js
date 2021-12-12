@@ -26,15 +26,21 @@ class Sheperd extends NPC {
       Sign me up!`,
     ];
     this.map = `C`;
-    this.doggyX = 222;
-    this.doggyY = 137;
+    this.doggyX = 400;
+    this.doggyY = 772;
     this.doggyW = 17;
     this.doggyH = 12;
   }
 
   display() {
+    // displays NPC specific image at the correct coordinates
     super.display();
+  }
+
+  showDoggy() {
+    // displays NPC specific ellipse (colors, size) at the correct coordinates
     push();
+    noStroke();
     fill(this.r,this.g,this.b);
     ellipse(this.doggyX,this.doggyY,this.doggyW, this.doggyH);
     pop();

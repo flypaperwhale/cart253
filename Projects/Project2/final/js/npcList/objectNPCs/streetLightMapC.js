@@ -31,7 +31,7 @@ class StreetLightC extends NPC {
         ellipse(this.x, this.y - 100, 100, 100);
         pop();
       }
-      
+
     display() {
       super.display();
     }

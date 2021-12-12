@@ -93,7 +93,7 @@ console.log(`yay lightflicks!`)
   }
 
   cueLightFlicks() { //simulationSoundsArray[2],npcList[5]
-    console.log(`lightflix?`);
+    //console.log(`lightflix?`);
     this.lightFlickSound.addCue(0.1, this.simulationNPCList[5].flickBulbOn);
     this.lightFlickSound.addCue(0.2, this.simulationNPCList[5].flickBulbOff);
     this.lightFlickSound.addCue(0.3, this.simulationNPCList[5].flickBulbOn);
@@ -108,6 +108,8 @@ console.log(`yay lightflicks!`)
     textAlign(CENTER);
     // This text is in the background, gives player how to play
     text(`press enter to change maps!`, width/ 2, height/2);
+
+this.billee.move();
 
 // assign current map so state class can manage accordingly (npcs, decor, sounds)
 // where the player is in relation to other elements
@@ -197,7 +199,7 @@ else if (this.map.name === `C`){
             }
 
             //this.flickBulb(this.currentLampost);
-            console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
+            //console.log(`flickbulb never happens yet t/f? ${this.flickerBulb}`)
 
 
 

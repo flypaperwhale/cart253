@@ -1,12 +1,13 @@
 class LightsUpState extend State { // animation when the light turns on, then simulation begins
   // and player can play
-  constructor(simulationImagesList, mapsArray, simulationSoundsArray, stateName){
+  constructor(simulationImagesList, mapsArray, simulationSoundsArray, stateName)
+  {
     super();
     this.name = `Light's up State`;
 
   }
 
-  if (stateName === `light's up State`) { // if state is "lightsUp"
+    if (state === `light's up State`) { // if state is "lightsUp"
     checkPlayerNPCCollision(); // checks if player is touching npc or not
     calculatePlayerLampDist(); // calculate the distance between player and lamp every frame
     songSwitch++; // add 1 to songSwitch

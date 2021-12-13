@@ -11,7 +11,12 @@ class StreetLightA extends NPC {
     this.isTriggered = false;
     this.tradeSucceeded = false;
     this.textNo = 0;
-    this.texts = [`Dolly used the wrench on the lampost`];
+    this.texts = [
+      `There is a lock on the switch box`,
+      `Dolly uses the Key on the lamppost`,
+      `You took out all the lights!
+      (if you haven't yet, take out your item)`,
+    ];
     this.map = `A`;
     this.lightIsOn = false; // switch true/false that draws light a.-v. FX when true
   }

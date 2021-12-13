@@ -12,10 +12,11 @@ class StreetLightB extends NPC {
     this.tradeSucceeded = false;
     this.textNo = 0;
     this.texts = [
-      `...`,
-      `Don't you see that copper down there?
-    I wouldn't use my slingshot here if I were you`,
+      `Don't act out now, there's a copper
+      watching us down there`,
       `Dolly used the wrench on the streetLight`,
+      `Look above, the Arrow Constellation...
+      Must move along, convince others`,
     ];
     this.map = `B`;
     this.lightIsOn = false; // switch true/false that draws light a.-v. FX when true

@@ -19,10 +19,11 @@ class Jade extends NPC {
       Although we're best friends, I sometimes feel I
       have to look over Billee because I'm older`,
       `Jade:
-      That constellation doesn't look like a frog to me,
-      I see a mouse!`,
+      That constellation is supposed to look like a frog?
+      to me, I see a mouse! Here's a Frog!!!`,
       `Jade:
-      Sign me up!`,
+      The more I look, I kind of see it.
+      In any case, it's soo beautiful!`,
     ];
     this.map = `C`;
   }

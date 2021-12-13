@@ -16,17 +16,11 @@ class Marv extends NPC {
     this.textNo = 0;
     this.texts = [
       `Elder Marv:
-      Hey sprout, what are you up to? - The stars?
-      reminds me of a constellation, I could tell you...`,
-      `Elder Marv:
-      You want to what? Turn out all the lights? Dolly,
-      I'm inclined to help you. I'm just not sure... `,
+      Hey sprout, what are you up to? - Them stars?
+      that reminds me of a constellation, I could tell you...`,
       `Elder Marv:
       Yes, the frog, THAT IS my favorite constellation!
       Here, use this on the lantern, I'll cover you`,
-      `Elder Marv:
-      Take this notice to mayor. If you can collect 3 of these
-      from other citizens, the city will comply to our demand!`,
       `Elder Marv:
       Good show sprout`,
     ];

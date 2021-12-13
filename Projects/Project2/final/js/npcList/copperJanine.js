@@ -17,6 +17,12 @@ class Janine extends NPC {
     this.texts = [
       `Copper Janine:
       Enjoy the night, I'll be watching over you`,
+      `Copper Janine:
+      *a tear*. My Dad taught me the Arrow Constellation.
+      Here, I wrote this for you, take it to the mayor`,
+      `Copper Janine:
+      Did you take my injunction to the mayor?
+      Look at all those stars!`,
     ];
     this.map = `B`;
   }

@@ -1,5 +1,5 @@
 class TitleState extends State {
-  constructor(simulationImagesList, mapsArray, simulationSoundsArray) {
+  constructor(simulationImagesList, mapsArray, simulationSoundsArray) { // program arrays fed through
     super();
     this.name = `Title State`;
     this.mapsArray = mapsArray;

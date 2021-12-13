@@ -18,11 +18,6 @@ class Sheperd extends NPC {
       `Sheperd:
       Walking the dog to take a moment
       away from the worries of the day`,
-      `Sheperd:
-      Timsy dragged me to here, it looks like
-      she's found herself a bone`,
-      `Sheperd:
-      Sign me up!`,
     ];
     this.map = `C`;
     this.doggyX = 403;

@@ -16,13 +16,14 @@ class Pimlico extends NPC {
     this.textNo = 0;
     this.texts = [
       `Mayor Pimlico:
-      Hello, hello! Our banquet at City Hall tonight is
-      NOT FOR KIDS. Have a ham scram kiddo`,
+      Hello, hello! Our investors' banquet at City Hall
+      tonight is ADULTS ONLY. Have a ham scram kiddo`,
       `Mayor Pimlico:
-      I'm not giving you any more food, we need to keep
-      some for the investors...`,
+      I don't have time to look at papers tonight -
+      an Injunction!? Just...- go on now, get on with it!`,
       `Mayor Pimlico:
-      I'm not looking at any papers tonight. Scram`,
+      You put up quite a show tonight little Dolly.
+      What you did even impressed the investors!`,
     ];
     this.map = `A`;
   }

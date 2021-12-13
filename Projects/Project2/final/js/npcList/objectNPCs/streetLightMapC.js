@@ -12,8 +12,10 @@ class StreetLightC extends NPC {
     this.tradeSucceeded = false;
     this.textNo = 0;
     this.texts = [
-      `The dog walker will get the copper if you shoot the light now`,
-      `Dolly uses slingshot on the lampost`,
+      `There's so many people around, still if only
+      I could just...`,
+      `Dolly uses Slingshot on the lampost`,
+      `You've just revealed the Frog Constellation!`
     ];
     this.map = `C`;
     this.lightIsOn = false; // switch true/false that draws light a.-v. FX when true

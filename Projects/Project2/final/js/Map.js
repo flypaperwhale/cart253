@@ -14,12 +14,11 @@ display(){
 
 }
 
-
 displaySky() {
   // displays sky blue rectangle
   push();
   noStroke();
-  fill(35,45,125); // blue with alpha value linked to dayTimer
+  fill(35,45,125);
   rectMode(CENTER);
   rect(width / 2, 0, 500, 200);
   pop();
@@ -42,13 +41,12 @@ displayItem(item){
   else {
   push();
   imageMode(CENTER);
-  image(item.image, item.x, item.y, item.width, item.height); // hard numbers
+  image(item.image, item.x, item.y, item.width, item.height);
   pop();}
 }
 
-addWindow(x,y,w,h,onOff){
+addWindow(x,y,w,h,onOff){ // method is called in maps to create windows
   push();
-  //noStroke();
 if (onOff === 1){ // Light is on
   fill(225,180,100);
 }
@@ -60,26 +58,26 @@ else if (onOff === 0){ // Light is off
   pop();
 }
 
-addStar(x,y,s,onOff){
+addStar(x,y,s,starType){ // method is called in maps to create stars
   push();
   noStroke();
-if (onOff === 1){ //
+if (starType === 1){ //flashing BLUISH Star
   this.r = random (50,225);
   this.g = 225;
   this.b = 225;
-  fill(this.r,this.g,this.b); //flashing BLUISH Star
+  fill(this.r,this.g,this.b);
 }
-else if (onOff === 0){ //
+else if (starType === 0){ // Yellow star
     this.r = 225;
     this.g = 225;
     this.b = 50;
-    fill(this.r,this.g,this.b); // Yellow star
+    fill(this.r,this.g,this.b);
   }
-  else if (onOff === 3){ //REDDISH Star
+  else if (starType === 3){ //REDDISH Star
       this.r = 225;
-      this.g = random (50,200);
+      this.g = random (50,200); //flashing red/white
       this.b = 50;
-      fill(this.r,this.g,this.b); //flashing red/white
+      fill(this.r,this.g,this.b);
     }
   ellipseMode(CENTER);
   ellipse(x, y, s);

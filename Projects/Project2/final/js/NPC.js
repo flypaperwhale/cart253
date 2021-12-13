@@ -7,14 +7,13 @@ class NPC {
     this.b = undefined;
     this.size = undefined;
     this.name = undefined;
-    //this.image = undefined; No they will be ellipses
-    this.itemHeld = undefined;
-    this.desiredItem = undefined;
+    this.itemHeld = undefined; // item list index number
+    this.desiredItem = undefined; // string with item name
     this.playerColliding = false;
-    this.isTriggered = false;
-    this.textNo = 0;
-    this.tradeSucceeded = false;
-    this.texts = [];
+    this.isTriggered = false; // when player is colliding with this and presses space becomes true
+    this.tradeSucceeded = false; // when trade is successful becomes true
+    this.textNo = 0; // first text to load into textBubble
+    this.texts = []; // 3 texts stored in this array, before, during, and after trade
     this.map = undefined;
   }
 
@@ -28,10 +27,10 @@ class NPC {
     pop();
   }
 
-  playerCollisionCheck(playerX, playerY, playerSize) {
+  playerCollisionCheck(playerX, playerY, playerSize) { // check if player is colliding
+  // with an NPC
     let d = dist(this.x, this.y, playerX, playerY);
     if (d < (this.size + playerSize ) / 2) {
-      //console.log(`player collision with ${this.name}`)
       this.playerColliding = true;
     } else {
       this.playerColliding = false;

@@ -39,15 +39,17 @@ Description of draw()
     this.displayShopBack(); // display small shop back
     this.displayWindows(); // display windows on buildings, lights on or off
     this.displayGarbage(); // display garbage
-    this.displayGazeboBase(); // display gazebo, front and back
+    this.displayGazeboBase(); // display gazebo, back
     npcList[7].showDoggy(); // display Sheperd npc's dog
     // display map C npcs and check for collision //
-    for (let i = 0; i < npcList.length; i++) {
-      if (npcList[i].map === this.name) {
-        if (npcList[i] === npcList[9]) {
+    for (let i = 0; i < npcList.length; i++) { // go through npc list
+      if (npcList[i].map === this.name) { // if npc's map (string) is the same
+          // as this map's name
+        if (npcList[i] === npcList[9]) { // if the npc is the lampost, it is displayed directly
+          // as an asset on the map, so this lampost npc serves to detect collision and trade
           //0,5,9 the lampostsABC
-        } else {
-          npcList[i].display();
+        } else { // character npcs on this map
+          npcList[i].display(); // are displayed
         }
         npcList[i].playerCollisionCheck(player.x, player.y, player.size);
       }
@@ -57,12 +59,12 @@ Description of draw()
     player.display(); //displayPlayer(); // displays player and also constrains them to move only on the ground
     this.displayLampGlow(npcList[9]); // call method with map B lamp and light buzz sound
     this.displayLamppost(); // displays lamppost in front of player
-    this.displayGazebo();
-    this.displayTrees();
+    this.displayGazebo(); // display gazebo front
+    this.displayTrees(); // display trees in front of player
     npcList[6].move(); // Billee moves
   }
 
-  displayGalaxy() {
+  displayGalaxy() { // displays galaxy asset when game is won
     push();
     imageMode(CENTER);
     image(this.galaxyImg, 245, 255, 800, 500); // hard numbers
@@ -80,7 +82,6 @@ Description of draw()
     super.addStar(255, 200, 1.5, 0);
     super.addStar(185, 240, 2, 0);
     super.addStar(217, 305, 2, 0);
-    // //
     //more random stars// 10 of 'em
     super.addStar(335, 138, 1.5, 0);
     super.addStar(450, 478, 2, 0);
@@ -95,7 +96,6 @@ Description of draw()
   }
 
   displaySkyGlow(lampost) {
-    //console.log(`sky glow no ${lampost.lightIsOn}`)
     if (lampost.lightIsOn === true) {
       // if the lamp is turned on
       push();
@@ -112,9 +112,6 @@ Description of draw()
       // if the lamp is turned on
       lampost.displayLampGlow(); // small yellow ellipse around lamp head
     }
-    // else if (lampost.lightIsOn === false){
-    //   lampost.turnOutLampGlow();
-    // }
   }
 
   //Background building
@@ -129,6 +126,7 @@ Description of draw()
   }
 
   displayWindows() {
+    //this.addWindow(x,y,onOff)
     if (this.allLightsOut === false) {
       super.addWindow(50, 720, 60, 30, 1);
     } else if (this.allLightsOut === true) {
@@ -138,7 +136,6 @@ Description of draw()
 
   displayGarbage() {
     // displays garbage in which player can throw out bone!
-    // ### need to find out how to click garbage and have bone appear behind the garbage
     push();
     imageMode(CENTER);
     image(this.garbageImg, 107, 744, 35, 50); // hard numbers
@@ -159,26 +156,6 @@ Description of draw()
     pop();
   }
 
-  // displaySky() {
-  //   // displays sky blue rectangle
-  //   push();
-  //   noStroke();
-  //   fill(35,45,125); // blue with alpha value linked to dayTimer
-  //   rectMode(CENTER);
-  //   rect(width / 2, 0, 500, 990);
-  //   pop();
-  // }
-  //
-  // displayGreenGrass() {
-  //   // draws a green rectangle as land where player can walk around
-  //   push();
-  //   noStroke();
-  //   fill(20, 85, 45); // middle green
-  //   rectMode(CENTER);
-  //   rect(width / 2, height, 500, 1010); // displayed at bottom center
-  //   pop();
-  // }
-
   displayCircleAndPath() {
     // draws a gray path leading to the circle
     // in the middle of which stands the lamppost
@@ -187,8 +164,6 @@ Description of draw()
     fill(145, 145, 145); // dark grey
     ellipseMode(CENTER);
     ellipse(width / 2 - 100, height / 2 + 290, 200, 20); // a circle at mid center
-    //rectMode(CENTER);
-    //ßrect(width / 2 - 25, height / 2 + 200, 40, 300); // a narrow path down the center
     pop();
   }
 

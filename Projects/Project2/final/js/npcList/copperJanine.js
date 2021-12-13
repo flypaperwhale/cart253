@@ -1,6 +1,9 @@
 class Janine extends NPC {
-  constructor() {
+  constructor(soundSwitch) {
     super();
+
+    this.soundSwitch = soundSwitch;
+
     this.x = 329;
     this.y = 774;
     this.r = 85; // baby blue

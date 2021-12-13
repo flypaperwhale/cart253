@@ -1,6 +1,9 @@
 class Sheperd extends NPC {
-  constructor() {
+  constructor(soundSwitch) {
     super();
+
+    this.soundSwitch = soundSwitch;
+
     this.x = 425;
     this.y = 762;
     this.r = 50; // teal

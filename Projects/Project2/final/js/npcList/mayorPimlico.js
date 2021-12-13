@@ -1,6 +1,8 @@
 class Pimlico extends NPC {
-  constructor() {
+  constructor(soundSwitch) {
     super();
+    this.soundSwitch = soundSwitch;
+
     this.x = 356;
     this.y = 734;
     this.r = 255; // pink

@@ -1,6 +1,8 @@
 class Lamotte extends NPC {
-  constructor() {
+  constructor(soundSwitch) {
     super();
+    this.soundSwitch = soundSwitch;
+
     this.x = 51;
     this.y = 539;
     this.r = 135; // purple

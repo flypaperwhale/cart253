@@ -1,6 +1,9 @@
 class Jade extends NPC {
-  constructor() {
+  constructor(soundSwitch) {
     super();
+
+    this.soundSwitch = soundSwitch;
+
     this.x = 150;
     this.y = 622;
     this.r = 200; // yellow

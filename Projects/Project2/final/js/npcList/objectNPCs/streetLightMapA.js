@@ -1,6 +1,10 @@
 class StreetLightA extends NPC {
-  constructor() {
+  constructor(soundSwitch) {
     super();
+    this.soundSwitch = soundSwitch;
+
+    this.isALamp = true;
+
     this.x = 258;
     this.y = 550;
     this.size = 10;
@@ -57,4 +61,5 @@ this.displayLampGlow(); // small yellow ellipse around lamp head
 
 }
 }
+
 }

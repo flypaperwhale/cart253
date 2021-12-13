@@ -1,6 +1,11 @@
 class StreetLightB extends NPC {
-  constructor(flickerBulb) {
+  constructor(flickerBulb, soundSwitch) {
     super();
+    this.soundSwitch = soundSwitch;
+
+    this.isALamp = true;
+
+
     this.flickerBulb = flickerBulb; // switch true/false to activate lamp bulb flicker animation
     // this variable is controlled by SCRIPT
     this.x = 225;
@@ -69,4 +74,6 @@ this.displayLampGlow(); // small yellow ellipse around lamp head
 
 }
 }
+
+
 }

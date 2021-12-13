@@ -1,6 +1,8 @@
 class Billee extends NPC {
-  constructor() {
+  constructor(soundSwitch) {
     super();
+    this.soundSwitch = soundSwitch;
+
     this.x = 80;
     this.y = 627;
     this.r = 215; // orange yellow

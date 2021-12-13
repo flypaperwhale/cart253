@@ -1,6 +1,10 @@
 class StreetLightC extends NPC {
-  constructor() {
+  constructor(soundSwitch) {
     super();
+    this.soundSwitch = soundSwitch;
+
+    this.isALamp = true;
+
     this.x = 378;
     this.y = 551;
     this.size = 10;

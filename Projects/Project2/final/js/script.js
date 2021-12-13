@@ -56,7 +56,8 @@ let songSwitch = 0; // ticker switch to play sounds at certain time frames (a Co
 let skyAlpha = 255; // the blue sky's alpha value is manipulated by mapping it to dayTimer
 let dayTimer = 500; // Counter used to map skyAlpha. 500 = day, 0 = night
 let flickerBulb; // switch true/false to activate lamp bulb flicker animation
-let npcSoundSwitch; // switch true/false used to play npc synth sound only once
+let npcSoundSwitch = 1; // 0 to initialize; 1 for npc trades, 2 for lamp trades
+let tradeSoundCheck; // can be true or false, when true player trade noise plays
 
 /**
 Description of preload
@@ -140,7 +141,7 @@ function setup() {
   setNPCSynth(); // set the npc Sound switch on and create a new synthesizer
 
   state = new TitleState(simulationImagesList, simulationMapsArray, simulationMapsArray,
-  flickerBulb); // initial state is TitleState
+  flickerBulb, npcSoundSwitch); // initial state is TitleState
   // other states are SimulationState and EndingState
 }
 
@@ -181,8 +182,6 @@ function flickBulbOff() {
 
 // Create Synthesizer (for npc sound)
 function setNPCSynth() {
-  npcSoundSwitch = true; // when this switch is true, when npc is interacted with
-  // npc makes a sound. when false, no more sound/interaction.
   let synth = new p5.PolySynth();
 }
 
@@ -194,12 +193,25 @@ function draw() {
 sunsetAnimationState();
   lightsUpAnimationState(); // animation when the light turns on, then simulation begins
   // and player can play
-//lightsOutAnimationState();
-  // if lantern is shut, bulb break sound
 
-    //playBGMusic(); // the backgroung music starts playing
+  if (tradeSoundCheck === 0){
+    // do nothing
   }
-}
+  else if (tradeSoundCheck === 1){
+      playNPCSound();
+      tradeSoundCheck = 0;
+    }
+
+  }
+  else if (tradeSoundCheck ===2){ // if lantern is shut
+    // play bulb burst and sparkles
+    lightBuzzNoise.stop(); // the buzzing noise is stopped
+    bulbBursting();
+    tradeSoundCheck = 0;
+  }
+
+  }
+
 
 function resetSongSwitch() { // resets songSwitch to 0
   songSwitch = 0;

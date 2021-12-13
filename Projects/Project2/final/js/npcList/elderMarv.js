@@ -1,6 +1,9 @@
 class Marv extends NPC {
-  constructor() {
+  constructor(soundSwitch) {
     super();
+
+    this.soundSwitch = soundSwitch;
+
     this.x = 259;
     this.y = 567;
     this.r = 150; // beige

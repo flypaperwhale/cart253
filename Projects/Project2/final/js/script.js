@@ -82,14 +82,7 @@ function preload() {
   fountainTopImg = loadImage("assets/images/fountainTop.png");
   galaxyImg = loadImage("assets/images/starnight2.png");
   // sounds
-  sunsetStarsIntro = loadSound(`assets/sounds/intro-constellation.mp3`);
-  constellationWinkSound = loadSound(`assets/sounds/constellationWink.wav`);
-  lightFlickSound = loadSound("assets/sounds/lightFlick.wav");
-  lightBuzzNoise = loadSound("assets/sounds/lightBuzz.wav");
-  bulbBurstSound = loadSound("assets/sounds/bulbBurst.wav");
   bgmusic1 = loadSound("assets/sounds/skyglowbgmusic.mp3");
-  bgmusic2 = loadSound("assets/sounds/testbgmusic.mp3");
-  bgmusic3 = loadSound("assets/sounds/testbgmusic2.mp3");
 }
 
 /**

@@ -1,4 +1,4 @@
-# Interrupt Skyglow
+# Interrupting Skyglow
 
 This evening Dolly caught a glimpse of a sight of a constellation
 as the sun was setting. The view was interrupted by the city's

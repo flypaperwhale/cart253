@@ -17,7 +17,7 @@ class TitleState extends State {
 
     push();
     textAlign(CENTER);
-    text(`- INTERUPTTING SKYGLOW -
+    text(`- INTERRUPT SKYGLOW -
 
 Trading Sequence Short Game
 

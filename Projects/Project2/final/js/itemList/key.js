@@ -1,5 +1,5 @@
 class Key extends Item {
-  constructor(image){
+  constructor(image) {
     super();
     this.name = `Key`;
     this.x = undefined;
@@ -16,8 +16,7 @@ class Key extends Item {
     super.display();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
-}
-
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
+  }
 }

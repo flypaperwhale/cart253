@@ -11,40 +11,45 @@ class StreetLightC extends NPC {
     this.isTriggered = false;
     this.tradeSucceeded = false;
     this.textNo = 0;
-    this.texts = [`The dog walker will get the copper if you shoot the light now`,`Dolly uses slingshot on the lampost`];
+    this.texts = [
+      `The dog walker will get the copper if you shoot the light now`,
+      `Dolly uses slingshot on the lampost`,
+    ];
     this.map = `C`;
     this.lightIsOn = false; // switch true/false that draws light a.-v. FX when true
   }
 
-    displayLampGlow() { // displays circle of light around lamphead
-      if (this.lightIsOn === false){
-        //
-      } else if (this.lightIsOn === true){
-        push();
-        noStroke();
-        fill(210, 190, 0, 200); // light yellow and slightly transparent
-        ellipseMode(CENTER);
-        ellipse(this.x, this.y - 100, 100, 100);
-        pop();
-      }
-}
-
-            turnOutLampGlow(){
-      this.lightIsOn = false;
-            }
-
-    display() {
-      super.display();
+  displayLampGlow() {
+    // displays circle of light around lamphead
+    if (this.lightIsOn === false) {
+      //
+    } else if (this.lightIsOn === true) {
+      push();
+      noStroke();
+      fill(210, 190, 0, 200); // light yellow and slightly transparent
+      ellipseMode(CENTER);
+      ellipse(this.x, this.y - 100, 100, 100);
+      pop();
     }
-
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
   }
 
-  flickBulb() { // happens when cued during the lightFlickSound in intro animation
-if (this.flickerBulb === true) { // if flickerBulb is true show lamp glow
-this.displayLampGlow(); // small yellow ellipse around lamp head
-}
-}
+  turnOutLampGlow() {
+    this.lightIsOn = false;
+  }
 
+  display() {
+    super.display();
+  }
+
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
+  }
+
+  flickBulb() {
+    // happens when cued during the lightFlickSound in intro animation
+    if (this.flickerBulb === true) {
+      // if flickerBulb is true show lamp glow
+      this.displayLampGlow(); // small yellow ellipse around lamp head
+    }
+  }
 }

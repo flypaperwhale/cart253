@@ -1,4 +1,4 @@
-class TitleState extends State {
+class TitleState2 extends State {
   constructor(simulationImagesList, mapsArray, simulationSoundsArray) {
     super();
     this.name = `Title State`;
@@ -17,13 +17,13 @@ class TitleState extends State {
 
     push();
     textAlign(CENTER);
-    text(`ONE  Welcome. Click mouse to start.`, width / 2, height / 2);
+    text(`TWO Welcome. Click mouse to start.`, width / 2, height / 2);
     pop();
   }
 
   keyPressed() {
     if (keyCode === 32) {
-      state = new TitleState2(
+      state = new SimulationState(
         this.simulationImagesList,
         this.mapsArray,
         this.simulationSoundsArray

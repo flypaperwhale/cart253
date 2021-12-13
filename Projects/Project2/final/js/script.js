@@ -11,7 +11,7 @@ so that everyone may see the constellations in the sky
 // declare item images
 let hamImg;
 let bigBoneImg;
-let slingshotImg
+let slingshotImg;
 let frogConstellationImg;
 let frogImg;
 let wrenchImg;
@@ -40,7 +40,7 @@ let bulbBurstSound; // bulb burst
 let bgmusic1; // background music 1
 let bgmusic2; // background music 2
 let bgmusic3; // background music 3
-
+// declare simulation variables
 let simulationSoundsArray = []; // array holding sounds for the game
 let simulationImagesList = []; // array holding images for the games
 let simulationMapsArray = []; // array holding game maps
@@ -57,22 +57,26 @@ function preload() {
   // Items image files
   hamImg = loadImage("assets/images/items/ham.png");
   bigBoneImg = loadImage("assets/images/items/bigBone.png");
-  slingshotImg = loadImage("assets/images/items/slingshot1.png")
+  slingshotImg = loadImage("assets/images/items/slingshot1.png");
   frogConstellationImg = loadImage("assets/images/items/frogConstellation.png");
   frogImg = loadImage("assets/images/items/frog2.png");
   wrenchImg = loadImage("assets/images/items/wrench.png");
-  arrowConstellationImg = loadImage("assets/images/items/arrowConstellation.png");
+  arrowConstellationImg = loadImage(
+    "assets/images/items/arrowConstellation.png"
+  );
   injunctionImg = loadImage("assets/images/items/letters.png");
   keyImg = loadImage("assets/images/items/key.png");
-  eagleConstellationImg = loadImage("assets/images/items/eagleConstellation.png");
+  eagleConstellationImg = loadImage(
+    "assets/images/items/eagleConstellation.png"
+  );
   emptyImg = loadImage("assets/images/empty.png");
-// decor image files
+  // decor image files
   streetlampImg = loadImage("assets/images/lamp.png");
   streetlampFootImg = loadImage("assets/images/lampFoot.png");
-  stairsImg =  loadImage("assets/images/stairs.png");
+  stairsImg = loadImage("assets/images/stairs.png");
   treeImg = loadImage("assets/images/tree.png");
-  garbageImg =  loadImage("assets/images/garbage.png");
-  gazeboImg =  loadImage("assets/images/gazebo2.png");
+  garbageImg = loadImage("assets/images/garbage.png");
+  gazeboImg = loadImage("assets/images/gazebo2.png");
   gazeboBaseImg = loadImage("assets/images/gazeboBase.png");
   fountainImg = loadImage("assets/images/fountain.png");
   fountainTopImg = loadImage("assets/images/fountainTop.png");
@@ -89,12 +93,15 @@ function preload() {
 }
 
 /**
-Description of setup
+Description of setup : create arrays to be used in the simulation
+Image list, NPC list, and Sounds list, start audio for BG Music
+and create the state to launch the simulation
 */
 function setup() {
   createCanvas(500, 1000);
 
-  simulationImagesList.push( // simulationImagesList Array
+  simulationImagesList.push(
+    // simulationImagesList Array
     hamImg, // [0]
     bigBoneImg, // [1]
     slingshotImg, // [2]
@@ -115,54 +122,56 @@ function setup() {
     fountainImg, // [17]
     fountainTopImg, // [18]
     emptyImg, // [19]
-    galaxyImg,); // [20]
+    galaxyImg
+  ); // [20]
 
-    simulationSoundsArray.push( // simulationSoundsArray
-      sunsetStarsIntro, // [0]
-      constellationWinkSound, // [1]
-      lightFlickSound, // [2]
-      lightBuzzNoise, // [3]
-      bulbBurstSound, // [4]
-      bgmusic1); // [5]
+  simulationSoundsArray.push(
+    // simulationSoundsArray
+    sunsetStarsIntro, // [0]
+    constellationWinkSound, // [1]
+    lightFlickSound, // [2]
+    lightBuzzNoise, // [3]
+    bulbBurstSound, // [4]
+    bgmusic1
+  ); // [5]
 
   createMapsAndStore(); // inputs map files into the program to be stored in simulationMapsArray
-
   userStartAudio();
 
-console.log(`before creating state simmapsarray is ${simulationMapsArray.length}`);
-  userStartAudio();
-  state = new TitleState(simulationImagesList, simulationMapsArray, simulationMapsArray); // initial state is TitleState
+  state = new TitleState(
+    simulationImagesList,
+    simulationMapsArray,
+    simulationMapsArray
+  ); // initial state is TitleState
   // other states are SimulationState and EndingState
 }
 
-function createMapsAndStore(){
-  for (let i = 0; i < mapNo; i++){
-    console.log(`map no isht ${i}`);
-    if (i === 0){
+function createMapsAndStore() {
+  for (let i = 0; i < mapNo; i++) {
+    if (i === 0) {
       map = new SkyGlowCityA(simulationImagesList); // Map A, full left
     }
-    if (i === 1){
+    if (i === 1) {
       map = new SkyGlowCityB(simulationImagesList); // Map B, middle
     }
-    if (i === 2){
+    if (i === 2) {
       map = new SkyGlowCityC(simulationImagesList); // Map C, full right
     }
     simulationMapsArray.push(map);
-    console.log(`simmaparray ${simulationMapsArray[0].name}
-      ${simulationMapsArray[1]}
-      ${simulationMapsArray[2]}`)
   }
 }
 
 function draw() {
-  state.update();
+  state.update(); // updates state every frame
 
-  if (state.name === `SimulationState`){
-    playBGMusic(); // the backgroung music starts playing
+  if (state.name === `SimulationState`) {
+    // during simulation
+    playBGMusic(); // the backgroung music is playing
   }
 }
 
-function playBGMusic() { // plays bg music
+function playBGMusic() {
+  // plays bg music
   push();
   bgmusic1.playMode(`untilDone`); // bg music mode loops forever
   bgmusic1.setVolume(0.88); // not too loud

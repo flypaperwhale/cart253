@@ -32,11 +32,12 @@ class Billee extends NPC {
     super.display();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
   }
 
-  move() { // from https://pippinbarr.github.io/cc/1/topics/conditionals/conditionals.html
+  move() {
+    // from https://pippinbarr.github.io/cc/1/topics/conditionals/conditionals.html
     this.x = this.x + this.speed;
     // If the npc is off the right side
     if (this.x > 110 || this.x < 40) {
@@ -44,5 +45,4 @@ class Billee extends NPC {
       this.speed = -this.speed;
     }
   }
-
 }

@@ -1,5 +1,5 @@
 class FrogConstellation extends Item {
-  constructor(image){
+  constructor(image) {
     super();
     this.name = `Frog Constellation`;
     this.x = undefined;
@@ -16,8 +16,7 @@ class FrogConstellation extends Item {
     super.display();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
-}
-
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
+  }
 }

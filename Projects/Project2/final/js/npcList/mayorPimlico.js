@@ -32,7 +32,7 @@ class Pimlico extends NPC {
     super.display();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
   }
 }

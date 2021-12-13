@@ -1,30 +1,26 @@
 class TextBubble {
-  constructor(text){
-    this.text = text;
-    this.loop = true;
-    this.stopTextBubble = false;
-    //this.textIsUp = false; // true or false
+  constructor(text) {
+    this.text = text; // text displayed by the bubble
+    this.stopTextBubble = false; // when this is true bubble is ended
   }
 
-  display(){
-    if (this.stopTextBubble === false){
+  display() {
+    if (this.stopTextBubble === false) { // bubble is up
       push();
       fill(255);
       rectMode(CENTER);
-      rect(300,400,320,75);
+      rect(300, 400, 320, 75);
       pop();
       push();
-      //textAlign(CENTER);
       fill(0);
-      text(this.text, 167,390);
+      text(this.text, 167, 390);
       pop();
-    }
-    else if (this.stopTextBubble === true){
+    } else if (this.stopTextBubble === true) { // bubble is ended
       // do nothing
     }
   }
 
-  break(){
-    this.stopTextBubble = true;
+  break() {
+    this.stopTextBubble = true; // stops the bubble
   }
 }

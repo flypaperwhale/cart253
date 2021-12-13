@@ -1,4 +1,5 @@
-class Garbage extends NPC { // This class is currently a place holder...
+class Garbage extends NPC {
+  // This class is currently a place holder...
   constructor() {
     super();
     this.x = 200;
@@ -13,13 +14,17 @@ class Garbage extends NPC { // This class is currently a place holder...
     this.playerColliding = false;
     this.isTriggered = false;
     this.tradeSucceeded = false;
-    this.texts = [`The garbage bin is almost full`, `You throw out the Big Bone`, `...`];
+    this.texts = [
+      `The garbage bin is almost full`,
+      `You throw out the Big Bone`,
+      `...`,
+    ];
   }
 
   display() {
     // displays NPC specific image at the correct coordinates, with correct colors
     push();
-    fill(this.r,this.g,this.b);
+    fill(this.r, this.g, this.b);
     noStroke();
     ellipseMode(CENTER);
     ellipse(this.x, this.y, this.size);

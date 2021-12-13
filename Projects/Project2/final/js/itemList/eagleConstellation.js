@@ -1,5 +1,5 @@
 class EagleConstellation extends Item {
-  constructor(image){
+  constructor(image) {
     super();
     this.name = `Eagle Constellation`;
     this.x = undefined;
@@ -7,7 +7,7 @@ class EagleConstellation extends Item {
     this.width = 30;
     this.height = 20;
     this.image = image;
-    this.isOnMap = false; 
+    this.isOnMap = false;
     this.map = undefined;
     this.playerColliding = undefined;
   }
@@ -16,8 +16,7 @@ class EagleConstellation extends Item {
     super.display();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
-}
-
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
+  }
 }

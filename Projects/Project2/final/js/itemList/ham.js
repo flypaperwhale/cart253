@@ -1,5 +1,5 @@
 class Ham extends Item {
-  constructor(image){
+  constructor(image) {
     super();
     this.name = `Ham`;
     this.x = 288;
@@ -7,7 +7,7 @@ class Ham extends Item {
     this.width = 30;
     this.height = 20;
     this.image = image;
-    this.isOnMap = true; 
+    this.isOnMap = true;
     this.map = `A`;
     this.playerColliding = undefined;
   }
@@ -16,8 +16,7 @@ class Ham extends Item {
     super.display();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
-}
-
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
+  }
 }

@@ -20,21 +20,21 @@ class NPC {
   display() {
     // displays NPC specific ellipse (colors, size) at the correct coordinates
     push();
-    fill(this.r,this.g,this.b);
+    fill(this.r, this.g, this.b);
     noStroke();
     ellipseMode(CENTER);
     ellipse(this.x, this.y, this.size);
     pop();
   }
 
-  playerCollisionCheck(playerX, playerY, playerSize) { // check if player is colliding
-  // with an NPC
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    // check if player is colliding
+    // with an NPC
     let d = dist(this.x, this.y, playerX, playerY);
-    if (d < (this.size + playerSize ) / 2) {
+    if (d < (this.size + playerSize) / 2) {
       this.playerColliding = true;
     } else {
       this.playerColliding = false;
     }
   }
-
 }

@@ -1,5 +1,5 @@
 class Injunction extends Item {
-  constructor(image){
+  constructor(image) {
     super();
     this.name = `City Injunction`;
     this.x = undefined;
@@ -16,8 +16,7 @@ class Injunction extends Item {
     super.display();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
-}
-
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
+  }
 }

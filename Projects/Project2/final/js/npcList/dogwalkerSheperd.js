@@ -40,12 +40,12 @@ class Sheperd extends NPC {
     // displays doggy specific ellipse (colors, size) at the correct coordinates
     push();
     noStroke();
-    fill(this.r,this.g,this.b);
-    ellipse(this.doggyX,this.doggyY,this.doggyW, this.doggyH);
+    fill(this.r, this.g, this.b);
+    ellipse(this.doggyX, this.doggyY, this.doggyW, this.doggyH);
     pop();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
   }
-  }
+}

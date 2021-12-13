@@ -20,6 +20,7 @@ display(){ // this method is called by maps in simulationState
 
 playerCollisionCheck(playerX, playerY, playerSize) { // check if player is colliding
 // with an item
+
   let d = dist(this.x, this.y, playerX, playerY);
   if (d < this.width / 2) {
     this.playerColliding = true;

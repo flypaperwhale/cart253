@@ -1,5 +1,5 @@
 class Frog extends Item {
-  constructor(image){
+  constructor(image) {
     super();
     this.name = `Frog`;
     this.x = undefined;
@@ -7,7 +7,7 @@ class Frog extends Item {
     this.width = 30;
     this.height = 19;
     this.image = image;
-    this.isOnMap = false; 
+    this.isOnMap = false;
     this.map = `A`;
     this.playerColliding = undefined;
   }
@@ -16,8 +16,7 @@ class Frog extends Item {
     super.display();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
-}
-
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
+  }
 }

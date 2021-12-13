@@ -14,9 +14,11 @@ class Janine extends NPC {
     this.isTriggered = false;
     this.tradeSucceeded = false;
     this.textNo = 0;
-    this.texts = [`Copper Janine:
-      Enjoy the night, I'll be watching over you`];
-      this.map = `B`;
+    this.texts = [
+      `Copper Janine:
+      Enjoy the night, I'll be watching over you`,
+    ];
+    this.map = `B`;
   }
 
   display() {
@@ -24,7 +26,7 @@ class Janine extends NPC {
     super.display();
   }
 
-  playerCollisionCheck(playerX,playerY,playerSize) {
-    super.playerCollisionCheck(playerX,playerY,playerSize);
+  playerCollisionCheck(playerX, playerY, playerSize) {
+    super.playerCollisionCheck(playerX, playerY, playerSize);
   }
 }

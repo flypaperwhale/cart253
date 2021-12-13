@@ -1,8 +1,5 @@
 class NPC {
-  constructor(soundSwitch) {
-    this.soundSwitch = soundSwitch;
-
-this.isALamp = undefined;
+  constructor() {
     this.x = undefined;
     this.y = undefined;
     this.r = undefined;
@@ -22,7 +19,6 @@ this.isALamp = undefined;
   }
 
   display() {
-    console.log(this.soundSwitch);
     // displays NPC specific ellipse (colors, size) at the correct coordinates
     push();
     fill(this.r,this.g,this.b);
@@ -42,15 +38,4 @@ this.isALamp = undefined;
     }
   }
 
-  playTradeSound(){
-    if (this.isALamp === true){
-      this.soundSwitch = 2;
-    }
-    else {
-      this.soundSwitch = 1;
-
-    }
-
-
-}
 }

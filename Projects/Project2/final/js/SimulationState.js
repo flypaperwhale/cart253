@@ -1,9 +1,6 @@
 class SimulationState extends State {
-  constructor(simulationImagesList, simulationMapsArray, simulationSoundsArray,
-    flickerBulb,npcSoundSwitch) {
+  constructor(simulationImagesList, simulationMapsArray, simulationSoundsArray) {
     super();
-
-    this.npcSoundSwitch = npcSoundSwitch;
 
 this.name = `SimulationState`;
     this.simulationImagesList = simulationImagesList;
@@ -22,7 +19,7 @@ this.name = `SimulationState`;
     this.createItems(); // create Items and store them in the itemList array
 // Array to hold all the simulation NPCs
     this.simulationNPCList = [];
-    this.createNPCs(flickerBulb, npcSoundSwitch); // creating NPCs and storing them in NPCList array
+    this.createNPCs(); // creating NPCs and storing them in NPCList array
 
     this.maps = [this.simulationMapsArray[0], this.simulationMapsArray[1],this.simulationMapsArray[2]]; // load game maps into the state
     // to be called upon and displayed
@@ -80,32 +77,32 @@ this.eventCounter1 = 0;
   this.simulationItemList.push(this.placeHolder); //
   }
 
-  createNPCs(flickerBulb, npcSoundSwitch) { // create individual copies of each NPC class
+  createNPCs() { // create individual copies of each NPC class
     // to be stored in simulationNPCList
     // map A NPCs
-    this.streetLightA = new StreetLightA(this.npcSoundSwitch);
+    this.streetLightA = new StreetLightA();
     this.simulationNPCList.push(this.streetLightA); // mapA
-    this.pimlico = new Pimlico(this.npcSoundSwitch); // mapA
+    this.pimlico = new Pimlico(); // mapA
     this.simulationNPCList.push(this.pimlico);
-    this.lamotte = new Lamotte(this.npcSoundSwitch); // mapA
+    this.lamotte = new Lamotte(); // mapA
     this.simulationNPCList.push(this.lamotte);
     // map B NPCs
-    this.janine = new Janine(this.npcSoundSwitch); // mapB
+    this.janine = new Janine(); // mapB
     this.simulationNPCList.push(this.janine);
-    this.marv = new Marv(this.npcSoundSwitch); // mapB
+    this.marv = new Marv(); // mapB
     this.simulationNPCList.push(this.marv);
-    this.streetLightB = new StreetLightB(flickerBulb,this.npcSoundSwitch); // mapB
+    this.streetLightB = new StreetLightB(); // mapB
     this.simulationNPCList.push(this.streetLightB);
     // map C NPCs
-    this.billee = new Billee(this.npcSoundSwitch); // mapC
+    this.billee = new Billee(); // mapC
     this.simulationNPCList.push(this.billee);
-    this.sheperd = new Sheperd(this.npcSoundSwitch); // mapC
+    this.sheperd = new Sheperd(); // mapC
     this.simulationNPCList.push(this.sheperd);
-    this.garbage = new Garbage(this.npcSoundSwitch); // mapC
+    this.garbage = new Garbage(); // mapC
     this.simulationNPCList.push(this.garbage);
-    this.streetLightC = new StreetLightC(this.npcSoundSwitch); // mapC
+    this.streetLightC = new StreetLightC(); // mapC
     this.simulationNPCList.push(this.streetLightC);
-    this.jade = new Jade(this.npcSoundSwitch); // mapC
+    this.jade = new Jade(); // mapC
     this.simulationNPCList.push(this.jade);
 
     this.player = new Player(109,597,this.placeHolder);
@@ -150,6 +147,8 @@ this.eventCounter1 = 0;
       this.currentLampost = this.simulationNPCList[9]; // lampostC
     }
 
+console.log(this.currentLampost.name)
+
     // go through the NPC array to display each NPC (according to the map player is on)
       // also, check if player is colliding and update the NPC's data if need be (from click & trade)
       for (let i = 0; i < this.simulationNPCList.length; i++) {
@@ -175,17 +174,6 @@ this.eventCounter1 = 0;
           // in simulation the item corresponding to the acquired item index is created
           // and stored in the player.inventory
 
-          if (this.simulationNPCList[i].tradeSucceeded){
-            this.eventSwitch4 = 0;
-            this.eventSwitch4 = constrain(this.eventSwitch3, 0, 1); // switch can be 0 or 1
-            if (this.eventSwitch4 === 0){
-              this.simulationNPCList[i].npcSoundSwitch = true;
-            }
-            else if (this.eventSwitch4 ===1){
-              this.simulationNPCList[i].npcSoundSwitch = false;
-            }
-    }
-          }
 
   // npcs display text[0] first... when player has the item they desire and trade happens
   //console.log(`current npc ${this.simulationNPCList[i].name}, textno is ${this.simulationNPCList[i].textNo}
@@ -223,9 +211,9 @@ this.eventCounter1 = 0;
           // and so on...
 
           // Display assigned text
-          //this.textBubble.display();
+          this.textBubble.display();
       }
-
+    }
 
       // * // Here begins the managing of items! // * //
 
@@ -295,7 +283,7 @@ if (this.currentMap.name === this.simulationItemList[i].map){
 
       this.eventSwitch2++;
       if (this.textBubbleIsLoaded === true){
-        //console.log(`so tbb is loaded...`);
+        console.log(`so tbb is loaded...`);
         this.textBubble.display();
       }
   }
@@ -328,7 +316,6 @@ if (this.currentMap.name === this.simulationItemList[i].map){
     // and player can play
     if (this.animationState === `lightsUp`) {
       if (this.currentLampost.tradeSucceeded === true){
-        this.currentLampost.playTradeSound();
         this.currentLampost.lightIsOn = false;
       }
       else {
@@ -357,6 +344,35 @@ if (this.currentMap.name === this.simulationItemList[i].map){
         // if player presses spacebar when colliding with npc
         this.player.paused(); // player avatar movement becomes paused
 
+        // // % // First interaction with Mayor Pimlico // % //
+        // if (
+        //   // if the triggered npc is the Mayor and player has either
+        //   // the placeholder or the slingshot in their inventory
+        //   this.simulationNPCList[i].name === `Mayor Pimlico` &&
+        //   this.player.inventory[0] === `PlaceHolder`
+        //   // || this.simulationNPCList[i].name === `Mayor Pimlico` &&
+        //   // this.player.inventory[0].name === `Slingshot`
+        // ) {
+        //   console.log(`this should only happen once`);
+        //   this.eventSwitch1 = 0; // initialize event switch
+        //   this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
+        //   if (this.eventSwitch1 === 0) {
+        //     this.player.inventory.unshift(this.simulationItemList[1]); // Pimlico gives you Ham!
+        //     if (this.player.inventory[1] === `PlaceHolder`) {
+        //       // remove place holder if you don'T already have the slingshot
+        //       this.player.inventory.splice(1, 1);
+        //       this.textBubble = new TextBubble(
+        //         `${this.simulationNPCList[i].texts[0]}`
+        //       );
+        //       this.simulationNPCList[i].textNo = 1;
+        //     }
+        //     //this.simulationNPCList[i].textNo = 1; // Pimlico's text is changed
+        //     // next time Pimlico is triggered this new text will be displayed
+        //   }
+        //   this.eventSwitch1++;
+        // }
+        // // % //
+
         // set up clicked npc values temporarily stored in simulation
         this.NPCdesiredItem = this.simulationNPCList[i].desiredItem;
         // SimulationState desiredItem is temporarily the clicked npc's desired item (if any)
@@ -383,7 +399,6 @@ if (this.currentMap.name === this.simulationItemList[i].map){
           this.simulationNPCList[i].textNo === 0 &&
           this.player.tradeHappens === true
         ) {
-          this.simulationNPCList[i].playTradeSound();
           if (this.eventSwitch3 === 0) {
             console.log(`trade happens, you comin in here?`);
             this.player.inventory.shift(0, 1);
@@ -576,7 +591,6 @@ if (this.currentMap.name === this.simulationItemList[i].map){
     this.player.isPaused = false; // player is not labelled as paused anymore
     this.ham.isPicked = false; // to avoid looping in here again, ham becomes unpicked
   }
-
 
   // surprise ending
 

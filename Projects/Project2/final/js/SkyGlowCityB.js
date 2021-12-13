@@ -25,9 +25,6 @@ this.allLightsOut = false;
 Description of draw()
 */
 display(player, npcList, soundList){
-
-npcList[5].displayAnimation();
-
   //sky
   if (this.galaxyDisplayed === true){
     this.displayGalaxy();

@@ -75,7 +75,7 @@ class Player {
     // pop();
     // push();
     for (let i = 0; i < this.inventory.length; i++) {
-  //console.log(this.inventory[i].name);
+  console.log(this.inventory[i].name);
   push();
   imageMode(CENTER);
   image(this.inventory[i].image, this.x + 3, this.y - 20, this.inventory[i].width, this.inventory[i].height); // hard numbers
@@ -83,7 +83,7 @@ class Player {
     // for (let i = 0; i < this.inventory.length; i++) {
     //   console.log(`Item ${[i]} in inv. : ${this.inventory[i]}`);
     // }
-    //console.log(this.inventory);
+    console.log(this.inventory);
   }}
 
   checkPlayerInventory(npcDesiredItem) {
@@ -114,15 +114,14 @@ if (this.checkedItem.name === undefined){
 
       //this.methodSwitch=1;
       //if (this.methodSwtich === 1){
-      //  console.log(`we're not coming here anymore`)
+        console.log(`we're not coming here anymore`)
 
       //splice removeFromPlayerInventory(this.inventory[i])
       this.tradeHappens = true;
       npc.tradeSucceeded = true;
-
-      //console.log(`npc trade success? ${npc.tradeSucceeded} with ${npc}`)
+      console.log(`npc trade success? ${npc.tradeSucceeded} with ${npc}`)
       this.itemToAddToInventory = npcHoldingItem;
-    //  console.log(`${npcHoldingItem}`);
+      console.log(`${npcHoldingItem}`);
 
       //this.methodSwitch =0;
     //}

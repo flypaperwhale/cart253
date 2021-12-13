@@ -1,16 +1,16 @@
 class TitleState extends State {
-  constructor(simulationImagesList, mapsArray, simulationSoundsArray, flickerBulb, npcSoundSwitch){
+  constructor(simulationImagesList, mapsArray, simulationSoundsArray){
     super();
     this.name = `Title State`;
     this.mapsArray = mapsArray;
     this.simulationImagesList = simulationImagesList;
     this.simulationSoundsArray = simulationSoundsArray;
-    this.flickerBulb = flickerBulb;
-    this.npcSoundSwitch = npcSoundSwitch;
   }
 
   update(){
     this.display();
+
+    console.log(`what is ${this.mapsArray}`)
   }
 
   display(){
@@ -29,9 +29,7 @@ class TitleState extends State {
   }
 
   mouseClicked(){
-    state = new SimulationState(
-      this.simulationImagesList, this.mapsArray, this.simulationSoundsArray,
-    this.flickerBulb, this.npcSoundSwitch,);
+    state = new SimulationState(this.simulationImagesList, this.mapsArray, this.simulationSoundsArray);
   }
 
 }

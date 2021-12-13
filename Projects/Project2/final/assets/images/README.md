@@ -39,5 +39,4 @@ lamp https://www.vhv.rs/viewpic/ihxoRm_lamp-post-png-cartoon-transparent-png/
 
 garbage https://www.vhv.rs/viewpic/hbboimb_trashcan-png-download-cartoon-transparent-cartoon-trash-can/
 
-
 place holder - https://commons.wikimedia.org/wiki/Category:Fully_transparent_images#/media/File:Arimaa_b74.png Arimaa_b74

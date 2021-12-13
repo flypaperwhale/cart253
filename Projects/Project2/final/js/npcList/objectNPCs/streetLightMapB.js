@@ -14,7 +14,7 @@ class StreetLightB extends NPC {
     this.texts = [
       `Don't act out now, there's a copper
       watching us down there`,
-      `Dolly used the wrench on the streetLight`,
+      `Dolly used the wrench on the street light`,
       `Look above, the Arrow Constellation...
       Must move along, convince others`,
     ];

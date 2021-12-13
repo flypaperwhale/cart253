@@ -2,9 +2,9 @@
 
 Interrupt Skyglow is a short game in which the player must walk around the town
 of Skyglow, receiving and exchanging Items with npcs, on a mission to get the lights
-in the city turned out. The player is playing as Dolly, a young person who after getting a glimpse of a
-constellation in the introduction of the game, decides to try to do something about
-the light pollution in her town.
+in the city turned out. The player is playing as Dolly, a young person who after
+getting a glimpse of a constellation in the introduction of the game, decides to
+try to do something about the light pollution in her town.
 
 What inspired this game for me was trying to find a simple enough game to succeed in
 coding with arrays, creating these strange, intricate connections between different
@@ -21,7 +21,7 @@ we might want to start by looking at where we come from and what we're made of.
 Interrupt Skyglow is a fun, satirical, light way for me to deal with these existential
 worries that I often think about. I was able to express my creativity freely in
 coding this Project as I was not hindered by my own racing ideas about the topic
-of the enclosing of the night sky as under time constraints and the excitement of
+of the enclosing of the night sky. With time constraints and the excitement of
 learning this new medium, I was pushed to find the ways to express what I could,
 knowing I could always come back later and build on what I have coded (add sound
 effects, have more Items be displayed on the map, have barriers disappear when certain

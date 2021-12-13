@@ -1,5 +1,5 @@
 /**
-Interrupting Sky Glow
+Interrupt Sky Glow
 Frankie Latreille
 Dolly explores the town of Sky Glow, fulfilling the needs of townsfolk
 while finding ways to turn out the lights in town

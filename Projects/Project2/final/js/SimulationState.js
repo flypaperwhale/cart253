@@ -47,7 +47,6 @@ class SimulationState extends State {
     this.setAnimationState(`lightsUp`); //## SurpriseEnd
 
     // Trade sequence bits and bobbles
-    this.eventCounter1 = 0;
     this.eventSwitch1 = 0; // event for ham aquisition
     this.eventSwitch2 = 0; // event for slingshot aquisition
     this.eventSwitch3 = 0; //
@@ -197,9 +196,9 @@ class SimulationState extends State {
           this.simulationNPCList[i].textNo === 0 && // if npc text is 0 trade has not happened yet
           this.player.tradeHappens === true // when trade happens
         ) {
-          this.eventSwitch3 = 0;
-          this.eventSwitch3 = constrain(this.eventSwitch3, 0, 1); // switch can be 0 or 1
-          if (this.eventSwitch3 === 0) {
+          this.eventSwitch1 = 0;
+          this.eventSwitch1 = constrain(this.eventSwitch1, 0, 1); // switch can be 0 or 1
+          if (this.eventSwitch1 === 0) {
             // this only happens once per npc
             this.player.inventory.shift(0, 1); // remove item in the player inventory
             this.player.inventory.unshift(
@@ -210,7 +209,7 @@ class SimulationState extends State {
             this.simulationNPCList[i].textNo = 1; // npc text is updated to the next in the sequence
             this.player.tradeHappens = false; // trade is over
           }
-          this.eventSwitch3++;
+          this.eventSwitch1++;
         }
 
         // * // this is a text assigning machine to display appropriate text // * //

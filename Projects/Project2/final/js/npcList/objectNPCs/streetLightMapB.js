@@ -1,46 +1,34 @@
 class StreetLightB extends NPC {
-  constructor(flickerBulb, soundSwitch) {
+  constructor() {
     super();
-    this.soundSwitch = soundSwitch;
-
-    this.isALamp = true;
-
-
-    this.flickerBulb = flickerBulb; // switch true/false to activate lamp bulb flicker animation
-    // this variable is controlled by SCRIPT
     this.x = 225;
     this.y = 560;
     this.size = 10;
     this.name = `StreetLightB`;
-    //this.image = undefined; No they will be ellipses
-    this.itemHeld = 6;
+    this.itemHeld = 6; // Arrow CONSTELLATION Item list index
     this.desiredItem = `Wrench`;
     this.playerColliding = false;
     this.isTriggered = false;
-    //this.textNo = 0;
     this.tradeSucceeded = false;
+    this.textNo = 0;
     this.texts = [`...`,`Don't you see that copper down there?
     I wouldn't use my slingshot here if I were you`,`Dolly used the wrench on the streetLight`];
     this.map = `B`;
-
-
     this.lightIsOn = false; // switch true/false that draws light a.-v. FX when true
-    this.buzzVolume; // lamp buzz sound volume, to be mapped on playerDistLamp values
-    // this.distPlayer = undefined;
-    this.canBurst = false; // when true, player can burst the lamp's bulb
 
   }
 
-displayAnimation(){
-  if (this.flickerBulb === false){
-  //
-  this.lightIsOn = false;
+  flickBulbOn() {
+    // on cue flicks bulb on
+    this.flickerBulb = true;
+    console.log(`Bulb flicks on!`)
   }
-  else if (flickerBulb === true){
-    this.lightIsOn = true;
-    this.displayLampGlow();
+
+  flickBulbOff() {
+    // on cue flicks bulb off
+    console.log(`Bulb flicks off!`);
+    this.flickerBulb = false;
   }
-}
 
   displayLampGlow() { // displays circle of light around lamphead
     if (this.lightIsOn === false){
@@ -53,7 +41,6 @@ displayAnimation(){
       ellipse(this.x, this.y - 100, 100, 100);
       pop();
     }}
-
 
           turnOutLampGlow(){
     this.lightIsOn = false;
@@ -70,10 +57,6 @@ displayAnimation(){
   flickBulb() { // happens when cued during the lightFlickSound in intro animation // currently disfunctional
 if (this.flickerBulb === true) { // if flickerBulb is true show lamp glow
 this.displayLampGlow(); // small yellow ellipse around lamp head
-  //   }
-
 }
 }
-
-
 }

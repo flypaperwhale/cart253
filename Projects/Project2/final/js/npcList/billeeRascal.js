@@ -1,8 +1,6 @@
 class Billee extends NPC {
-  constructor(soundSwitch) {
+  constructor() {
     super();
-    this.soundSwitch = soundSwitch;
-
     this.x = 80;
     this.y = 627;
     this.r = 215; // orange yellow
@@ -10,13 +8,12 @@ class Billee extends NPC {
     this.b = 60;
     this.size = 17;
     this.name = `Billee Rascal`;
-    //this.image = undefined; No they will be ellipses
-    this.itemHeld = 2;
+    this.itemHeld = 2; // Slingshot index in item list
     this.desiredItem = `Big Bone`;
     this.playerColliding = false;
     this.isTriggered = false;
-    this.textNo = 0;
     this.tradeSucceeded = false;
+    this.textNo = 0;
     this.texts = [
       `Bille Rascal:
       Jade! Jade! Why is she always on her cellphone?
@@ -31,7 +28,7 @@ class Billee extends NPC {
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
+    // displays NPC specific image at the correct coordinates and colors
     super.display();
   }
 
@@ -48,5 +45,4 @@ class Billee extends NPC {
     }
   }
 
-//   givePlayerInjunction(playerInventory) {}
 }

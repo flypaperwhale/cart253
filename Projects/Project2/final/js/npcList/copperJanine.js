@@ -1,9 +1,6 @@
 class Janine extends NPC {
-  constructor(soundSwitch) {
+  constructor() {
     super();
-
-    this.soundSwitch = soundSwitch;
-
     this.x = 329;
     this.y = 774;
     this.r = 85; // baby blue
@@ -11,20 +8,19 @@ class Janine extends NPC {
     this.b = 225;
     this.size = 25;
     this.name = `Copper Janine`;
-    //this.image = undefined; No they will be ellipses
-    this.itemHeld = 7;
+    this.itemHeld = 7; // Injunction index in item list
     this.desiredItem = `Arrow Constellation`;
     this.playerColliding = false;
     this.isTriggered = false;
-    this.textNo = 0;
     this.tradeSucceeded = false;
+    this.textNo = 0;
     this.texts = [`Copper Janine:
       Enjoy the night, I'll be watching over you`];
       this.map = `B`;
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
+    // displays NPC specific image at the correct coordinates and colors
     super.display();
   }
 

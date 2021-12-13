@@ -7,13 +7,12 @@ class Ham extends Item {
     this.width = 30;
     this.height = 20;
     this.image = image;
-    this.isOnMap = true; // always false
+    this.isOnMap = true; 
     this.map = `A`;
     this.playerColliding = undefined;
   }
 
   display() {
-    // x,y for whether item is displayed on map or in inventory
     super.display();
   }
 

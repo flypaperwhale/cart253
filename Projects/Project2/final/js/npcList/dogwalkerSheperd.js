@@ -1,9 +1,6 @@
 class Sheperd extends NPC {
-  constructor(soundSwitch) {
+  constructor() {
     super();
-
-    this.soundSwitch = soundSwitch;
-
     this.x = 425;
     this.y = 762;
     this.r = 50; // teal
@@ -11,13 +8,12 @@ class Sheperd extends NPC {
     this.b = 130;
     this.size = 25;
     this.name = `Dogwalker Sheperd`;
-    //this.image = undefined; No they will be ellipses
-    this.itemHeld = undefined;
+    this.itemHeld = undefined; // no item, Sheperd is a red herring
     this.desiredItem = undefined;
     this.playerColliding = false;
     this.isTriggered = false;
-    this.textNo = 0;
     this.tradeSucceeded = false;
+    this.textNo = 0;
     this.texts = [
       `Sheperd:
       Walking the dog to take a moment
@@ -36,12 +32,12 @@ class Sheperd extends NPC {
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
+    // displays NPC specific image at the correct coordinates and colors
     super.display();
   }
 
   showDoggy() {
-    // displays NPC specific ellipse (colors, size) at the correct coordinates
+    // displays doggy specific ellipse (colors, size) at the correct coordinates
     push();
     noStroke();
     fill(this.r,this.g,this.b);
@@ -52,8 +48,4 @@ class Sheperd extends NPC {
   playerCollisionCheck(playerX,playerY,playerSize) {
     super.playerCollisionCheck(playerX,playerY,playerSize);
   }
-
-  givePlayerInjunction(playerInventory){
-
   }
-}

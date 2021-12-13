@@ -1,8 +1,6 @@
 class Lamotte extends NPC {
-  constructor(soundSwitch) {
+  constructor() {
     super();
-    this.soundSwitch = soundSwitch;
-
     this.x = 51;
     this.y = 539;
     this.r = 135; // purple
@@ -10,13 +8,12 @@ class Lamotte extends NPC {
     this.b = 180;
     this.size = 25;
     this.name = `Street Person Lamotte`;
-    //this.image = undefined; No they will be ellipses
     this.itemHeld = 1; // the Big Bone INDEX in itemList
     this.desiredItem = `Ham`;
     this.playerColliding = false;
     this.isTriggered = false;
-    this.textNo = 0;
     this.tradeSucceeded = false;
+    this.textNo = 0;
     this.texts = [
       `Street Person Lamotte:
       Hey, what's about it? Could you find me
@@ -40,5 +37,4 @@ class Lamotte extends NPC {
     super.playerCollisionCheck(playerX,playerY,playerSize);
   }
 
-  //givePlayerInjunction(playerInventory) {}
 }

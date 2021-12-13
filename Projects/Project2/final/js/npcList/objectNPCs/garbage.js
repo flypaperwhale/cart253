@@ -1,4 +1,4 @@
-class Garbage extends NPC {
+class Garbage extends NPC { // This class is currently a place holder...
   constructor() {
     super();
     this.x = 200;
@@ -8,18 +8,16 @@ class Garbage extends NPC {
     this.b = 0;
     this.size = 10;
     this.name = `Garbage`;
-    //this.image = undefined; No they will be ellipses
     this.itemHeld = 0;
     this.desiredItem = `Big Bone`;
     this.playerColliding = false;
     this.isTriggered = false;
-    //this.textNo = 0;
     this.tradeSucceeded = false;
     this.texts = [`The garbage bin is almost full`, `You throw out the Big Bone`, `...`];
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
+    // displays NPC specific image at the correct coordinates, with correct colors
     push();
     fill(this.r,this.g,this.b);
     noStroke();

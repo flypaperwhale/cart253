@@ -1,9 +1,6 @@
 class Marv extends NPC {
-  constructor(soundSwitch) {
+  constructor() {
     super();
-
-    this.soundSwitch = soundSwitch;
-
     this.x = 259;
     this.y = 567;
     this.r = 150; // beige
@@ -11,13 +8,12 @@ class Marv extends NPC {
     this.b = 90;
     this.size = 25;
     this.name = `Elder Marv`;
-    //this.image = undefined; No they will be ellipses
-    this.itemHeld = 5; // also holds the first Injunction
+    this.itemHeld = 5; // Wrench index item list
     this.desiredItem = `Frog`;
     this.playerColliding = false;
     this.isTriggered = false;
-    this.textNo = 0;
     this.tradeSucceeded = false;
+    this.textNo = 0;
     this.texts = [
       `Elder Marv:
       Hey sprout, what are you up to? - The stars?
@@ -38,7 +34,7 @@ class Marv extends NPC {
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
+    // displays NPC specific image at the correct coordinates and colors
     super.display();
   }
 

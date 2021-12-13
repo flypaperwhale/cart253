@@ -1,9 +1,6 @@
 class Jade extends NPC {
-  constructor(soundSwitch) {
+  constructor() {
     super();
-
-    this.soundSwitch = soundSwitch;
-
     this.x = 150;
     this.y = 622;
     this.r = 200; // yellow
@@ -11,13 +8,12 @@ class Jade extends NPC {
     this.b = 100;
     this.size = 20;
     this.name = `Ms. Jade`;
-    //this.image = undefined; No they will be ellipses
-    this.itemHeld = 4;
+    this.itemHeld = 4; // Frog Index in ItemList
     this.desiredItem = `Frog Constellation`;
     this.playerColliding = false;
     this.isTriggered = false;
-    this.textNo = 0;
     this.tradeSucceeded = false;
+    this.textNo = 0;
     this.texts = [
       `Jade:
       Although we're best friends, I sometimes feel I
@@ -32,7 +28,7 @@ class Jade extends NPC {
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
+    // displays NPC specific image at the correct coordinates and colors
     super.display();
   }
 

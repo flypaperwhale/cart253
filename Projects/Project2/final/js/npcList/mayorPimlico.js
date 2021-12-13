@@ -1,8 +1,6 @@
 class Pimlico extends NPC {
-  constructor(soundSwitch) {
+  constructor() {
     super();
-    this.soundSwitch = soundSwitch;
-
     this.x = 356;
     this.y = 734;
     this.r = 255; // pink
@@ -10,13 +8,12 @@ class Pimlico extends NPC {
     this.b = 175;
     this.size = 32;
     this.name = `Mayor Pimlico`;
-    //this.image = undefined; No they will be ellipses
-    this.itemHeld = 8;
+    this.itemHeld = 8; // Key Index in ItemList
     this.desiredItem = `City Injunction`;
     this.playerColliding = false;
     this.isTriggered = false;
-    this.textNo = 0;
     this.tradeSucceeded = false;
+    this.textNo = 0;
     this.texts = [
       `Mayor Pimlico:
       Hello, hello! Our banquet at City Hall tonight is
@@ -31,7 +28,7 @@ class Pimlico extends NPC {
   }
 
   display() {
-    // displays NPC specific image at the correct coordinates
+    // displays NPC specific image at the correct coordinates and colors
     super.display();
   }
 

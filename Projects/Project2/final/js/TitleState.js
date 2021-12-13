@@ -17,7 +17,18 @@ class TitleState extends State {
 
     push();
     textAlign(CENTER);
-    text(`ONE  Welcome. Click mouse to start.`, width / 2, height / 2);
+    text(`- INTERUPTTING SKYGLOW -
+
+Trading Sequence Short Game
+
+      This evening Dolly caught a glimpse of a sight of a constellation
+      as the sun was setting. The view was interrupted by the city's
+      skyglow. As if from out of the blue, Dolly decided to take action!
+
+      Play as Dolly as she quests to Interrupt Skyglow!
+
+      - Press Space -
+      `, width / 2, height / 2.5);
     pop();
   }
 

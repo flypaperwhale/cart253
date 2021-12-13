@@ -17,7 +17,18 @@ class TitleState2 extends State {
 
     push();
     textAlign(CENTER);
-    text(`TWO Welcome. Click mouse to start.`, width / 2, height / 2);
+    text(`Buttons:
+
+
+      'up', 'down', 'left', 'right'
+
+      'Space' to interact
+
+      'Return' to display item
+
+
+
+      - Press Space to start -    `, width / 2, height / 2.5);
     pop();
   }
 

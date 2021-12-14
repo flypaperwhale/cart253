@@ -75,7 +75,7 @@ function preload() {
   fountainTopImg = loadImage("assets/images/fountainTop.png");
   galaxyImg = loadImage("assets/images/starnight2.png");
   // sounds
-  bgmusic1 = loadSound("assets/sounds/Bossa-nova-beat-music-loop.mp3");
+  bgmusic1 = loadSound("assets/sounds/Bossa-nova-beat-music-loop.wav");
 }
 
 /**

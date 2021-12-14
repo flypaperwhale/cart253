@@ -54,6 +54,7 @@ let mapC; // full right
 Description of preload
 */
 function preload() {
+    userStartAudio();
   // Items image files
   hamImg = loadImage("assets/images/items/ham.png");
   bigBoneImg = loadImage("assets/images/items/bigBone.png");
@@ -129,7 +130,7 @@ function setup() {
   ); // [5]
 
   createMapsAndStore(); // inputs map files into the program to be stored in simulationMapsArray
-  userStartAudio();
+
 
   state = new TitleState(
     simulationImagesList,

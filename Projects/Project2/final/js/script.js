@@ -32,16 +32,8 @@ let fountainTopImg;
 let emptyImg;
 let galaxyImg;
 // sounds
-let sunsetStarsIntro; // sunset introduction theme
-let constellationWinkSound; // constellation wink
-let lightFlickSound; // light flick
-let lightBuzzNoise; // light buzz
-let bulbBurstSound; // bulb burst
 let bgmusic1; // background music 1
-let bgmusic2; // background music 2
-let bgmusic3; // background music 3
 // declare simulation variables
-let simulationSoundsArray = []; // array holding sounds for the game
 let simulationImagesList = []; // array holding images for the games
 let simulationMapsArray = []; // array holding game maps
 let state = undefined; // state can be new State, substates: Title, Simulation, Ending
@@ -83,12 +75,12 @@ function preload() {
   fountainTopImg = loadImage("assets/images/fountainTop.png");
   galaxyImg = loadImage("assets/images/starnight2.png");
   // sounds
-  bgmusic1 = loadSound("assets/sounds/skyglowbgmusic.mp3");
+  bgmusic1 = loadSound("assets/sounds/Bossa-nova-beat-music-loop.mp3");
 }
 
 /**
 Description of setup : create arrays to be used in the simulation
-Image list, NPC list, and Sounds list, start audio for BG Music
+Image list, NPC list, and start audio for BG Music
 and create the state to launch the simulation
 */
 function setup() {
@@ -119,23 +111,12 @@ function setup() {
     galaxyImg
   ); // [20]
 
-  simulationSoundsArray.push(
-    // simulationSoundsArray
-    sunsetStarsIntro, // [0]
-    constellationWinkSound, // [1]
-    lightFlickSound, // [2]
-    lightBuzzNoise, // [3]
-    bulbBurstSound, // [4]
-    bgmusic1
-  ); // [5]
-
   createMapsAndStore(); // inputs map files into the program to be stored in simulationMapsArray
 
 
   state = new TitleState(
     simulationImagesList,
     simulationMapsArray,
-    simulationMapsArray
   ); // initial state is TitleState
   // other states are SimulationState and EndingState
 }

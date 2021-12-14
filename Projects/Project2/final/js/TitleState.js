@@ -1,10 +1,9 @@
 class TitleState extends State {
-  constructor(simulationImagesList, mapsArray, simulationSoundsArray) { // program arrays fed through
+  constructor(simulationImagesList, mapsArray) { // program arrays fed through
     super();
     this.name = `Title State`;
     this.mapsArray = mapsArray;
     this.simulationImagesList = simulationImagesList;
-    this.simulationSoundsArray = simulationSoundsArray;
   }
 
   update() {
@@ -37,7 +36,6 @@ Trading Sequence Short Game
       state = new TitleState2(
         this.simulationImagesList,
         this.mapsArray,
-        this.simulationSoundsArray
       );
         }
       }

@@ -3,22 +3,12 @@ class SimulationState extends State {
   constructor(
     simulationImagesList,
     simulationMapsArray,
-    simulationSoundsArray
   ) {
     super();
 
     this.name = `SimulationState`;
     this.simulationImagesList = simulationImagesList;
     this.simulationMapsArray = simulationMapsArray;
-    this.simulationSoundsArray = simulationSoundsArray;
-
-    // Save simulation sounds into variables for this class
-    this.sunsetStarsIntro = this.simulationSoundsArray[0];
-    this.constellationWink = this.simulationSoundsArray[1];
-    this.lightFlickSound = this.simulationSoundsArray[2];
-    this.buzzingSound = this.simulationSoundsArray[3];
-    this.bulbBurstSound = this.simulationSoundsArray[4];
-    this.bgMusic = this.simulationSoundsArray[5];
 
     // Array to hold all the simulation items
     this.simulationItemList = [];
@@ -142,13 +132,12 @@ class SimulationState extends State {
       this.player.move(); // change the player avatar's position
     }
 
-    // assign the current map so the SimulationState can manage npcs, decor, sounds accordingly
+    // assign the current map so the SimulationState can manage npcs, decor, 
     // with relation to the player's actions
     this.map = this.currentMap;
     this.map.display(
       this.player,
       this.simulationNPCList,
-      this.simulationSoundsArray
     );
     this.player.barriers(this.map); // barriers are stated in the Player file
     // because they control where the player can and cannot go

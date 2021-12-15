@@ -66,7 +66,7 @@ function preload() {
   // decor image files
   streetlampImg = loadImage("assets/images/lamp.png");
   streetlampFootImg = loadImage("assets/images/lampFoot.png");
-  stairsImg = loadImage("assets/images/stairs.png");
+  stairsImg = loadImage("assets/images/Stairs.png");
   treeImg = loadImage("assets/images/tree.png");
   garbageImg = loadImage("assets/images/garbage.png");
   gazeboImg = loadImage("assets/images/gazebo2.png");
